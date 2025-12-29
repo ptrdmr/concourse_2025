@@ -169,7 +169,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-square overflow-hidden rounded-lg">
-                <Image src="/images/food/italian sandwich.jpg" alt="Bar area" fill className="object-cover" />
+                <Image src="/images/food/concourse_nachoes.jpg" alt="Bar area" fill className="object-cover" />
               </div>
               <div className="relative aspect-square overflow-hidden rounded-lg">
                 <Image src="/images/arcade/space invaders.jpg" alt="Arcade" fill className="object-cover" />

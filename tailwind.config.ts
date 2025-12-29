@@ -27,6 +27,10 @@ const config: Config = {
       },
     },
   	extend: {
+  		fontFamily: {
+  			'display': ['Aktiv Grotesk', 'Helvetica', 'sans-serif'],
+  			'body': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',

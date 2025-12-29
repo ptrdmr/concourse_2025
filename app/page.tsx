@@ -99,15 +99,16 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative w-full">
+      <section className="relative w-full border-2 border-red-500">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/bowling/dark lanes.jpg"
+            src="/images/bowling/exterior.png"
             alt="Bowling lanes"
             fill
-            className="object-cover brightness-50"
+            className="object-cover"
             priority
           />
+          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
         </div>
         <div className="container relative z-10 mx-auto flex flex-col items-center justify-center px-4 py-16 text-center text-white md:px-6 md:py-24 lg:px-8 lg:py-40">
           <h1 className="mb-4 text-6xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl flex flex-wrap justify-center items-baseline whitespace-nowrap">
@@ -116,10 +117,10 @@ export default function Home() {
             <span ref={llRef}>LL</span>
             <span ref={restOfTextRef} className="inline-flex whitespace-nowrap ml-1 sm:ml-2 md:ml-4">WITH US!</span>
           </h1>
-          <p ref={subtitleRef} className="mb-6 max-w-2xl text-base sm:text-lg md:text-xl">
-            Experience the best bowling in Anaheim since 1990. Food, fun, and friendly competition all under one roof.
+          <p ref={subtitleRef} className="mb-6 max-w-2xl text-base text-bold sm:text-lg md:text-xl">
+           Food, fun, and competition<br/>ALL UNDER ONE ROOF.
           </p>
-          <div ref={buttonsRef} className="flex-responsive gap-3 w-full max-w-md mx-auto">
+          <div ref={buttonsRef} className="flex-responsive gap-3 w-full max-w-md mx-auto justify-center items-center">
             <Button size="lg" className="w-full sm:w-auto" asChild>
               <Link href="/reservations">Reserve Today!</Link>
             </Button>
@@ -131,15 +132,25 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="bg-muted py-12 md:py-16">
-        <div className="container-responsive">
+      <section className="relative bg-muted py-12 md:py-16">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/bowling/concourse vintage.jpg"
+            alt="Vintage bowling alley"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
+        </div>
+        <div className="container-responsive relative z-10">
           <div className="mx-auto max-w-3xl text-center">
             <AnimatedHeader
-              text="Providing bowling since 1990"
-              className="mb-4 md:mb-6 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight"
+              text="Rolling since 1990"
+              className="mb-4 md:mb-6 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white"
               delay={0.2}
             />
-            <p className="mb-6 md:mb-8 text-base md:text-lg text-muted-foreground">
+            <p className="mb-6 md:mb-8 text-base md:text-lg text-white">
               Serving Anaheim, Fullerton, Yorba Linda, Orange, Brea, and many more areas with quality entertainment and
               memorable experiences for over three decades.
             </p>
@@ -153,22 +164,17 @@ export default function Home() {
       {/* Services Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <AnimatedHeader
-            text="Our Services"
-            className="mb-12 text-center text-3xl font-bold tracking-tight sm:text-4xl"
-            delay={0.2}
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <Card>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 h-full">
+            <Card className="h-full flex flex-col">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2">
                   <Trophy className="h-5 w-5 text-primary" />
                   Bowling
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
-                  Enjoy our state-of-the-art lanes for casual games or competitive play.
+              <CardContent className="flex flex-col flex-grow">
+                <CardDescription className="mb-4 flex-grow">
+                  Enjoy our lanes powered by Brunswick SYNC built for casual games or competitive play.
                 </CardDescription>
                 <Button variant="outline" className="w-full" asChild>
                   <Link href="/bowling">View Rates</Link>
@@ -176,15 +182,15 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="h-full flex flex-col">
               <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
+                <CardTitle className="flex items-center gap-2 text-lg">
                   <Users className="h-5 w-5 text-primary" />
                   League Bowling
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
+              <CardContent className="flex flex-col flex-grow">
+                <CardDescription className="mb-4 flex-grow">
                   Join one of our many leagues for regular competitive play and prizes.
                 </CardDescription>
                 <Button variant="outline" className="w-full" asChild>
@@ -193,15 +199,15 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="h-full flex flex-col">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2">
                   <Pizza className="h-5 w-5 text-primary" />
                   Menus
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
+              <CardContent className="flex flex-col flex-grow">
+                <CardDescription className="mb-4 flex-grow">
                   Delicious food and drinks to enjoy while you bowl or at our restaurant.
                 </CardDescription>
                 <Button variant="outline" className="w-full" asChild>
@@ -210,15 +216,15 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="h-full flex flex-col">
               <CardHeader className="pb-2">
                 <CardTitle className="flex items-center gap-2">
                   <Gamepad className="h-5 w-5 text-primary" />
                   Arcade
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription className="mb-4">
+              <CardContent className="flex flex-col flex-grow">
+                <CardDescription className="mb-4 flex-grow">
                   Enjoy our selection of arcade games for all ages between bowling games.
                 </CardDescription>
                 <Button variant="outline" className="w-full" asChild>
