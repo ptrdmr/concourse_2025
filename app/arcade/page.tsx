@@ -57,7 +57,7 @@ export default function ArcadePage() {
               <Trophy className="mb-2 h-6 w-6 text-primary" />
               <h3 className="mb-1 font-bold">Win Prizes</h3>
               <p className="text-sm text-muted-foreground">
-                Many of our games award tickets that can be redeemed for exciting prizes at our redemption counter.
+                Many of our games award tickets that can be redeemed for exciting prizes at our prize hub.
               </p>
             </div>
           </div>
@@ -168,7 +168,7 @@ export default function ArcadePage() {
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Visit our prize counter to redeem your tickets for a wide selection of toys, games, electronics, and
+                Visit our prize hub to redeem your tickets for a wide selection of toys, games, electronics, and
                 more!
               </CardDescription>
             </CardContent>
@@ -178,59 +178,36 @@ export default function ArcadePage() {
 
       <div className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-white">Arcade Pricing</h2>
-        <div className="grid gap-8 md:grid-cols-2">
-          <Card className="bg-background/95 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle>Game Card Packages</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Starter Package</span>
-                <span>$10 (40 credits)</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Value Package</span>
-                <span>$20 (85 credits)</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Super Package</span>
-                <span>$30 (130 credits)</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Mega Package</span>
-                <span>$50 (225 credits)</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Ultimate Package</span>
-                <span>$100 (500 credits)</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-background/95 backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle>Special Offers</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Weekday Special (Mon-Thu)</span>
-                <span>Half-price game card reload</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Birthday Package</span>
-                <span>$5 game card for the birthday person</span>
-              </div>
-              <div className="flex justify-between border-b pb-2">
-                <span className="font-medium">Group Discount</span>
-                <span>10% off for groups of 10+</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="font-medium">Unlimited Play Pass</span>
-                <span>$24.99 (2 hours, non-redemption games)</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="bg-background/95 backdrop-blur-sm max-w-2xl mx-auto">
+          <CardHeader>
+            <CardTitle>Game Card Packages</CardTitle>
+            <CardDescription className="text-base mt-2">
+              <span className="font-semibold">Note:</span> 1 credit = 1 quarter (25¢)
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex justify-between border-b pb-2">
+              <span className="font-medium">Starter Package</span>
+              <span>$10 (40 credits)</span>
+            </div>
+            <div className="flex justify-between border-b pb-2">
+              <span className="font-medium">Value Package</span>
+              <span>$20 (85 credits)</span>
+            </div>
+            <div className="flex justify-between border-b pb-2">
+              <span className="font-medium">Super Package</span>
+              <span>$30 (130 credits)</span>
+            </div>
+            <div className="flex justify-between border-b pb-2">
+              <span className="font-medium">Mega Package</span>
+              <span>$50 (225 credits)</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="font-medium">Ultimate Package</span>
+              <span>$100 (500 credits)</span>
+            </div>
+          </CardContent>
+        </Card>
       </div>
 
       <div className="mb-16">
@@ -238,40 +215,45 @@ export default function ArcadePage() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="flex flex-col justify-center">
             <p className="mb-6 text-gray-200">
-              Make your next birthday party or group event unforgettable with our arcade packages. We offer special
-              packages that include bowling, arcade play, food, and more!
+              Looking for the ultimate party experience? Our party packages include arcade cards so everyone can enjoy the games!
             </p>
             <div className="space-y-4">
               <div className="flex items-start gap-3">
                 <Users className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
-                  <h3 className="font-medium">Arcade Party Package</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Includes game cards for each guest, reserved party area, and a dedicated party host.
+                  <h3 className="font-medium text-lg">Supercharge Kids Party</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    Starting at $850 for 20 kids (ages 16 and under)
                   </p>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• 4 Lane Suite with 3 hours of party time</li>
+                    <li>• 2.5 hours of bowling</li>
+                    <li>• Two slices of pizza per bowler</li>
+                    <li>• Unlimited soda</li>
+                    <li>• <strong>$10 arcade card per bowler</strong></li>
+                    <li>• Dedicated party planner</li>
+                  </ul>
                 </div>
               </div>
               <div className="flex items-start gap-3">
                 <Users className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
-                  <h3 className="font-medium">Combo Package</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Combine bowling and arcade play for the ultimate party experience. Includes food and drink options.
+                  <h3 className="font-medium text-lg">Pair & Spare Package</h3>
+                  <p className="text-sm text-muted-foreground mb-2">
+                    $360 (Mon-Thu) / $390 (Fri-Sun) for 10 guests
                   </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Users className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
-                <div>
-                  <h3 className="font-medium">Corporate Team Building</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Special packages for corporate groups looking for a fun team-building activity.
-                  </p>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• 2 bowling lanes for 2 hours</li>
+                    <li>• 10 pairs of shoes</li>
+                    <li>• 2 pizzas</li>
+                    <li>• Unlimited sodas for 10 guests</li>
+                    <li>• <strong>$5 arcade card per guest</strong></li>
+                  </ul>
                 </div>
               </div>
             </div>
             <div className="mt-6">
-              <Button asChild>
+              <Button asChild size="lg">
                 <Link href="/reservations">Book a Party</Link>
               </Button>
             </div>
