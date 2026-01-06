@@ -216,9 +216,8 @@ export default function ReservationsPage() {
         <div>
           {/* VIP Suites Section - Most Elaborate Option */}
           <div className="bg-black text-white py-8 px-4 rounded-lg">
-            <h2 className="mb-6 text-4xl font-extrabold text-center text-white gold-shimmer relative">
-              <span className="relative z-10 text-4xl">VIP SUITES</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-yellow-500/10 via-amber-400/20 to-yellow-500/10 rounded blur-md"></span>
+            <h2 className="mb-6 text-4xl font-extrabold text-center text-white">
+              VIP SUITES
             </h2>
             <p className="text-center mb-8 max-w-3xl mx-auto text-gray-300">
               Experience the ultimate in bowling luxury with our premium VIP suites. Perfect for corporate events, large parties, and special celebrations.
