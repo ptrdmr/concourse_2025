@@ -234,48 +234,6 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold text-white">Arcade Events & Tournaments</h2>
-        <div className="grid gap-8 md:grid-cols-2">
-          <div className="relative aspect-video overflow-hidden rounded-lg">
-            <Image src="/placeholder.svg?height=600&width=800" alt="Arcade tournament" fill className="object-cover" />
-          </div>
-          <div className="flex flex-col justify-center">
-            <p className="mb-6 text-gray-200">
-              We regularly host exciting tournaments and special events in our arcade. Test your skills against other
-              players and compete for prizes and bragging rights!
-            </p>
-            <div className="space-y-4">
-              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
-                <h3 className="mb-2 font-bold">Monthly High Score Challenge</h3>
-                <p className="text-sm text-muted-foreground">
-                  Every month we feature a different game for our high score challenge. The player with the highest
-                  score at the end of the month wins a prize package!
-                </p>
-              </div>
-              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
-                <h3 className="mb-2 font-bold">Tournament Tuesdays</h3>
-                <p className="text-sm text-muted-foreground">
-                  Join us every Tuesday evening for head-to-head competition on a featured game. Entry fee: $5, with
-                  cash prizes for the winners!
-                </p>
-              </div>
-              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
-                <h3 className="mb-2 font-bold">Ticket Blitz</h3>
-                <p className="text-sm text-muted-foreground">
-                  First Sunday of each month: all redemption games award double tickets from 12PM to 4PM!
-                </p>
-              </div>
-            </div>
-            <div className="mt-6">
-              <Button asChild>
-                <Link href="/events">View All Events</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mb-16">
         <h2 className="mb-6 text-2xl font-bold text-white">Birthday Parties & Group Events</h2>
         <div className="grid gap-8 md:grid-cols-2">
           <div className="flex flex-col justify-center">
