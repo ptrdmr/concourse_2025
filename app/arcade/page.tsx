@@ -91,7 +91,7 @@ export default function ArcadePage() {
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Test your skills on our collection of classic arcade cabinets including Space Invaders, Pac-Man, and more timeless favorites.
+                Test your skills on our collection of classic arcade cabinets and timeless retro favorites.
               </CardDescription>
             </CardContent>
           </Card>
