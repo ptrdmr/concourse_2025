@@ -405,6 +405,25 @@ export default function ReservationsPage() {
               </p>
             </div>
             
+            {/* Seasonal Availability Notice */}
+            <div className="bg-yellow-100 dark:bg-yellow-900/30 border-l-4 border-yellow-500 p-4 mx-6 mt-6">
+              <div className="flex items-start">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-yellow-600 dark:text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <div className="ml-3">
+                  <p className="text-sm font-bold text-yellow-800 dark:text-yellow-200">
+                    SEASONAL AVAILABILITY ONLY
+                  </p>
+                  <p className="mt-1 text-sm text-yellow-700 dark:text-yellow-300">
+                    This package is offered at specific times of year. Please contact us to check current availability for your team.
+                  </p>
+                </div>
+              </div>
+            </div>
+            
             <div className="grid gap-8 md:grid-cols-2 p-8 bg-white dark:bg-gray-800">
               <div className="flex flex-col justify-center">
                 <div className="mb-6">
@@ -433,10 +452,10 @@ export default function ReservationsPage() {
                   </div>
                   
                   <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-                    <p className="font-bold text-[#4CAF50]">Reservations required!</p>
-                    <p className="mt-1 text-gray-700 dark:text-gray-300">Please call <span className="font-bold text-gray-900 dark:text-gray-100">(714) 666-2695 ext. 238</span> to book your team party.</p>
+                    <p className="font-bold text-[#4CAF50] text-lg">Contact us for availability!</p>
+                    <p className="mt-1 text-gray-700 dark:text-gray-300">This seasonal package has limited availability. Please call <span className="font-bold text-gray-900 dark:text-gray-100">(714) 666-2695 ext. 238</span> to check dates and book your team party.</p>
                     <Button size="lg" className="mt-4 px-8 bg-[#4CAF50] hover:bg-[#388E3C] transition-colors text-white">
-                      Contact for Team Party
+                      Contact for Availability
                     </Button>
                   </div>
                 </div>
