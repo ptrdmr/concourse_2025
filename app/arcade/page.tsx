@@ -9,37 +9,51 @@ import { PageHeader } from "@/components/page-header"
 
 export default function ArcadePage() {
   return (
-    <div className="container py-12">
-      <PageHeader
-        title="Arcade Games"
-        description="Take a break from bowling and enjoy our selection of exciting arcade games for all ages."
-        centered
-      />
+    <div className="relative">
+      {/* Background Image with Overlay */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src="/images/arcade/space invaders.jpg"
+          alt="Arcade background"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/80 dark:bg-black/90"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4yIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
+      </div>
+      
+      <div className="relative z-10 container py-12">
+        <PageHeader
+          title="Arcade Games"
+          description="Take a break from bowling and enjoy our selection of exciting arcade games for all ages."
+          centered
+        />
 
       <div className="mb-16 grid gap-8 md:grid-cols-2">
         <div className="relative aspect-video overflow-hidden rounded-lg">
           <Image
-            src="/placeholder.svg?height=600&width=800"
-            alt="Arcade area with games"
+            src="/images/arcade/space invaders.jpg"
+            alt="Space Invaders arcade game"
             fill
             className="object-cover"
           />
         </div>
         <div className="flex flex-col justify-center">
-          <h2 className="mb-4 text-2xl font-bold">Fun For Everyone</h2>
-          <p className="mb-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Fun For Everyone</h2>
+          <p className="mb-6 text-gray-200">
             Our arcade features a variety of games suitable for all ages and skill levels. From classic arcade cabinets
             to the latest video games, there's something for everyone to enjoy.
           </p>
           <div className="grid grid-cols-2 gap-4">
-            <div className="rounded-lg bg-muted p-4">
+            <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
               <Gamepad className="mb-2 h-6 w-6 text-primary" />
               <h3 className="mb-1 font-bold">Latest Games</h3>
               <p className="text-sm text-muted-foreground">
                 We regularly update our game selection to include the newest and most popular titles.
               </p>
             </div>
-            <div className="rounded-lg bg-muted p-4">
+            <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
               <Trophy className="mb-2 h-6 w-6 text-primary" />
               <h3 className="mb-1 font-bold">Win Prizes</h3>
               <p className="text-sm text-muted-foreground">
@@ -51,11 +65,11 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Featured Games</h2>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <Card>
+        <h2 className="mb-6 text-2xl font-bold text-white">Featured Games</h2>
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+          <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=200&width=400" alt="Racing game" fill className="object-cover" />
+              <Image src="/images/arcade/racing games.jpg" alt="Racing games" fill className="object-cover" />
             </div>
             <CardHeader>
               <CardTitle>Racing Games</CardTitle>
@@ -68,40 +82,25 @@ export default function ArcadePage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=200&width=400" alt="Pinball machine" fill className="object-cover" />
+              <Image src="/images/arcade/classic.jpg" alt="Classic arcade games" fill className="object-cover" />
             </div>
             <CardHeader>
-              <CardTitle>Pinball Machines</CardTitle>
+              <CardTitle>Classic Arcade Games</CardTitle>
             </CardHeader>
             <CardContent>
               <CardDescription>
-                Test your skills on our collection of classic and themed pinball machines. A timeless arcade favorite
-                for all ages.
+                Test your skills on our collection of classic arcade cabinets including Space Invaders, Pac-Man, and more timeless favorites.
               </CardDescription>
             </CardContent>
           </Card>
 
-          <Card>
-            <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=200&width=400" alt="Redemption games" fill className="object-cover" />
-            </div>
-            <CardHeader>
-              <CardTitle>Redemption Games</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Win tickets and redeem them for awesome prizes! Our redemption games are fun for the whole family.
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
+          <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
               <Image
-                src="/placeholder.svg?height=200&width=400"
-                alt="Basketball arcade game"
+                src="/images/arcade/sports.jpg"
+                alt="Sports arcade games"
                 fill
                 className="object-cover"
               />
@@ -116,24 +115,9 @@ export default function ArcadePage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=200&width=400" alt="Dance game" fill className="object-cover" />
-            </div>
-            <CardHeader>
-              <CardTitle>Dance & Music Games</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <CardDescription>
-                Get moving with our interactive dance and music games. Perfect for showing off your rhythm and
-                coordination.
-              </CardDescription>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=200&width=400" alt="Claw machine" fill className="object-cover" />
+              <Image src="/images/arcade/prize.jpg" alt="Prize games and claw machines" fill className="object-cover" />
             </div>
             <CardHeader>
               <CardTitle>Prize Games</CardTitle>
@@ -149,9 +133,9 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">How It Works</h2>
+        <h2 className="mb-6 text-2xl font-bold text-white">How It Works</h2>
         <div className="grid gap-8 md:grid-cols-3">
-          <Card className="flex flex-col items-center text-center">
+          <Card className="flex flex-col items-center text-center bg-background/95 backdrop-blur-sm">
             <CardHeader>
               <Zap className="mb-2 h-12 w-12 text-primary" />
               <CardTitle>Load Your Card</CardTitle>
@@ -164,7 +148,7 @@ export default function ArcadePage() {
             </CardContent>
           </Card>
 
-          <Card className="flex flex-col items-center text-center">
+          <Card className="flex flex-col items-center text-center bg-background/95 backdrop-blur-sm">
             <CardHeader>
               <Gamepad className="mb-2 h-12 w-12 text-primary" />
               <CardTitle>Play & Win</CardTitle>
@@ -177,7 +161,7 @@ export default function ArcadePage() {
             </CardContent>
           </Card>
 
-          <Card className="flex flex-col items-center text-center">
+          <Card className="flex flex-col items-center text-center bg-background/95 backdrop-blur-sm">
             <CardHeader>
               <Trophy className="mb-2 h-12 w-12 text-primary" />
               <CardTitle>Redeem Prizes</CardTitle>
@@ -193,9 +177,9 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Arcade Pricing</h2>
+        <h2 className="mb-6 text-2xl font-bold text-white">Arcade Pricing</h2>
         <div className="grid gap-8 md:grid-cols-2">
-          <Card>
+          <Card className="bg-background/95 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Game Card Packages</CardTitle>
             </CardHeader>
@@ -223,7 +207,7 @@ export default function ArcadePage() {
             </CardContent>
           </Card>
 
-          <Card>
+          <Card className="bg-background/95 backdrop-blur-sm">
             <CardHeader>
               <CardTitle>Special Offers</CardTitle>
             </CardHeader>
@@ -250,32 +234,32 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Arcade Events & Tournaments</h2>
+        <h2 className="mb-6 text-2xl font-bold text-white">Arcade Events & Tournaments</h2>
         <div className="grid gap-8 md:grid-cols-2">
           <div className="relative aspect-video overflow-hidden rounded-lg">
             <Image src="/placeholder.svg?height=600&width=800" alt="Arcade tournament" fill className="object-cover" />
           </div>
           <div className="flex flex-col justify-center">
-            <p className="mb-6">
+            <p className="mb-6 text-gray-200">
               We regularly host exciting tournaments and special events in our arcade. Test your skills against other
               players and compete for prizes and bragging rights!
             </p>
             <div className="space-y-4">
-              <div className="rounded-lg bg-muted p-4">
+              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
                 <h3 className="mb-2 font-bold">Monthly High Score Challenge</h3>
                 <p className="text-sm text-muted-foreground">
                   Every month we feature a different game for our high score challenge. The player with the highest
                   score at the end of the month wins a prize package!
                 </p>
               </div>
-              <div className="rounded-lg bg-muted p-4">
+              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
                 <h3 className="mb-2 font-bold">Tournament Tuesdays</h3>
                 <p className="text-sm text-muted-foreground">
                   Join us every Tuesday evening for head-to-head competition on a featured game. Entry fee: $5, with
                   cash prizes for the winners!
                 </p>
               </div>
-              <div className="rounded-lg bg-muted p-4">
+              <div className="rounded-lg bg-background/95 backdrop-blur-sm p-4 border border-primary/20">
                 <h3 className="mb-2 font-bold">Ticket Blitz</h3>
                 <p className="text-sm text-muted-foreground">
                   First Sunday of each month: all redemption games award double tickets from 12PM to 4PM!
@@ -292,10 +276,10 @@ export default function ArcadePage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Birthday Parties & Group Events</h2>
+        <h2 className="mb-6 text-2xl font-bold text-white">Birthday Parties & Group Events</h2>
         <div className="grid gap-8 md:grid-cols-2">
           <div className="flex flex-col justify-center">
-            <p className="mb-6">
+            <p className="mb-6 text-gray-200">
               Make your next birthday party or group event unforgettable with our arcade packages. We offer special
               packages that include bowling, arcade play, food, and more!
             </p>
@@ -345,19 +329,20 @@ export default function ArcadePage() {
         </div>
       </div>
 
-      <div className="rounded-lg bg-primary p-8 text-primary-foreground">
-        <div className="grid gap-6 md:grid-cols-2">
-          <div>
-            <h2 className="mb-4 text-2xl font-bold">Ready to Play?</h2>
-            <p className="mb-6">
-              Visit our arcade today and experience the excitement for yourself. With games for all ages and skill
-              levels, it's the perfect addition to your bowling experience!
-            </p>
-          </div>
-          <div className="flex items-center justify-center md:justify-end">
-            <Button size="lg" variant="secondary" asChild>
-              <Link href="/contact">Contact Us</Link>
-            </Button>
+        <div className="rounded-lg bg-primary p-8 text-primary-foreground">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h2 className="mb-4 text-2xl font-bold">Ready to Play?</h2>
+              <p className="mb-6">
+                Visit our arcade today and experience the excitement for yourself. With games for all ages and skill
+                levels, it's the perfect addition to your bowling experience!
+              </p>
+            </div>
+            <div className="flex items-center justify-center md:justify-end">
+              <Button size="lg" variant="secondary" asChild>
+                <Link href="/contact">Contact Us</Link>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
