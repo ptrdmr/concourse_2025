@@ -131,36 +131,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="relative bg-muted py-12 md:py-16">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/bowling/concourse vintage.jpg"
-            alt="Vintage bowling alley"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
-        </div>
-        <div className="container-responsive relative z-10">
-          <div className="mx-auto max-w-3xl text-center">
-            <AnimatedHeader
-              text="Rolling since 1990"
-              className="mb-4 md:mb-6 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white"
-              delay={0.2}
-            />
-            <p className="mb-6 md:mb-8 text-base md:text-lg text-white">
-              Serving Anaheim, Fullerton, Yorba Linda, Orange, Brea, and many more areas with quality entertainment and
-              memorable experiences for over three decades.
-            </p>
-            <Button className="w-full sm:w-auto" asChild>
-              <Link href="/about">Learn More About Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Services Section */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -236,41 +206,71 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Events Section */}
+      {/* About Section */}
+      <section className="relative bg-muted py-12 md:py-16">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/bowling/concourse vintage.jpg"
+            alt="Vintage bowling alley"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
+        </div>
+        <div className="container-responsive relative z-10">
+          <div className="mx-auto max-w-3xl text-center">
+            <AnimatedHeader
+              text="Rolling since 1990"
+              className="mb-4 md:mb-6 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white"
+              delay={0.2}
+            />
+            <p className="mb-6 md:mb-8 text-base md:text-lg text-white">
+              Serving Anaheim, Fullerton, Yorba Linda, Orange, Brea, and many more areas with quality entertainment and
+              memorable experiences for over three decades.
+            </p>
+            <Button className="w-full sm:w-auto" asChild>
+              <Link href="/about">Learn More About Us</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Events & Specials Section */}
       <section className="bg-muted py-16">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="grid gap-8 md:grid-cols-2">
             <div className="flex flex-col justify-center">
               <AnimatedHeader
-                text="Upcoming Events"
+                text="Events & Specials"
                 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
                 delay={0.2}
               />
               <p className="mb-6 text-lg text-muted-foreground">
-                From cosmic bowling nights to tournaments and special promotions, there's always something happening at
+                From cosmic bowling nights to weekly specials and holiday events, there's always something happening at
                 Concourse Bowling.
               </p>
               <Button className="w-fit" asChild>
-                <Link href="/events">View All Events</Link>
+                <Link href="/events">View Events & Specials</Link>
               </Button>
             </div>
             <div className="rounded-lg bg-background p-6 shadow-md">
               <div className="mb-4 flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-primary" />
-                <h3 className="text-xl font-bold">Featured Events</h3>
+                <h3 className="text-xl font-bold">Weekly Specials</h3>
               </div>
               <ul className="space-y-4">
                 <li className="border-b pb-4">
-                  <p className="font-medium">Cosmic Bowling Night</p>
-                  <p className="text-sm text-muted-foreground">Every Friday & Saturday, 9PM - 1AM</p>
+                  <p className="font-medium">$2 Game Night</p>
+                  <p className="text-sm text-muted-foreground">Every Monday, 4PM - Close</p>
                 </li>
                 <li className="border-b pb-4">
-                  <p className="font-medium">Family Day Special</p>
-                  <p className="text-sm text-muted-foreground">Sundays, 10AM - 2PM</p>
+                  <p className="font-medium">Cosmic Bowling</p>
+                  <p className="text-sm text-muted-foreground">Fri & Sat, 9PM - Midnight</p>
                 </li>
                 <li>
-                  <p className="font-medium">Summer League Sign-ups</p>
-                  <p className="text-sm text-muted-foreground">Starting June 1st</p>
+                  <p className="font-medium">Family Day</p>
+                  <p className="text-sm text-muted-foreground">Sundays, 10AM - 2PM</p>
                 </li>
               </ul>
             </div>
@@ -306,20 +306,20 @@ export default function Home() {
                 <h3 className="mb-2 font-medium">Hours of Operation</h3>
                 <ul className="space-y-1 text-sm">
                   <li className="flex justify-between">
-                    <span>Monday - Thursday:</span>
-                    <span>9AM - 11PM</span>
+                    <span>Monday:</span>
+                    <span>4PM - 10PM</span>
                   </li>
                   <li className="flex justify-between">
-                    <span>Friday:</span>
-                    <span>9AM - 1AM</span>
+                    <span>Tuesday - Thursday:</span>
+                    <span>11AM - 11PM</span>
                   </li>
                   <li className="flex justify-between">
-                    <span>Saturday:</span>
-                    <span>9AM - 1AM</span>
+                    <span>Friday - Saturday:</span>
+                    <span>11AM - Midnight</span>
                   </li>
                   <li className="flex justify-between">
                     <span>Sunday:</span>
-                    <span>9AM - 11PM</span>
+                    <span>11AM - 11PM</span>
                   </li>
                 </ul>
               </div>

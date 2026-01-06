@@ -36,7 +36,7 @@ const navigation = [
     name: "Visit",
     items: [
       { name: "Menu", href: "/menu" },
-      { name: "Events", href: "/events" },
+      { name: "Events & Specials", href: "/events" },
       { name: "Reservations", href: "/reservations" },
     ],
     icon: Utensils
@@ -59,7 +59,7 @@ const mobileNavigation = [
   { name: "League Bowling", href: "/league-bowling" },
   { name: "Arcade", href: "/arcade" },
   { name: "Menu", href: "/menu" },
-  { name: "Events", href: "/events" },
+  { name: "Events & Specials", href: "/events" },
   { name: "Reservations", href: "/reservations" },
   { name: "About Us", href: "/about" },
   { name: "Contact", href: "/contact" },

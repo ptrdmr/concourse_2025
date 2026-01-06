@@ -34,7 +34,7 @@ export default function ReservationsPage() {
   }
 
   const tabs = [
-    { id: "regular", label: "Regular Lanes" },
+    { id: "regular", label: "Lane Reservations" },
     { id: "pair-spare", label: "Pair & Spare" },
     { id: "vip-suites", label: "VIP Suites" },
     { id: "kids", label: "Kids Parties" },
@@ -71,14 +71,14 @@ export default function ReservationsPage() {
       {/* Tab Content */}
       {activeTab === "regular" && (
         <div className="space-y-16">
-          {/* Regular Lane Reservations - Visual Introduction */}
+          {/* Lane Reservations - Visual Introduction */}
           <div className="grid gap-8 md:grid-cols-2">
             <div className="relative aspect-video overflow-hidden rounded-lg">
               <Image src="/placeholder.svg?height=600&width=800" alt="Bowling lanes" fill className="object-cover" />
             </div>
             <div className="flex flex-col justify-center">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold">Regular Lane Reservations</h2>
+                <h2 className="text-2xl font-bold">Lane Reservations</h2>
                 <Button className="bg-blue-600 hover:bg-blue-700">
                   Book Now
                 </Button>

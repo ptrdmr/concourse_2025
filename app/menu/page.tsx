@@ -29,25 +29,6 @@ export default function MenuPage() {
             your lane or in our restaurant area. Our menu features classic American favorites, from juicy burgers to
             crispy pizzas, as well as a selection of craft beers and cocktails.
           </p>
-          <div className="space-y-4">
-            <p>
-              <strong>Hours of Operation:</strong>
-            </p>
-            <ul className="space-y-1 text-sm">
-              <li className="flex justify-between">
-                <span>Monday - Thursday:</span>
-                <span>11AM - 10PM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Friday - Saturday:</span>
-                <span>11AM - 12AM</span>
-              </li>
-              <li className="flex justify-between">
-                <span>Sunday:</span>
-                <span>11AM - 9PM</span>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
 

@@ -12,7 +12,7 @@ export default function BowlingPage() {
   return (
     <div className="container py-12">
       <PageHeader
-        title="Bowling Rates & Information"
+        title="Walk-in Rates"
         description="Enjoy our state-of-the-art lanes with friends and family. Check out our competitive rates and special offers."
         centered
       />

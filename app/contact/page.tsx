@@ -125,10 +125,10 @@ export default function ContactPage() {
                 <div>
                   <p className="font-medium">Hours of Operation</p>
                   <div className="text-sm text-muted-foreground">
-                    <p>Monday - Thursday: 9AM - 11PM</p>
-                    <p>Friday: 9AM - 1AM</p>
-                    <p>Saturday: 9AM - 1AM</p>
-                    <p>Sunday: 9AM - 11PM</p>
+                    <p>Monday: 4PM - 10PM</p>
+                    <p>Tuesday - Thursday: 11AM - 11PM</p>
+                    <p>Friday - Saturday: 11AM - Midnight</p>
+                    <p>Sunday: 11AM - 11PM</p>
                   </div>
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function ContactPage() {
                 <Link href="/league-bowling">League Bowling Information</Link>
               </Button>
               <Button variant="outline" className="w-full justify-start" asChild>
-                <Link href="/events">Upcoming Events</Link>
+                <Link href="/events">Events & Specials</Link>
               </Button>
               <Button variant="outline" className="w-full justify-start" asChild>
                 <Link href="https://www2.appone.com/Search/Search.aspx?ServerVar=concoursebowl.appone.com">Job Opportunities</Link>

@@ -38,7 +38,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/events" className="hover:underline">
-                  Events Calendar
+                  Events & Specials
                 </Link>
               </li>
             </ul>
@@ -65,10 +65,10 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Hours</h3>
             <ul className="space-y-2 text-sm">
-              <li>Monday - Thursday: 9AM - 11PM</li>
-              <li>Friday: 9AM - 1AM</li>
-              <li>Saturday: 9AM - 1AM</li>
-              <li>Sunday: 9AM - 11PM</li>
+              <li>Monday: 4PM - 10PM</li>
+              <li>Tuesday - Thursday: 11AM - 11PM</li>
+              <li>Friday - Saturday: 11AM - Midnight</li>
+              <li>Sunday: 11AM - 11PM</li>
             </ul>
             <div className="flex gap-4 pt-2">
               <Link href="#" aria-label="Facebook">
