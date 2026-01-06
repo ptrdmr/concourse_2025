@@ -180,31 +180,46 @@ export default function ArcadePage() {
         <h2 className="mb-6 text-2xl font-bold text-white">Arcade Pricing</h2>
         <Card className="bg-background/95 backdrop-blur-sm max-w-2xl mx-auto">
           <CardHeader>
-            <CardTitle>Game Card Packages</CardTitle>
+            <CardTitle>Game Card Packages - Buy More, Get More!</CardTitle>
             <CardDescription className="text-base mt-2">
               <span className="font-semibold">Note:</span> 1 credit = 1 quarter (25¢)
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="flex justify-between border-b pb-2">
-              <span className="font-medium">Starter Package</span>
-              <span>$10 (40 credits)</span>
+            <div className="flex justify-between items-center border-b pb-3">
+              <div>
+                <span className="font-medium text-lg">Purchase $10</span>
+                <p className="text-sm text-green-600 dark:text-green-400 font-semibold">+ $5 Bonus Play</p>
+              </div>
+              <span className="text-lg font-bold">$15 Total</span>
             </div>
-            <div className="flex justify-between border-b pb-2">
-              <span className="font-medium">Value Package</span>
-              <span>$20 (85 credits)</span>
+            <div className="flex justify-between items-center border-b pb-3">
+              <div>
+                <span className="font-medium text-lg">Purchase $20</span>
+                <p className="text-sm text-green-600 dark:text-green-400 font-semibold">+ $12 Bonus Play</p>
+              </div>
+              <span className="text-lg font-bold">$32 Total</span>
             </div>
-            <div className="flex justify-between border-b pb-2">
-              <span className="font-medium">Super Package</span>
-              <span>$30 (130 credits)</span>
+            <div className="flex justify-between items-center border-b pb-3">
+              <div>
+                <span className="font-medium text-lg">Purchase $40</span>
+                <p className="text-sm text-green-600 dark:text-green-400 font-semibold">+ $20 Bonus Play</p>
+              </div>
+              <span className="text-lg font-bold">$60 Total</span>
             </div>
-            <div className="flex justify-between border-b pb-2">
-              <span className="font-medium">Mega Package</span>
-              <span>$50 (225 credits)</span>
+            <div className="flex justify-between items-center border-b pb-3">
+              <div>
+                <span className="font-medium text-lg">Purchase $60</span>
+                <p className="text-sm text-green-600 dark:text-green-400 font-semibold">+ $20 Bonus Play</p>
+              </div>
+              <span className="text-lg font-bold">$80 Total</span>
             </div>
-            <div className="flex justify-between">
-              <span className="font-medium">Ultimate Package</span>
-              <span>$100 (500 credits)</span>
+            <div className="flex justify-between items-center">
+              <div>
+                <span className="font-medium text-lg">Purchase $100</span>
+                <p className="text-sm text-green-600 dark:text-green-400 font-semibold">+ $40 Bonus Play</p>
+              </div>
+              <span className="text-lg font-bold">$140 Total</span>
             </div>
           </CardContent>
         </Card>
