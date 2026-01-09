@@ -44,7 +44,7 @@ export default function ReservationsPage() {
   return (
     <div className="container py-12">
       <PageHeader
-        title="Reservations"
+        title="Reserve Today!"
         description="Reserve your lanes, plan a party, or book a special event. We have options for groups of all sizes."
         centered
       />

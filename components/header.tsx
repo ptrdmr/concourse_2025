@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -110,6 +110,37 @@ const getDirections = () => {
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
+  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null)
+
+  const handleMouseEnter = (itemName: string) => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+    }
+    const timeout = setTimeout(() => {
+      setOpenDropdown(itemName)
+    }, 150) // Small delay for smoother interaction
+    setHoverTimeout(timeout)
+  }
+
+  const handleMouseLeave = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout)
+    }
+    const timeout = setTimeout(() => {
+      setOpenDropdown(null)
+    }, 200) // Brief delay before closing
+    setHoverTimeout(timeout)
+  }
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout)
+      }
+    }
+  }, [hoverTimeout])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -231,35 +262,47 @@ export default function Header() {
           <nav className="flex h-14 items-center justify-center gap-6 lg:gap-8">
             {navigation.map((item) => (
               item.items ? (
-                <DropdownMenu key={item.name}>
-                  <DropdownMenuTrigger className="group flex items-center text-sm font-medium transition-all duration-200 hover:text-red-600 hover:scale-105">
-                    <span className="relative">
-                      {item.name}
-                      <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-                    </span>
-                    <div className="relative ml-2 flex h-6 w-6 items-center justify-center">
-                      <div className="relative w-5 h-5 overflow-hidden rounded-full">
-                        <Image 
-                          src="/branding/ball_thumbnail.jpg" 
-                          alt="" 
-                          width={20} 
-                          height={20} 
-                          className="w-full h-full rounded-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rotate-180" 
-                        />
-                        <div className="absolute -inset-0.5 rounded-full transition-all duration-300 bg-red-600 mix-blend-multiply translate-y-full group-hover:translate-y-0 scale-110"></div>
+                <DropdownMenu key={item.name} open={openDropdown === item.name} onOpenChange={(open) => {
+                  if (!open) setOpenDropdown(null)
+                }}>
+                  <div
+                    onMouseEnter={() => handleMouseEnter(item.name)}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <DropdownMenuTrigger 
+                      className="group flex items-center text-sm font-medium transition-all duration-200 hover:text-red-600 hover:scale-105"
+                    >
+                      <span className="relative">
+                        {item.name}
+                        <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
+                      </span>
+                      <div className="relative ml-2 flex h-6 w-6 items-center justify-center">
+                        <div className="relative w-5 h-5 overflow-hidden rounded-full">
+                          <Image 
+                            src="/branding/ball_thumbnail.jpg" 
+                            alt="" 
+                            width={20} 
+                            height={20} 
+                            className="w-full h-full rounded-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rotate-180" 
+                          />
+                          <div className="absolute -inset-0.5 rounded-full transition-all duration-300 bg-red-600 mix-blend-multiply translate-y-full group-hover:translate-y-0 scale-110"></div>
+                        </div>
                       </div>
-                    </div>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="center" className="animate-in fade-in-50 data-[side=bottom]:slide-in-from-top-2 rounded-xl border-primary bg-background p-3 shadow-md">
-                    <DropdownMenuLabel className="text-lg font-bold text-primary">{item.name}</DropdownMenuLabel>
-                    {item.items.map((subItem) => (
-                      <DropdownMenuItem key={subItem.name} asChild className="rounded-lg p-2.5 focus:bg-red-50 focus:text-red-600 focus:font-bold">
-                        <Link href={subItem.href} className="w-full text-base transition-all duration-200 hover:translate-x-1 hover:font-bold">
-                          {subItem.name}
-                        </Link>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent 
+                      align="center" 
+                      className="animate-in fade-in-50 data-[side=bottom]:slide-in-from-top-2 rounded-xl border-primary bg-background p-3 shadow-md"
+                    >
+                      <DropdownMenuLabel className="text-lg font-bold text-primary">{item.name}</DropdownMenuLabel>
+                      {item.items.map((subItem) => (
+                        <DropdownMenuItem key={subItem.name} asChild className="rounded-lg p-2.5 focus:bg-red-50 focus:text-red-600 focus:font-bold">
+                          <Link href={subItem.href} className="w-full text-base transition-all duration-200 hover:translate-x-1 hover:font-bold">
+                            {subItem.name}
+                          </Link>
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuContent>
+                  </div>
                 </DropdownMenu>
               ) : (
                 <Link 
