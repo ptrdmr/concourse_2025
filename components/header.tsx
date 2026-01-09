@@ -8,9 +8,9 @@ import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/co
 import { 
   Menu, 
   Trophy,
-  Utensils,
   Info,
-  MapPin
+  MapPin,
+  CalendarIcon
 } from "lucide-react"
 import {
   DropdownMenu,
@@ -26,20 +26,20 @@ const navigation = [
   {
     name: "Play",
     items: [
-      { name: "Bowling", href: "/bowling" },
+      { name: "Walk-in Rates", href: "/bowling" },
       { name: "League Bowling", href: "/league-bowling" },
       { name: "Arcade", href: "/arcade" },
     ],
     icon: Trophy
   },
   {
-    name: "Visit",
+    name: "Plan Ahead",
     items: [
-      { name: "Menu", href: "/menu" },
+      { name: "Reservations & Parties", href: "/reservations" },
       { name: "Events & Specials", href: "/events" },
-      { name: "Reservations", href: "/reservations" },
+      { name: "Menu", href: "/menu" },
     ],
-    icon: Utensils
+    icon: CalendarIcon
   },
   {
     name: "About",
@@ -55,12 +55,12 @@ const navigation = [
 // Flattened navigation for mobile view
 const mobileNavigation = [
   { name: "Home", href: "/" },
-  { name: "Bowling", href: "/bowling" },
+  { name: "Walk-in Rates", href: "/bowling" },
   { name: "League Bowling", href: "/league-bowling" },
   { name: "Arcade", href: "/arcade" },
-  { name: "Menu", href: "/menu" },
+  { name: "Reservations & Parties", href: "/reservations" },
   { name: "Events & Specials", href: "/events" },
-  { name: "Reservations", href: "/reservations" },
+  { name: "Menu", href: "/menu" },
   { name: "About Us", href: "/about" },
   { name: "Contact", href: "/contact" },
   { name: "Careers", href: "https://www2.appone.com/Search/Search.aspx?ServerVar=concoursebowl.appone.com" },
