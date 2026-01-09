@@ -1,12 +1,42 @@
+"use client"
+
+import { useState } from "react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { PageHeader } from "@/components/page-header"
 
+// Map menu tabs to background images
+const menuBackgrounds: Record<string, string> = {
+  appetizers: "/images/food/appetizers.jpg",
+  burgers: "/images/food/burger.jpg",
+  pizza: "/images/food/pizza.jpg",
+  sandwiches: "/images/food/sandwiches.jpg",
+  salads: "/images/food/salads.jpg",
+  "taps-cocktails": "/images/food/taps & cocktails.jpg",
+  happyhour: "/images/food/happy hour.jpg",
+}
+
 export default function MenuPage() {
+  const [activeTab, setActiveTab] = useState("appetizers")
+
   return (
-    <div className="container py-12">
+    <div className="relative">
+      {/* Background Image with Overlay */}
+      <div className="fixed inset-0 z-0">
+        <Image
+          src={menuBackgrounds[activeTab]}
+          alt="Menu background"
+          fill
+          className="object-cover transition-opacity duration-500"
+          priority
+          key={activeTab}
+        />
+        <div className="absolute inset-0 bg-black/80 dark:bg-black/90"></div>
+      </div>
+
+      <div className="relative z-10 container py-12">
       <PageHeader
         title="Menus"
         description="Indulge in delicious American cuisine while enjoying your game. From appetizers to entrees, we've got something for everyone."
@@ -23,8 +53,8 @@ export default function MenuPage() {
           />
         </div>
         <div className="flex flex-col justify-center">
-          <h2 className="mb-4 text-2xl font-bold">Dine While You Bowl</h2>
-          <p className="mb-6">
+          <h2 className="mb-4 text-2xl font-bold text-white">Dine While You Bowl</h2>
+          <p className="mb-6 text-gray-200">
             At our Bar & Grill, we offer a full menu of delicious food and beverages that can be enjoyed right at
             your lane or in our restaurant area. Our menu features classic American favorites, from juicy burgers to
             crispy pizzas, as well as a selection of craft beers and cocktails.
@@ -33,7 +63,7 @@ export default function MenuPage() {
       </div>
 
       <div className="mb-16">
-        <Tabs defaultValue="appetizers" className="w-full">
+        <Tabs defaultValue="appetizers" className="w-full" onValueChange={setActiveTab}>
           <div className="overflow-x-auto pb-2">
             <TabsList className="inline-flex w-auto min-w-full md:grid md:grid-cols-7 md:w-full">
               <TabsTrigger value="appetizers" className="flex-1 min-w-[100px]">Appetizers</TabsTrigger>
@@ -47,7 +77,7 @@ export default function MenuPage() {
           </div>
 
           <TabsContent value="appetizers" className="mt-6">
-            <h3 className="text-2xl font-bold mb-6">STARTERS</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">STARTERS</h3>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <Card>
                 <CardHeader className="pb-2">
@@ -261,7 +291,7 @@ export default function MenuPage() {
           </TabsContent>
 
           <TabsContent value="burgers" className="mt-6">
-            <h3 className="text-2xl font-bold mb-6">BURGERS</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">BURGERS</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
               <p>Includes French Fries or Side Salad. Upgrade: Veggies or Waffle Fries for +$2.50, Onion Rings +$3.</p>
               <p>Add cheese +$1.50: American, Swiss, Pepper Jack. Add Bacon +$3, Avocado +$1.50.</p>
@@ -327,7 +357,7 @@ export default function MenuPage() {
           </TabsContent>
 
           <TabsContent value="pizza" className="mt-6">
-            <h3 className="text-2xl font-bold mb-6">PIZZAS</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">PIZZAS</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
               <p>All Pies Prepared With Our Housemade Pizza Sauce & Hand Grated Mozzarella Cheese.</p>
               <p>12" Medium Pizza - 8 Slices. 16" Large Pizza - 12 Slices.</p>
@@ -448,7 +478,7 @@ export default function MenuPage() {
           </TabsContent>
 
           <TabsContent value="sandwiches" className="mt-6">
-            <h3 className="text-2xl font-bold mb-6">SANDWICHES</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">SANDWICHES</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
               <p>Includes French Fries or Side Salad. Upgrade: Veggies or Waffle Fries for +$2.50, Onion Rings +$3.</p>
               <p>Add cheese +$1.50: American, Swiss, Pepper Jack. Add Bacon +$3, Avocado +$1.50.</p>
@@ -514,7 +544,7 @@ export default function MenuPage() {
           </TabsContent>
 
           <TabsContent value="salads" className="mt-6">
-            <h3 className="text-2xl font-bold mb-6">SALADS</h3>
+            <h3 className="text-2xl font-bold mb-6 text-white">SALADS</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
               <p>Dressings: Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese.</p>
               <p>Add Proteins: +$4 Chicken, +$5 Steak, +$5 Shrimp.</p>
@@ -592,20 +622,20 @@ export default function MenuPage() {
             </div>
           </TabsContent>
 
-          <TabsContent value="taps-cocktails" className="mt-6">
+          <TabsContent value="taps-cocktails" className="mt-6 text-white">
             <div className="mb-8">
-              <h3 className="text-2xl font-bold mb-6">On Tap</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white">On Tap</h3>
               
               {/* FRUITY SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">FRUITY</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">FRUITY</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
-                        <span className="font-medium">BREWERY X HUCKLEBERRY SELTZER</span>
-                        <span className="text-muted-foreground">5%</span>
+                        <span className="text-lg font-bold text-white">8</span>
+                        <span className="font-medium text-white">BREWERY X HUCKLEBERRY SELTZER</span>
+                        <span className="text-gray-400">5%</span>
                       </div>
                       <p className="text-sm text-lime-500 font-medium">HUCKLEBERRY FLAVORED SPIKED SELTZER</p>
                     </div>
@@ -659,7 +689,7 @@ export default function MenuPage() {
               
               {/* DARK & MALTY SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">DARK & MALTY</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">DARK & MALTY</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
@@ -687,7 +717,7 @@ export default function MenuPage() {
               
               {/* IPAS SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">IPAS</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">IPAS</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
@@ -748,7 +778,7 @@ export default function MenuPage() {
               
               {/* IMPORT SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">IMPORT</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">IMPORT</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
@@ -776,7 +806,7 @@ export default function MenuPage() {
               
               {/* BLONDES/ALES SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">BLONDES/ALES</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">BLONDES/ALES</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
@@ -815,7 +845,7 @@ export default function MenuPage() {
               
               {/* DOMESTIC SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b">DOMESTIC</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">DOMESTIC</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
@@ -841,7 +871,7 @@ export default function MenuPage() {
             </div>
             
             <div className="mt-12">
-              <h3 className="text-2xl font-bold mb-6">Specialty Cocktails</h3>
+              <h3 className="text-2xl font-bold mb-6 text-white">Specialty Cocktails</h3>
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
                   <div>
@@ -904,8 +934,8 @@ export default function MenuPage() {
 
           <TabsContent value="happyhour" className="mt-6">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-4">HAPPY HOUR MENU</h3>
-              <p className="text-lg mb-4">Mon: Open to Close; Tues: 2pm-6pm; Wed: 2pm-6pm & 9pm-Close; Thu & Fri: 2pm-6pm</p>
+              <h3 className="text-2xl font-bold mb-4 text-white">HAPPY HOUR MENU</h3>
+              <p className="text-lg mb-4 text-gray-200">Mon: Open to Close; Tues: 2pm-6pm; Wed: 2pm-6pm & 9pm-Close; Thu & Fri: 2pm-6pm</p>
             </div>
             
             <div className="grid gap-8 md:grid-cols-2">
@@ -1103,6 +1133,7 @@ export default function MenuPage() {
             </div>
           </TabsContent>
         </Tabs>
+      </div>
       </div>
     </div>
   )
