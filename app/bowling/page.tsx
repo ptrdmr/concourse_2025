@@ -19,13 +19,12 @@ export default function BowlingPage() {
 
       <div className="mb-16 grid gap-8 md:grid-cols-2">
         <div className="relative aspect-video overflow-hidden rounded-lg">
-          <Image src="/placeholder.svg?height=600&width=800" alt="Bowling lanes" fill className="object-cover" />
+          <Image src="/images/bowling/walk_in.jpg" alt="Bowling lanes" fill className="object-cover" />
         </div>
         <div className="flex flex-col justify-center">
           <h2 className="mb-4 text-2xl font-bold">Walk-in Bowling</h2>
           <p className="mb-6">
-            We operate on a first come, first serve basis for non-reservation bowling. Simply come in, and we'll get you
-            set up with a lane as soon as one becomes available.
+            We operate on a first come, first serve basis for non-reservation bowling.
           </p>
           <Alert variant="destructive" className="mb-6">
             <AlertCircle className="h-4 w-4" />
@@ -34,6 +33,11 @@ export default function BowlingPage() {
               Outside food and drinks are not permitted. Birthday cakes and desserts are welcome.
             </AlertDescription>
           </Alert>
+          <p className="mb-6">
+            If you have a group of 8 or more, a reservation may be recommended. <br></br><br></br> <Button asChild>
+            
+          </Button> Click below for more information!
+          </p>
           <Button asChild>
             <Link href="/reservations">Make a Reservation</Link>
           </Button>
@@ -41,7 +45,7 @@ export default function BowlingPage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Bowl by Hour Rates</h2>
+        <h2 className="mb-6 text-2xl font-bold">Bowl by the Hour</h2>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
@@ -93,7 +97,7 @@ export default function BowlingPage() {
       </div>
 
       <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold">Bowl by Game Rates</h2>
+        <h2 className="mb-6 text-2xl font-bold">Bowl by the Game</h2>
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>

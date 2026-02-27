@@ -7,6 +7,12 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      { source: '/back-tv', destination: '/back-tv.html' },
+      { source: '/front-tv', destination: '/front-tv.html' },
+    ]
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },

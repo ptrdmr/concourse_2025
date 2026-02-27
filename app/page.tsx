@@ -261,16 +261,24 @@ export default function Home() {
               </div>
               <ul className="space-y-4">
                 <li className="border-b pb-4">
-                  <p className="font-medium">$2 Game Night</p>
-                  <p className="text-sm text-muted-foreground">Every Monday, 4PM - Close</p>
+                  <p className="font-medium">Tuesday: 3 Games for $14</p>
+                  <p className="text-sm text-muted-foreground">Open - 3PM · Tuesday Unlimited 2hr $18/person (8PM-Close)</p>
                 </li>
                 <li className="border-b pb-4">
-                  <p className="font-medium">Cosmic Bowling</p>
-                  <p className="text-sm text-muted-foreground">Fri & Sat, 9PM - Midnight</p>
+                  <p className="font-medium">Wednesday: 3 Games for $14</p>
+                  <p className="text-sm text-muted-foreground">Open - 3PM · Late Night Happy Hour (9PM-Close)</p>
+                </li>
+                <li className="border-b pb-4">
+                  <p className="font-medium">Thursday: 3 Games for $14</p>
+                  <p className="text-sm text-muted-foreground">Open - 3PM</p>
+                </li>
+                <li className="border-b pb-4">
+                  <p className="font-medium">Friday: Pre-Game Special 3 for $16</p>
+                  <p className="text-sm text-muted-foreground">Open - 3PM · Cosmic Bowling (5PM-Close) · Live DJ (8PM-Close)</p>
                 </li>
                 <li>
-                  <p className="font-medium">Family Day</p>
-                  <p className="text-sm text-muted-foreground">Sundays, 10AM - 2PM</p>
+                  <p className="font-medium">Sunday: Cosmic Bowling & Late Night</p>
+                  <p className="text-sm text-muted-foreground">Cosmic (Open-5PM) · $5 Games/$5 Shoes (8PM-Close)</p>
                 </li>
               </ul>
             </div>

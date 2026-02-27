@@ -83,7 +83,7 @@ export default function LeagueBowlingPage() {
       <div className="mb-16">
         <div className="grid gap-8 md:grid-cols-2">
           <div className="relative aspect-video overflow-hidden rounded-lg">
-            <Image src="/placeholder.svg?height=600&width=800" alt="League bowling in action" fill className="object-cover" />
+            <Image src="/images/bowling/league.jpg" alt="League bowling in action" fill className="object-cover" />
           </div>
           <div className="flex flex-col justify-center">
             <h2 className="mb-4 text-2xl font-bold">Why Join a League?</h2>

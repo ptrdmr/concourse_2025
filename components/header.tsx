@@ -33,7 +33,7 @@ const navigation = [
     icon: Trophy
   },
   {
-    name: "Plan Ahead",
+    name: "Reserve & More",
     items: [
       { name: "Reservations & Parties", href: "/reservations" },
       { name: "Events & Specials", href: "/events" },
@@ -270,7 +270,7 @@ export default function Header() {
                     onMouseLeave={handleMouseLeave}
                   >
                     <DropdownMenuTrigger 
-                      className="group flex items-center text-sm font-medium transition-all duration-200 hover:text-red-600 hover:scale-105"
+                      className="group flex items-center text-sm font-medium transition-colors duration-200 hover:text-red-600 outline-none focus:outline-none focus-visible:outline-none"
                     >
                       <span className="relative">
                         {item.name}
@@ -283,9 +283,9 @@ export default function Header() {
                             alt="" 
                             width={20} 
                             height={20} 
-                            className="w-full h-full rounded-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rotate-180" 
+                            className="w-full h-full rounded-full object-cover transition-transform duration-300 group-hover:rotate-180" 
                           />
-                          <div className="absolute -inset-0.5 rounded-full transition-all duration-300 bg-red-600 mix-blend-multiply translate-y-full group-hover:translate-y-0 scale-110"></div>
+                          <div className="absolute inset-0 rounded-full transition-all duration-300 bg-red-600/40 opacity-0 group-hover:opacity-100"></div>
                         </div>
                       </div>
                     </DropdownMenuTrigger>
@@ -295,8 +295,8 @@ export default function Header() {
                     >
                       <DropdownMenuLabel className="text-lg font-bold text-primary">{item.name}</DropdownMenuLabel>
                       {item.items.map((subItem) => (
-                        <DropdownMenuItem key={subItem.name} asChild className="rounded-lg p-2.5 focus:bg-red-50 focus:text-red-600 focus:font-bold">
-                          <Link href={subItem.href} className="w-full text-base transition-all duration-200 hover:translate-x-1 hover:font-bold">
+                        <DropdownMenuItem key={subItem.name} asChild className="rounded-lg p-2.5 focus:bg-red-50 focus:text-red-600 cursor-pointer">
+                          <Link href={subItem.href} className="w-full text-base transition-colors duration-200 hover:text-red-600">
                             {subItem.name}
                           </Link>
                         </DropdownMenuItem>
@@ -308,7 +308,7 @@ export default function Header() {
                 <Link 
                   key={item.name} 
                   href={item.href} 
-                  className="group relative text-sm font-medium transition-all duration-200 hover:text-red-600 hover:scale-105"
+                  className="group relative text-sm font-medium transition-colors duration-200 hover:text-red-600"
                 >
                   <span>{item.name}</span>
                   <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full"></span>

@@ -19,6 +19,7 @@ import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 import { ImageModal } from "@/components/ui/image-modal"
 import { PageHeader } from "@/components/page-header"
+import { VipCalculator } from "@/components/vip-calculator"
 
 export default function ReservationsPage() {
   const [date, setDate] = useState<Date>()
@@ -226,7 +227,12 @@ export default function ReservationsPage() {
             {/* Strike Zone VIP Suite */}
             <Card className="mb-8 bg-gray-900 border-gray-700">
               <CardHeader className="border-b border-gray-700">
-                <CardTitle className="text-2xl text-white">STRIKE ZONE VIP SUITE (4 LANE AREA)</CardTitle>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <CardTitle className="text-2xl text-white">STRIKE ZONE VIP SUITE (4 LANE AREA)</CardTitle>
+                  <Button asChild size="sm" className="bg-primary hover:bg-primary/90 w-fit">
+                    <a href="#vip-calculator">Estimate Your Cost</a>
+                  </Button>
+                </div>
                 <CardDescription className="text-gray-400">
                   Minimum 20 bowlers; Maximum 32 bowlers
                 </CardDescription>
@@ -268,7 +274,12 @@ export default function ReservationsPage() {
             {/* Kingpin VIP Suite */}
             <Card className="mb-8 bg-gray-900 border-gray-700">
               <CardHeader className="border-b border-gray-700">
-                <CardTitle className="text-2xl text-white">KINGPIN VIP SUITE (8 LANE SUITE)</CardTitle>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <CardTitle className="text-2xl text-white">KINGPIN VIP SUITE (8 LANE SUITE)</CardTitle>
+                  <Button asChild size="sm" className="bg-primary hover:bg-primary/90 w-fit">
+                    <a href="#vip-calculator">Estimate Your Cost</a>
+                  </Button>
+                </div>
                 <CardDescription className="text-gray-400">
                   Minimum 40 bowlers; Maximum 64 bowlers
                 </CardDescription>
@@ -310,7 +321,12 @@ export default function ReservationsPage() {
             {/* Larger Suites */}
             <Card className="bg-gray-900 border-gray-700">
               <CardHeader className="border-b border-gray-700">
-                <CardTitle className="text-2xl text-white">LARGER SUITES & EVENTS</CardTitle>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <CardTitle className="text-2xl text-white">LARGER SUITES & EVENTS</CardTitle>
+                  <Button asChild size="sm" className="bg-primary hover:bg-primary/90 w-fit">
+                    <a href="#vip-calculator">Estimate Your Cost</a>
+                  </Button>
+                </div>
                 <CardDescription className="text-gray-400">
                   For our most spectacular events and largest groups
                 </CardDescription>
@@ -332,6 +348,9 @@ export default function ReservationsPage() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* VIP Cost Calculator */}
+            <VipCalculator id="vip-calculator" />
           </div>
         </div>
       )}
@@ -349,7 +368,7 @@ export default function ReservationsPage() {
             
             <div className="grid gap-8 md:grid-cols-2 p-8 bg-white dark:bg-gray-800">
               <div className="relative aspect-video overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600">
-                <Image src="/placeholder.svg?height=600&width=800" alt="Kids Bowling Party" fill className="object-cover" />
+                <Image src="/images/bowling/kids_party.png" alt="Kids Bowling Party" fill className="object-cover" />
               </div>
               
               <div className="flex flex-col justify-center">

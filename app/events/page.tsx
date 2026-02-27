@@ -1,8 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { CalendarIcon, Clock, DollarSign, Sparkles } from "lucide-react"
+import { CalendarIcon, DollarSign } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 
 export default function EventsPage() {
@@ -11,9 +10,181 @@ export default function EventsPage() {
     <div className="container py-12">
       <PageHeader
         title="Events & Specials"
-        description="Special holiday hours, rates, and weekly promotions to make your bowling experience even better."
+        description="Current specials valid Jan 20 - Mar 31. Special holiday hours, rates, and weekly promotions to make your bowling experience even better."
         centered
       />
+
+      {/* Weekly Specials */}
+      <div className="mb-16 rounded-2xl bg-[#FAF9F6] dark:bg-muted/30 p-6 md:p-8">
+        {/* Section Header */}
+        <div className="mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">
+            Weekly Specials
+          </h2>
+          <div className="flex items-center gap-3">
+            <div className="h-1 w-16 bg-primary rounded-full"></div>
+            <p className="text-sm font-medium text-muted-foreground">Jan 20 - Mar 31</p>
+          </div>
+        </div>
+
+        {/* Mobile: Horizontal scroll carousel | Desktop: 2-column grid */}
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
+          
+          {/* Tuesday Card - Red tinted */}
+          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-red-50 dark:bg-red-950/20">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src="/images/bowling/Facility Shot.jpg"
+                alt="Tuesday bowling special"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-sm font-medium text-red-600 dark:text-red-400 uppercase tracking-wide mb-2">Tuesday</p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-bold mb-2">Game Special</h3>
+                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
+                  3 Games for $14
+                </span>
+                <p className="text-sm text-muted-foreground">Open - 3PM • 1 per person per day</p>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold mb-2">Tuesday Unlimited</h4>
+                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
+                  $18/person
+                </span>
+                <p className="text-sm text-muted-foreground">2 Hours + Shoes • 8PM - Close</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Wednesday Card - Cream/Yellow tinted */}
+          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#FFFACD] dark:bg-yellow-950/20">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src="/images/food/happy hour.jpg"
+                alt="Wednesday happy hour"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">Wednesday</p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-bold mb-2">Game Special</h3>
+                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
+                  3 Games for $14
+                </span>
+                <p className="text-sm text-muted-foreground">Open - 3PM • 1 per person per day</p>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold mb-1">Late Night Happy Hour</h4>
+                <p className="text-sm text-muted-foreground">9PM - Close</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Thursday Card - Dark theme like flyer */}
+          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#1A1A1A] text-white">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src="/images/bowling/concourse vintage.jpg"
+                alt="Thursday bowling special"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-2">Thursday</p>
+              
+              <div>
+                <h3 className="text-xl font-bold mb-2">Game Special</h3>
+                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
+                  3 Games for $14
+                </span>
+                <p className="text-sm text-gray-400">Open - 3PM • 1 per person per day</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Friday Card - Dark theme */}
+          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#1A1A1A] text-white">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src="/images/bowling/dark lanes.jpg"
+                alt="Friday night cosmic bowling"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-2">Friday</p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-bold mb-2">Pre-Game Special</h3>
+                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
+                  3 Games for $16
+                </span>
+                <p className="text-sm text-gray-400">Open - 3PM</p>
+              </div>
+
+              <div className="mb-4">
+                <h4 className="text-xl font-bold mb-1">Cosmic Bowling</h4>
+                <p className="text-sm text-gray-400">5:00PM - Close</p>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold mb-1">Live DJ</h4>
+                <p className="text-sm text-gray-400">8:00PM - Close</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Sunday Card - Cream/Yellow tinted */}
+          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#FFFACD] dark:bg-yellow-950/20">
+            <div className="relative aspect-[16/9] overflow-hidden">
+              <Image
+                src="/images/bowling/exterior.png"
+                alt="Sunday bowling specials"
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+            </div>
+            <div className="p-6">
+              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">Sunday</p>
+              
+              <div className="mb-4">
+                <h3 className="text-xl font-bold mb-1">Cosmic Bowling</h3>
+                <p className="text-sm text-muted-foreground">Open - 5:00PM</p>
+              </div>
+
+              <div>
+                <h4 className="text-xl font-bold mb-2">Late Night Specials</h4>
+                <div className="flex flex-wrap gap-2 mb-1">
+                  <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full">
+                    $5 Games
+                  </span>
+                  <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full">
+                    $5 Shoes
+                  </span>
+                </div>
+                <p className="text-sm text-muted-foreground">Bar Happy Hour • 8PM - Close</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile scroll indicator */}
+        <div className="flex justify-center gap-2 mt-4 md:hidden">
+          <span className="text-xs text-muted-foreground">Swipe for more</span>
+          <span className="text-muted-foreground">→</span>
+        </div>
+      </div>
 
       {/* Holiday Events & Special Dates */}
       <div className="mb-16">
@@ -26,79 +197,23 @@ export default function EventsPage() {
           <p className="mb-4 text-muted-foreground">
             We observe special hours and rates on the following holidays:
           </p>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">President's Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Martin Luther King Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Memorial Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Juneteenth</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Independence Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Labor Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Veterans Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Day After Christmas</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">New Year's Day</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">Holiday rates apply</p>
-              </CardContent>
-            </Card>
+          <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              "New Year's Day",
+              "Martin Luther King Day",
+              "President's Day",
+              "Memorial Day",
+              "Juneteenth",
+              "Independence Day",
+              "Labor Day",
+              "Veterans Day",
+              "Day After Christmas",
+            ].map((holiday) => (
+              <div key={holiday} className="flex items-center gap-2 py-1">
+                <CalendarIcon className="h-4 w-4 text-primary flex-shrink-0" />
+                <span className="text-sm">{holiday}</span>
+              </div>
+            ))}
           </div>
           <div className="mt-6 rounded-md bg-background p-4 border">
             <p className="font-medium mb-2 flex items-center gap-2">
@@ -112,95 +227,6 @@ export default function EventsPage() {
               <li>• Reservations: Holiday rates apply (see reservations page)</li>
             </ul>
           </div>
-        </div>
-      </div>
-
-      {/* Weekly Specials */}
-      <div className="mb-16">
-        <h2 className="mb-6 text-2xl font-bold flex items-center gap-2">
-          <Sparkles className="h-6 w-6 text-primary" />
-          Weekly Specials
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="border-2 border-blue-500">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">💵</span>
-                Monday
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <p className="font-bold text-lg text-primary">$2 Game Night</p>
-                <p className="text-sm text-muted-foreground">$2 games from 4PM-Close</p>
-                <p className="text-sm text-muted-foreground">$2.50 shoe rental</p>
-              </div>
-              <div className="pt-2 border-t">
-                <p className="font-medium">League Night</p>
-                <p className="text-sm text-muted-foreground">Monday Night Out & Monday No Tap leagues at 6:45 PM</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">👴</span>
-                Tuesday
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <p className="font-bold text-lg text-primary">Senior Day</p>
-                <p className="text-sm text-muted-foreground">Special pricing for seniors 55+</p>
-                <p className="text-sm text-muted-foreground">11AM - 5PM</p>
-              </div>
-              <div className="pt-2 border-t">
-                <p className="font-medium">League Night</p>
-                <p className="text-sm text-muted-foreground">Vegas or Bust league at 6:15 PM</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="border-2 border-purple-500">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">🎆</span>
-                Friday & Saturday
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <p className="font-bold text-lg text-primary">Cosmic Bowling</p>
-                <p className="text-sm text-muted-foreground">Experience bowling with black lights and music!</p>
-                <p className="text-sm text-muted-foreground">9PM - Midnight</p>
-              </div>
-              <div className="pt-2 border-t">
-                <p className="font-medium">Happy Hour (Friday)</p>
-                <p className="text-sm text-muted-foreground">2PM - 6PM with discounted drinks & appetizers</p>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <span className="text-2xl">👨‍👩‍👧‍👦</span>
-                Sunday
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div>
-                <p className="font-bold text-lg text-primary">Family Day</p>
-                <p className="text-sm text-muted-foreground">Special family packages available</p>
-                <p className="text-sm text-muted-foreground">10AM - 2PM</p>
-              </div>
-              <div className="pt-2 border-t">
-                <p className="font-medium">Cosmic Bowling</p>
-                <p className="text-sm text-muted-foreground">11AM - 5PM with special lighting</p>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       </div>
 
@@ -224,9 +250,8 @@ export default function EventsPage() {
             <div className="rounded-md bg-muted p-4 mb-4">
               <p className="font-bold mb-2">Available Times:</p>
               <ul className="space-y-1 text-sm">
-                <li>• Friday: 9PM - Midnight</li>
-                <li>• Saturday: 9PM - Midnight</li>
-                <li>• Sunday: 11AM - 5PM</li>
+                <li>• Friday: 5:00PM - Close</li>
+                <li>• Sunday: Open - 5:00PM</li>
               </ul>
             </div>
             <Button asChild size="lg" className="w-fit">
