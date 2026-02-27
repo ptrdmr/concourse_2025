@@ -101,12 +101,13 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full border-2 border-red-500">
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/bowling/exterior.png"
-            alt="Bowling lanes"
-            fill
-            className="object-cover"
-            priority
+          <video
+            src="/pins_small.mp4"
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
         </div>
