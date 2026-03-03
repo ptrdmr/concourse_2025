@@ -270,7 +270,7 @@ export default function Header() {
                     onMouseLeave={handleMouseLeave}
                   >
                     <DropdownMenuTrigger 
-                      className="group flex items-center text-sm font-medium transition-colors duration-200 hover:text-red-600 outline-none focus:outline-none focus-visible:outline-none"
+                      className="group flex items-center py-3 px-2 -mx-2 text-sm font-medium transition-colors duration-200 hover:text-red-600 outline-none focus:outline-none focus-visible:outline-none rounded-md"
                     >
                       <span className="relative">
                         {item.name}
@@ -291,6 +291,9 @@ export default function Header() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent 
                       align="center" 
+                      sideOffset={0}
+                      onMouseEnter={() => handleMouseEnter(item.name)}
+                      onMouseLeave={handleMouseLeave}
                       className="animate-in fade-in-50 data-[side=bottom]:slide-in-from-top-2 rounded-xl border-primary bg-background p-3 shadow-md"
                     >
                       <DropdownMenuLabel className="text-lg font-bold text-primary">{item.name}</DropdownMenuLabel>
@@ -308,7 +311,7 @@ export default function Header() {
                 <Link 
                   key={item.name} 
                   href={item.href} 
-                  className="group relative text-sm font-medium transition-colors duration-200 hover:text-red-600"
+                  className="group relative flex items-center py-3 px-2 -mx-2 text-sm font-medium transition-colors duration-200 hover:text-red-600 rounded-md"
                 >
                   <span>{item.name}</span>
                   <span className="absolute -bottom-1 left-0 h-0.5 w-0 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
