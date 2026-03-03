@@ -53,52 +53,12 @@
   .screen::before { top: 0; }
   .screen::after { bottom: 0; }
 
-  /* ─── HEADER ─── */
-  .header {
-    text-align: center;
-    padding: 30px 60px 18px;
-    flex-shrink: 0;
-  }
-  .logo-top-rule {
-    width: 320px;
-    height: 3px;
-    background: var(--white);
-    margin: 0 auto 6px;
-  }
-  .logo-title {
-    font-family: 'Aktiv Grotesk', 'Arial Black', sans-serif;
-    font-size: 56px;
-    font-weight: 900;
-    letter-spacing: 12px;
-    line-height: 1;
-    color: var(--white);
-  }
-  .logo-subtitle {
-    font-family: 'Satisfy', cursive;
-    font-size: 20px;
-    color: var(--mid);
-    line-height: 1;
-    margin-top: 0;
-  }
-  .logo-bottom-rule {
-    width: 220px;
-    height: 2px;
-    background: var(--white);
-    margin: 6px auto 0;
-  }
-  .header-divider {
-    width: 100%;
-    height: 1px;
-    background: var(--rule);
-    margin-top: 16px;
-  }
-
   /* ─── MAIN LAYOUT ─── */
   .main {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 0 40px;
-    padding: 16px 60px 0;
+    padding: 24px 60px 0;
     flex: 1;
     min-height: 0;
   }
@@ -106,7 +66,7 @@
   /* ─── SECTION TITLE (banner style) ─── */
   .section-title {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 30px;
+    font-size: 36px;
     letter-spacing: 4px;
     color: var(--white);
     border: 2.5px solid var(--white);
@@ -119,7 +79,7 @@
 
   /* ─── SECTION NOTES ─── */
   .section-notes {
-    font-size: 19px;
+    font-size: 22px;
     line-height: 1.5;
     color: var(--light);
     padding-bottom: 10px;
@@ -143,7 +103,7 @@
   }
   .item-name {
     font-weight: 700;
-    font-size: 19px;
+    font-size: 22px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--white);
@@ -151,25 +111,25 @@
   .item-price {
     margin-left: auto;
     font-weight: 700;
-    font-size: 19px;
+    font-size: 22px;
     color: var(--red);
     white-space: nowrap;
     flex-shrink: 0;
   }
   .item-desc {
-    font-size: 19px;
+    font-size: 22px;
     line-height: 1.45;
     color: var(--mid);
     margin-top: 2px;
   }
   .item-note {
-    font-size: 19px;
+    font-size: 22px;
     font-style: italic;
     color: var(--light);
     margin-top: 2px;
   }
   .item-sub {
-    font-size: 19px;
+    font-size: 22px;
     color: var(--light);
     font-style: italic;
   }
@@ -178,7 +138,7 @@
   .badge {
     display: inline-block;
     font-family: 'Barlow', sans-serif;
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 700;
     padding: 1px 6px;
     border-radius: 3px;
@@ -212,7 +172,7 @@
     margin-top: 16px;
   }
   .jr-section .section-title {
-    font-size: 22px;
+    font-size: 26px;
     padding: 1px 14px 0;
     border-width: 2px;
     margin-bottom: 8px;
@@ -220,41 +180,11 @@
   .jr-section .item { margin-bottom: 8px; }
   .jr-section .item:last-child { margin-bottom: 0; }
 
-  /* ─── LEGEND ─── */
-  .legend {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    padding: 14px 60px 22px;
-    font-size: 12px;
-    color: var(--light);
-    margin-top: auto;
-    flex-shrink: 0;
-  }
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .legend .badge {
-    font-size: 8px;
-    top: 0;
-  }
 </style>
 </head>
 <body>
 
 <div class="screen">
-
-  <!-- HEADER -->
-  <header class="header">
-    <div class="logo-top-rule"></div>
-    <div class="logo-title">CONCOURSE</div>
-    <div class="logo-subtitle">Bowl · Bar · Grill</div>
-    <div class="logo-bottom-rule"></div>
-    <div class="header-divider"></div>
-  </header>
 
   <!-- MAIN 3-COLUMN LAYOUT -->
   <div class="main">
@@ -386,7 +316,7 @@
 
       <!-- SODAS -->
       <div class="drinks-section">
-        <div class="section-title" style="font-size:22px; padding:1px 14px 0; border-width:2px; margin-bottom:8px;">SODAS</div>
+        <div class="section-title" style="font-size:26px; padding:1px 14px 0; border-width:2px; margin-bottom:8px;">SODAS</div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Pitchers</span>
@@ -474,14 +404,6 @@
     </div>
 
   </div>
-
-  <!-- LEGEND -->
-  <footer class="legend">
-    <div class="legend-item"><span class="badge badge-new">NEW</span> New Items</div>
-    <div class="legend-item"><span class="badge badge-spicy">SPICY</span> Spicy</div>
-    <div class="legend-item"><span class="badge badge-vegan">VG</span> Vegan</div>
-    <div class="legend-item"><span class="badge badge-gf">GF</span> Gluten Free</div>
-  </footer>
 
 </div>
 
