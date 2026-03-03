@@ -6,7 +6,7 @@
 <title>Concourse Menu – Front Display</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Satisfy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -62,11 +62,17 @@
     flex: 1;
     min-height: 0;
   }
+  .main > .col {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
 
   /* ─── SECTION TITLE (banner style) ─── */
   .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
+    font-family: 'Caveat', cursive;
+    font-size: 72px;
+    font-weight: 700;
     letter-spacing: 4px;
     color: var(--white);
     border: 2.5px solid var(--white);
@@ -79,7 +85,7 @@
 
   /* ─── SECTION NOTES ─── */
   .section-notes {
-    font-size: 22px;
+    font-size: 44px;
     line-height: 1.5;
     color: var(--light);
     padding-bottom: 10px;
@@ -89,6 +95,30 @@
   .section-notes strong {
     font-weight: 600;
     color: var(--mid);
+  }
+
+  .section-blurb-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 0;
+    transform: translateY(-20%);
+  }
+  .section-blurb-title {
+    font-size: 35px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  .section-blurb {
+    font-size: 35px;
+    line-height: 1.4;
+    color: var(--light);
+    text-align: center;
+    width: 100%;
   }
 
   /* ─── MENU ITEMS ─── */
@@ -103,7 +133,7 @@
   }
   .item-name {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 44px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--white);
@@ -111,25 +141,25 @@
   .item-price {
     margin-left: auto;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 44px;
     color: var(--red);
     white-space: nowrap;
     flex-shrink: 0;
   }
   .item-desc {
-    font-size: 22px;
+    font-size: 44px;
     line-height: 1.45;
     color: var(--mid);
     margin-top: 2px;
   }
   .item-note {
-    font-size: 22px;
+    font-size: 44px;
     font-style: italic;
     color: var(--light);
     margin-top: 2px;
   }
   .item-sub {
-    font-size: 22px;
+    font-size: 44px;
     color: var(--light);
     font-style: italic;
   }
@@ -138,7 +168,7 @@
   .badge {
     display: inline-block;
     font-family: 'Barlow', sans-serif;
-    font-size: 11px;
+    font-size: 22px;
     font-weight: 700;
     padding: 1px 6px;
     border-radius: 3px;
@@ -172,7 +202,9 @@
     margin-top: 16px;
   }
   .jr-section .section-title {
-    font-size: 26px;
+    font-family: 'Caveat', cursive;
+    font-size: 52px;
+    font-weight: 700;
     padding: 1px 14px 0;
     border-width: 2px;
     margin-bottom: 8px;
@@ -191,12 +223,7 @@
 
     <!-- COLUMN 1: SALADS -->
     <div class="col">
-      <div class="section-title">SALADS</div>
-
-      <div class="section-notes">
-        <strong>Dressings:</strong> Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese<br>
-        <strong>Add Proteins:</strong> Chicken Breast +$4 · Steak +$5 · Shrimp +$5
-      </div>
+      <div class="section-title">Salads</div>
 
       <div class="item">
         <div class="item-row">
@@ -205,8 +232,8 @@
           <span class="badge badge-vegan">VG</span>
           <span class="item-price">$8</span>
         </div>
-        <div class="item-desc">Romaine lettuce, tomato, cucumber, mozzarella &amp; carrots.</div>
-        <div class="item-note">Ask for no cheese for vegan option</div>
+        <!-- <div class="item-desc">Romaine lettuce, tomato, cucumber, mozzarella &amp; carrots.</div> -->
+        <!-- <div class="item-note">Ask for no cheese for vegan option</div> -->
       </div>
 
       <div class="item">
@@ -215,8 +242,8 @@
           <span class="badge badge-gf">GF</span>
           <span class="item-price">$8.50</span>
         </div>
-        <div class="item-desc">Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.</div>
-        <div class="item-note">Ask for no croutons for gluten-free option</div>
+        <!-- <div class="item-desc">Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.</div> -->
+        <!-- <div class="item-note">Ask for no croutons for gluten-free option</div> -->
       </div>
 
       <div class="item">
@@ -224,7 +251,7 @@
           <span class="item-name">Chinese Chicken Salad</span>
           <span class="item-price">$14</span>
         </div>
-        <div class="item-desc">Grilled chicken breast, shredded cabbage, romaine lettuce, sweet &amp; savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions &amp; sesame seeds.</div>
+        <!-- <div class="item-desc">Grilled chicken breast, shredded cabbage, romaine lettuce, sweet &amp; savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions &amp; sesame seeds.</div> -->
       </div>
 
       <div class="item">
@@ -232,7 +259,7 @@
           <span class="item-name">Taco Salad</span>
           <span class="item-price">$14</span>
         </div>
-        <div class="item-desc">Black beans, shredded lettuce and seasoned ground beef. Topped with shredded cheddar, avocado, pico de gallo and sour cream. Served with tortilla chips and chipotle ranch.</div>
+        <!-- <div class="item-desc">Black beans, shredded lettuce and seasoned ground beef. Topped with shredded cheddar, avocado, pico de gallo and sour cream. Served with tortilla chips and chipotle ranch.</div> -->
       </div>
 
       <div class="item">
@@ -242,7 +269,7 @@
           <span class="badge badge-gf">GF</span>
           <span class="item-price">$15</span>
         </div>
-        <div class="item-desc">Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles &amp; tomato.</div>
+        <!-- <div class="item-desc">Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles &amp; tomato.</div> -->
       </div>
 
       <div class="item">
@@ -250,19 +277,24 @@
           <span class="item-name">Fried Chicken Salad</span>
           <span class="item-price">$15</span>
         </div>
-        <div class="item-desc">Chunks of crispy fried chicken tenders atop mixed greens with grape tomatoes, kernel corn &amp; shredded cheddar. Served with honey mustard.</div>
+        <!-- <div class="item-desc">Chunks of crispy fried chicken tenders atop mixed greens with grape tomatoes, kernel corn &amp; shredded cheddar. Served with honey mustard.</div> -->
+      </div>
+
+      <div class="section-blurb-wrap">
+        <div class="section-blurb-title">Available Dressings</div>
+        <div class="section-blurb">Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese</div>
       </div>
     </div>
 
     <!-- COLUMN 2: SANDWICHES -->
     <div class="col">
-      <div class="section-title">SANDWICHES</div>
+      <div class="section-title">Sandwiches</div>
 
-      <div class="section-notes">
+      <!-- <div class="section-notes">
         Includes fries or side salad · <strong>Upgrade:</strong> veggies +$2.50, onion rings or waffle fries +$3<br>
         <strong>Add:</strong> cheese +$1.50 · bacon +$3 · avocado +$1.50<br>
         <strong>Breads:</strong> hamburger bun, sourdough, ciabatta
-      </div>
+      </div> -->
 
       <div class="item">
         <div class="item-row">
@@ -270,7 +302,7 @@
           <span class="badge badge-new">NEW</span>
           <span class="item-price">$14</span>
         </div>
-        <div class="item-desc">Chicken breast brushed with BBQ sauce, piled high with ham, american cheese on onion strings on a burger bun.</div>
+        <!-- <div class="item-desc">Chicken breast brushed with BBQ sauce, piled high with ham, american cheese on onion strings on a burger bun.</div> -->
       </div>
 
       <div class="item">
@@ -278,7 +310,7 @@
           <span class="item-name">Turkey Avocado</span>
           <span class="item-price">$15</span>
         </div>
-        <div class="item-desc">Sliced turkey breast, swiss cheese, avocado, ciabatta roll, with lettuce, tomato &amp; mayo.</div>
+        <!-- <div class="item-desc">Sliced turkey breast, swiss cheese, avocado, ciabatta roll, with lettuce, tomato &amp; mayo.</div> -->
       </div>
 
       <div class="item">
@@ -286,7 +318,7 @@
           <span class="item-name">Grilled Cheese</span>
           <span class="item-price">$10</span>
         </div>
-        <div class="item-sub">Add ham for $3</div>
+        <!-- <div class="item-sub">Add ham for $3</div> -->
       </div>
 
       <div class="item">
@@ -294,7 +326,7 @@
           <span class="item-name">Hot Italian</span>
           <span class="item-price">$13.50</span>
         </div>
-        <div class="item-desc">Bakery fresh ciabatta roll topped with marinara, shredded mozzarella, basil, pepperoncini, pepperoni &amp; sausage. Oven baked until bubbly &amp; crisp.</div>
+        <!-- <div class="item-desc">Bakery fresh ciabatta roll topped with marinara, shredded mozzarella, basil, pepperoncini, pepperoni &amp; sausage. Oven baked until bubbly &amp; crisp.</div> -->
       </div>
 
       <div class="item">
@@ -302,7 +334,7 @@
           <span class="item-name">Chipotle Chicken Melt</span>
           <span class="item-price">$15</span>
         </div>
-        <div class="item-desc">Tender chicken breast on ciabatta with chipotle aioli &amp; shredded mozzarella. Topped with lettuce, tomato &amp; cucumber.</div>
+        <!-- <div class="item-desc">Tender chicken breast on ciabatta with chipotle aioli &amp; shredded mozzarella. Topped with lettuce, tomato &amp; cucumber.</div> -->
       </div>
 
       <div class="item">
@@ -311,12 +343,12 @@
           <span class="badge badge-new">NEW</span>
           <span class="item-price">$10</span>
         </div>
-        <div class="item-desc">A half sandwich (grilled cheese or BLT) on sourdough, paired with a cup of our housemade soup of the day.</div>
+        <!-- <div class="item-desc">A half sandwich (grilled cheese or BLT) on sourdough, paired with a cup of our housemade soup of the day.</div> -->
       </div>
 
       <!-- SODAS -->
       <div class="drinks-section">
-        <div class="section-title" style="font-size:26px; padding:1px 14px 0; border-width:2px; margin-bottom:8px;">SODAS</div>
+        <div class="section-title" style="font-size:52px; padding:1px 14px 0; border-width:2px; margin-bottom:8px;">Sodas</div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Pitchers</span>
@@ -328,27 +360,27 @@
             <span class="item-name">Cups</span>
             <span class="item-price">$3.75</span>
           </div>
-          <div class="item-sub">$1 refills</div>
+          <!-- <div class="item-sub">$1 refills</div> -->
         </div>
       </div>
     </div>
 
     <!-- COLUMN 3: BURGERS + JR. BOWLERS -->
     <div class="col">
-      <div class="section-title">BURGERS</div>
+      <div class="section-title">Burgers</div>
 
-      <div class="section-notes">
+      <!-- <div class="section-notes">
         Includes fries or side salad · <strong>Upgrade:</strong> veggies +$2.50, onion rings or waffle fries +$3<br>
         <strong>Add:</strong> cheese +$1.50 · bacon +$3 · avocado +$1.50<br>
         <strong>Breads:</strong> hamburger bun, sourdough, ciabatta
-      </div>
+      </div> -->
 
       <div class="item">
         <div class="item-row">
           <span class="item-name">Smash Burger</span>
           <span class="item-price">$13</span>
         </div>
-        <div class="item-desc">Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.</div>
+        <!-- <div class="item-desc">Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.</div> -->
       </div>
 
       <div class="item">
@@ -357,7 +389,7 @@
           <span class="badge badge-spicy">SPICY</span>
           <span class="item-price">$14.50</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, american cheese, lettuce, tomato, onions &amp; 1000 Island dressing on bakery fresh burger bun.</div>
+        <!-- <div class="item-desc">Custom blended beef patty, american cheese, lettuce, tomato, onions &amp; 1000 Island dressing on bakery fresh burger bun.</div> -->
       </div>
 
       <div class="item">
@@ -365,7 +397,7 @@
           <span class="item-name">Cali Burger</span>
           <span class="item-price">$16</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.</div>
+        <!-- <div class="item-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.</div> -->
       </div>
 
       <div class="item">
@@ -373,32 +405,32 @@
           <span class="item-name">BBQ Bacon Cheeseburger</span>
           <span class="item-price">$16</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh burger bun.</div>
+        <!-- <div class="item-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh burger bun.</div> -->
       </div>
 
       <!-- JR. BOWLERS -->
       <div class="jr-section">
-        <div class="section-title">JR. BOWLERS</div>
+        <div class="section-title">Jr. bowlers</div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Mini Corn Dogs</span>
             <span class="item-price">$10</span>
           </div>
-          <div class="item-desc">Served with fries.</div>
+          <!-- <div class="item-desc">Served with fries.</div> -->
         </div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Kids Sliders</span>
             <span class="item-price">$11.50</span>
           </div>
-          <div class="item-desc">Two mini burgers with american cheese and ketchup. Served with french fries.</div>
+          <!-- <div class="item-desc">Two mini burgers with american cheese and ketchup. Served with french fries.</div> -->
         </div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Kids Chicken Strips</span>
             <span class="item-price">$11.50</span>
           </div>
-          <div class="item-desc">2 chicken fingers with fries.</div>
+          <!-- <div class="item-desc">2 chicken fingers with fries.</div> -->
         </div>
       </div>
     </div>

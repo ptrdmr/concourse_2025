@@ -6,7 +6,7 @@
 <title>Concourse Menu – Back Display</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Satisfy&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -59,12 +59,21 @@
     flex: 1;
     min-height: 0;
   }
+  .starters-section {
+    min-width: 0;
+    overflow: auto;
+  }
+  .pizzas-section {
+    min-width: 0;
+    overflow: hidden;
+  }
 
   /* ─── SECTION TITLE ─── */
   .section-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    letter-spacing: 4px;
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 2px;
     color: var(--white);
     border: 2.5px solid var(--white);
     display: inline-block;
@@ -74,17 +83,18 @@
   }
 
   .sub-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 24px;
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 700;
     letter-spacing: 2px;
     color: var(--red);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     line-height: 1.15;
   }
 
   /* ─── SECTION NOTES ─── */
   .section-notes {
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1.5;
     color: var(--light);
     padding-bottom: 10px;
@@ -99,18 +109,49 @@
     grid-template-columns: 1fr 1fr;
     gap: 0 28px;
   }
+  .inner-grid > * {
+    min-width: 0;
+  }
+  .starters-inner-grid {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    overflow: hidden;
+  }
+  /* ─── STARTERS: font sizes, stay in container ─── */
+  .starters-section .section-title { font-size: 50px; }
+  .starters-section .item-name { font-size: 31px; min-width: 0; }
+  .starters-section .item-price { font-size: 31px; }
+  .starters-section .badge { font-size: 14px; }
+  .starters-section .item-row { overflow: hidden; }
+  .pizzas-inner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ─── PIZZAS SECTION: +32% font sizes (15% + 15%) ─── */
+  .pizzas-section .section-title { font-size: 53px; }
+  .pizzas-section .sub-title { font-size: 35px; }
+  .pizzas-section .byo-box .sub-title { font-size: 46px; }
+  .pizzas-section .item-name { font-size: 32px; }
+  .pizzas-section .item-price { font-size: 32px; }
+  .pizzas-section .badge { font-size: 16px; }
+  .pizzas-section .pizza-prices { font-size: 29px; }
+  .pizzas-section .pizza-prices .size { font-size: 24px; }
+  .pizzas-section .byo-base { font-size: 32px; }
+  .pizzas-section .byo-base .byo-note { font-size: 29px; }
+  .pizzas-section .byo-category-title { font-size: 32px; }
+  .pizzas-section .byo-list { font-size: 32px; }
 
   /* ─── MENU ITEMS ─── */
-  .item { margin-bottom: 9px; }
+  .item { margin-bottom: 14px; }
   .item-row {
     display: flex;
     align-items: baseline;
     gap: 8px;
-    line-height: 1.2;
+    line-height: 1.3;
   }
   .item-name {
     font-weight: 700;
-    font-size: 22px;
+    font-size: 24px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: var(--white);
@@ -118,34 +159,34 @@
   .item-price {
     margin-left: auto;
     font-weight: 700;
-    font-size: 22px;
+    font-size: 24px;
     color: var(--red);
     white-space: nowrap;
     flex-shrink: 0;
   }
   .item-desc {
-    font-size: 22px;
+    font-size: 24px;
     line-height: 1.45;
     color: var(--mid);
     margin-top: 2px;
   }
   .starters-section .item-desc {
-    font-size: 20px;
+    font-size: 22px;
   }
   .item-note {
-    font-size: 22px;
+    font-size: 24px;
     font-style: italic;
     color: var(--light);
     margin-top: 2px;
   }
   .item-sub {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--light);
     font-style: italic;
   }
   .serves {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 22px;
+    font-size: 24px;
     font-style: italic;
     color: var(--light);
     margin-left: 3px;
@@ -157,7 +198,7 @@
   .badge {
     display: inline-block;
     font-family: 'Barlow', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     padding: 1px 6px;
     border-radius: 3px;
@@ -177,7 +218,7 @@
   .pizza-prices {
     margin-left: auto;
     font-weight: 700;
-    font-size: 20px;
+    font-size: 22px;
     color: var(--red);
     white-space: nowrap;
     flex-shrink: 0;
@@ -185,7 +226,7 @@
   .pizza-prices .size {
     font-weight: 500;
     color: var(--light);
-    font-size: 17px;
+    font-size: 18px;
     text-transform: uppercase;
   }
   .pizza-sep { color: rgba(255,255,255,0.2); margin: 0 3px; }
@@ -198,17 +239,17 @@
     margin-top: 6px;
   }
   .byo-base {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 600;
     color: var(--white);
     margin-bottom: 10px;
     line-height: 1.5;
   }
   .byo-base .byo-price { color: var(--red); font-weight: 700; }
-  .byo-base .byo-note { font-weight: 400; font-size: 20px; color: var(--light); }
+  .byo-base .byo-note { font-weight: 400; font-size: 22px; color: var(--light); }
   .byo-category { margin-bottom: 8px; }
   .byo-category-title {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--white);
     text-transform: uppercase;
@@ -216,7 +257,7 @@
   }
   .byo-category-title .byo-each { font-weight: 600; color: var(--red); text-transform: none; }
   .byo-list {
-    font-size: 22px;
+    font-size: 24px;
     color: var(--mid);
     line-height: 1.5;
     margin-top: 2px;
@@ -232,9 +273,9 @@
 
     <!-- ═══ LEFT HALF: STARTERS ═══ -->
     <div class="starters-section">
-      <div class="section-title">STARTERS</div>
+      <div class="section-title">Starters</div>
 
-      <div class="inner-grid">
+      <div class="inner-grid starters-inner-grid">
 
         <!-- Starters Col 1 -->
         <div>
@@ -268,10 +309,9 @@
               <span class="item-name">Irish Nachos</span>
               <span class="badge badge-new">NEW</span>
               <span class="badge badge-gf">GF</span>
-              <span class="serves">*Feeds 4–6*</span>
               <span class="item-price">$19</span>
             </div>
-            <div class="item-desc">Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon and green onions.</div>
+            <!-- <div class="item-desc">Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon and green onions.</div> -->
           </div>
 
           <div class="item">
@@ -280,11 +320,10 @@
               <span class="badge badge-new">NEW</span>
               <span class="badge badge-gf">GF</span>
               <span class="badge badge-spicy">SPICY</span>
-              <span class="serves">*Feeds 4–6*</span>
               <span class="item-price">$17.50</span>
             </div>
-            <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos and pico de gallo.</div>
-            <div class="item-sub">Add Chicken $4 · Steak $5</div>
+            <!-- <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos and pico de gallo.</div> -->
+            <!-- <div class="item-sub">Add Chicken $4 · Steak $5</div> -->
           </div>
 
           <div class="item">
@@ -292,8 +331,8 @@
               <span class="item-name">Sliders</span>
               <span class="item-price">$14.50</span>
             </div>
-            <div class="item-desc">Three two-ounce beef patties on sweet hawaiian slider buns with melted cheese, grilled onions &amp; ketchup.</div>
-            <div class="item-sub">Add fries $2.50</div>
+            <!-- <div class="item-desc">Three two-ounce beef patties on sweet hawaiian slider buns with melted cheese, grilled onions &amp; ketchup.</div> -->
+            <!-- <div class="item-sub">Add fries $2.50</div> -->
           </div>
 
           <div class="item">
@@ -301,7 +340,7 @@
               <span class="item-name">Chicken Strips (3)</span>
               <span class="item-price">$14.50</span>
             </div>
-            <div class="item-desc">Breaded white meat chicken, regular or spicy buffalo. Served with fries.</div>
+            <!-- <div class="item-desc">Breaded white meat chicken, regular or spicy buffalo. Served with fries.</div> -->
           </div>
 
           <div class="item">
@@ -312,7 +351,7 @@
               <span class="badge badge-spicy">SPICY</span>
               <span class="item-price">$16</span>
             </div>
-            <div class="item-desc">8 jumbo bone-in wings tossed in buffalo, garlic parmesan, asian zing or naked.</div>
+            <!-- <div class="item-desc">8 jumbo bone-in wings tossed in buffalo, garlic parmesan, asian zing or naked.</div> -->
           </div>
 
           <div class="item">
@@ -320,7 +359,7 @@
               <span class="item-name">Soup of the Day</span>
               <span class="item-price">$6</span>
             </div>
-            <div class="item-desc">Ask your server!</div>
+            <!-- <div class="item-desc">Ask your server!</div> -->
           </div>
         </div>
 
@@ -332,7 +371,7 @@
               <span class="badge badge-vegan">VG</span>
               <span class="item-price">$9</span>
             </div>
-            <div class="item-desc">Farm fresh vegetables.</div>
+            <!-- <div class="item-desc">Farm fresh vegetables.</div> -->
           </div>
 
           <div class="item">
@@ -340,8 +379,8 @@
               <span class="item-name">Pretzel Sticks (6)</span>
               <span class="item-price">$12.50</span>
             </div>
-            <div class="item-desc">Bakery fresh, with nacho cheese &amp; mustard.</div>
-            <div class="item-note">Ask for no cheese for vegan option</div>
+            <!-- <div class="item-desc">Bakery fresh, with nacho cheese &amp; mustard.</div> -->
+            <!-- <div class="item-note">Ask for no cheese for vegan option</div> -->
           </div>
 
           <div class="item">
@@ -350,7 +389,7 @@
               <span class="badge badge-vegan">VG</span>
               <span class="item-price">$12</span>
             </div>
-            <div class="item-desc">Three fresh Mediterranean style dips: plain, edamame &amp; red pepper. Served with pita &amp; veggies.</div>
+            <!-- <div class="item-desc">Three fresh Mediterranean style dips: plain, edamame &amp; red pepper. Served with pita &amp; veggies.</div> -->
           </div>
 
           <div class="item">
@@ -358,7 +397,7 @@
               <span class="item-name">Mozzarella Sticks</span>
               <span class="item-price">$10.50</span>
             </div>
-            <div class="item-desc">Served with marinara sauce, topped with parmesan.</div>
+            <!-- <div class="item-desc">Served with marinara sauce, topped with parmesan.</div> -->
           </div>
 
           <div class="item">
@@ -367,7 +406,7 @@
               <span class="badge badge-spicy">SPICY</span>
               <span class="item-price">$14.50</span>
             </div>
-            <div class="item-desc">Flour shell shrimp tacos filled with melted mozzarella, lettuce, pico de gallo and chipotle aioli. Served with black beans puree and tortilla chips.</div>
+            <!-- <div class="item-desc">Flour shell shrimp tacos filled with melted mozzarella, lettuce, pico de gallo and chipotle aioli. Served with black beans puree and tortilla chips.</div> -->
           </div>
 
           <div class="item">
@@ -376,7 +415,7 @@
               <span class="badge badge-new">NEW</span>
               <span class="item-price">$12</span>
             </div>
-            <div class="item-desc">Three soft corn tortillas with your choice of chicken, pork carnitas or beef carne asada. Topped with red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</div>
+            <!-- <div class="item-desc">Three soft corn tortillas with your choice of chicken, pork carnitas or beef carne asada. Topped with red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</div> -->
           </div>
 
           <div class="item">
@@ -384,8 +423,8 @@
               <span class="item-name">Quesadilla</span>
               <span class="item-price">$11</span>
             </div>
-            <div class="item-desc">Topped with pico de gallo. Served with chips, sour cream &amp; red salsa.</div>
-            <div class="item-sub">Add Chicken $4 · Steak or Shrimp $5</div>
+            <!-- <div class="item-desc">Topped with pico de gallo. Served with chips, sour cream &amp; red salsa.</div> -->
+            <!-- <div class="item-sub">Add Chicken $4 · Steak or Shrimp $5</div> -->
           </div>
 
           <div class="item">
@@ -393,8 +432,8 @@
               <span class="item-name">Southwest Rice Bowl</span>
               <span class="item-price">$10</span>
             </div>
-            <div class="item-desc">Long grain rice with black bean-corn and tomatillo salsas, cheddar, chipotle aioli, avocado and fajita vegetables. Topped with crispy tortilla strips.</div>
-            <div class="item-sub">Add Chicken $4 · Steak or Shrimp $5</div>
+            <!-- <div class="item-desc">Long grain rice with black bean-corn and tomatillo salsas, cheddar, chipotle aioli, avocado and fajita vegetables. Topped with crispy tortilla strips.</div> -->
+            <!-- <div class="item-sub">Add Chicken $4 · Steak or Shrimp $5</div> -->
           </div>
         </div>
 
@@ -402,26 +441,26 @@
     </div>
 
     <!-- ═══ RIGHT HALF: PIZZAS ═══ -->
-    <div>
-      <div class="section-title">PIZZAS</div>
+    <div class="pizzas-section">
+      <div class="section-title">Pizzas</div>
 
-      <div class="section-notes">
+      <!-- <div class="section-notes">
         All pies prepared with our housemade pizza sauce &amp; hand grated mozzarella.
         <strong>Medium</strong> 12″ · 8 Slices &nbsp;—&nbsp; <strong>Large</strong> 16″ · 12 Slices
-      </div>
+      </div> -->
 
-      <div class="inner-grid">
+      <div class="inner-grid pizzas-inner-grid">
 
         <!-- Specialties -->
         <div>
-          <div class="sub-title">SPECIALTIES</div>
+          <div class="sub-title">Specialties</div>
 
           <div class="item">
             <div class="item-row">
               <span class="item-name">Bowlers Combo</span>
               <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
             </div>
-            <div class="item-desc">Sausage, pepperoni, mushrooms, onions, bell peppers.</div>
+            <!-- <div class="item-desc">Sausage, pepperoni, mushrooms, onions, bell peppers.</div> -->
           </div>
 
           <div class="item">
@@ -429,7 +468,7 @@
               <span class="item-name">Meat Lovers</span>
               <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
             </div>
-            <div class="item-desc">Pepperoni, ham, Italian sausage, applewood smoked bacon.</div>
+            <!-- <div class="item-desc">Pepperoni, ham, Italian sausage, applewood smoked bacon.</div> -->
           </div>
 
           <div class="item">
@@ -437,7 +476,7 @@
               <span class="item-name">Veggie Lovers</span>
               <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
             </div>
-            <div class="item-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</div>
+            <!-- <div class="item-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</div> -->
           </div>
 
           <div class="item">
@@ -445,7 +484,7 @@
               <span class="item-name">BBQ Chicken</span>
               <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
             </div>
-            <div class="item-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</div>
+            <!-- <div class="item-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</div> -->
           </div>
 
           <div class="item">
@@ -453,7 +492,7 @@
               <span class="item-name">Hawaiian</span>
               <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
             </div>
-            <div class="item-desc">Ham &amp; pineapple.</div>
+            <!-- <div class="item-desc">Ham &amp; pineapple.</div> -->
           </div>
 
           <div class="item">
@@ -462,14 +501,14 @@
               <span class="badge badge-spicy">SPICY</span>
               <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
             </div>
-            <div class="item-desc">Double pepperoni, Fresno chiles, drizzled with HOT honey.</div>
+            <!-- <div class="item-desc">Double pepperoni, Fresno chiles, drizzled with HOT honey.</div> -->
           </div>
         </div>
 
         <!-- Build Your Own -->
         <div>
           <div class="byo-box">
-            <div class="sub-title">BUILD YOUR OWN</div>
+            <div class="sub-title">Build Your Own</div>
 
             <div class="byo-base">
               Medium Pizza <span class="byo-price">$17</span> <span class="byo-note">cheese only</span><br>
