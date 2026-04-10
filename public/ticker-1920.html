@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse Sports Ticker – 1920×270</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D42027;
+    --bg: #111111;
+    --white: #FFFFFF;
+    --mid: #BBBBBB;
+  }
+
+  html, body {
+    font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .screen {
+    width: 1920px;
+    height: 270px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .screen::before, .screen::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 4px;
+    background: var(--red);
+    z-index: 10;
+  }
+  .screen::before { top: 0; }
+  .screen::after { bottom: 0; }
+
+  .ticker-container {
+    flex: 1;
+    min-height: 0;
+    width: 100%;
+    padding: 10px 20px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .sport-panel {
+    display: none;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    height: 100%;
+  }
+  .sport-panel.active {
+    display: flex;
+    align-items: center;
+  }
+  .sport-panel.no-games {
+    display: none !important;
+  }
+
+  .ticker-track {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    animation: ticker-scroll 60s linear infinite;
+  }
+  .ticker-track.paused {
+    animation-play-state: paused;
+  }
+
+  @keyframes ticker-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .game-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 32px;
+    margin-right: 40px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .game-chip .team {
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--white);
+  }
+  .game-chip .score {
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--red);
+    min-width: 3ch;
+    text-align: center;
+  }
+  .game-chip .vs {
+    font-size: 32px;
+    color: var(--mid);
+    font-weight: 500;
+  }
+  .game-chip .status {
+    font-size: 24px;
+    color: var(--mid);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .sport-label {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-right: 28px;
+    flex-shrink: 0;
+  }
+
+  .loading, .empty {
+    color: var(--mid);
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .no-games-message {
+    color: var(--mid);
+    font-size: 52px;
+    text-align: center;
+    width: 100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="screen">
+  <div class="ticker-container">
+    <div class="sport-panel" id="panel-none" style="display:none;">
+      <span class="no-games-message">No games today</span>
+    </div>
+    <div class="sport-panel active" id="panel-nba">
+      <div class="ticker-track" id="track-nba"></div>
+    </div>
+    <div class="sport-panel" id="panel-nfl">
+      <div class="ticker-track" id="track-nfl"></div>
+    </div>
+    <div class="sport-panel" id="panel-hockey">
+      <div class="ticker-track" id="track-hockey"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var SPORTS = ['nba', 'nfl', 'hockey'];
+  var LABELS = { nba: 'NBA', nfl: 'NFL', hockey: 'NHL' };
+  var date = new Date().toISOString().slice(0, 10);
+  var cache = {};
+  var currentIndex = 0;
+  var sportsWithGames = [];
+
+  function formatGame(g) {
+    var chip = document.createElement('div');
+    chip.className = 'game-chip';
+    if (g.homeScore != null && g.awayScore != null) {
+      chip.innerHTML = '<span class="team">' + escapeHtml(g.away) + '</span>' +
+        '<span class="score">' + g.awayScore + '</span>' +
+        '<span class="vs">–</span>' +
+        '<span class="score">' + g.homeScore + '</span>' +
+        '<span class="team">' + escapeHtml(g.home) + '</span>' +
+        (g.statusShort ? '<span class="status">' + escapeHtml(g.statusShort) + '</span>' : '');
+    } else {
+      chip.innerHTML = '<span class="team">' + escapeHtml(g.away) + '</span>' +
+        '<span class="vs">vs</span>' +
+        '<span class="team">' + escapeHtml(g.home) + '</span>' +
+        (g.statusShort ? '<span class="status">' + escapeHtml(g.statusShort) + '</span>' : '');
+    }
+    return chip;
+  }
+
+  function escapeHtml(s) {
+    var d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function renderTrack(sport, games) {
+    var panel = document.getElementById('panel-' + sport);
+    var track = document.getElementById('track-' + sport);
+    track.innerHTML = '';
+    if (!games || games.length === 0) {
+      panel.classList.add('no-games');
+      return;
+    }
+    panel.classList.remove('no-games');
+    var wrapper = document.createElement('div');
+    wrapper.style.display = 'inline-flex';
+    wrapper.style.alignItems = 'center';
+    for (var i = 0; i < 2; i++) {
+      var group = document.createElement('span');
+      group.style.display = 'inline-flex';
+      group.style.alignItems = 'center';
+      group.style.marginRight = '96px';
+      var label = document.createElement('span');
+      label.className = 'sport-label';
+      label.textContent = LABELS[sport];
+      group.appendChild(label);
+      games.forEach(function(g) {
+        group.appendChild(formatGame(g));
+      });
+      wrapper.appendChild(group);
+    }
+    track.appendChild(wrapper);
+  }
+
+  function fetchSport(sport) {
+    if (cache[sport]) return Promise.resolve(cache[sport]);
+    return fetch('/api/sports-ticker?sport=' + sport + '&date=' + date)
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        cache[sport] = data.games || [];
+        return cache[sport];
+      })
+      .catch(function() {
+        cache[sport] = [];
+        return [];
+      });
+  }
+
+  function updateSportsWithGames() {
+    sportsWithGames = SPORTS.filter(function(sport) {
+      return !document.getElementById('panel-' + sport).classList.contains('no-games');
+    });
+    var activePanel = document.querySelector('.sport-panel.active');
+    var activeSport = activePanel ? activePanel.id.replace('panel-', '') : null;
+    var keepCurrent = activeSport && sportsWithGames.includes(activeSport);
+    if (sportsWithGames.length > 0) {
+      document.querySelectorAll('.sport-panel.active').forEach(function(p) { p.classList.remove('active'); });
+      var toShow = keepCurrent ? activeSport : sportsWithGames[0];
+      document.getElementById('panel-' + toShow).classList.add('active');
+      currentIndex = sportsWithGames.indexOf(toShow);
+      document.getElementById('panel-none').style.display = 'none';
+    } else {
+      document.querySelectorAll('.sport-panel.active').forEach(function(p) { p.classList.remove('active'); });
+      document.getElementById('panel-none').style.display = 'flex';
+    }
+  }
+
+  function loadAll(useCache) {
+    if (!useCache) cache = {};
+    Promise.all(SPORTS.map(function(sport) {
+      return fetchSport(sport).then(function(games) {
+        renderTrack(sport, games);
+        return sport;
+      });
+    })).then(function() {
+      updateSportsWithGames();
+    });
+  }
+
+  function cycle() {
+    if (sportsWithGames.length === 0) return;
+    document.getElementById('panel-' + sportsWithGames[currentIndex]).classList.remove('active');
+    currentIndex = (currentIndex + 1) % sportsWithGames.length;
+    document.getElementById('panel-' + sportsWithGames[currentIndex]).classList.add('active');
+  }
+
+  loadAll(false);
+  setInterval(function() { loadAll(false); }, 300000);
+  setInterval(cycle, 10000);
+})();
+</script>
+
+</body>
+</html>

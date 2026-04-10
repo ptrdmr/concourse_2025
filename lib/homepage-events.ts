@@ -46,8 +46,8 @@ export const homepageEventsCarousel: HomepageCarouselSlide[] = [
     deals: [
       { lines: ["Open – 3:00PM", "Tuesday – Friday"] },
     ],
-    image: "/placeholder.svg?height=600&width=600&text=Arcade",
-    imageAlt: "Arcade games at Concourse — replace with real photo",
+    image: "/images/arcade/homepage_arcade.jpg",
+    imageAlt: "Space Invaders Frenzy arcade cabinet at Concourse",
   },
   {
     kind: "spring-break",
@@ -70,8 +70,8 @@ export const homepageEventsCarousel: HomepageCarouselSlide[] = [
       { title: "Game Special", lines: ["3 Games for $14", "Open – 3PM", "1 per person per day"] },
       { title: "Late Night Happy Hour", lines: ["9PM – Close"] },
     ],
-    image: "/placeholder.svg?height=600&width=600&text=Happy+Hour",
-    imageAlt: "Happy hour at the bar — replace with real photo",
+    image: "/images/food/homepage_bar_cafe.jpg",
+    imageAlt: "Margarita and chips at Concourse Bar & Cafe",
   },
   {
     kind: "spring-break",
@@ -94,8 +94,8 @@ export const homepageEventsCarousel: HomepageCarouselSlide[] = [
       { title: "Cosmic Bowling", lines: ["3:00PM – Close"] },
       { title: "Live DJ", lines: ["8:00PM – Close"] },
     ],
-    image: "/placeholder.svg?height=600&width=600&text=Cosmic+Bowling",
-    imageAlt: "Cosmic bowling lights — replace with real photo",
+    image: "/images/bowling/friday_cosmic.jpg",
+    imageAlt: "Cosmic bowling at Concourse on Friday night",
   },
   {
     kind: "spring-break",

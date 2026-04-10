@@ -204,16 +204,16 @@ const primaryCategoryCards = [
     description: "Burgers, pizza, drinks, and happy hour — at your lane or in our restaurant.",
     href: "/menu",
     cta: "View our menu",
-    image: "/placeholder.jpg",
-    imageAlt: "Food and drinks placeholder — replace with bar & cafe photo",
+    image: "/images/food/homepage_bar_cafe.jpg",
+    imageAlt: "Margarita and chips at Concourse Bar & Cafe",
   },
   {
     title: "Arcade",
     description: "Classic cabinets and the latest games for all ages between frames.",
     href: "/arcade",
     cta: "Play now",
-    image: "/placeholder.jpg",
-    imageAlt: "Arcade placeholder — replace with arcade photo",
+    image: "/images/arcade/homepage_arcade.jpg",
+    imageAlt: "Space Invaders Frenzy arcade cabinet at Concourse",
   },
 ] as const
 
