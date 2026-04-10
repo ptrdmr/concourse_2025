@@ -3,103 +3,327 @@
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { MapPin, Phone, Mail, Calendar, Users, Trophy, Pizza, Gamepad } from "lucide-react"
-import { useEffect, useRef } from "react"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  type CarouselApi,
+} from "@/components/ui/carousel"
+import { MapPin, Phone, Mail } from "lucide-react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import gsap from "gsap"
 import { AnimatedHeader } from "@/components/animated-header"
+import {
+  homepageEventsCarousel,
+  type HomepageSpringSlide,
+  type HomepageTournamentSlide,
+  type SpringRowVariant,
+} from "@/lib/homepage-events"
+import { cn } from "@/lib/utils"
+import Autoplay from "embla-carousel-autoplay"
+
+const variantStyles: Record<SpringRowVariant, { bg: string; title: string; line: string }> = {
+  cyan:   { bg: "bg-[#00BCD4]", title: "text-[#1A237E]",  line: "text-[#1A237E]" },
+  orange: { bg: "bg-[#FF7043]", title: "text-[#FFD54F]",  line: "text-white" },
+  navy:   { bg: "bg-[#283593]", title: "text-[#00BCD4]",  line: "text-white" },
+}
+
+function EventsSpringSlide({ slide }: { slide: HomepageSpringSlide }) {
+  const s = variantStyles[slide.variant]
+  return (
+    <div className={cn("relative w-full h-[560px] md:h-[560px]", s.bg)}>
+      <div className="container mx-auto flex h-full flex-col md:flex-row md:items-stretch">
+        {/* Text content */}
+        <div className="flex flex-1 flex-col justify-center px-6 py-10 md:px-10 md:py-12 lg:py-14">
+          <div className="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <span className="text-sm font-black uppercase tracking-widest text-white/70">Spring Break</span>
+            <span className="text-sm font-bold italic text-[#FFD54F] md:text-base">Now – May 31st</span>
+          </div>
+
+          <h3 className="mb-6 text-4xl font-black uppercase leading-none tracking-tight text-white drop-shadow-md sm:text-5xl md:mb-8 md:text-6xl lg:text-7xl">
+            {slide.dayLabel}
+          </h3>
+
+          <div
+            className={cn(
+              "flex flex-col gap-4 md:gap-5",
+              slide.deals.length > 1 && "lg:flex-row lg:flex-wrap"
+            )}
+          >
+            {slide.deals.map((deal, i) => (
+              <div key={i} className="lg:min-w-[200px] lg:max-w-sm">
+                {deal.title ? (
+                  <h4 className={cn("mb-2 text-2xl font-black uppercase leading-tight tracking-tight md:text-3xl", s.title)}>
+                    {deal.title}
+                  </h4>
+                ) : null}
+                <ul className="space-y-1">
+                  {deal.lines.map((line, j) => (
+                    <li
+                      key={j}
+                      className={cn(
+                        "font-bold uppercase leading-snug tracking-tight",
+                        j === 0 ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg opacity-90",
+                        s.line
+                      )}
+                    >
+                      {line}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-wrap gap-4 md:mt-10">
+            <Button size="lg" asChild className="bg-[#1A237E] font-bold text-white shadow-lg hover:bg-[#111836]">
+              <Link href="/reservations">Reserve your lane today</Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="border-white/50 font-bold text-white hover:bg-white/10">
+              <Link href="/events">View all specials</Link>
+            </Button>
+          </div>
+        </div>
+
+        {/* Photo — hidden on mobile, right side on md+ */}
+        <div className="relative hidden w-[40%] max-w-[480px] shrink-0 md:block">
+          <Image
+            src={slide.image}
+            alt={slide.imageAlt}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 0px, 40vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-current/20 to-transparent" style={{ color: "inherit" }} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EventsTournamentSlide({ slide }: { slide: HomepageTournamentSlide }) {
+  return (
+    <div className="relative w-full h-[560px] md:h-[560px] bg-[#1A237E]">
+      <div className="container mx-auto flex h-full flex-col items-center justify-center gap-8 px-6 py-10 md:flex-row md:px-10 md:py-12 lg:gap-12 lg:py-14">
+        <div className="relative h-[200px] w-[200px] shrink-0 sm:h-[240px] sm:w-[240px] md:h-[280px] md:w-[280px]">
+          <Image src={slide.image} alt={slide.imageAlt} fill className="object-contain drop-shadow-2xl" sizes="280px" />
+        </div>
+        <div className="flex-1 text-center md:text-left">
+          <span className="text-sm font-black uppercase tracking-widest text-[#00BCD4]">Tournament</span>
+          <h3 className="mt-2 text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+            {slide.title}
+          </h3>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">{slide.description}</p>
+          <div className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
+            <Button size="lg" asChild className="bg-red-600 font-bold shadow-lg hover:bg-red-700">
+              <a href={slide.registerUrl} target="_blank" rel="noopener noreferrer">
+                {slide.registerLabel}
+              </a>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="border-white/50 font-bold text-white hover:bg-white/10">
+              <Link href="/events">View all events</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EventsCarousel() {
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) return
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap())
+    api.on("select", () => setCurrent(api.selectedScrollSnap()))
+  }, [api])
+
+  return (
+    <section className="relative w-full overflow-hidden">
+      <Carousel
+        setApi={setApi}
+        opts={{ align: "center", loop: true }}
+        plugins={[Autoplay({ delay: 7000, stopOnInteraction: true })]}
+        className="w-full"
+      >
+        <CarouselContent className="ml-0">
+          {homepageEventsCarousel.map((slide) => (
+            <CarouselItem key={slide.id} className="basis-full pl-0">
+              {slide.kind === "spring-break" ? (
+                <EventsSpringSlide slide={slide} />
+              ) : (
+                <EventsTournamentSlide slide={slide} />
+              )}
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+      </Carousel>
+
+      {count > 1 && (
+        <div className="absolute inset-x-0 bottom-4 z-20 flex items-center justify-center gap-2 md:bottom-6">
+          {Array.from({ length: count }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => api?.scrollTo(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={cn(
+                "h-2.5 rounded-full transition-all duration-300",
+                i === current ? "w-8 bg-white" : "w-2.5 bg-white/40 hover:bg-white/70"
+              )}
+            />
+          ))}
+        </div>
+      )}
+    </section>
+  )
+}
+
+const primaryCategoryCards = [
+  {
+    title: "Reservations & Parties",
+    description: "Birthdays, corporate events, and lane reservations for groups of any size.",
+    href: "/reservations",
+    cta: "Reserve your party",
+    image: "/images/bowling/kids_party.png",
+    imageAlt: "Kids bowling party at Concourse",
+  },
+  {
+    title: "League Bowling",
+    description: "Sanctioned and fun leagues with regular play, camaraderie, and prizes.",
+    href: "/league-bowling",
+    cta: "Join a league",
+    image: "/images/bowling/league.jpg",
+    imageAlt: "League bowling at Concourse",
+  },
+  {
+    title: "Bar & Cafe",
+    description: "Burgers, pizza, drinks, and happy hour — at your lane or in our restaurant.",
+    href: "/menu",
+    cta: "View our menu",
+    image: "/placeholder.jpg",
+    imageAlt: "Food and drinks placeholder — replace with bar & cafe photo",
+  },
+  {
+    title: "Arcade",
+    description: "Classic cabinets and the latest games for all ages between frames.",
+    href: "/arcade",
+    cta: "Play now",
+    image: "/placeholder.jpg",
+    imageAlt: "Arcade placeholder — replace with arcade photo",
+  },
+] as const
 
 export default function Home() {
-  const rRef = useRef(null);
-  const oRef = useRef(null);
-  const llRef = useRef(null);
-  const restOfTextRef = useRef(null);
-  const subtitleRef = useRef(null);
-  const buttonsRef = useRef(null);
-  
+  const rRef = useRef(null)
+  const oRef = useRef(null)
+  const llRef = useRef(null)
+  const restOfTextRef = useRef(null)
+  const subtitleRef = useRef(null)
+  const buttonsRef = useRef(null)
+
   useEffect(() => {
-    // Make sure we're in the browser environment
-    if (typeof window !== 'undefined') {
-      // Create a timeline for more control
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      
-      // Initial states
-      gsap.set(rRef.current, { 
+    if (typeof window !== "undefined") {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } })
+
+      gsap.set(rRef.current, {
         autoAlpha: 0,
         y: -50,
-      });
-      
-      gsap.set(oRef.current, { 
+      })
+
+      gsap.set(oRef.current, {
         autoAlpha: 0,
-        x: -100, // Start off-screen to the left
-        rotation: -720, // Will make 2 full rotations
-      });
-      
-      gsap.set(llRef.current, { 
+        x: -100,
+        rotation: -720,
+      })
+
+      gsap.set(llRef.current, {
         autoAlpha: 0,
         y: -50,
-      });
-      
-      gsap.set(restOfTextRef.current, { 
-        autoAlpha: 0, 
+      })
+
+      gsap.set(restOfTextRef.current, {
+        autoAlpha: 0,
         y: -50,
-      });
-      
-      gsap.set(subtitleRef.current, { 
-        autoAlpha: 0, 
-        y: 20
-      });
-      
-      gsap.set(buttonsRef.current, { 
-        autoAlpha: 0, 
-        y: 20
-      });
-      
-      // Animation sequence
+      })
+
+      gsap.set(subtitleRef.current, {
+        autoAlpha: 0,
+        y: 20,
+      })
+
+      gsap.set(buttonsRef.current, {
+        autoAlpha: 0,
+        y: 20,
+      })
+
       tl.to(rRef.current, {
         duration: 0.5,
         autoAlpha: 1,
         y: 0,
-        ease: "back.out(1.7)"
+        ease: "back.out(1.7)",
       })
-      .to(oRef.current, {
-        duration: 1.2,
-        autoAlpha: 1,
-        x: 0,
-        rotation: 0,
-        ease: "bounce.out", // Bouncy effect to simulate rolling
-      }, "-=0.3")
-      .to(llRef.current, {
-        duration: 0.5,
-        autoAlpha: 1,
-        y: 0,
-        ease: "back.out(1.7)"
-      }, "-=0.6")
-      .to(restOfTextRef.current, {
-        duration: 0.6,
-        autoAlpha: 1,
-        y: 0,
-        ease: "back.out(1.7)"
-      }, "-=0.4")
-      .to(subtitleRef.current, {
-        duration: 0.8,
-        autoAlpha: 1,
-        y: 0,
-        ease: "power2.out"
-      }, "-=0.3")
-      .to(buttonsRef.current, {
-        duration: 0.6,
-        autoAlpha: 1,
-        y: 0,
-        ease: "power2.out"
-      }, "-=0.4");
+        .to(
+          oRef.current,
+          {
+            duration: 1.2,
+            autoAlpha: 1,
+            x: 0,
+            rotation: 0,
+            ease: "bounce.out",
+          },
+          "-=0.3"
+        )
+        .to(
+          llRef.current,
+          {
+            duration: 0.5,
+            autoAlpha: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+          },
+          "-=0.6"
+        )
+        .to(
+          restOfTextRef.current,
+          {
+            duration: 0.6,
+            autoAlpha: 1,
+            y: 0,
+            ease: "back.out(1.7)",
+          },
+          "-=0.4"
+        )
+        .to(
+          subtitleRef.current,
+          {
+            duration: 0.8,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        )
+        .to(
+          buttonsRef.current,
+          {
+            duration: 0.6,
+            autoAlpha: 1,
+            y: 0,
+            ease: "power2.out",
+          },
+          "-=0.4"
+        )
     }
-  }, []);
+  }, [])
 
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative w-full border-2 border-red-500">
+      <section className="relative w-full">
         <div className="absolute inset-0 z-0">
           <video
             src="/pins_small.mp4"
@@ -109,105 +333,77 @@ export default function Home() {
             playsInline
             className="absolute inset-0 h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
+          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75" />
         </div>
         <div className="container relative z-10 mx-auto flex flex-col items-center justify-center px-4 py-16 text-center text-white md:px-6 md:py-24 lg:px-8 lg:py-40">
-          <h1 className="mb-4 text-6xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl flex flex-wrap justify-center items-baseline whitespace-nowrap">
+          <h1 className="mb-4 flex flex-wrap items-baseline justify-center whitespace-nowrap text-6xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl">
             <span ref={rRef}>R</span>
-            <span ref={oRef} className="inline-block">O</span>
+            <span ref={oRef} className="inline-block">
+              O
+            </span>
             <span ref={llRef}>LL</span>
-            <span ref={restOfTextRef} className="inline-flex whitespace-nowrap ml-1 sm:ml-2 md:ml-4">WITH US!</span>
+            <span ref={restOfTextRef} className="ml-1 inline-flex whitespace-nowrap sm:ml-2 md:ml-4">
+              WITH US!
+            </span>
           </h1>
-          <p ref={subtitleRef} className="mb-6 max-w-2xl text-base text-bold sm:text-lg md:text-xl">
-           Food, fun, and competition<br/>ALL UNDER ONE ROOF.
+          <p ref={subtitleRef} className="text-bold mb-6 max-w-2xl text-base sm:text-lg md:text-xl">
+            Food, fun, and competition
+            <br />
+            ALL UNDER ONE ROOF.
           </p>
-          <div ref={buttonsRef} className="flex-responsive gap-3 w-full max-w-md mx-auto justify-center items-center">
+          <div ref={buttonsRef} className="flex-responsive mx-auto w-full max-w-md items-center justify-center gap-3">
             <Button size="lg" className="w-full sm:w-auto" asChild>
               <Link href="/reservations">Reserve Today!</Link>
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto bg-white/10 text-white hover:bg-white/20" asChild>
+            <Button size="lg" variant="outline" className="w-full bg-white/10 text-white hover:bg-white/20 sm:w-auto" asChild>
               <Link href="/league-bowling">Join a League</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-16">
+      {/* Primary categories — image cards */}
+      <section className="border-b border-border/40 bg-muted/40 py-16">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 h-full">
-            <Card className="h-full flex flex-col">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
-                  <Trophy className="h-5 w-5 text-primary" />
-                  Bowling
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-grow">
-                <CardDescription className="mb-4 flex-grow">
-                  Enjoy our lanes powered by Brunswick SYNC built for casual games or competitive play.
-                </CardDescription>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/bowling">View Rates</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="h-full flex flex-col">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <Users className="h-5 w-5 text-primary" />
-                  League Bowling
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-grow">
-                <CardDescription className="mb-4 flex-grow">
-                  Join one of our many leagues for regular competitive play and prizes.
-                </CardDescription>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/league-bowling">View Leagues</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="h-full flex flex-col">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
-                  <Pizza className="h-5 w-5 text-primary" />
-                  Menus
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-grow">
-                <CardDescription className="mb-4 flex-grow">
-                  Delicious food and drinks to enjoy while you bowl or at our restaurant.
-                </CardDescription>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/menu">View Menu</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="h-full flex flex-col">
-              <CardHeader className="pb-2">
-                <CardTitle className="flex items-center gap-2">
-                  <Gamepad className="h-5 w-5 text-primary" />
-                  Arcade
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-grow">
-                <CardDescription className="mb-4 flex-grow">
-                  Enjoy our selection of arcade games for all ages between bowling games.
-                </CardDescription>
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/arcade">Learn More</Link>
-                </Button>
-              </CardContent>
-            </Card>
+          <div className="mb-10 text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Plan your visit</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
+              Everything you need for a great night out — reserve lanes, join a league, eat well, and play.
+            </p>
           </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {primaryCategoryCards.map((card) => (
+              <Link
+                key={card.href + card.title}
+                href={card.href}
+                className="group relative block min-h-[280px] overflow-hidden rounded-2xl border-2 border-transparent shadow-lg transition-all duration-300 hover:border-red-600/80 hover:shadow-xl md:min-h-[320px]"
+              >
+                <Image src={card.image} alt={card.imageAlt} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 50vw" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-6 text-left text-white">
+                  <h3 className="text-2xl font-bold tracking-tight">{card.title}</h3>
+                  <p className="mt-2 max-w-lg text-sm text-white/90 md:text-base">{card.description}</p>
+                  <span className="mt-4 inline-flex items-center rounded-lg bg-red-600 px-4 py-2 text-sm font-bold text-white transition-colors group-hover:bg-red-700">
+                    {card.cta}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-8 text-center text-sm text-muted-foreground">
+            Walk-in bowling and hourly rates?{" "}
+            <Link href="/bowling" className="font-medium text-red-600 underline-offset-4 hover:underline">
+              See bowling rates
+            </Link>
+            .
+          </p>
         </div>
       </section>
 
-      {/* About Section */}
+      {/* Events & Specials — full-bleed rotating carousel */}
+      <EventsCarousel />
+
+      {/* Our History */}
       <section className="relative bg-muted py-12 md:py-16">
         <div className="absolute inset-0 z-0">
           <Image
@@ -217,71 +413,26 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75"></div>
+          <div className="absolute inset-0 bg-black opacity-25 dark:opacity-75" />
         </div>
         <div className="container-responsive relative z-10">
           <div className="mx-auto max-w-3xl text-center">
             <AnimatedHeader
               text="Rolling since 1990"
-              className="mb-4 md:mb-6 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white"
+              className="mb-4 text-2xl font-bold tracking-tight text-white md:mb-6 md:text-3xl lg:text-4xl"
               delay={0.2}
             />
-            <p className="mb-6 md:mb-8 text-base md:text-lg text-white">
+            <p className="mb-6 text-base text-white md:mb-8 md:text-lg">
               Serving Anaheim, Fullerton, Yorba Linda, Orange, Brea, and many more areas with quality entertainment and
               memorable experiences for over three decades.
             </p>
-            <Button className="w-full sm:w-auto" asChild>
-              <Link href="/about">Learn More About Us</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Events & Specials Section */}
-      <section className="bg-muted py-16">
-        <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="flex flex-col justify-center">
-              <AnimatedHeader
-                text="Events & Specials"
-                className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl"
-                delay={0.2}
-              />
-              <p className="mb-6 text-lg text-muted-foreground">
-                From cosmic bowling nights to weekly specials and holiday events, there's always something happening at
-                Concourse Bowling.
-              </p>
-              <Button className="w-fit" asChild>
-                <Link href="/events">View Events & Specials</Link>
+            <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <Button className="w-full bg-white text-foreground hover:bg-white/90 sm:w-auto" asChild>
+                <Link href="/about">Explore our history</Link>
               </Button>
-            </div>
-            <div className="rounded-lg bg-background p-6 shadow-md">
-              <div className="mb-4 flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-primary" />
-                <h3 className="text-xl font-bold">Weekly Specials</h3>
-              </div>
-              <ul className="space-y-4">
-                <li className="border-b pb-4">
-                  <p className="font-medium">Tuesday: 3 Games for $14</p>
-                  <p className="text-sm text-muted-foreground">Open - 3PM · Tuesday Unlimited 2hr $18/person (8PM-Close)</p>
-                </li>
-                <li className="border-b pb-4">
-                  <p className="font-medium">Wednesday: 3 Games for $14</p>
-                  <p className="text-sm text-muted-foreground">Open - 3PM · Late Night Happy Hour (9PM-Close)</p>
-                </li>
-                <li className="border-b pb-4">
-                  <p className="font-medium">Thursday: 3 Games for $14</p>
-                  <p className="text-sm text-muted-foreground">Open - 3PM</p>
-                </li>
-                <li className="border-b pb-4">
-                  <p className="font-medium">Friday: Pre-Game Special 3 for $16</p>
-                  <p className="text-sm text-muted-foreground">Open - 3PM · Cosmic Bowling (5PM-Close) · Live DJ (8PM-Close)</p>
-                </li>
-                <li>
-                  <p className="font-medium">Sunday: Cosmic Bowling & Late Night</p>
-                  <p className="text-sm text-muted-foreground">Cosmic (Open-5PM) · $5 Games/$5 Shoes (8PM-Close)</p>
-                </li>
-              </ul>
+              <Button variant="secondary" className="w-full sm:w-auto" asChild>
+                <Link href="/reservations">Reserve now</Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -311,7 +462,7 @@ export default function Home() {
                   <span>info@concoursebowling.com</span>
                 </li>
               </ul>
-              <div className="rounded border p-4">
+              <div className="mb-6 rounded border p-4">
                 <h3 className="mb-2 font-medium">Hours of Operation</h3>
                 <ul className="space-y-1 text-sm">
                   <li className="flex justify-between">
@@ -332,6 +483,9 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
+              <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 sm:w-auto" asChild>
+                <Link href="/reservations">Reserve now</Link>
+              </Button>
             </div>
             <div className="rounded-lg bg-muted p-6">
               <div className="aspect-video overflow-hidden rounded-lg">
@@ -344,7 +498,7 @@ export default function Home() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   title="Concourse Bowling Center Location"
-                ></iframe>
+                />
               </div>
             </div>
           </div>
@@ -371,4 +525,3 @@ export default function Home() {
     </div>
   )
 }
-

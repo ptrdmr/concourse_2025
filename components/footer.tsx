@@ -18,7 +18,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/bowling" className="hover:underline">
-                  Walk-in Rates
+                  Bowling
                 </Link>
               </li>
               <li>
@@ -33,12 +33,32 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/menu" className="hover:underline">
-                  Menus
+                  Bar & Cafe
+                </Link>
+              </li>
+              <li>
+                <Link href="/arcade" className="hover:underline">
+                  Arcade
                 </Link>
               </li>
               <li>
                 <Link href="/events" className="hover:underline">
                   Events & Specials
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:underline">
+                  Our History
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://www2.appone.com/Search/Search.aspx?ServerVar=concoursebowl.appone.com"
+                  className="hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Careers
                 </Link>
               </li>
             </ul>

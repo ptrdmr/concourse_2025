@@ -11,8 +11,8 @@ export default function AboutPage() {
   return (
     <div className="container py-12">
       <PageHeader
-        title="About Concourse Bowling"
-        description="Providing exceptional bowling experiences to Anaheim and surrounding communities since 1990."
+        title="Our History"
+        description="Concourse Bowling has been part of Anaheim and surrounding communities since 1990."
         centered
       />
 
@@ -183,7 +183,7 @@ export default function AboutPage() {
               comfortable seating areas. We regularly update our equipment to ensure the best possible bowling
               experience.
             </p>
-            <h3 className="mb-4 text-xl font-bold">Menus</h3>
+            <h3 className="mb-4 text-xl font-bold">Bar & Cafe</h3>
             <p className="mb-4">
               Enjoy delicious food and beverages at our full-service restaurant and bar. From appetizers to entrees, we
               offer a variety of options that can be enjoyed at your lane or in our dining area.

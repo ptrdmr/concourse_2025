@@ -10,7 +10,7 @@ export default function EventsPage() {
     <div className="container py-12">
       <PageHeader
         title="Events & Specials"
-        description="Current specials valid Jan 20 - Mar 31. Special holiday hours, rates, and weekly promotions to make your bowling experience even better."
+        description="Spring Break lane deals and weekly specials through May 31, plus tournaments and holiday hours. Check back often — we update promotions throughout the year."
         centered
       />
 
@@ -23,7 +23,7 @@ export default function EventsPage() {
           </h2>
           <div className="flex items-center gap-3">
             <div className="h-1 w-16 bg-primary rounded-full"></div>
-            <p className="text-sm font-medium text-muted-foreground">Jan 20 - Mar 31</p>
+            <p className="text-sm font-medium text-muted-foreground">Now – May 31</p>
           </div>
         </div>
 

@@ -38,7 +38,7 @@ export default function MenuPage() {
 
       <div className="relative z-10 container py-12">
       <PageHeader
-        title="Menus"
+        title="Bar & Cafe"
         description="Indulge in delicious American cuisine while enjoying your game. From appetizers to entrees, we've got something for everyone."
         centered
       />
