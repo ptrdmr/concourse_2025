@@ -28,6 +28,34 @@ const variantStyles: Record<SpringRowVariant, { bg: string; title: string; line:
   navy:   { bg: "bg-[#283593]", title: "text-[#00BCD4]",  line: "text-white" },
 }
 
+/** Semi-transparent grey “balls” for the walk-in rates banner (pure CSS, decorative only). */
+function RateBannerBowlingBalls() {
+  const Ball = ({ className }: { className: string }) => (
+    <div
+      className={cn(
+        "absolute rounded-full bg-gradient-to-br from-zinc-200/20 via-zinc-400/14 to-zinc-700/24 shadow-[inset_-6px_-10px_18px_rgba(0,0,0,0.28)] ring-1 ring-inset ring-white/[0.07]",
+        className,
+      )}
+    >
+      <span className="absolute left-[38%] top-[30%] block h-2 w-2 rounded-full bg-black/20" />
+      <span className="absolute left-[54%] top-[32%] block h-1.5 w-1.5 rounded-full bg-black/20" />
+      <span className="absolute left-[44%] top-[46%] block h-2 w-2 rounded-full bg-black/20" />
+    </div>
+  )
+
+  return (
+    <div
+      className="pointer-events-none absolute inset-0 select-none overflow-hidden rounded-2xl"
+      aria-hidden
+    >
+      <Ball className="-left-5 top-1/2 h-[4.25rem] w-[4.25rem] -translate-y-1/2 sm:-left-3 sm:h-[5.25rem] sm:w-[5.25rem]" />
+      <Ball className="bottom-0 left-[6%] h-12 w-12 opacity-90 sm:left-[12%] sm:h-14 sm:w-14" />
+      <Ball className="-right-5 top-1/2 h-[4.75rem] w-[4.75rem] -translate-y-1/2 sm:-right-3 sm:h-[5.5rem] sm:w-[5.5rem]" />
+      <Ball className="right-[5%] top-1 h-11 w-11 opacity-85 sm:right-[11%] sm:h-14 sm:w-14" />
+    </div>
+  )
+}
+
 function EventsSpringSlide({ slide }: { slide: HomepageSpringSlide }) {
   const s = variantStyles[slide.variant]
   return (
@@ -390,13 +418,18 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <p className="mt-8 text-center text-sm text-muted-foreground">
-            Walk-in bowling and hourly rates?{" "}
-            <Link href="/bowling" className="font-medium text-red-600 underline-offset-4 hover:underline">
-              See bowling rates
-            </Link>
-            .
-          </p>
+          <div className="relative mt-10 overflow-hidden rounded-2xl bg-zinc-950 px-6 py-6 text-center shadow-lg md:px-10 md:py-8">
+            <RateBannerBowlingBalls />
+            <p className="relative z-10 font-display flex flex-wrap items-baseline justify-center gap-x-2 gap-y-1 text-2xl font-bold leading-tight tracking-tight sm:text-3xl md:gap-x-3 md:text-4xl">
+              <span className="text-white">Just walking in?</span>
+              <Link
+                href="/bowling"
+                className="text-red-600 underline-offset-4 transition-colors hover:text-red-500 hover:underline"
+              >
+                See Rates!
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -427,7 +460,10 @@ export default function Home() {
               memorable experiences for over three decades.
             </p>
             <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button className="w-full bg-white text-foreground hover:bg-white/90 sm:w-auto" asChild>
+              <Button
+                className="w-full !bg-white !text-black hover:!bg-white/90 hover:!text-black sm:w-auto"
+                asChild
+              >
                 <Link href="/about">Explore our history</Link>
               </Button>
               <Button variant="secondary" className="w-full sm:w-auto" asChild>

@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { MapPin, Phone, Mail, Clock, CheckCircle } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+import { ContactFaqSection } from "@/components/contact-faq-section"
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
@@ -183,53 +184,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <div className="rounded-lg bg-muted p-8">
-        <h2 className="mb-6 text-2xl font-bold text-center">Frequently Asked Questions</h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="space-y-2">
-            <h3 className="font-bold">Do you take reservations?</h3>
-            <p className="text-muted-foreground">
-              Yes, we accept reservations for lanes, especially for groups. You can make a reservation online or by
-              calling us directly.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold">What are your busiest times?</h3>
-            <p className="text-muted-foreground">
-              Friday and Saturday evenings are typically our busiest times. We recommend making a reservation or coming
-              earlier in the day to avoid waiting.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold">Do you have bumpers for kids?</h3>
-            <p className="text-muted-foreground">
-              Yes, we have automatic bumpers that can be set up for specific players in your lane, allowing adults and
-              children to play together.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold">Can we bring our own food and drinks?</h3>
-            <p className="text-muted-foreground">
-              Outside food and beverages are not permitted, with the exception of birthday cakes and desserts. We have a
-              full-service bar and grill with a variety of options.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold">Do you host birthday parties?</h3>
-            <p className="text-muted-foreground">
-              Yes, we offer several birthday party packages that include bowling, food, and arcade play. Contact us for
-              details and availability.
-            </p>
-          </div>
-          <div className="space-y-2">
-            <h3 className="font-bold">How do I join a bowling league?</h3>
-            <p className="text-muted-foreground">
-              You can sign up for a league by visiting our League Bowling page, calling us, or stopping by in person. We
-              have leagues for all skill levels.
-            </p>
-          </div>
-        </div>
-      </div>
+      <ContactFaqSection />
     </div>
   )
 }
