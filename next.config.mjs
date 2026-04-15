@@ -11,6 +11,11 @@ const nextConfig = {
     return [
       { source: '/back-tv', destination: '/back-tv.html' },
       { source: '/front-tv', destination: '/front-tv.html' },
+      { source: '/draft_1', destination: '/draft_1.html' },
+      { source: '/draft_2', destination: '/draft_2.html' },
+      { source: '/bottles_cans', destination: '/bottles_cans.html' },
+      { source: '/wines', destination: '/wines.html' },
+      { source: '/bar_rotate', destination: '/bar_rotate.html' },
     ]
   },
   eslint: {
