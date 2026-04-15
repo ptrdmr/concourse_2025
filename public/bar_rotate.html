@@ -21,14 +21,14 @@
 </style>
 </head>
 <body>
-<!-- Rotates: draft_1 → draft_2 → bottles_cans → wines. Params: ?s=seconds (min 5, default 7), ?start=0–3 -->
+<!-- Rotates: draft_1 → draft_2 → bottles_cans → wines. Params: ?s=seconds (min 5, default 10), ?start=0–3 -->
 <iframe id="menu" title="Rotating menu display" src="/draft_1"></iframe>
 <script>
 (function () {
   var MENUS = ['/draft_1', '/draft_2', '/bottles_cans', '/wines'];
   var params = new URLSearchParams(window.location.search);
-  var sec = parseInt(params.get('s') || params.get('interval') || '7', 10);
-  if (isNaN(sec) || sec < 5) sec = 7;
+  var sec = parseFloat(params.get('s') || params.get('interval') || '10');
+  if (isNaN(sec) || sec < 5) sec = 10;
   var start = parseInt(params.get('start') || '0', 10);
   if (isNaN(start)) start = 0;
   start = Math.max(0, Math.min(MENUS.length - 1, start));
