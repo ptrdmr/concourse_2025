@@ -53,7 +53,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 72px 96px 88px;
+    padding: 56px 80px 72px;
     font-family: 'Barlow Condensed', sans-serif;
     color: #fff;
   }
@@ -83,7 +83,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 66px;
+    gap: 52px;
   }
 
   .wine-section {
@@ -91,14 +91,14 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 33px;
+    gap: 26px;
   }
 
   .section-title {
-    font-size: 129px;
+    font-size: 100px;
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 6px;
+    letter-spacing: 4px;
     line-height: 1;
     color: #fff;
     text-align: center;
@@ -124,6 +124,13 @@
 
   .wine-row--nowrap {
     flex-wrap: nowrap;
+  }
+
+  /* One wine per row, centered (avoids clipping long names side-by-side) */
+  .wine-row--single {
+    flex-wrap: nowrap;
+    justify-content: center;
+    width: 100%;
   }
 
   /* Each wine: one horizontal line; categories keep all wines on one row */
@@ -221,7 +228,7 @@
       <section class="wine-section" aria-label="White wines">
         <h2 class="section-title">White</h2>
         <div class="wine-rows">
-          <div class="wine-row wine-row--nowrap">
+          <div class="wine-row wine-row--single">
             <div class="wine-item">
               <span class="wine-name">Trinity Oaks Pinot Grigio</span>
               <span class="wine-meta">Glass </span>
@@ -229,6 +236,8 @@
               <span class="wine-meta"><span class="sep">·</span>Bottle</span>
               <span class="wine-bottle">$22</span>
             </div>
+          </div>
+          <div class="wine-row wine-row--single">
             <div class="wine-item">
               <span class="wine-name">Trinity Oaks Chardonnay</span>
               <span class="wine-meta">Glass </span>
@@ -237,7 +246,7 @@
               <span class="wine-bottle">$22</span>
             </div>
           </div>
-          <div class="wine-row wine-row--nowrap">
+          <div class="wine-row wine-row--single">
             <div class="wine-item">
               <span class="wine-name">Josh Chardonnay</span>
               <span class="wine-meta">Glass </span>
