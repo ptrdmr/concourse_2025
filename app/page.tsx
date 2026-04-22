@@ -10,19 +10,22 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 import { MapPin, Phone, Mail } from "lucide-react"
-import { useEffect, useRef, useState, useCallback } from "react"
+import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import { AnimatedHeader } from "@/components/animated-header"
 import {
   homepageEventsCarousel,
-  type HomepageSpringSlide,
+  type HomepageDailyDealSlide,
+  type HomepageFeaturedPackageSlide,
   type HomepageTournamentSlide,
-  type SpringRowVariant,
+  type DealRowVariant,
 } from "@/lib/homepage-events"
+import { SportsTeamPartyFlyer } from "@/components/sports-team-party-flyer"
 import { cn } from "@/lib/utils"
 import Autoplay from "embla-carousel-autoplay"
+import AutoHeight from "embla-carousel-auto-height"
 
-const variantStyles: Record<SpringRowVariant, { bg: string; title: string; line: string }> = {
+const variantStyles: Record<DealRowVariant, { bg: string; title: string; line: string }> = {
   cyan:   { bg: "bg-[#00BCD4]", title: "text-[#1A237E]",  line: "text-[#1A237E]" },
   orange: { bg: "bg-[#FF7043]", title: "text-[#FFD54F]",  line: "text-white" },
   navy:   { bg: "bg-[#283593]", title: "text-[#00BCD4]",  line: "text-white" },
@@ -56,43 +59,61 @@ function RateBannerBowlingBalls() {
   )
 }
 
-function EventsSpringSlide({ slide }: { slide: HomepageSpringSlide }) {
+function DailyDealSlide({ slide }: { slide: HomepageDailyDealSlide }) {
   const s = variantStyles[slide.variant]
   return (
-    <div className={cn("relative w-full h-[560px] md:h-[560px]", s.bg)}>
-      <div className="container mx-auto flex h-full flex-col md:flex-row md:items-stretch">
-        {/* Text content */}
-        <div className="flex flex-1 flex-col justify-center px-6 py-10 md:px-10 md:py-12 lg:py-14">
-          <div className="mb-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
-            <span className="text-sm font-black uppercase tracking-widest text-white/70">Spring Break</span>
-            <span className="text-sm font-bold italic text-[#FFD54F] md:text-base">Now – May 31st</span>
+    <div className={cn("relative w-full", s.bg)}>
+      <div className="container mx-auto flex min-h-0 flex-col md:flex-row md:items-stretch">
+        <div className="flex min-w-0 flex-1 flex-col justify-start px-4 py-5 md:px-6 md:py-6">
+          <div className="mb-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-0">
+            <span className="text-[11px] font-black uppercase tracking-widest text-white/70 sm:text-xs">
+              Summer Specials
+            </span>
+            <span className="text-[11px] font-bold italic text-[#FFD54F] sm:text-xs">All Summer 2026</span>
           </div>
 
-          <h3 className="mb-6 text-4xl font-black uppercase leading-none tracking-tight text-white drop-shadow-md sm:text-5xl md:mb-8 md:text-6xl lg:text-7xl">
+          <h3 className="mb-2 text-2xl font-black uppercase leading-none tracking-tight text-white drop-shadow-sm sm:text-3xl md:mb-2.5 md:text-4xl">
             {slide.dayLabel}
           </h3>
 
           <div
             className={cn(
-              "flex flex-col gap-4 md:gap-5",
-              slide.deals.length > 1 && "lg:flex-row lg:flex-wrap"
+              "flex min-h-0 flex-col gap-2.5 md:gap-3",
+              slide.deals.length > 1 && "md:flex-row md:flex-wrap md:content-start",
             )}
           >
             {slide.deals.map((deal, i) => (
-              <div key={i} className="lg:min-w-[200px] lg:max-w-sm">
+              <div key={i} className="min-w-0 md:max-w-[48%] lg:max-w-[46%]">
                 {deal.title ? (
-                  <h4 className={cn("mb-2 text-2xl font-black uppercase leading-tight tracking-tight md:text-3xl", s.title)}>
+                  <h4
+                    className={cn(
+                      "mb-1 text-xs font-black uppercase leading-tight tracking-tight sm:text-sm md:text-base",
+                      s.title,
+                    )}
+                  >
                     {deal.title}
                   </h4>
                 ) : null}
-                <ul className="space-y-1">
+                {deal.timeWindow ? (
+                  <p
+                    className={cn(
+                      "mb-1 text-[11px] font-bold uppercase tracking-wide opacity-95 sm:text-xs md:text-sm",
+                      s.line,
+                    )}
+                  >
+                    {deal.timeWindow}
+                  </p>
+                ) : null}
+                <ul className="space-y-0.5">
                   {deal.lines.map((line, j) => (
                     <li
                       key={j}
                       className={cn(
-                        "font-bold uppercase leading-snug tracking-tight",
-                        j === 0 ? "text-xl md:text-2xl lg:text-3xl" : "text-base md:text-lg opacity-90",
-                        s.line
+                        "break-words font-bold uppercase leading-snug tracking-tight",
+                        j === 0
+                          ? "text-xs sm:text-sm md:text-base"
+                          : "text-[11px] opacity-90 sm:text-xs md:text-sm",
+                        s.line,
                       )}
                     >
                       {line}
@@ -103,24 +124,32 @@ function EventsSpringSlide({ slide }: { slide: HomepageSpringSlide }) {
             ))}
           </div>
 
-          <div className="mt-8 flex flex-wrap gap-4 md:mt-10">
-            <Button size="lg" asChild className="bg-[#1A237E] font-bold text-white shadow-lg hover:bg-[#111836]">
-              <Link href="/reservations">Reserve your lane today</Link>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            <Button
+              size="sm"
+              asChild
+              className="h-9 bg-[#1A237E] px-4 text-sm font-bold text-white hover:bg-[#111836]"
+            >
+              <Link href="/reservations">Reserve a lane</Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="border-white/50 font-bold text-white hover:bg-white/10">
-              <Link href="/events">View all specials</Link>
+            <Button
+              size="sm"
+              variant="outline"
+              asChild
+              className="h-9 border-white/50 px-4 text-sm font-bold text-white hover:bg-white/10"
+            >
+              <Link href="/events">All specials</Link>
             </Button>
           </div>
         </div>
 
-        {/* Photo — hidden on mobile, right side on md+ */}
-        <div className="relative hidden w-[40%] max-w-[480px] shrink-0 md:block">
+        <div className="relative hidden min-h-[200px] w-[38%] max-w-[380px] shrink-0 self-stretch md:block">
           <Image
             src={slide.image}
             alt={slide.imageAlt}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 0px, 40vw"
+            sizes="(max-width: 768px) 0px, 32vw"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-current/20 to-transparent" style={{ color: "inherit" }} />
         </div>
@@ -129,29 +158,97 @@ function EventsSpringSlide({ slide }: { slide: HomepageSpringSlide }) {
   )
 }
 
-function EventsTournamentSlide({ slide }: { slide: HomepageTournamentSlide }) {
-  return (
-    <div className="relative w-full h-[560px] md:h-[560px] bg-[#1A237E]">
-      <div className="container mx-auto flex h-full flex-col items-center justify-center gap-8 px-6 py-10 md:flex-row md:px-10 md:py-12 lg:gap-12 lg:py-14">
-        <div className="relative h-[200px] w-[200px] shrink-0 sm:h-[240px] sm:w-[240px] md:h-[280px] md:w-[280px]">
-          <Image src={slide.image} alt={slide.imageAlt} fill className="object-contain drop-shadow-2xl" sizes="280px" />
+function FeaturedPackageSlide({ slide }: { slide: HomepageFeaturedPackageSlide }) {
+  if (slide.id === "sports-team-party") {
+    return (
+      <div className="relative w-full bg-team-flyer-canvas">
+        <div className="w-full px-4 py-3 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+          <SportsTeamPartyFlyer variant="carousel" ctaHref={slide.ctaHref} className="w-full" />
         </div>
-        <div className="flex-1 text-center md:text-left">
-          <span className="text-sm font-black uppercase tracking-widest text-[#00BCD4]">Tournament</span>
-          <h3 className="mt-2 text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+      </div>
+    )
+  }
+
+  return (
+    <div className="relative w-full bg-[#283593]">
+      <div className="container mx-auto flex min-h-0 flex-col md:flex-row md:items-stretch">
+        <div className="flex min-w-0 flex-1 flex-col justify-start px-4 py-5 md:px-6 md:py-6">
+          <span className="text-[11px] font-black uppercase tracking-widest text-[#00BCD4] sm:text-xs">
+            Featured package
+          </span>
+          <h3 className="mt-1 text-xl font-black uppercase leading-tight tracking-tight text-white sm:text-2xl md:text-3xl">
             {slide.title}
           </h3>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/80 md:text-lg">{slide.description}</p>
-          <div className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start">
-            <Button size="lg" asChild className="bg-red-600 font-bold shadow-lg hover:bg-red-700">
+          <p className="mt-1 text-sm font-semibold text-white/90 md:text-base">{slide.subtitle}</p>
+          <p className="mt-1.5 text-lg font-black text-[#FFD54F] md:text-xl">{slide.priceFrom}</p>
+          {slide.blurb ? <p className="mt-1.5 max-w-xl text-xs text-white/80 md:text-sm">{slide.blurb}</p> : null}
+          <ul className="mt-2 max-w-xl space-y-1 text-xs font-semibold text-white/90 md:text-sm">
+            {slide.includes.map((item, i) => (
+              <li key={i} className="flex gap-2">
+                <span className="text-[#00BCD4]" aria-hidden>
+                  •
+                </span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-3 flex flex-wrap gap-2.5">
+            <Button size="sm" asChild className="h-9 bg-[#FF7043] px-4 text-sm font-bold text-white hover:bg-[#E64A19]">
+              <Link href={slide.ctaHref}>{slide.ctaLabel}</Link>
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              asChild
+              className="h-9 border-white/50 px-4 text-sm font-bold text-white hover:bg-white/10"
+            >
+              <Link href="/events">All specials</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="relative hidden min-h-[200px] w-[38%] max-w-[380px] shrink-0 self-stretch md:block">
+          <Image src={slide.image} alt={slide.imageAlt} fill className="object-cover" sizes="(max-width: 768px) 0px, 32vw" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#283593]/40 to-transparent" />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function EventsTournamentSlide({ slide }: { slide: HomepageTournamentSlide }) {
+  return (
+    <div className="relative w-full bg-[#1A237E]">
+      <div className="container mx-auto flex min-h-0 flex-col md:flex-row md:items-stretch">
+        <div className="order-2 flex min-w-0 flex-1 flex-col justify-start px-4 py-5 md:order-1 md:px-6 md:py-6">
+          <span className="text-[11px] font-black uppercase tracking-widest text-[#00BCD4] sm:text-xs">Tournament</span>
+          <h3 className="mt-1.5 text-xl font-black uppercase leading-tight tracking-tight text-white sm:text-2xl md:text-3xl">
+            {slide.title}
+          </h3>
+          <p className="mt-2 max-w-2xl text-sm leading-snug text-white/85 sm:text-base">{slide.description}</p>
+          <div className="mt-4 flex flex-wrap gap-2.5">
+            <Button size="sm" asChild className="h-9 bg-red-600 px-4 text-sm font-bold hover:bg-red-700">
               <a href={slide.registerUrl} target="_blank" rel="noopener noreferrer">
                 {slide.registerLabel}
               </a>
             </Button>
-            <Button size="lg" variant="outline" asChild className="border-white/50 font-bold text-white hover:bg-white/10">
-              <Link href="/events">View all events</Link>
+            <Button
+              size="sm"
+              variant="outline"
+              asChild
+              className="h-9 border-white/50 px-4 text-sm font-bold text-white hover:bg-white/10"
+            >
+              <Link href="/events">All events</Link>
             </Button>
           </div>
+        </div>
+        <div className="relative order-1 h-52 w-full shrink-0 border-b border-white/10 md:order-2 md:h-auto md:min-h-[240px] md:w-[38%] md:max-w-[420px] md:border-b-0 md:border-l md:border-white/10 md:self-stretch">
+          <Image
+            src={slide.image}
+            alt={slide.imageAlt}
+            fill
+            className="object-contain object-center p-4 drop-shadow-xl md:p-6"
+            sizes="(max-width: 768px) 100vw, 36vw"
+          />
         </div>
       </div>
     </div>
@@ -171,18 +268,20 @@ function EventsCarousel() {
   }, [api])
 
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden pb-10">
       <Carousel
         setApi={setApi}
         opts={{ align: "center", loop: true }}
-        plugins={[Autoplay({ delay: 7000, stopOnInteraction: true })]}
+        plugins={[Autoplay({ delay: 7000, stopOnInteraction: true }), AutoHeight()]}
         className="w-full"
       >
-        <CarouselContent className="ml-0">
+        <CarouselContent className="ml-0 items-stretch">
           {homepageEventsCarousel.map((slide) => (
             <CarouselItem key={slide.id} className="basis-full pl-0">
-              {slide.kind === "spring-break" ? (
-                <EventsSpringSlide slide={slide} />
+              {slide.kind === "daily-deal" ? (
+                <DailyDealSlide slide={slide} />
+              ) : slide.kind === "featured-package" ? (
+                <FeaturedPackageSlide slide={slide} />
               ) : (
                 <EventsTournamentSlide slide={slide} />
               )}
@@ -192,7 +291,7 @@ function EventsCarousel() {
       </Carousel>
 
       {count > 1 && (
-        <div className="absolute inset-x-0 bottom-4 z-20 flex items-center justify-center gap-2 md:bottom-6">
+        <div className="absolute inset-x-0 bottom-3 z-20 flex items-center justify-center gap-2">
           {Array.from({ length: count }).map((_, i) => (
             <button
               key={i}
@@ -206,6 +305,16 @@ function EventsCarousel() {
           ))}
         </div>
       )}
+    </section>
+  )
+}
+
+function SportsTeamPartyFeaturedStrip() {
+  return (
+    <section className="border-b border-border/40 bg-muted/20 py-3 md:py-4">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12">
+        <SportsTeamPartyFlyer variant="strip" className="w-full" />
+      </div>
     </section>
   )
 }
@@ -390,6 +499,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Summer specials — full-bleed rotating carousel */}
+      <EventsCarousel />
+
+      <SportsTeamPartyFeaturedStrip />
+
       {/* Primary categories — image cards */}
       <section className="border-b border-border/40 bg-muted/40 py-16">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
@@ -432,9 +546,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Events & Specials — full-bleed rotating carousel */}
-      <EventsCarousel />
 
       {/* Our History */}
       <section className="relative bg-muted py-12 md:py-16">
@@ -503,7 +614,7 @@ export default function Home() {
                 <ul className="space-y-1 text-sm">
                   <li className="flex justify-between">
                     <span>Monday:</span>
-                    <span>4PM - 10PM</span>
+                    <span>2PM - 10PM</span>
                   </li>
                   <li className="flex justify-between">
                     <span>Tuesday - Thursday:</span>

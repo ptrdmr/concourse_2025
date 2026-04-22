@@ -1,22 +1,37 @@
 /**
- * Homepage Events & Specials carousel. Add or remove slides here when promos change.
- * Spring Break row colors: cyan #00BCD4 / #0097A7, orange #FF7043 / #E64A19, navy #283593 / #111836, yellow #FFD54F, header #1A237E.
+ * Homepage Events & Specials carousel — single source of truth for weekly specials.
+ * Row colors: cyan #00BCD4, orange #FF7043, navy #283593.
  */
 
-export type SpringRowVariant = "cyan" | "orange" | "navy"
+export type DealRowVariant = "cyan" | "orange" | "navy"
 
-export type SpringBreakDeal = {
+export type DailyDeal = {
   title?: string
+  /** Shown prominently (e.g. Open – 5PM) */
+  timeWindow?: string
   lines: string[]
 }
 
-export type HomepageSpringSlide = {
-  kind: "spring-break"
+export type HomepageDailyDealSlide = {
+  kind: "daily-deal"
   id: string
-  variant: SpringRowVariant
+  variant: DealRowVariant
   dayLabel: string
-  deals: SpringBreakDeal[]
-  /** Right-side photo. Use placeholder path until real photos are supplied. */
+  deals: DailyDeal[]
+  image: string
+  imageAlt: string
+}
+
+export type HomepageFeaturedPackageSlide = {
+  kind: "featured-package"
+  id: string
+  title: string
+  subtitle: string
+  priceFrom: string
+  blurb?: string
+  includes: string[]
+  ctaLabel: string
+  ctaHref: string
   image: string
   imageAlt: string
 }
@@ -32,91 +47,136 @@ export type HomepageTournamentSlide = {
   registerLabel: string
 }
 
-export type HomepageCarouselSlide = HomepageSpringSlide | HomepageTournamentSlide
+export type HomepageCarouselSlide =
+  | HomepageDailyDealSlide
+  | HomepageFeaturedPackageSlide
+  | HomepageTournamentSlide
 
 export const JR_SHOOTOUT_REGISTER_URL =
   "https://lp.constantcontactpages.com/ev/reg/bpd227s/lp/08ad52a8-f74a-450c-ac33-7b84b7cf6ad3"
 
-export const homepageEventsCarousel: HomepageCarouselSlide[] = [
+const summerDailyDeals: HomepageDailyDealSlide[] = [
   {
-    kind: "spring-break",
-    id: "arcade-happy-hour",
-    variant: "navy",
-    dayLabel: "Arcade Happy Hour",
-    deals: [
-      { lines: ["Open – 3:00PM", "Tuesday – Friday"] },
-    ],
-    image: "/images/arcade/homepage_arcade.jpg",
-    imageAlt: "Space Invaders Frenzy arcade cabinet at Concourse",
-  },
-  {
-    kind: "spring-break",
-    id: "tuesday",
+    kind: "daily-deal",
+    id: "monday",
     variant: "cyan",
-    dayLabel: "Tuesday",
+    dayLabel: "Monday",
     deals: [
-      { title: "Game Special", lines: ["3 Games for $14", "Open – 3PM", "1 per person per day"] },
-      { title: "Tuesday Unlimited", lines: ["2 Hours + Shoes · $18/person", "8PM – Close", "1 per person per day"] },
+      {
+        title: "League Bowler Meet-Up",
+        timeWindow: "2PM – 5PM",
+        lines: ["3 games + pair of shoes · $11/person", "Opens at 2PM starting June 1"],
+      },
+      {
+        title: "Happy Hour",
+        timeWindow: "Open – Close",
+        lines: ["Bar specials open to close", "All day"],
+      },
     ],
     image: "/images/bowling/walk_in.jpg",
     imageAlt: "Bowling lanes at Concourse",
   },
   {
-    kind: "spring-break",
-    id: "wednesday",
+    kind: "daily-deal",
+    id: "tuesday-thursday",
     variant: "orange",
-    dayLabel: "Wednesday",
+    dayLabel: "Tues – Thurs",
     deals: [
-      { title: "Game Special", lines: ["3 Games for $14", "Open – 3PM", "1 per person per day"] },
-      { title: "Late Night Happy Hour", lines: ["9PM – Close"] },
+      {
+        title: "Summer Game Special",
+        timeWindow: "Open – 5PM",
+        lines: ["2 games + shoes + $10 game card", "$17/person"],
+      },
+      {
+        title: "Unlimited Bowling",
+        timeWindow: "8PM – Close",
+        lines: ["2 hours unlimited bowling + shoes", "$18/person"],
+      },
     ],
-    image: "/images/food/homepage_bar_cafe.jpg",
-    imageAlt: "Margarita and chips at Concourse Bar & Cafe",
+    image: "/images/bowling/walk_in.jpg",
+    imageAlt: "Summer bowling at Concourse",
   },
   {
-    kind: "spring-break",
-    id: "thursday",
-    variant: "navy",
-    dayLabel: "Thursday",
-    deals: [
-      { title: "Game Special", lines: ["3 Games for $14", "Open – 3PM", "1 per person per day"] },
-    ],
-    image: "/images/bowling/league.jpg",
-    imageAlt: "Bowling at Concourse",
-  },
-  {
-    kind: "spring-break",
+    kind: "daily-deal",
     id: "friday",
-    variant: "cyan",
+    variant: "navy",
     dayLabel: "Friday",
     deals: [
-      { title: "Pre-Game Special", lines: ["3 Games for $16", "Open – 3PM"] },
-      { title: "Cosmic Bowling", lines: ["3:00PM – Close"] },
-      { title: "Live DJ", lines: ["8:00PM – Close"] },
+      {
+        title: "Friday Pre-Game",
+        timeWindow: "Open – 2PM",
+        lines: ["3 games (shoes not included)", "$12/person"],
+      },
+      {
+        title: "Cosmic Bowling",
+        timeWindow: "2PM – Close",
+        lines: ["Standard rates"],
+      },
     ],
     image: "/images/bowling/friday_cosmic.jpg",
     imageAlt: "Cosmic bowling at Concourse on Friday night",
   },
   {
-    kind: "spring-break",
+    kind: "daily-deal",
+    id: "saturday",
+    variant: "cyan",
+    dayLabel: "Saturday",
+    deals: [
+      {
+        title: "Family Special",
+        timeWindow: "Open – 2PM",
+        lines: [
+          "4 bowlers + shoes, 1 hr bowling",
+          "Large pizza + soda pitcher",
+          "$100/group",
+        ],
+      },
+    ],
+    image: "/images/bowling/kids_party.png",
+    imageAlt: "Family bowling at Concourse",
+  },
+  {
+    kind: "daily-deal",
     id: "sunday",
     variant: "orange",
     dayLabel: "Sunday",
     deals: [
-      { title: "Cosmic Bowling", lines: ["Open – 5:00PM"] },
-      { title: "Late Night Specials", lines: ["$5 Games · $5 Shoes", "Bar Happy Hour · 8PM – Close"] },
+      {
+        title: "Family Special",
+        timeWindow: "Open – 2PM",
+        lines: [
+          "4 bowlers + shoes, 1 hr bowling",
+          "Large pizza + soda pitcher",
+          "$100/group",
+        ],
+      },
+      {
+        title: "Late Night Special",
+        timeWindow: "8PM – Close",
+        lines: ["Pay per game — no package required", "$5 games & $5 shoes"],
+      },
     ],
-    image: "/images/bowling/kids_party.png",
-    imageAlt: "Fun at Concourse",
+    image: "/images/bowling/exterior.png",
+    imageAlt: "Sunday at Concourse Bowling",
   },
+]
+
+export const homepageEventsCarousel: HomepageCarouselSlide[] = [
+  ...summerDailyDeals,
   {
     kind: "tournament",
     id: "jr-shootout",
     title: "Southern California $30,000 Junior Shootout",
-    description: "Join us May 30, 2026 — four divisions. Presented by BCSC and Storm. Register online to secure your spot.",
+    description:
+      "Join us May 30, 2026 — four divisions. Presented by BCSC and Storm. Register online to secure your spot.",
     image: "/images/events/jr-shootout.png",
     imageAlt: "Southern California Junior Shootout tournament flyer",
     registerUrl: JR_SHOOTOUT_REGISTER_URL,
     registerLabel: "Register",
   },
 ]
+
+/** Slides used for the /events weekly specials grid (excludes tournament & featured package) */
+export function getDailyDealSlides(): HomepageDailyDealSlide[] {
+  return homepageEventsCarousel.filter((s): s is HomepageDailyDealSlide => s.kind === "daily-deal")
+}

@@ -9,6 +9,7 @@ import { Menu, MapPin } from "lucide-react"
 
 /** Flat top-level nav — logo links home; no dropdowns */
 const navLinks = [
+  { name: "Reservations", href: "/reservations" },
   { name: "Bowling", href: "/bowling" },
   { name: "Leagues", href: "/league-bowling" },
   { name: "Bar & Cafe", href: "/menu" },
@@ -60,13 +61,20 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="border-b border-border/40">
         <div className="container flex h-20 items-center justify-between px-4 md:px-6 lg:px-8">
-          <div className="hidden md:flex flex-1" />
+          <div className="hidden min-w-0 flex-1 items-center justify-end gap-3 pr-2 md:flex md:pr-4">
+            <Link
+              href="/"
+              className="whitespace-nowrap text-[11px] font-medium uppercase tracking-[0.2em] text-muted-foreground/80 transition-colors hover:text-foreground"
+            >
+              Home
+            </Link>
+          </div>
 
-          <Link href="/" className="flex items-center md:hidden">
+          <Link href="/" className="flex shrink-0 items-center md:hidden">
             <Image src="/branding/logo.png" alt="Concourse Bowling Logo" width={180} height={75} className="h-auto" />
           </Link>
 
-          <Link href="/" className="hidden md:flex items-center">
+          <Link href="/" className="hidden shrink-0 items-center md:flex">
             <Image src="/branding/logo.png" alt="Concourse Bowling Logo" width={240} height={100} className="h-auto" />
           </Link>
 

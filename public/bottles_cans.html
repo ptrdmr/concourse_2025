@@ -16,7 +16,7 @@
     --bg2: #1c1c1c;
     --green: #9BCD00;
     --white: #ffffff;
-    --price-col: 7.48rem;
+    --price-col: 7.9rem;
   }
 
   html, body {
@@ -104,16 +104,16 @@
   }
 
   .section-title {
-    font-size: 64px;
+    font-size: 70px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 1;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     color: var(--white);
   }
 
-  .beer-list { display: flex; flex-direction: column; gap: 16px; }
+  .beer-list { display: flex; flex-direction: column; gap: 17px; }
 
   .beer-item {
     display: grid;
@@ -123,7 +123,7 @@
   }
 
   .price {
-    font-size: 55px;
+    font-size: 60px;
     font-weight: 900;
     color: var(--white);
     line-height: 1.1;
@@ -134,7 +134,7 @@
   .beer-info { display: flex; flex-direction: column; gap: 0; }
 
   .beer-name {
-    font-size: 47px;
+    font-size: 52px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--white);
@@ -144,13 +144,13 @@
 
   .beer-name .abv {
     font-weight: 700;
-    font-size: 40px;
+    font-size: 44px;
     color: var(--white);
     opacity: 0.85;
   }
 
   .beer-desc {
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 600;
     text-transform: uppercase;
     color: var(--green);
@@ -159,13 +159,58 @@
     line-height: 1.25;
   }
 
+  .na-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1920px;
+    padding: 14px 72px 22px;
+    background: rgba(0,0,0,0.45);
+    border-top: 1px solid rgba(255,255,255,0.09);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 15;
+  }
+
+  .na-bar .section-title {
+    font-size: 62px;
+    margin-bottom: 0;
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .na-items {
+    display: flex;
+    gap: 86px;
+    align-items: baseline;
+    justify-content: center;
+  }
+
+  .na-items .beer-item {
+    grid-template-columns: 74px 1fr;
+  }
+
+  .na-items .price {
+    font-size: 56px;
+  }
+
+  .na-items .beer-name {
+    font-size: 48px;
+  }
+
+  .na-items .beer-desc {
+    font-size: 24px;
+  }
+
   .tagline {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 20px;
+    font-size: 22px;
     font-style: italic;
     letter-spacing: 7px;
     color: rgba(255,255,255,0.15);
@@ -234,25 +279,6 @@
         </div>
       </div>
 
-      <div>
-        <div class="section-title">Canned Beer</div>
-        <div class="beer-list">
-          <div class="beer-item">
-            <span class="price">$6</span>
-            <div class="beer-info">
-              <div class="beer-name">Athletic Run Wild IPA</div>
-              <div class="beer-desc">N/A · Under 0.5% ABV</div>
-            </div>
-          </div>
-          <div class="beer-item">
-            <span class="price">$6</span>
-            <div class="beer-info">
-              <div class="beer-name">Athletic Upside Dawn Golden Ale</div>
-              <div class="beer-desc">N/A · Under 0.5% ABV</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="col right-col">
@@ -306,6 +332,26 @@
             <div class="beer-info">
               <div class="beer-name">Twisted Tea Peach <span class="abv">- 24oz</span></div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="na-bar">
+      <div class="section-title">Non-Alcoholic</div>
+      <div class="na-items">
+        <div class="beer-item">
+          <span class="price">$6</span>
+          <div class="beer-info">
+            <div class="beer-name">Athletic Run Wild IPA</div>
+            <div class="beer-desc">N/A · Under 0.5% ABV</div>
+          </div>
+        </div>
+        <div class="beer-item">
+          <span class="price">$6</span>
+          <div class="beer-info">
+            <div class="beer-name">Athletic Upside Dawn Golden Ale</div>
+            <div class="beer-desc">N/A · Under 0.5% ABV</div>
           </div>
         </div>
       </div>

@@ -3,183 +3,101 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { CalendarIcon, DollarSign } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
+import { getDailyDealSlides, type HomepageDailyDealSlide, type DealRowVariant } from "@/lib/homepage-events"
+import { cn } from "@/lib/utils"
+
+function cardTheme(variant: DealRowVariant) {
+  if (variant === "navy") {
+    return {
+      card: "bg-[#1A1A1A] text-white",
+      label: "text-gray-400",
+      muted: "text-gray-400",
+    }
+  }
+  if (variant === "orange") {
+    return {
+      card: "bg-[#FFFACD] dark:bg-yellow-950/20",
+      label: "text-yellow-700 dark:text-yellow-400",
+      muted: "text-muted-foreground",
+    }
+  }
+  return {
+    card: "bg-red-50 dark:bg-red-950/20",
+    label: "text-red-600 dark:text-red-400",
+    muted: "text-muted-foreground",
+  }
+}
+
+function WeeklySpecialCard({ slide }: { slide: HomepageDailyDealSlide }) {
+  const t = cardTheme(slide.variant)
+  return (
+    <div
+      className={cn(
+        "group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1",
+        t.card,
+      )}
+    >
+      <div className="relative aspect-[16/9] overflow-hidden">
+        <Image
+          src={slide.image}
+          alt={slide.imageAlt}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
+      </div>
+      <div className="p-6">
+        <p className={cn("text-sm font-medium uppercase tracking-wide mb-2", t.label)}>{slide.dayLabel}</p>
+        {slide.deals.map((deal, i) => (
+          <div key={i} className={i > 0 ? "mt-4" : ""}>
+            {deal.title ? <h3 className="text-xl font-bold mb-2">{deal.title}</h3> : null}
+            {deal.timeWindow ? <p className={cn("text-sm font-semibold mb-2", t.muted)}>{deal.timeWindow}</p> : null}
+            <ul className="space-y-1">
+              {deal.lines.map((line, j) => (
+                <li
+                  key={j}
+                  className={cn(
+                    line.includes("$") ? "text-base font-bold" : "text-sm",
+                    !line.includes("$") && t.muted,
+                  )}
+                >
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default function EventsPage() {
+  const dailyDeals = getDailyDealSlides()
 
   return (
     <div className="container py-12">
       <PageHeader
         title="Events & Specials"
-        description="Spring Break lane deals and weekly specials through May 31, plus tournaments and holiday hours. Check back often — we update promotions throughout the year."
+        description="Summer 2026 weekly lane deals and specials, plus tournaments and holiday hours. Check back often — we update promotions throughout the year."
         centered
       />
 
-      {/* Weekly Specials */}
+      {/* Weekly Specials — single source: lib/homepage-events.ts */}
       <div className="mb-16 rounded-2xl bg-[#FAF9F6] dark:bg-muted/30 p-6 md:p-8">
-        {/* Section Header */}
         <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
-            Weekly Specials
-          </h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-2">Weekly Specials</h2>
           <div className="flex items-center gap-3">
-            <div className="h-1 w-16 bg-primary rounded-full"></div>
-            <p className="text-sm font-medium text-muted-foreground">Now – May 31</p>
+            <div className="h-1 w-16 bg-primary rounded-full" />
+            <p className="text-sm font-medium text-muted-foreground">All Summer 2026</p>
           </div>
         </div>
 
-        {/* Mobile: Horizontal scroll carousel | Desktop: 2-column grid */}
         <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 -mx-6 px-6 md:mx-0 md:px-0">
-          
-          {/* Tuesday Card - Red tinted */}
-          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-red-50 dark:bg-red-950/20">
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src="/images/bowling/Facility Shot.jpg"
-                alt="Tuesday bowling special"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-medium text-red-600 dark:text-red-400 uppercase tracking-wide mb-2">Tuesday</p>
-              
-              <div className="mb-4">
-                <h3 className="text-xl font-bold mb-2">Game Special</h3>
-                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
-                  3 Games for $14
-                </span>
-                <p className="text-sm text-muted-foreground">Open - 3PM • 1 per person per day</p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-2">Tuesday Unlimited</h4>
-                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
-                  $18/person
-                </span>
-                <p className="text-sm text-muted-foreground">2 Hours + Shoes • 8PM - Close</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Wednesday Card - Cream/Yellow tinted */}
-          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#FFFACD] dark:bg-yellow-950/20">
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src="/images/food/happy hour.jpg"
-                alt="Wednesday happy hour"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">Wednesday</p>
-              
-              <div className="mb-4">
-                <h3 className="text-xl font-bold mb-2">Game Special</h3>
-                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
-                  3 Games for $14
-                </span>
-                <p className="text-sm text-muted-foreground">Open - 3PM • 1 per person per day</p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-1">Late Night Happy Hour</h4>
-                <p className="text-sm text-muted-foreground">9PM - Close</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Thursday Card - Dark theme like flyer */}
-          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#1A1A1A] text-white">
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src="/images/bowling/concourse vintage.jpg"
-                alt="Thursday bowling special"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-2">Thursday</p>
-              
-              <div>
-                <h3 className="text-xl font-bold mb-2">Game Special</h3>
-                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
-                  3 Games for $14
-                </span>
-                <p className="text-sm text-gray-400">Open - 3PM • 1 per person per day</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Friday Card - Dark theme */}
-          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#1A1A1A] text-white">
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src="/images/bowling/dark lanes.jpg"
-                alt="Friday night cosmic bowling"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-medium text-gray-400 uppercase tracking-wide mb-2">Friday</p>
-              
-              <div className="mb-4">
-                <h3 className="text-xl font-bold mb-2">Pre-Game Special</h3>
-                <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full mb-1">
-                  3 Games for $16
-                </span>
-                <p className="text-sm text-gray-400">Open - 3PM</p>
-              </div>
-
-              <div className="mb-4">
-                <h4 className="text-xl font-bold mb-1">Cosmic Bowling</h4>
-                <p className="text-sm text-gray-400">5:00PM - Close</p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-1">Live DJ</h4>
-                <p className="text-sm text-gray-400">8:00PM - Close</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Sunday Card - Cream/Yellow tinted */}
-          <div className="group flex-shrink-0 w-[85vw] md:w-auto snap-center rounded-xl overflow-hidden shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-[#FFFACD] dark:bg-yellow-950/20">
-            <div className="relative aspect-[16/9] overflow-hidden">
-              <Image
-                src="/images/bowling/exterior.png"
-                alt="Sunday bowling specials"
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <div className="p-6">
-              <p className="text-sm font-medium text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">Sunday</p>
-              
-              <div className="mb-4">
-                <h3 className="text-xl font-bold mb-1">Cosmic Bowling</h3>
-                <p className="text-sm text-muted-foreground">Open - 5:00PM</p>
-              </div>
-
-              <div>
-                <h4 className="text-xl font-bold mb-2">Late Night Specials</h4>
-                <div className="flex flex-wrap gap-2 mb-1">
-                  <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full">
-                    $5 Games
-                  </span>
-                  <span className="inline-block bg-primary text-primary-foreground font-bold px-3 py-1.5 rounded-full">
-                    $5 Shoes
-                  </span>
-                </div>
-                <p className="text-sm text-muted-foreground">Bar Happy Hour • 8PM - Close</p>
-              </div>
-            </div>
-          </div>
+          {dailyDeals.map((slide) => (
+            <WeeklySpecialCard key={slide.id} slide={slide} />
+          ))}
         </div>
 
-        {/* Mobile scroll indicator */}
         <div className="flex justify-center gap-2 mt-4 md:hidden">
           <span className="text-xs text-muted-foreground">Swipe for more</span>
           <span className="text-muted-foreground">→</span>
@@ -194,9 +112,7 @@ export default function EventsPage() {
         </h2>
         <div className="mb-6 rounded-lg bg-muted p-6">
           <h3 className="mb-4 text-xl font-semibold">Observed Holidays</h3>
-          <p className="mb-4 text-muted-foreground">
-            We observe special hours and rates on the following holidays:
-          </p>
+          <p className="mb-4 text-muted-foreground">We observe special hours and rates on the following holidays:</p>
           <div className="grid gap-x-8 gap-y-2 sm:grid-cols-2 md:grid-cols-3">
             {[
               "New Year's Day",
@@ -250,8 +166,7 @@ export default function EventsPage() {
             <div className="rounded-md bg-muted p-4 mb-4">
               <p className="font-bold mb-2">Available Times:</p>
               <ul className="space-y-1 text-sm">
-                <li>• Friday: 5:00PM - Close</li>
-                <li>• Sunday: Open - 5:00PM</li>
+                <li>• Friday: 2:00PM - Close</li>
               </ul>
             </div>
             <Button asChild size="lg" className="w-fit">
@@ -267,8 +182,8 @@ export default function EventsPage() {
           <div>
             <h2 className="mb-4 text-2xl font-bold">Ready to Bowl?</h2>
             <p className="mb-6">
-              Take advantage of our weekly specials or plan your visit around one of our special events. 
-              Reservations are recommended for weekend and holiday bowling.
+              Take advantage of our weekly specials or plan your visit around one of our special events. Reservations are
+              recommended for weekend and holiday bowling.
             </p>
           </div>
           <div className="flex items-center justify-center md:justify-end gap-4">
@@ -284,4 +199,3 @@ export default function EventsPage() {
     </div>
   )
 }
-

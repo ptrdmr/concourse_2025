@@ -30,6 +30,15 @@ const config: Config = {
   		fontFamily: {
   			'display': ['Aktiv Grotesk', 'Helvetica', 'sans-serif'],
   			'body': ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'sans-serif'],
+  			'bebas': ['var(--font-bebas-neue)', 'Impact', 'Arial Black', 'sans-serif'],
+  			'barlow': ['var(--font-barlow-condensed)', 'Arial', 'sans-serif'],
+  		},
+  		backgroundImage: {
+  			'flyer-dots':
+  				'radial-gradient(circle, rgba(29,185,84,0.15) 1px, transparent 1px)',
+  		},
+  		backgroundSize: {
+  			'flyer-dot': '24px 24px',
   		},
   		colors: {
   			background: 'hsl(var(--background))',
@@ -71,6 +80,16 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			'team-flyer': {
+  				canvas: '#0a0a0a',
+  				green: '#1db954',
+  				'green-dark': '#158a3e',
+  				box: '#0e1a12',
+  				card: '#1c1c1c',
+  				'card-border': '#2a4a32',
+  				'pizza-bg': '#111111',
+  				'soda-bg': '#0d1f12',
   			},
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
