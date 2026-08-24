@@ -123,11 +123,33 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'menu-pulse': {
+  				'0%, 100%': {
+  					boxShadow: '0 0 0 0 rgba(220, 38, 38, 0)',
+  					borderColor: 'hsl(var(--border))'
+  				},
+  				'50%': {
+  					boxShadow: '0 0 10px 2px rgba(220, 38, 38, 0.45)',
+  					borderColor: 'rgba(220, 38, 38, 0.85)'
+  				}
+  			},
+  			'info-glow': {
+  				'0%, 100%': {
+  					color: 'rgba(220, 38, 38, 0.55)',
+  					textShadow: '0 0 0px rgba(220, 38, 38, 0)'
+  				},
+  				'50%': {
+  					color: 'rgba(220, 38, 38, 1)',
+  					textShadow: '0 0 6px rgba(220, 38, 38, 0.7)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'menu-pulse': 'menu-pulse 2.4s ease-in-out infinite',
+  			'info-glow': 'info-glow 2.4s ease-in-out infinite'
   		}
   	}
   },

@@ -43,6 +43,7 @@ function WeeklySpecialCard({ slide }: { slide: HomepageDailyDealSlide }) {
           alt={slide.imageAlt}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"
+          sizes="(max-width: 768px) 85vw, 50vw"
         />
       </div>
       <div className="p-6">
@@ -124,6 +125,7 @@ export default function EventsPage() {
               "Labor Day",
               "Veterans Day",
               "Day After Christmas",
+              "Day After New Year's",
             ].map((holiday) => (
               <div key={holiday} className="flex items-center gap-2 py-1">
                 <CalendarIcon className="h-4 w-4 text-primary flex-shrink-0" />
@@ -155,6 +157,7 @@ export default function EventsPage() {
               alt="Cosmic bowling with special lighting"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           <div className="flex flex-col justify-center">
@@ -166,7 +169,9 @@ export default function EventsPage() {
             <div className="rounded-md bg-muted p-4 mb-4">
               <p className="font-bold mb-2">Available Times:</p>
               <ul className="space-y-1 text-sm">
-                <li>• Friday: 2:00PM - Close</li>
+                <li>• Friday: 3:00PM - Close</li>
+                <li>• Saturday: All Day</li>
+                <li>• Sunday: Open - 5:00PM</li>
               </ul>
             </div>
             <Button asChild size="lg" className="w-fit">

@@ -6,18 +6,10 @@ import {
   type ThemeProviderProps,
 } from 'next-themes'
 
+// next-themes injects a blocking script that sets the correct class on <html>
+// before first paint, and the root layout sets `suppressHydrationWarning`, so
+// there's no need to hide the whole app behind a "mounted" gate here — doing
+// so was hiding all content (and hurting FCP/LCP) until client JS hydrated.
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
-  const [mounted, setMounted] = React.useState(false)
-
-  // When mounted on client, we can show the UI
-  React.useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  // Prevent hydration mismatch by rendering a simple div until the component is mounted on the client
-  if (!mounted) {
-    return <div style={{ visibility: "hidden" }}>{children}</div>
-  }
-
   return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

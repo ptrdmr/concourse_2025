@@ -1,7 +1,11 @@
 import Link from "next/link"
-import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react"
+import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react"
+import { getGroupedWeeklyHours } from "@/lib/schedule"
+import { PHONE_DISPLAY, PHONE_TEL, EVENTS_EMAIL } from "@/lib/booking"
 
 export default function Footer() {
+  const groupedHours = getGroupedWeeklyHours()
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12 md:px-6 md:py-16 lg:px-8">
@@ -52,6 +56,11 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/community-partnerships" className="hover:underline">
+                  Community Partnerships
+                </Link>
+              </li>
+              <li>
                 <Link
                   href="https://www2.appone.com/Search/Search.aspx?ServerVar=concoursebowl.appone.com"
                   className="hover:underline"
@@ -69,15 +78,19 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li className="flex items-center gap-2">
                 <MapPin className="h-4 w-4" />
-                <span>3364 E La Palmera Ave, Anaheim, CA 92806</span>
+                <span>3364 E La Palma Ave, Anaheim, CA 92806</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4" />
-                <span>(714) 666-2695</span>
+                <a href={PHONE_TEL} className="hover:underline">
+                  {PHONE_DISPLAY}
+                </a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <span>info@concoursebowling.com</span>
+                <a href={`mailto:${EVENTS_EMAIL}`} className="hover:underline">
+                  {EVENTS_EMAIL}
+                </a>
               </li>
             </ul>
           </div>
@@ -85,20 +98,28 @@ export default function Footer() {
           <div className="space-y-4">
             <h3 className="text-lg font-bold">Hours</h3>
             <ul className="space-y-2 text-sm">
-              <li>Monday: 4PM - 10PM</li>
-              <li>Tuesday - Thursday: 11AM - 11PM</li>
-              <li>Friday - Saturday: 11AM - Midnight</li>
-              <li>Sunday: 11AM - 11PM</li>
+              {groupedHours.map((group) => (
+                <li key={group.label}>
+                  {group.label}: {group.hours}
+                </li>
+              ))}
             </ul>
             <div className="flex gap-4 pt-2">
-              <Link href="#" aria-label="Facebook">
+              <Link
+                href="https://www.facebook.com/concoursebowl"
+                aria-label="Facebook"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Facebook className="h-5 w-5" />
               </Link>
-              <Link href="#" aria-label="Instagram">
+              <Link
+                href="https://www.instagram.com/concoursebowling/"
+                aria-label="Instagram"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
               </Link>
             </div>
           </div>

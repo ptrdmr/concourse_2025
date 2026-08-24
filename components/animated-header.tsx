@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import gsap from "gsap"
 import { cn } from "@/lib/utils"
 
 interface AnimatedHeaderProps {
@@ -18,25 +17,33 @@ export function AnimatedHeader({
   delay = 0
 }: AnimatedHeaderProps) {
   const headerRef = useRef(null)
-  
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // Initial state - invisible
-      gsap.set(headerRef.current, { 
-        autoAlpha: 0, 
+    let cancelled = false
+
+    // Loaded on demand instead of bundled statically, since this component
+    // renders on nearly every page via PageHeader.
+    import("gsap").then(({ default: gsap }) => {
+      if (cancelled) return
+
+      gsap.set(headerRef.current, {
+        autoAlpha: 0,
         y: -30,
-        scale: 0.8
+        scale: 0.8,
       })
-      
-      // Animation with elastic bounce
+
       gsap.to(headerRef.current, {
         duration: 0.8,
-        autoAlpha: 1, // fade in
-        y: 0, // move to final position
-        scale: 1, // normal size
-        ease: "elastic.out(1.2, 0.5)", // elastic bounce
-        delay: delay, // optional delay
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        ease: "elastic.out(1.2, 0.5)",
+        delay,
       })
+    })
+
+    return () => {
+      cancelled = true
     }
   }, [delay])
 

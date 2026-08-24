@@ -23,6 +23,7 @@ export default function AboutPage() {
             alt="Concourse Bowling Center vintage photo"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="flex flex-col justify-center">
@@ -112,7 +113,13 @@ export default function AboutPage() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           <Card>
             <div className="relative aspect-square overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=300&width=300" alt="John Smith" fill className="object-cover" />
+              <Image
+                src="/placeholder.svg?height=300&width=300"
+                alt="John Smith"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>John Smith</CardTitle>
@@ -128,7 +135,13 @@ export default function AboutPage() {
 
           <Card>
             <div className="relative aspect-square overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=300&width=300" alt="Sarah Johnson" fill className="object-cover" />
+              <Image
+                src="/placeholder.svg?height=300&width=300"
+                alt="Sarah Johnson"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>Sarah Johnson</CardTitle>
@@ -144,7 +157,13 @@ export default function AboutPage() {
 
           <Card>
             <div className="relative aspect-square overflow-hidden rounded-t-lg">
-              <Image src="/placeholder.svg?height=300&width=300" alt="Mike Rodriguez" fill className="object-cover" />
+              <Image
+                src="/placeholder.svg?height=300&width=300"
+                alt="Mike Rodriguez"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>Mike Rodriguez</CardTitle>
@@ -165,14 +184,32 @@ export default function AboutPage() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-6">
             <div className="relative aspect-video overflow-hidden rounded-lg">
-              <Image src="/images/bowling/Facility Shot.jpg" alt="Bowling lanes" fill className="object-cover" />
+              <Image
+                src="/images/bowling/Facility Shot.jpg"
+                alt="Bowling lanes"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div className="relative aspect-square overflow-hidden rounded-lg">
-                <Image src="/images/food/concourse_nachoes.jpg" alt="Bar area" fill className="object-cover" />
+                <Image
+                  src="/images/food/concourse_nachoes.jpg"
+                  alt="Bar area"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
               </div>
               <div className="relative aspect-square overflow-hidden rounded-lg">
-                <Image src="/images/arcade/space invaders.jpg" alt="Arcade" fill className="object-cover" />
+                <Image
+                  src="/images/arcade/space invaders.jpg"
+                  alt="Arcade"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                />
               </div>
             </div>
           </div>
@@ -275,6 +312,9 @@ export default function AboutPage() {
                 </p>
               </div>
             </div>
+            <Button asChild size="lg" className="mt-6 w-fit">
+              <Link href="/community-partnerships">Explore Partnership Opportunities</Link>
+            </Button>
           </div>
           <div className="relative aspect-video overflow-hidden rounded-lg">
             <Image
@@ -282,6 +322,7 @@ export default function AboutPage() {
               alt="Special Olympics charity event at Concourse Bowling"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>

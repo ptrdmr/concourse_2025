@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Button } from "@/components/ui/button"
+import { eventsMailto } from "@/lib/booking"
 
 // Pricing configuration
 const SUITES = {
@@ -335,9 +336,7 @@ export function VipCalculator({ id }: VipCalculatorProps) {
             </p>
 
             <Button asChild className="w-full mt-4" size="lg">
-              <a href="#" target="_blank" rel="noopener noreferrer">
-                Request Info
-              </a>
+              <a href={eventsMailto("VIP Suite Estimate Follow-up")}>Request Info</a>
             </Button>
           </div>
         </div>

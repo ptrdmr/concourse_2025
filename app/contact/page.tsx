@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,9 +13,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MapPin, Phone, Mail, Clock, CheckCircle } from "lucide-react"
 import { PageHeader } from "@/components/page-header"
 import { ContactFaqSection } from "@/components/contact-faq-section"
+import { LazyMapEmbed } from "@/components/lazy-map-embed"
+import { getGroupedWeeklyHours } from "@/lib/schedule"
 
 export default function ContactPage() {
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const groupedHours = useMemo(() => getGroupedWeeklyHours(), [])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -104,7 +107,7 @@ export default function ContactPage() {
                 <MapPin className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
                   <p className="font-medium">Address</p>
-                  <p className="text-muted-foreground">3364 E La Palmera Ave, Anaheim, CA 92806</p>
+                  <p className="text-muted-foreground">3364 E La Palma Ave, Anaheim, CA 92806</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -118,7 +121,7 @@ export default function ContactPage() {
                 <Mail className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
                   <p className="font-medium">Email</p>
-                  <p className="text-muted-foreground">info@concoursebowling.com</p>
+                  <p className="text-muted-foreground">events@concoursebowling.com</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
@@ -126,10 +129,11 @@ export default function ContactPage() {
                 <div>
                   <p className="font-medium">Hours of Operation</p>
                   <div className="text-sm text-muted-foreground">
-                    <p>Monday: 4PM - 10PM</p>
-                    <p>Tuesday - Thursday: 11AM - 11PM</p>
-                    <p>Friday - Saturday: 11AM - Midnight</p>
-                    <p>Sunday: 11AM - 11PM</p>
+                    {groupedHours.map((group) => (
+                      <p key={group.label}>
+                        {group.label}: {group.hours}
+                      </p>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -141,18 +145,11 @@ export default function ContactPage() {
               <CardTitle>Location</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="aspect-video overflow-hidden rounded-lg">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.0088651367!2d-117.8651!3d33.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd5a9b8172a65%3A0x78c9f7713a95e1ba!2s3364%20E%20La%20Palma%20Ave%2C%20Anaheim%2C%20CA%2092806!5e0!3m2!1sen!2sus!4v1710766158!5m2!1sen!2sus"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Concourse Bowling Center Location"
-                ></iframe>
-              </div>
+              <LazyMapEmbed
+                className="aspect-video overflow-hidden rounded-lg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.0088651367!2d-117.8651!3d33.8367!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dcd5a9b8172a65%3A0x78c9f7713a95e1ba!2s3364%20E%20La%20Palma%20Ave%2C%20Anaheim%2C%20CA%2092806!5e0!3m2!1sen!2sus!4v1710766158!5m2!1sen!2sus"
+                title="Concourse Bowling Center Location"
+              />
               <div className="mt-4">
                 <p className="text-sm text-muted-foreground">
                   We're conveniently located in Anaheim, just minutes from major highways and attractions. Plenty of

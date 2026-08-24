@@ -120,6 +120,7 @@ export default function CareersPage() {
             alt="Team members working at bowling center" 
             fill 
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="flex flex-col justify-center">
@@ -315,7 +316,7 @@ export default function CareersPage() {
             <div>
               <h3 className="font-medium">In Person</h3>
               <p className="mt-2 text-sm text-muted-foreground">
-                Visit us at 3364 E La Palmera Ave, Anaheim, CA 92806 to fill out an application in person.
+                Visit us at 3364 E La Palma Ave, Anaheim, CA 92806 to fill out an application in person.
               </p>
             </div>
             <div>

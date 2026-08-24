@@ -78,6 +78,7 @@ export const contactFaqCategories: FaqCategory[] = [
           "Independence Day",
           "Day After Christmas",
           "New Year’s Day",
+          "Day After New Year’s",
         ],
       },
       {
@@ -107,9 +108,9 @@ export const contactFaqCategories: FaqCategory[] = [
         ],
         listTitle: "Typical Cosmic times",
         listItems: [
-          "Friday: cosmic from 2 p.m. to close (through end of June)",
+          "Friday: cosmic from 3 p.m. to close",
           "Saturday: cosmic all day",
-          "Sunday: cosmic all day",
+          "Sunday: cosmic until 5 p.m.",
         ],
       },
       {
@@ -217,10 +218,9 @@ export const contactFaqCategories: FaqCategory[] = [
         paragraphs: ["Happy hour schedule:"],
         listItems: [
           "Monday: open–close",
-          "Tuesday: 2:00 p.m.–6:00 p.m.",
+          "Tuesday: 2:00 p.m.–6:00 p.m. and 9:00 p.m.–close",
           "Wednesday: 2:00 p.m.–6:00 p.m. and 9:00 p.m.–close",
           "Thursday–Friday: 2:00 p.m.–6:00 p.m.",
-          "Sunday: 11:00 a.m.–2:00 p.m. and 8:00 p.m.–11:00 p.m. (through end of June)",
         ],
       },
       {

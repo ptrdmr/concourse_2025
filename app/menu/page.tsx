@@ -10,12 +10,13 @@ import { PageHeader } from "@/components/page-header"
 // Map menu tabs to background images
 const menuBackgrounds: Record<string, string> = {
   appetizers: "/images/food/appetizers.jpg",
-  burgers: "/images/food/burger.jpg",
+  burgers: "/images/food/homepage_bar_cafe.jpg",
   pizza: "/images/food/pizza.jpg",
   sandwiches: "/images/food/sandwiches.jpg",
   salads: "/images/food/salads.jpg",
   "taps-cocktails": "/images/food/taps & cocktails.jpg",
   happyhour: "/images/food/happy hour.jpg",
+  kids: "/images/food/appetizers.jpg",
 }
 
 export default function MenuPage() {
@@ -31,6 +32,7 @@ export default function MenuPage() {
           fill
           className="object-cover transition-opacity duration-500"
           priority
+          sizes="100vw"
           key={activeTab}
         />
         <div className="absolute inset-0 bg-black/80 dark:bg-black/90"></div>
@@ -50,6 +52,7 @@ export default function MenuPage() {
             alt="Restaurant area with tables and bar"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="flex flex-col justify-center">
@@ -65,7 +68,7 @@ export default function MenuPage() {
       <div className="mb-16">
         <Tabs defaultValue="appetizers" className="w-full" onValueChange={setActiveTab}>
           <div className="overflow-x-auto pb-2">
-            <TabsList className="inline-flex w-auto min-w-full md:grid md:grid-cols-7 md:w-full">
+            <TabsList className="inline-flex w-auto min-w-full md:grid md:grid-cols-8 md:w-full">
               <TabsTrigger value="appetizers" className="flex-1 min-w-[100px]">Appetizers</TabsTrigger>
               <TabsTrigger value="burgers" className="flex-1 min-w-[100px]">Burgers</TabsTrigger>
               <TabsTrigger value="pizza" className="flex-1 min-w-[100px]">Pizza</TabsTrigger>
@@ -73,6 +76,7 @@ export default function MenuPage() {
               <TabsTrigger value="salads" className="flex-1 min-w-[100px]">Salads</TabsTrigger>
               <TabsTrigger value="taps-cocktails" className="flex-1 min-w-[100px]">Taps & Cocktails</TabsTrigger>
               <TabsTrigger value="happyhour" className="flex-1 min-w-[100px]">Happy Hour</TabsTrigger>
+              <TabsTrigger value="kids" className="flex-1 min-w-[100px]">Jr. Bowlers</TabsTrigger>
             </TabsList>
           </div>
 
@@ -83,7 +87,7 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>FRENCH FRIES</CardTitle>
-                    <span className="font-bold">$8</span>
+                    <span className="font-bold">$7</span>
                   </div>
                 </CardHeader>
               </Card>
@@ -92,7 +96,7 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>WAFFLE FRIES</CardTitle>
-                    <span className="font-bold">$8</span>
+                    <span className="font-bold">$9</span>
                   </div>
                 </CardHeader>
               </Card>
@@ -143,7 +147,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Topped with pico de gallo, served with chips, sour cream & red salsa. Add Chicken +$4 or Steak +$5
+                    Topped with pico de gallo, served with chips, sour cream & red salsa. Add Chicken +$4 · Steak or Shrimp +$5
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -151,13 +155,13 @@ export default function MenuPage() {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle>HUMMUS TRIO</CardTitle>
+                    <CardTitle>HUMMUS & PITA</CardTitle>
                     <span className="font-bold">$12</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Three fresh Mediterranean style dips: Plain, Edamame, and Red Pepper. Served with pita & veggies
+                    Creamy chickpea hummus topped with a marinated tomato olive relish. Served with warm pita bread and fresh vegetables
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -166,12 +170,12 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>IRISH NACHOS</CardTitle>
-                    <span className="font-bold">$19</span>
+                    <span className="font-bold">$20</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon & green onions
+                    Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon & green onions. Feeds 4–6
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -185,7 +189,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos & pico de gallo. Add Chicken +$4 or steak for +$5
+                    Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos & pico de gallo. Feeds 4–6. Add Chicken +$4 · Steak +$5
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -236,7 +240,7 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>SHRIMP TACOS (3)</CardTitle>
-                    <span className="font-bold">$14.5</span>
+                    <span className="font-bold">$15</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -255,7 +259,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Three beef patties served on sweet Hawaiian slider buns, topped with melted cheese, grilled onions & ketchup. Add fries +$2.50
+                    Three sliders on sweet Hawaiian buns. Choose from classic cheeseburger, jerk chicken with pickled onions, or pulled pork with BBQ sauce & onion strings. One style per order. Add fries +$2.50
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -263,14 +267,40 @@ export default function MenuPage() {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle>BEEF TAQUITOS</CardTitle>
+                    <CardTitle>TACO PLATE</CardTitle>
                     <span className="font-bold">$12</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Three rolled tacos filled with tender braised beef and cheese. Fried to order and served with guacamole, shredded iceberg lettuce, tomatillo salsa, sour cream and pico de gallo.
+                    Three soft corn tortillas filled with your choice of chicken, pork carnitas or beef carne asada. Topped with diced red onion & cilantro. Includes tortilla chips, black beans and fire roasted salsa
                   </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>CHICKEN LETTUCE CUPS</CardTitle>
+                    <span className="font-bold">$13</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Seasoned ground chicken with onions, peppers & rice noodles in crisp lettuce leaves. Served with chili dipping sauce and chili roasted peanuts
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>SOUP OF THE DAY</CardTitle>
+                    <span className="font-bold">$6</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>Ask your server!</CardDescription>
                 </CardContent>
               </Card>
 
@@ -283,7 +313,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Steaming bed of rice. Features black bean-corn and tomatillo salsas, cheddar cheese, chipotle aioli, diced avocado and fajita vegetables. Topped with crispy tortilla strips
+                    Steaming bed of long grain rice with black bean-corn and tomatillo salsas, cheddar cheese, chipotle aioli, diced avocado and fajita vegetables. Topped with crispy tortilla strips. Add Chicken +$4 · Steak or Shrimp +$5
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -293,7 +323,7 @@ export default function MenuPage() {
           <TabsContent value="burgers" className="mt-6">
             <h3 className="text-2xl font-bold mb-6 text-white">BURGERS</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
-              <p>Includes French Fries or Side Salad. Upgrade: Veggies or Waffle Fries for +$2.50, Onion Rings +$3.</p>
+              <p>Includes French Fries or Side Salad. Upgrade: Veggies +$2.50, Onion Rings or Waffle Fries +$3.</p>
               <p>Add cheese +$1.50: American, Swiss, Pepper Jack. Add Bacon +$3, Avocado +$1.50.</p>
               <p>Bread: Hamburger Bun, Sourdough or Ciabatta.</p>
             </div>
@@ -307,7 +337,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Two smashed beef patties, topped with American cheese, grilled onions, ketchup, mustard, on a fresh burger bun
+                    Two smashed beef patties, topped with American cheese, grilled onions, ketchup, mustard, on a fresh burger bun. Additional patty +$3
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -361,6 +391,7 @@ export default function MenuPage() {
             <div className="mb-4 p-4 bg-muted rounded-md">
               <p>All Pies Prepared With Our Housemade Pizza Sauce & Hand Grated Mozzarella Cheese.</p>
               <p>12" Medium Pizza - 8 Slices. 16" Large Pizza - 12 Slices.</p>
+              <p>Build Your Own: additional toppings $1.50/each (veggie) · $2.50/each (meat).</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <Card className="border-rose-400 border-2">
@@ -480,7 +511,7 @@ export default function MenuPage() {
           <TabsContent value="sandwiches" className="mt-6">
             <h3 className="text-2xl font-bold mb-6 text-white">SANDWICHES</h3>
             <div className="mb-4 p-4 bg-muted rounded-md">
-              <p>Includes French Fries or Side Salad. Upgrade: Veggies or Waffle Fries for +$2.50, Onion Rings +$3.</p>
+              <p>Includes French Fries or Side Salad. Upgrade: Veggies +$2.50, Onion Rings or Waffle Fries +$3.</p>
               <p>Add cheese +$1.50: American, Swiss, Pepper Jack. Add Bacon +$3, Avocado +$1.50.</p>
               <p>Bread: Hamburger Bun, Sourdough or Ciabatta.</p>
             </div>
@@ -488,13 +519,13 @@ export default function MenuPage() {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle>CHICKEN SANDWICH</CardTitle>
-                    <span className="font-bold">$13.5</span>
+                    <CardTitle>BBQ CHICKEN SANDWICH</CardTitle>
+                    <span className="font-bold">$14</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Grilled chicken breast served on a toasted burger bun and topped with lettuce, tomato, red onion and mayo. Served with French fries
+                    A plump chicken breast brushed with BBQ sauce and piled high with ham, American cheese and onion strings on a burger bun
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -502,13 +533,41 @@ export default function MenuPage() {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle>TURKEY AVOCADO</CardTitle>
+                    <CardTitle>CLUB SANDWICH</CardTitle>
+                    <span className="font-bold">$14</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Sliced turkey breast, ham, avocado, lettuce & tomato on toasted sourdough with mayo. Served with French fries
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>HOT ITALIAN</CardTitle>
+                    <span className="font-bold">$13.5</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Hot & fresh out of the oven! A bakery fresh ciabatta roll topped with marinara sauce, shredded mozzarella cheese, basil, pepperoncini, pepperoni & sausage. Then oven baked until bubbly & crisp
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>CHIPOTLE CHICKEN MELT</CardTitle>
                     <span className="font-bold">$15</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Sliced turkey breast, Swiss cheese, avocado on a ciabatta roll, with lettuce, tomato & mayo
+                    A tender chicken breast on a fresh ciabatta roll with chipotle aioli & shredded mozzarella cheese. Served hot & fresh from the oven, topped with lettuce, tomato & sliced cucumber
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -530,13 +589,13 @@ export default function MenuPage() {
               <Card>
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle>ITALIAN SANDWICH</CardTitle>
-                    <span className="font-bold">$12.5</span>
+                    <CardTitle>SOUP & HALF SANDWICH</CardTitle>
+                    <span className="font-bold">$10</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Shaved ham, pepperoni, iceberg lettuce, tomato, red onion, Italian dressing & mayo on a ciabatta roll. Served with French fries
+                    A half sandwich (grilled cheese or BLT) on sourdough bread, paired with a cup of our housemade soup of the day
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -554,7 +613,7 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>HOUSE SALAD</CardTitle>
-                    <span className="font-bold">$8</span>
+                    <span className="font-bold">$9</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -568,7 +627,7 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>CAESAR SALAD</CardTitle>
-                    <span className="font-bold">$8.5</span>
+                    <span className="font-bold">$9.5</span>
                   </div>
                 </CardHeader>
                 <CardContent>
@@ -601,7 +660,7 @@ export default function MenuPage() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Black beans, shredded lettuce and seasoned ground beef, topped with shredded cheddar cheese, avocado, pico de gallo and sour cream. Served with tortilla ships & chipotle ranch dressing
+                    Black beans, shredded lettuce and seasoned ground beef, topped with shredded cheddar cheese, avocado, pico de gallo and sour cream. Served with tortilla chips & chipotle ranch dressing
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -610,12 +669,26 @@ export default function MenuPage() {
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
                     <CardTitle>COBB SALAD</CardTitle>
-                    <span className="font-bold">$15</span>
+                    <span className="font-bold">$15.5</span>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
                     Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles & tomatoes
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>MISO SHRIMP SALAD</CardTitle>
+                    <span className="font-bold">$15</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Grilled shrimp over chopped kale and romaine, dried cranberries, sliced almonds, tossed in miso dressing
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -633,7 +706,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold text-white">8</span>
+                        <span className="text-lg font-bold text-white">$9</span>
                         <span className="font-medium text-white">BREWERY X HUCKLEBERRY SELTZER</span>
                         <span className="text-gray-400">5%</span>
                       </div>
@@ -644,7 +717,18 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold text-white">$8</span>
+                        <span className="font-medium text-white">TRULY WILD BERRY</span>
+                        <span className="text-gray-400">5%</span>
+                      </div>
+                      <p className="text-sm text-lime-500 font-medium">WILD BERRY HARD SELTZER</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">CALI SQUEEZE BLOOD ORANGE</span>
                         <span className="text-muted-foreground">5.4%</span>
                       </div>
@@ -655,8 +739,8 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
-                        <span className="font-medium">GOLDENROAD MANGO CART</span>
+                        <span className="text-lg font-bold">$9</span>
+                        <span className="font-medium">GOLDEN ROAD MANGO CART</span>
                         <span className="text-muted-foreground">4%</span>
                       </div>
                       <p className="text-sm text-lime-500 font-medium">MANGO FLAVORED WHEAT BEER</p>
@@ -666,7 +750,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">ANGRY ORCHARD</span>
                         <span className="text-muted-foreground">5.4%</span>
                       </div>
@@ -677,11 +761,22 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">BOTTLE LOGIC HONEYDEW LIME</span>
-                        <span className="text-muted-foreground">8.0%</span>
+                        <span className="text-lg font-bold">$10</span>
+                        <span className="font-medium">BOTTLE LOGIC BLUEBERRY LAVENDER LEMONADE</span>
+                        <span className="text-muted-foreground">5.7%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">LIME GREEN HARD SELTZER WITH HONEY-DEW</p>
+                      <p className="text-sm text-lime-500 font-medium">FRUITED HARD SELTZER WITH BLUEBERRY, FLORAL LAVENDER &amp; CITRUS</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold">$9</span>
+                        <span className="font-medium">4 SONS BREWING – VACATION PINEAPPLE</span>
+                        <span className="text-muted-foreground">5%</span>
+                      </div>
+                      <p className="text-sm text-lime-500 font-medium">PINEAPPLE SESSION ALE</p>
                     </div>
                   </div>
                 </div>
@@ -694,22 +789,22 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">ALASKAN AMBER</span>
-                        <span className="text-muted-foreground">5.3%</span>
+                        <span className="text-lg font-bold">$10</span>
+                        <span className="font-medium">GUINNESS</span>
+                        <span className="text-muted-foreground">4.2%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">TOASTY, NUTTY, AND CARAMEL MALT</p>
+                      <p className="text-sm text-lime-500 font-medium">IRISH DRY STOUT</p>
                     </div>
                   </div>
                   
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">GUINNESS</span>
-                        <span className="text-muted-foreground">4.2%</span>
+                        <span className="text-lg font-bold">$10</span>
+                        <span className="font-medium">NAUGHTY SAUCE</span>
+                        <span className="text-muted-foreground">5.4%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">IRISH DRY STOUT</p>
+                      <p className="text-sm text-lime-500 font-medium">GOLDEN MILK STOUT</p>
                     </div>
                   </div>
                 </div>
@@ -722,7 +817,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
+                        <span className="text-lg font-bold">$10</span>
                         <span className="font-medium">BREWERY X SLAP AND TICKLE</span>
                         <span className="text-muted-foreground">6.7%</span>
                       </div>
@@ -733,7 +828,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
+                        <span className="text-lg font-bold">$10</span>
                         <span className="font-medium">ELYSIAN SPACE DUST</span>
                         <span className="text-muted-foreground">8.2%</span>
                       </div>
@@ -744,35 +839,25 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">HARLAND BREWING HAZY IPA</span>
-                        <span className="text-muted-foreground">6.5%</span>
+                        <span className="text-lg font-bold">$10</span>
+                        <span className="font-medium">BOTTLE LOGIC DBL ACTUATOR</span>
+                        <span className="text-muted-foreground">8.5%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">IT'S HAZY. IT'S AN IPA. NOT OVERWHELMINGLY BITTER.</p>
+                      <p className="text-sm text-lime-500 font-medium">A DIPA WITH A BOLD WEST COAST PROFILE</p>
                     </div>
                   </div>
                   
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">BOTTLE LOGIC - FUZZY LOGIC</span>
+                        <span className="text-lg font-bold">$10</span>
+                        <span className="font-medium">BOTTLE LOGIC – FUZZY LOGIC</span>
                         <span className="text-muted-foreground">7.1%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">HAZY IPA</p>
+                      <p className="text-sm text-lime-500 font-medium">HAZY PEACH IPA</p>
                     </div>
                   </div>
                   
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">9</span>
-                        <span className="font-medium">SIERRA NEVADA - CELEBRATION</span>
-                        <span className="text-muted-foreground">6.8%</span>
-                      </div>
-                      <p className="text-sm text-lime-500 font-medium">CITRUS PINE IPA</p>
-                    </div>
-                  </div>
                 </div>
               </div>
               
@@ -783,22 +868,33 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">STELLA</span>
                         <span className="text-muted-foreground">5%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">CLASSIC BELGIAN LAGER</p>
+                      <p className="text-sm text-lime-500 font-medium">BELGIAN LAGER</p>
                     </div>
                   </div>
                   
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">PACIFICO</span>
                         <span className="text-muted-foreground">4.4%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">CLASSIC MEXICAN PILSNER</p>
+                      <p className="text-sm text-lime-500 font-medium">MEXICAN PILSNER</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-bold">$9</span>
+                        <span className="font-medium">MODELO</span>
+                        <span className="text-muted-foreground">4.4%</span>
+                      </div>
+                      <p className="text-sm text-lime-500 font-medium">MEXICAN PILSNER</p>
                     </div>
                   </div>
                 </div>
@@ -806,12 +902,12 @@ export default function MenuPage() {
               
               {/* BLONDES/ALES SECTION */}
               <div className="mb-8">
-                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">BLONDES/ALES</h4>
+                <h4 className="text-xl font-bold mb-4 pb-2 border-b text-white">BLONDES / ALES</h4>
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">BREWERY X BLONDE</span>
                         <span className="text-muted-foreground">4.7%</span>
                       </div>
@@ -822,7 +918,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
+                        <span className="text-lg font-bold">$9</span>
                         <span className="font-medium">805</span>
                         <span className="text-muted-foreground">4.7%</span>
                       </div>
@@ -833,11 +929,11 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">8</span>
-                        <span className="font-medium">KONA BIGWAVE</span>
-                        <span className="text-muted-foreground">4.4%</span>
+                        <span className="text-lg font-bold">$9</span>
+                        <span className="font-medium">BLUE MOON</span>
+                        <span className="text-muted-foreground">5.4%</span>
                       </div>
-                      <p className="text-sm text-lime-500 font-medium">GOLDEN HAWAIIAN ALE WITH A TROPICAL HOP AROMA</p>
+                      <p className="text-sm text-lime-500 font-medium">BELGIAN-STYLE WHEAT ALE</p>
                     </div>
                   </div>
                 </div>
@@ -850,7 +946,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">7</span>
+                        <span className="text-lg font-bold">$8</span>
                         <span className="font-medium">COORS LIGHT</span>
                         <span className="text-muted-foreground">4.2%</span>
                       </div>
@@ -860,7 +956,7 @@ export default function MenuPage() {
                   <div className="flex justify-between items-start">
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="text-lg font-bold">7</span>
+                        <span className="text-lg font-bold">$8</span>
                         <span className="font-medium">MICHELOB ULTRA</span>
                         <span className="text-muted-foreground">4.2%</span>
                       </div>
@@ -877,7 +973,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">COSMIC PALOMA</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Herradura Silver Tequila, grapefruit Jarritos, Tajin rim, lime wedge garnish</p>
                   </div>
@@ -885,7 +981,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">LYNCHBURG LEMONADE</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Jack Daniels, Triple Sec, Sweet & Sour, Starry with Lemon & Cherry</p>
                   </div>
@@ -893,7 +989,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">IRISH MULE</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Jameson Irish Whiskey, Lime Juice, Cutwater Ginger Beer with Lime</p>
                   </div>
@@ -903,7 +999,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">HACIENDA MARGARITA</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Pineapple / Jalapeno Dulce Vida, Concierge Triple Sec, Sweet & Sour, freshly squeezed lime juice and lime garnish</p>
                   </div>
@@ -911,7 +1007,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">THE OLD TRAVELER</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">An Old Fashioned with Traveler American Whiskey, Sugar Cube, Bitters, with Orange & Cherry garnish</p>
                   </div>
@@ -919,7 +1015,7 @@ export default function MenuPage() {
                   <div>
                     <div className="flex justify-between items-center">
                       <span className="font-bold text-lg">ESPRESSO MARTINI</span>
-                      <span className="font-bold">$12</span>
+                      <span className="font-bold">$13</span>
                     </div>
                     <p className="text-sm text-muted-foreground">Smirnoff Vanilla Vodka, Kapali Coffee Liquor, Borghetti Cafe Espresso</p>
                   </div>
@@ -927,7 +1023,7 @@ export default function MenuPage() {
               </div>
               
               <div className="mt-8 p-4 bg-muted rounded-md">
-                <p className="font-medium text-center">All specialty cocktails are available for $10 during Happy Hour!</p>
+                <p className="font-medium text-center">All specialty cocktails are available for $11 during Happy Hour!</p>
               </div>
             </div>
           </TabsContent>
@@ -935,7 +1031,7 @@ export default function MenuPage() {
           <TabsContent value="happyhour" className="mt-6">
             <div className="mb-6">
               <h3 className="text-2xl font-bold mb-4 text-white">HAPPY HOUR MENU</h3>
-              <p className="text-lg mb-4 text-gray-200">Mon: Open to Close; Tues: 2pm-6pm; Wed: 2pm-6pm & 9pm-Close; Thu & Fri: 2pm-6pm</p>
+              <p className="text-lg mb-4 text-gray-200">Mon: Open to Close; Tue-Thu: 2pm-6pm & 9pm-Close; Fri: 2pm-6pm</p>
             </div>
             
             <div className="grid gap-8 md:grid-cols-2">
@@ -987,18 +1083,26 @@ export default function MenuPage() {
                     
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">IRISH NACHO</span>
-                        <p className="text-sm text-muted-foreground">Waffle cut fries, hot cheese sauce, stopped with shredded cheddar, crispy bacon & green onions.</p>
+                        <span className="font-medium">CONCOURSE NACHO</span>
+                        <p className="text-sm text-muted-foreground">Tortilla chips, guacamole, salsa, sour cream, nacho cheese, black bean, jalapeños & pico. Add Chicken +$4 | Steak +$5</p>
                       </div>
-                      <span className="font-bold">$16</span>
+                      <span className="font-bold">$15</span>
                     </div>
                     
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">TAQUITOS</span>
-                        <p className="text-sm text-muted-foreground">Three rolled tacos filled with tender braised beef and cheese. Served with guacamole, lettuce, salsa, sour cream & pico de gallo.</p>
+                        <span className="font-medium">LETTUCE CUPS</span>
+                        <p className="text-sm text-muted-foreground">Jerk-spiced chicken, grilled onions & peppers, rice noodles & chili peanuts with dipping sauce</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
+                    </div>
+                    
+                    <div className="flex justify-between">
+                      <div>
+                        <span className="font-medium">TACO PLATE</span>
+                        <p className="text-sm text-muted-foreground">Three soft corn tortillas — Chicken, Carnitas, or Carne Asada. Chips, beans & salsa included</p>
+                      </div>
+                      <span className="font-bold">$11</span>
                     </div>
                   </div>
                 </CardContent>
@@ -1012,18 +1116,18 @@ export default function MenuPage() {
                   <div className="space-y-4">
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">MICHELOBE ULTRA</span>
+                        <span className="font-medium">CONCOURSE BLONDE</span>
                         <p className="text-sm text-muted-foreground">16oz Pint</p>
                       </div>
-                      <span className="font-bold">$5</span>
+                      <span className="font-bold">$7</span>
                     </div>
                     
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">CONCOURSE BLONDE</span>
+                        <span className="font-medium">MICHELOB ULTRA</span>
                         <p className="text-sm text-muted-foreground">16oz Pint</p>
                       </div>
-                      <span className="font-bold">$6</span>
+                      <span className="font-bold">$7</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1031,7 +1135,15 @@ export default function MenuPage() {
                         <span className="font-medium">COORS LIGHT</span>
                         <p className="text-sm text-muted-foreground">16oz Pint</p>
                       </div>
-                      <span className="font-bold">$5</span>
+                      <span className="font-bold">$7</span>
+                    </div>
+                    
+                    <div className="flex justify-between">
+                      <div>
+                        <span className="font-medium">BLUE MOON</span>
+                        <p className="text-sm text-muted-foreground">16oz Pint</p>
+                      </div>
+                      <span className="font-bold">$7</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1039,15 +1151,23 @@ export default function MenuPage() {
                         <span className="font-medium">CALI SQUEEZE</span>
                         <p className="text-sm text-muted-foreground">16oz Pint</p>
                       </div>
+                      <span className="font-bold">$7</span>
+                    </div>
+                    
+                    <div className="flex justify-between">
+                      <div>
+                        <span className="font-medium">LOGIC LIGHT</span>
+                        <p className="text-sm text-muted-foreground">16oz Can</p>
+                      </div>
                       <span className="font-bold">$6</span>
                     </div>
                     
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">KONA BIG WAVE</span>
-                        <p className="text-sm text-muted-foreground">16oz Pint</p>
+                        <span className="font-medium">HAPPY DAD GRAPE</span>
+                        <p className="text-sm text-muted-foreground">24oz Can</p>
                       </div>
-                      <span className="font-bold">$6</span>
+                      <span className="font-bold">$8</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1055,7 +1175,7 @@ export default function MenuPage() {
                         <span className="font-medium">ATHLETICS</span>
                         <p className="text-sm text-muted-foreground">Can - Non-Alcoholic</p>
                       </div>
-                      <span className="font-bold">$5</span>
+                      <span className="font-bold">$6.50</span>
                     </div>
                     
                     <div className="border-t pt-4 mt-4">
@@ -1064,10 +1184,10 @@ export default function MenuPage() {
                     
                     <div className="flex justify-between">
                       <div>
-                        <span className="font-medium">TRINITY OAKS</span>
+                        <span className="font-medium">JOSH CELLARS</span>
                         <p className="text-sm text-muted-foreground">Chardonnay, Pinot Grigio, Merlot or Cabernet</p>
                       </div>
-                      <span className="font-bold">$6</span>
+                      <span className="font-bold">$8</span>
                     </div>
                   </div>
                 </CardContent>
@@ -1076,7 +1196,7 @@ export default function MenuPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>HAPPY HOUR SPECIALTY COCKTAILS</CardTitle>
-                  <CardDescription>All Specialty Cocktails are $10 during Happy Hour</CardDescription>
+                  <CardDescription>All Specialty Cocktails are $11 during Happy Hour (Regular $13)</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
@@ -1085,7 +1205,7 @@ export default function MenuPage() {
                         <span className="font-medium">COSMIC PALOMA</span>
                         <p className="text-sm text-muted-foreground">Herradura Silver Tequila, grapefruit Jarritos, Tajin rim, lime wedge garnish</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1093,7 +1213,7 @@ export default function MenuPage() {
                         <span className="font-medium">LYNCHBURG LEMONDADE</span>
                         <p className="text-sm text-muted-foreground">Jack Daniels, Triple Sec, Sweet & Sour, Starry with Lemon & Cherry</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1101,7 +1221,7 @@ export default function MenuPage() {
                         <span className="font-medium">IRISH MULE</span>
                         <p className="text-sm text-muted-foreground">Jameson Irish Whiskey, Lime Juice, Cutwater Ginger Beer with Lime</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1109,7 +1229,7 @@ export default function MenuPage() {
                         <span className="font-medium">HACIENDA MARGARITA</span>
                         <p className="text-sm text-muted-foreground">Pineapple / Jalapeno Dulce Vida, Concierge Triple Sec, Sweet & Sour, freshly squeezed lime juice and lime garnish</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1117,7 +1237,7 @@ export default function MenuPage() {
                         <span className="font-medium">THE OLD TRAVELER</span>
                         <p className="text-sm text-muted-foreground">An Old Fashioned with Traveler American Whiskey, Sugar Cube, Bitters, with Orange & Cherry garnish</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                     
                     <div className="flex justify-between">
@@ -1125,9 +1245,55 @@ export default function MenuPage() {
                         <span className="font-medium">ESPRESSO MARTINI</span>
                         <p className="text-sm text-muted-foreground">Smirnoff Vanilla Vodka, Kapali Coffee Liquor, Borghetti Cafe Espresso</p>
                       </div>
-                      <span className="font-bold">$10</span>
+                      <span className="font-bold">$11</span>
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+            </div>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-muted-foreground italic">Happy Hour Not Valid on Holidays</p>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="kids" className="mt-6">
+            <h3 className="text-2xl font-bold mb-6 text-white">JR. BOWLERS</h3>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>MINI CORN DOGS</CardTitle>
+                    <span className="font-bold">$10</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>Served with fries</CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>KIDS SLIDERS</CardTitle>
+                    <span className="font-bold">$11.5</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>
+                    Two mini burgers with American cheese and ketchup. Served with French fries
+                  </CardDescription>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader className="pb-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle>KIDS CHICKEN STRIPS</CardTitle>
+                    <span className="font-bold">$11.5</span>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <CardDescription>2 chicken fingers with fries</CardDescription>
                 </CardContent>
               </Card>
             </div>

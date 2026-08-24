@@ -7,6 +7,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { AlertCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { PageHeader } from "@/components/page-header"
+import { TodayHours } from "@/components/today-hours"
+import { LANE_BOOKING_URL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/booking"
 
 export default function BowlingPage() {
   return (
@@ -16,10 +18,23 @@ export default function BowlingPage() {
         description="Enjoy our state-of-the-art lanes with friends and family. Check out our competitive rates and special offers."
         centered
       />
+      <p className="mx-auto -mt-4 mb-10 max-w-xl text-center text-muted-foreground">
+        <TodayHours className="font-semibold text-foreground" />
+        {" · "}First come, first served{" · "}
+        <a href={PHONE_TEL} className="font-semibold text-primary hover:underline">
+          {PHONE_DISPLAY}
+        </a>
+      </p>
 
       <div className="mb-16 grid gap-8 md:grid-cols-2">
         <div className="relative aspect-video overflow-hidden rounded-lg">
-          <Image src="/images/bowling/walk_in.jpg" alt="Bowling lanes" fill className="object-cover" />
+          <Image
+            src="/images/bowling/walk_in.jpg"
+            alt="Bowling lanes"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
         </div>
         <div className="flex flex-col justify-center">
           <h2 className="mb-4 text-2xl font-bold">Walk-in Bowling</h2>
@@ -34,12 +49,12 @@ export default function BowlingPage() {
             </AlertDescription>
           </Alert>
           <p className="mb-6">
-            If you have a group of 8 or more, a reservation may be recommended. <br></br><br></br> <Button asChild>
-            
-          </Button> Click below for more information!
+            If you have a group of 8 or more, a reservation is recommended — book online to guarantee your lanes.
           </p>
           <Button asChild>
-            <Link href="/reservations">Make a Reservation</Link>
+            <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
+              Reserve a Lane Online
+            </a>
           </Button>
         </div>
       </div>
@@ -183,7 +198,13 @@ export default function BowlingPage() {
           <li>Saturday All Day</li>
           <li>Sunday Open-5:00pm</li>
         </ul>
-        <p>Please call for current special pricing or check our promotions page.</p>
+        <p>
+          Please{" "}
+          <a href={PHONE_TEL} className="font-medium text-primary hover:underline">
+            call us at {PHONE_DISPLAY}
+          </a>{" "}
+          for current special pricing or check our promotions page.
+        </p>
       </div>
 
       <div className="mb-16">
@@ -191,10 +212,11 @@ export default function BowlingPage() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="relative aspect-video overflow-hidden rounded-lg">
             <Image
-              src="/placeholder.svg?height=600&width=800"
+              src="/images/bowling/friday_cosmic.jpg"
               alt="Cosmic bowling with neon lights"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           <div className="flex flex-col justify-center">
@@ -208,7 +230,9 @@ export default function BowlingPage() {
               Friday 3:00pm - Midnight - Saturday All Day - Sunday 11:00am - 5:00pm
             </p>
             <Button asChild>
-              <Link href="/reservations">Reserve for Cosmic Bowling</Link>
+              <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
+                Reserve for Cosmic Bowling
+              </a>
             </Button>
           </div>
         </div>
@@ -221,7 +245,7 @@ export default function BowlingPage() {
           sizes.
         </p>
         <Button asChild>
-          <Link href="/reservations">View Group Reservation Options</Link>
+          <Link href="/reservations?track=parties">View Party & Group Options</Link>
         </Button>
       </div>
     </div>

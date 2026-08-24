@@ -18,6 +18,7 @@ export default function ArcadePage() {
           fill
           className="object-cover"
           priority
+          sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/80 dark:bg-black/90"></div>
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iMC4yIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00eiIvPjwvZz48L2c+PC9zdmc+')] opacity-20"></div>
@@ -37,6 +38,7 @@ export default function ArcadePage() {
             alt="Space Invaders arcade game"
             fill
             className="object-cover"
+            sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>
         <div className="flex flex-col justify-center">
@@ -69,7 +71,13 @@ export default function ArcadePage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
           <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/images/arcade/racing games.jpg" alt="Racing games" fill className="object-cover" />
+              <Image
+                src="/images/arcade/racing games.jpg"
+                alt="Racing games"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>Racing Games</CardTitle>
@@ -84,7 +92,13 @@ export default function ArcadePage() {
 
           <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/images/arcade/classic.jpg" alt="Classic arcade games" fill className="object-cover" />
+              <Image
+                src="/images/arcade/classic.jpg"
+                alt="Classic arcade games"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>Classic Arcade Games</CardTitle>
@@ -103,6 +117,7 @@ export default function ArcadePage() {
                 alt="Sports arcade games"
                 fill
                 className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
             <CardHeader>
@@ -117,7 +132,13 @@ export default function ArcadePage() {
 
           <Card className="bg-background/95 backdrop-blur-sm">
             <div className="relative aspect-video overflow-hidden rounded-t-lg">
-              <Image src="/images/arcade/prize.jpg" alt="Prize games and claw machines" fill className="object-cover" />
+              <Image
+                src="/images/arcade/prize.jpg"
+                alt="Prize games and claw machines"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+              />
             </div>
             <CardHeader>
               <CardTitle>Prize Games</CardTitle>
@@ -279,6 +300,7 @@ export default function ArcadePage() {
               alt="Birthday party in arcade"
               fill
               className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>
