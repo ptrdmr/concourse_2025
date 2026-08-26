@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — {{ item.name }} specials</title>
+
+<!--
+  Two things worth noticing here.
+
+  1. `flyer:formats` lists two sizes, so this one file produces both the 1920
+     and the 1280 banner. You never maintain two copies of the same design.
+  2. `flyer:for-each` points at a list, so this file also renders once per day
+     in content/daily-specials.json. Inside the markup, `item` is that day.
+
+  Five days times two sizes = ten finished banners from this single file.
+-->
+<meta name="flyer:formats" content="banner-1920x270,banner-1280x328">
+<meta name="flyer:content" content="daily-specials">
+<meta name="flyer:for-each" content="content.days">
+<meta name="flyer:outputs" content="jpeg">
+<meta name="flyer:title" content="Daily specials strip banner">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  /* A banner is a single row of panels, so this board skips the usual .safe box. */
+  .board { display: flex; align-items: stretch; }
+
+  .brand-block {
+    width: 15%;
+    min-width: 15%;
+    background: var(--bg-alt);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.6rem;
+  }
+
+  .brand-block img { height: 4.8rem; }
+
+  .season {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.2;
+  }
+
+  /* Sized to the longest day name rather than a fixed width, so "Wednesday"
+     does not get clipped where "Friday" fits. */
+  .day-strip {
+    min-width: 13%;
+    background: var(--brand);
+    display: grid;
+    place-content: center;
+    padding: 0 1.2rem;
+  }
+
+  .day-name {
+    font-family: var(--font-display);
+    font-size: 3.4rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .specials { flex: 1; display: flex; }
+
+  .special {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.1rem;
+    padding: 0.5rem 1.2rem;
+  }
+
+  .special + .special { border-left: 2px solid var(--rule); }
+
+  .special .item-name { font-size: 2.4rem; }
+  .special .item-desc { font-size: 1.3rem; color: var(--muted); }
+  .special .time { font-size: 1.15rem; color: var(--muted-soft); }
+  .special .price-huge { font-size: 5rem; }
+
+  .special .badge {
+    font-size: 3.4rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    border: 0;
+    padding: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="board">
+  <div class="edge-top"></div>
+
+  <div class="brand-block">
+    <img src="../brand/assets/logo-on-dark.svg" alt="">
+    <div class="season">{{ content.season }} {{ content.year }}</div>
+  </div>
+
+  <div class="day-strip">
+    <div class="day-name">{{ item.name }}</div>
+  </div>
+
+  <div class="specials">
+    {{#each item.specials}}
+    <div class="special">
+      <div class="item-name">{{ this.name }}</div>
+      {{#if this.price}}<div class="price-huge">{{ this.price }}</div>{{/if}}
+      {{#if this.badge}}<div class="badge">{{ this.badge }}</div>{{/if}}
+      {{#if this.desc}}<div class="item-desc">{{ this.desc }}</div>{{/if}}
+      {{#if this.time}}<div class="time">{{ this.time }}</div>{{/if}}
+    </div>
+    {{/each}}
+  </div>
+
+  <div class="edge-bottom"></div>
+</div>
+
+</body>
+</html>

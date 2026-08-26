@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — __TITLE__</title>
+
+<!-- Files beginning with an underscore are ignored by the renderer.
+     `npm run new` copies this one and fills in the blanks. -->
+<meta name="flyer:format" content="__FORMAT__">
+<meta name="flyer:content" content="__CONTENT__">
+<meta name="flyer:title" content="__TITLE__">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  /* Board-specific adjustments go here. Reach for base.css classes first, and
+     never write a literal colour — use var(--brand), var(--accent), var(--ink),
+     var(--muted) so this board follows the brand when the brand changes. */
+  .safe { --pad: 1.2rem; }
+</style>
+</head>
+<body>
+
+<div class="board board--gradient">
+  <div class="safe">
+    <header class="lockup">
+      <img src="../brand/assets/logo-on-dark.svg" alt="">
+      <div>
+        <div class="brand-name">{{ brand.business.name }}</div>
+        <div class="brand-tagline">{{ brand.business.tagline }}</div>
+      </div>
+    </header>
+
+    <h1 class="title">__TITLE__</h1>
+
+    <div class="items grow">
+      {{#each content.sections}}
+      <section>
+        <h2 class="section-title">{{ this.title }}</h2>
+        <div class="items items--tight">
+          {{#each this.items}}
+          <article>
+            <div class="item-head">
+              <span class="item-name">{{ this.name }}</span>
+              {{#if this.price}}<span class="item-price">{{ this.price }}</span>{{/if}}
+            </div>
+            {{#if this.desc}}<p class="item-desc">{{ this.desc }}</p>{{/if}}
+          </article>
+          {{/each}}
+        </div>
+      </section>
+      {{/each}}
+    </div>
+
+    <footer class="footer">
+      <div class="contact">{{ brand.business.website }}</div>
+      <p class="legal">{{ brand.legal.allergen }}</p>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

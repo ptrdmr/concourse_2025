@@ -55,9 +55,9 @@
     position: relative;
     overflow: hidden;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 53% 47%;
     gap: 0;
-    padding: 64px 80px 54px;
+    padding: 54px 72px 44px 32px;
   }
 
   /* Single CONCOURSE watermark — same treatment as draft_2 */
@@ -82,7 +82,7 @@
   .board::after {
     content: '';
     position: absolute;
-    left: 50%;
+    left: 53%;
     top: 5%;
     height: 90%;
     width: 1px;
@@ -97,8 +97,26 @@
     font-family: 'Barlow Condensed', sans-serif;
     color: var(--white);
   }
-  .col:first-child { padding-left: 0; }
+  .col:first-child {
+    padding-left: 0;
+    padding-right: 20px;
+  }
   .col:last-child { padding-right: 0; }
+
+  .col-fruity .section-title {
+    margin-bottom: 30px;
+  }
+
+  .col-fruity .beer-list { gap: 16px; }
+
+  .col-fruity .beer-item {
+    grid-template-columns: 5.2rem 1fr;
+    gap: 0 12px;
+  }
+
+  .col-fruity .beer-name {
+    white-space: nowrap;
+  }
 
   .section-title {
     font-size: 110px;
@@ -182,12 +200,12 @@
 <div class="screen">
   <div class="board">
 
-    <div class="col">
+    <div class="col col-fruity">
       <div class="section-title">Fruity</div>
       <div class="beer-list">
 
         <div class="beer-item">
-          <span class="price">$8</span>
+          <span class="price">$9</span>
           <div class="beer-info">
             <div class="beer-name">Brewery X Huckleberry Seltzer <span class="abv">- 5%</span></div>
             <div class="beer-desc">Huckleberry Flavored Spiked Seltzer</div>
@@ -195,7 +213,7 @@
         </div>
 
         <div class="beer-item">
-          <span class="price">$8</span>
+          <span class="price">$9</span>
           <div class="beer-info">
             <div class="beer-name">Cali Squeeze Blood Orange <span class="abv">- 5.4%</span></div>
             <div class="beer-desc">Blood Orange Hefe</div>
@@ -203,7 +221,7 @@
         </div>
 
         <div class="beer-item">
-          <span class="price">$8</span>
+          <span class="price">$9</span>
           <div class="beer-info">
             <div class="beer-name">Golden Road Mango Cart <span class="abv">- 4%</span></div>
             <div class="beer-desc">Mango Flavored Wheat Beer</div>
@@ -211,7 +229,7 @@
         </div>
 
         <div class="beer-item">
-          <span class="price">$8</span>
+          <span class="price">$9</span>
           <div class="beer-info">
             <div class="beer-name">Angry Orchard <span class="abv">- 5.4%</span></div>
             <div class="beer-desc">Crisp Hard Apple Cider</div>
@@ -219,10 +237,18 @@
         </div>
 
         <div class="beer-item">
+          <span class="price">$10</span>
+          <div class="beer-info">
+            <div class="beer-name">Bottle Logic – Blueberry Lemonade <span class="abv">- 5.7%</span></div>
+            <div class="beer-desc">Blueberry, Lavender &amp; Citrus Seltzer</div>
+          </div>
+        </div>
+
+        <div class="beer-item">
           <span class="price">$9</span>
           <div class="beer-info">
-            <div class="beer-name">She Shot First <span class="abv">- 6.4%</span></div>
-            <div class="beer-desc">Tropical Hazy IPA brewed with Mosaic, Simcoe and El Dorado hops, finished with Pineapple and Passionfruit</div>
+            <div class="beer-name">4 Sons – Vacation Pineapple <span class="abv">- 5%</span></div>
+            <div class="beer-desc">Pineapple Session Ale</div>
           </div>
         </div>
 
@@ -236,7 +262,7 @@
         <div class="beer-list">
 
           <div class="beer-item">
-            <span class="price">$9</span>
+            <span class="price">$10</span>
             <div class="beer-info">
               <div class="beer-name">Guinness <span class="abv">- 4.2%</span></div>
               <div class="beer-desc">Irish Dry Stout</div>
@@ -244,7 +270,7 @@
           </div>
 
           <div class="beer-item">
-            <span class="price">$9</span>
+            <span class="price">$10</span>
             <div class="beer-info">
               <div class="beer-name">Naughty Sauce <span class="abv">- 5.4%</span></div>
               <div class="beer-desc">Golden Milk Stout</div>
@@ -259,14 +285,14 @@
         <div class="beer-list">
 
           <div class="beer-item">
-            <span class="price">$7</span>
+            <span class="price">$8</span>
             <div class="beer-info">
               <div class="beer-name">Coors Light <span class="abv">- 4.2%</span></div>
             </div>
           </div>
 
           <div class="beer-item">
-            <span class="price">$7</span>
+            <span class="price">$8</span>
             <div class="beer-info">
               <div class="beer-name">Michelob Ultra <span class="abv">- 4.2%</span></div>
             </div>

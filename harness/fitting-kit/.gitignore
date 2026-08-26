@@ -1,0 +1,14 @@
+node_modules/
+
+# Rendered artwork. Regenerate any time with `npm run render`.
+out/
+
+# Working copies of boards with your content merged in. Safe to delete.
+.build/
+
+# Generated from brand/brand.json by `npm run tokens`.
+templates/tokens.css
+
+.DS_Store
+Thumbs.db
+desktop.ini

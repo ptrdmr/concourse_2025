@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1500">
+<title>Concourse Happy Hour Menu — Fall 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/dom1gkc.css">
+<style>
+  @page {
+    size: 5in 7in;
+    margin: 0;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* ========== BOARD TOKENS (match bottles_wines_5x7) ========== */
+  :root {
+    --red: #D42027;
+    --red-hot: #f03030;
+    --bg: #111111;
+    --bg2: #1c1c1c;
+    --yellow: #E8D88C;
+    --white: #ffffff;
+    --muted: rgba(255, 255, 255, 0.65);
+    --muted-soft: rgba(255, 255, 255, 0.45);
+    --rule: rgba(255, 255, 255, 0.12);
+
+    --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+    --font-body: 'DM Sans', 'Helvetica Neue', sans-serif;
+    --font-accent: 'Libre Baskerville', 'Georgia', serif;
+    --font-title: "cortado", sans-serif;
+  }
+
+  html, body {
+    background: #000;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: var(--font-body);
+    color: var(--white);
+  }
+
+  @media print {
+    body { background: none; padding: 0; margin: 0; }
+    .menu-page {
+      zoom: 1;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+      margin: 0;
+      box-shadow: none;
+    }
+  }
+
+  /* ========== MENU CARD — 5×7; zoom to 1500×2100 (300dpi) for export ========== */
+  .menu-page {
+    width: 5in;
+    height: 7in;
+    background: linear-gradient(160deg, var(--bg2) 55%, #242424);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+    zoom: 3.125;
+    color: var(--white);
+  }
+
+  .menu-page::before {
+    content: '';
+    position: absolute;
+    inset: 6px;
+    border: 1.5px solid var(--rule);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .menu-page::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 6px;
+    background: var(--red);
+    z-index: 2;
+  }
+
+  .top-bar {
+    background: var(--red);
+    height: 6px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+  }
+
+  .inner {
+    padding: 14px 20px 16px;
+    height: calc(7in - 6px);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ========== HEADER ========== */
+  .header {
+    text-align: center;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .logo-sub {
+    font-family: var(--font-accent);
+    font-size: 7.5px;
+    font-style: italic;
+    color: var(--muted);
+    letter-spacing: 1.5px;
+  }
+
+  .title-main {
+    font-family: var(--font-title);
+    font-size: 52px;
+    line-height: 0.85;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin: 4px 0 10px;
+  }
+
+  .hours-block {
+    margin: 4px auto 0;
+    text-align: center;
+  }
+
+  .hours-block p {
+    font-family: var(--font-body);
+    font-size: 7.5px;
+    color: var(--muted);
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  .specialty-callout {
+    margin: 7px auto 2px;
+    text-align: center;
+    background: transparent;
+    border: 1.5px solid var(--red);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 16px;
+    width: fit-content;
+    border-radius: 2px;
+  }
+
+  .specialty-callout span {
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .specialty-callout .price {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  .see-reverse {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 6.5px;
+    color: var(--muted-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 3px;
+    margin-bottom: 6px;
+  }
+
+  .divider {
+    width: 120px;
+    height: 2px;
+    margin: 0 auto 6px;
+    background: linear-gradient(90deg, transparent, var(--red), transparent);
+  }
+
+  /* ========== MAIN CONTENT GRID ========== */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 20px;
+    flex: 1;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--red-hot);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    padding-bottom: 3px;
+    border-bottom: 2px solid var(--rule);
+    display: inline-block;
+  }
+
+  .menu-item {
+    margin-bottom: 6px;
+  }
+
+  .item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 4px;
+  }
+
+  .item-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--white);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .item-price {
+    font-family: var(--font-display);
+    font-size: 12.5px;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .item-desc {
+    font-family: var(--font-body);
+    font-size: 7px;
+    color: var(--yellow);
+    line-height: 1.4;
+    margin-top: 1px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+
+  .item-sub {
+    font-family: var(--font-body);
+    font-size: 11.25px;
+    color: var(--muted);
+    line-height: 1.45;
+    margin-top: 1px;
+  }
+
+  .pint-detail {
+    font-family: var(--font-body);
+    font-size: 6.5px;
+    color: var(--yellow);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+
+  .wine-section {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-top: 2px;
+    padding-top: 6px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .wine-section .section-title {
+    display: inline-block;
+    margin-bottom: 3px;
+  }
+
+  .wine-brand {
+    font-family: var(--font-display);
+    font-size: 12px;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+
+  .wine-brand .price {
+    color: var(--white);
+  }
+
+  .wine-varieties {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 10px;
+    color: var(--yellow);
+    margin-top: 1px;
+  }
+
+  .footer {
+    text-align: center;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+
+  .social-label {
+    font-family: var(--font-display);
+    font-size: 9px;
+    color: var(--red-hot);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 5px;
+  }
+
+  .social-icons svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--red);
+  }
+
+  .footer-note {
+    font-family: var(--font-body);
+    font-size: 8px;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+    font-weight: bold;
+  }
+
+  .allergy-note {
+    font-family: var(--font-body);
+    font-size: 7.5px;
+    color: var(--red-hot);
+    margin-top: 3px;
+    letter-spacing: 0.2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="menu-page">
+  <div class="top-bar"></div>
+
+  <div class="inner">
+    <div class="header">
+      <div class="logo-text">CONCOURSE</div>
+      <div class="logo-sub">Bowl &middot; Bar &middot; Grill</div>
+      <div class="title-main">Happy Hour</div>
+      <div class="hours-block">
+        <p>Monday: Open–Close &nbsp</p> 
+	<p>Tuesday-Thursdy: 2pm–6pm; 9pm–Close</p>
+        <p>Fri: 2pm–6pm</p>
+      </div>
+
+      <div class="specialty-callout">
+        <span>SPECIALTY COCKTAILS <span class="price">$11</span></span>
+      </div>
+      <div class="see-reverse">*See Reverse Side*</div>
+    </div>
+
+    
+
+    <div class="content-grid">
+      <div class="col-left">
+        <div class="section-title">Bar Grub</div>
+
+        <div class="menu-item">
+          <div class="item-name">Medium Pizza</div>
+          <div class="item-sub">Cheese – $12.50 &nbsp;|&nbsp; Pepperoni – $14.50</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Sliders (3)</span>
+            <span class="item-price">$12.50</span>
+          </div>
+          <div class="item-desc">Choose one style: Cheeseburger, Pulled Pork, or Jerk Chicken</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Hummus</span>
+            <span class="item-price">$10</span>
+          </div>
+          <div class="item-desc">Served with fresh veggies &amp; pita bread</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Pretzel Sticks (6)</span>
+            <span class="item-price">$10</span>
+          </div>
+          <div class="item-desc">Served with Cheese &amp; Mustard Sauce</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Concourse Nacho</span>
+            <span class="item-price">$15</span>
+          </div>
+          <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalape&ntilde;os &amp; pico de gallo. Add Chicken +$4 | Steak +$5</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Lettuce Cups</span>
+            <span class="item-price">$11</span>
+          </div>
+          <div class="item-desc">Jerk-spiced ground chicken, grilled onions &amp; bell peppers, rice noodles &amp; chili peanuts in honey gem lettuce with chili dipping sauce</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Taco Plate</span>
+            <span class="item-price">$11</span>
+          </div>
+          <div class="item-desc">Three soft corn tortillas filled with your choice of Chicken, Pork Carnitas or Beef Carne Asada. Topped with diced red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</div>
+        </div>
+      </div>
+
+      <div class="col-right">
+        <div class="section-title">Pints &amp; Cans</div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Concourse Blonde</span>
+            <span class="item-price">$7</span>
+          </div>
+          <div class="pint-detail">16oz Pint</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Michelob Ultra</span>
+            <span class="item-price">$7</span>
+          </div>
+          <div class="pint-detail">16oz Pint</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Coors Light</span>
+            <span class="item-price">$7</span>
+          </div>
+          <div class="pint-detail">16oz Pint</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Blue Moon</span>
+            <span class="item-price">$7</span>
+          </div>
+          <div class="pint-detail">16oz Pint</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Cali Squeeze</span>
+            <span class="item-price">$7</span>
+          </div>
+          <div class="pint-detail">16oz Pint</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Logic Light</span>
+            <span class="item-price">$6</span>
+          </div>
+          <div class="pint-detail">16oz Can</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Happy Dad Grape</span>
+            <span class="item-price">$8</span>
+          </div>
+          <div class="pint-detail">24oz Can</div>
+        </div>
+
+        <div class="menu-item">
+          <div class="item-header">
+            <span class="item-name">Athletics</span>
+            <span class="item-price">$6.50</span>
+          </div>
+          <div class="pint-detail">Can – Non-Alcoholic</div>
+        </div>
+      </div>
+
+      <div class="wine-section">
+        <div class="section-title">Wine by Glass</div><br>
+        <span class="wine-brand">Josh Cellars <span class="price">$8</span></span>
+        <div class="wine-varieties">Chardonnay, Sauvignon Blanc, Pinot Noir, Red Blend</div>
+      </div>
+    </div>
+
+    <div class="footer">
+    
+     
+      
+      <div class="footer-note">*Happy Hour Not Valid on Holidays*</div>
+      <div class="allergy-note">⚠ Menu items may contain peanuts and other allergens. Please inform your server of any allergies.</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

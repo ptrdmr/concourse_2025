@@ -1,0 +1,215 @@
+/* ============================================================================
+   Layout for a menu board. Shared by every board so they match each other.
+
+   Every size here is in `rem`, which means "relative to the root font size".
+   render.mjs sets that root size to suit the screen, so the same board fills a
+   1920x1080 TV and a 4K one without being redesigned.
+
+   Colours are never written here. They come from brand.css.
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #000;
+  font-family: var(--font-body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* The screen itself. render.mjs sets the exact pixel size. */
+.board {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(155deg, var(--bg-alt) 45%, var(--bg));
+  color: var(--ink);
+}
+
+/* Everything readable goes in here, so nothing ends up jammed against an edge
+   or lost behind a TV bezel. */
+.safe {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: 2.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ------------------------------------------------------------------- header */
+
+.topbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid var(--brand);
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lockup img {
+  height: 3.4rem;
+  width: auto;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* -------------------------------------------------------------------- items */
+
+/* Two columns that fill themselves. Three items or eight, it stays balanced. */
+.items {
+  columns: 2;
+  column-gap: 3.5rem;
+  margin-top: 1.6rem;
+}
+
+.items article {
+  break-inside: avoid;
+  margin-bottom: 1.4rem;
+}
+
+.item-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.item-name {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.12;
+}
+
+.item-price {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  white-space: nowrap;
+  color: var(--accent);
+}
+
+.item-desc {
+  font-size: 1.05rem;
+  line-height: 1.35;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+/* Add-ons, sizes, "vegetarian" — anything qualifying the item above. */
+.item-note {
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.1rem;
+}
+
+.section-title {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-bright);
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 0.15rem;
+  margin-bottom: 0.6rem;
+}
+
+/* ------------------------------------------------------------------- footer */
+
+.board-footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--rule);
+}
+
+.footer-note {
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.contact {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.legal {
+  font-size: 0.85rem;
+  color: var(--muted-soft);
+}
+
+/* --------------------------------------------------------------- decoration */
+
+/* Deliberately runs off the edge of the screen. */
+.glow {
+  position: absolute;
+  width: 60%;
+  aspect-ratio: 1;
+  right: -18%;
+  top: -25%;
+  background: radial-gradient(circle, var(--brand) 0%, transparent 62%);
+  opacity: 0.35;
+  pointer-events: none;
+}

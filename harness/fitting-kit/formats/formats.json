@@ -1,0 +1,203 @@
+{
+  "$comment": [
+    "The catalog of every size this harness can produce. Add your own freely — nothing",
+    "in the renderer is hard-coded to this list.",
+    "",
+    "  unit    'px' for screens, 'in' or 'mm' for anything that gets printed.",
+    "  dpi     Output resolution. Screens are 96. Print shops want 300.",
+    "  bleed   Extra artwork past the trim edge, in the same unit. Print only.",
+    "          Use 0.125in for anything a printer will cut. 0 for screens.",
+    "  safe    Keep important text this far inside the trim edge, so nothing",
+    "          important gets sliced off. Print only.",
+    "  scale   The font-size a board should set on <html>. This is the one dial",
+    "          that makes the same design work at 5 inches and at 1920 pixels.",
+    "  outputs Default file types. A board can override with its own meta tag."
+  ],
+
+  "screen-1080p": {
+    "label": "TV / digital menu board, landscape",
+    "width": 1920,
+    "height": 1080,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 26,
+    "outputs": ["jpeg"]
+  },
+  "screen-1080p-portrait": {
+    "label": "TV / digital menu board, portrait",
+    "width": 1080,
+    "height": 1920,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 22,
+    "outputs": ["jpeg"]
+  },
+  "screen-4k": {
+    "label": "4K digital menu board, landscape",
+    "width": 3840,
+    "height": 2160,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 52,
+    "outputs": ["jpeg"]
+  },
+
+  "banner-1920x270": {
+    "label": "Wide strip banner, full HD width",
+    "width": 1920,
+    "height": 270,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 16,
+    "outputs": ["jpeg"]
+  },
+  "banner-1280x328": {
+    "label": "Wide strip banner, 1280 screens",
+    "width": 1280,
+    "height": 328,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 13,
+    "outputs": ["jpeg"]
+  },
+
+  "social-square": {
+    "label": "Instagram / Facebook square post",
+    "width": 1080,
+    "height": 1080,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 20,
+    "outputs": ["jpeg", "png"]
+  },
+  "social-story": {
+    "label": "Instagram / TikTok vertical story",
+    "width": 1080,
+    "height": 1920,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 22,
+    "outputs": ["jpeg"]
+  },
+  "social-landscape": {
+    "label": "Link preview / Facebook event cover",
+    "width": 1200,
+    "height": 630,
+    "unit": "px",
+    "dpi": 96,
+    "scale": 15,
+    "outputs": ["jpeg"]
+  },
+
+  "card-4x6": {
+    "label": "4x6 table card or handout",
+    "width": 4,
+    "height": 6,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.1875,
+    "scale": 7.5,
+    "outputs": ["jpeg", "pdf"]
+  },
+  "card-5x7": {
+    "label": "5x7 table card or flyer",
+    "width": 5,
+    "height": 7,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.1875,
+    "scale": 8,
+    "outputs": ["jpeg", "pdf"]
+  },
+  "business-card": {
+    "label": "Standard 3.5x2 business card",
+    "width": 3.5,
+    "height": 2,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.125,
+    "scale": 6,
+    "outputs": ["pdf"]
+  },
+  "table-tent-4x9": {
+    "label": "Tall 4x9 table tent panel",
+    "width": 4,
+    "height": 9,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.1875,
+    "scale": 8,
+    "outputs": ["jpeg", "pdf"]
+  },
+
+  "print-letter-portrait": {
+    "label": "8.5x11 menu page, portrait",
+    "width": 8.5,
+    "height": 11,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.25,
+    "scale": 13,
+    "outputs": ["jpeg", "pdf"]
+  },
+  "print-letter-landscape": {
+    "label": "11x8.5 door sign or placemat, landscape",
+    "width": 11,
+    "height": 8.5,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.25,
+    "scale": 14,
+    "outputs": ["jpeg", "pdf"]
+  },
+  "print-trifold": {
+    "label": "11x8.5 tri-fold takeout menu, one side (3 panels)",
+    "width": 11,
+    "height": 8.5,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.25,
+    "scale": 11,
+    "outputs": ["pdf"]
+  },
+  "print-a4-portrait": {
+    "label": "A4 menu page, portrait (outside North America)",
+    "width": 210,
+    "height": 297,
+    "unit": "mm",
+    "dpi": 300,
+    "bleed": 3,
+    "safe": 6,
+    "scale": 13,
+    "outputs": ["jpeg", "pdf"]
+  },
+  "print-tabloid-portrait": {
+    "label": "11x17 large menu or poster",
+    "width": 11,
+    "height": 17,
+    "unit": "in",
+    "dpi": 300,
+    "bleed": 0.125,
+    "safe": 0.25,
+    "scale": 17,
+    "outputs": ["pdf"]
+  },
+  "poster-18x24": {
+    "label": "18x24 poster (rendered at 150dpi to keep file sizes sane)",
+    "width": 18,
+    "height": 24,
+    "unit": "in",
+    "dpi": 150,
+    "bleed": 0.125,
+    "safe": 0.5,
+    "scale": 28,
+    "outputs": ["jpeg", "pdf"]
+  }
+}

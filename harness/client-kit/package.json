@@ -1,0 +1,14 @@
+﻿{
+  "name": "northgate-menu-boards",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Generates Northgate Social's menu board screens.",
+  "scripts": {
+    "render": "node render.mjs",
+    "setup": "playwright install chromium"
+  },
+  "dependencies": {
+    "playwright": "^1.59.1"
+  }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — {{ content.title }} post</title>
+
+<!--
+  A square post for Instagram or Facebook, from the same happy hour content as
+  the printed table card.
+
+  Deliberately does NOT list every item. A phone screen is small and a post is
+  scrolled past in a second, so it carries the offer, the days, and where to find
+  the rest. The card on the table does the detail work.
+-->
+<meta name="flyer:format" content="social-square">
+<meta name="flyer:content" content="happy-hour">
+<meta name="flyer:outputs" content="jpeg,png">
+<meta name="flyer:title" content="Happy hour square post">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  .safe { --pad: 2.4rem; justify-content: center; text-align: center; }
+
+  .board { background: var(--bg); }
+
+  .wash {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 22% 18%, var(--brand) 0%, transparent 45%),
+      radial-gradient(circle at 82% 88%, var(--brand-bright) 0%, transparent 42%);
+    opacity: 0.4;
+  }
+
+  .lockup img { height: 4.2rem; }
+
+  .title { font-size: 7.6rem; margin: 1rem 0 0.6rem; }
+
+  .hours { margin: 0 auto; }
+  .hours p { font-size: 1.35rem; line-height: 1.6; color: var(--ink); }
+
+  .offer {
+    margin: 1.6rem auto 0;
+    padding: 1rem 2rem;
+    border: 3px solid var(--accent);
+    border-radius: 0.2rem;
+    width: fit-content;
+  }
+
+  .offer-label {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .offer-price { font-size: 5.4rem; margin-top: 0.1rem; }
+
+  .handle {
+    margin-top: 1.8rem;
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="board">
+  <div class="wash"></div>
+
+  <div class="safe">
+    <div class="lockup lockup--stacked">
+      <img src="../brand/assets/logo-on-dark.svg" alt="">
+      <div class="brand-name">{{ brand.business.name }}</div>
+      <div class="brand-tagline">{{ brand.business.tagline }}</div>
+    </div>
+
+    <h1 class="title">{{ content.title }}</h1>
+
+    <div class="rule" style="width: 45%; margin: 0 auto"></div>
+
+    <div class="hours">
+      {{#each content.hours}}<p>{{ this }}</p>{{/each}}
+    </div>
+
+    {{#if content.callout}}
+    <div class="offer">
+      <div class="offer-label">{{ content.callout.label }}</div>
+      <div class="price-huge offer-price">{{ content.callout.price }}</div>
+    </div>
+    {{/if}}
+
+    <div class="handle">{{ brand.business.socials.instagram }}</div>
+    <p class="legal">{{ content.footnote }}</p>
+  </div>
+</div>
+
+</body>
+</html>

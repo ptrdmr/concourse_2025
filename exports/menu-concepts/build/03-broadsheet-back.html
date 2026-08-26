@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURSE — 03-broadsheet (back)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1C1410;
+  --ink-soft: #4A3F36;
+  --muted: #6B5E52;
+  --rule: #C9B8A4;
+  --paper: #F3E6D0;
+  --paper-deep: #E8D4B5;
+  --accent: #8B1E1E; /* oxblood — the second ink */
+  --page-bg: #F3E6D0;
+  --bleed-color: #F3E6D0;
+  --font-display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Serif 4', 'Libre Baskerville', Georgia, serif;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #8a7a66;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 0;
+    min-height: 100vh;
+  }
+}
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+  background: var(--paper);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.28in 0.38in 0.22in;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+
+/* Double-rule masthead */
+.bs-mast {
+  text-align: center;
+  border-top: 2.5px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 0.08in 0 0.07in;
+  margin-bottom: 0.04in;
+  position: relative;
+}
+.bs-mast::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 3px;
+  border-bottom: 0.5px solid var(--ink);
+}
+.bs-kicker {
+  font-family: var(--font-body);
+  font-size: 7pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 2pt;
+}
+.bs-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28pt;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.bs-tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10pt;
+  color: var(--ink-soft);
+  margin-top: 2pt;
+}
+.bs-dateline {
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.05in 0 0.08in;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 0.1in;
+}
+
+/* Columns */
+.bs-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.bs-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.28in;
+  align-content: start;
+}
+.bs-col { min-width: 0; }
+
+.bs-section { margin-bottom: 0.12in; }
+.bs-section:last-child { margin-bottom: 0; }
+
+.bs-section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 2pt;
+  margin-bottom: 0.05in;
+  font-variant: small-caps;
+  font-feature-settings: "smcp" 1;
+}
+.bs-section-note {
+  font-size: 6.5pt;
+  line-height: 1.35;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.05in;
+}
+
+.bs-item { margin-bottom: 0.055in; }
+.bs-item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.bs-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.5pt;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  flex-shrink: 0;
+}
+.bs-lead {
+  flex: 1;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 4px 2px;
+  min-width: 0.2in;
+  height: 0;
+  align-self: flex-end;
+}
+.bs-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.5pt;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.bs-price-dual {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.5pt;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bs-price-dual .sz {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 6.5pt;
+}
+.bs-badge {
+  font-family: var(--font-body);
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0 2.5pt;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+.bs-serves {
+  font-size: 6pt;
+  font-style: italic;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.bs-desc {
+  font-size: 7pt;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  margin-top: 1pt;
+  text-align: justify;
+  hyphens: auto;
+}
+.bs-sub, .bs-note {
+  font-size: 6.5pt;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 1pt;
+}
+
+/* Jr. bowlers callout */
+.bs-shaded {
+  background: var(--paper-deep);
+  padding: 0.08in 0.1in;
+  border: 0.5px solid var(--rule);
+  margin-top: 0.08in;
+}
+
+/* Pizza grid */
+.bs-pizza {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0 0.22in;
+  margin-top: 0.04in;
+}
+.bs-subhead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink);
+  margin-bottom: 0.04in;
+}
+.bs-byo {
+  background: var(--paper-deep);
+  border: 0.5px solid var(--rule);
+  padding: 0.08in 0.1in;
+}
+.bs-byo-base {
+  font-size: 8pt;
+  line-height: 1.4;
+  margin-bottom: 0.06in;
+  font-weight: 600;
+}
+.bs-byo-base .p { color: var(--accent); }
+.bs-byo-cat { margin-bottom: 0.05in; }
+.bs-byo-cat-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bs-byo-cat-title .each { color: var(--accent); font-style: italic; font-weight: 400; margin-left: 4px; text-transform: none; letter-spacing: 0; }
+.bs-byo-list {
+  font-size: 7pt;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-top: 1pt;
+}
+
+/* Starters two-col under one title */
+.bs-starters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.24in;
+}
+
+.bs-footer {
+  margin-top: auto;
+  padding-top: 0.07in;
+  border-top: 1px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 6.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bs-legend { display: flex; gap: 0.16in; }
+.bs-legend-item { display: flex; align-items: center; gap: 3px; }
+
+</style>
+</head>
+<body data-concept="03-broadsheet" data-side="back">
+
+<div class="page">
+  
+    <header class="bs-mast">
+      <div class="bs-kicker">The Kitchen Gazette · Vol. I</div>
+      <div class="bs-brand">CONCOURSE</div>
+      <div class="bs-tag">Bowl · Bar · Grill</div>
+    </header>
+    <div class="bs-dateline">
+      <span>Page Two</span>
+      <span>3364 E La Palma Ave, Anaheim, CA 92806</span>
+      <span>(714) 666-2695</span>
+    </div>
+  <div class="bs-body">
+    
+      <section class="bs-section">
+        <h2 class="bs-section-title">Starters</h2>
+        <div class="bs-starters-grid">
+          <div>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">French Fries</span>
+        <span class="bs-badge">GF</span><span class="bs-badge">VG</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$7</span>
+      </div>
+      
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Waffle Fries</span>
+        <span class="bs-badge">GF</span><span class="bs-badge">VG</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$9</span>
+      </div>
+      
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Onion Rings</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$9.50</span>
+      </div>
+      
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Irish Nachos</span>
+        <span class="bs-badge">GF</span>
+        <span class="bs-serves">*Feeds 4–6*</span>
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$20</span>
+      </div>
+      <p class="bs-desc">Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon and green onions.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Concourse Nacho</span>
+        <span class="bs-badge">GF</span><span class="bs-badge">SPICY</span>
+        <span class="bs-serves">*Feeds 4–6*</span>
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$17.50</span>
+      </div>
+      <p class="bs-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos and pico de gallo.</p>
+      <p class="bs-sub">Add Chicken $4 · Steak $5</p>
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Sliders</span>
+        <span class="bs-badge">NEW</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14.50</span>
+      </div>
+      <p class="bs-desc">Three sliders on sweet Hawaiian buns. Choose from classic cheeseburger, jerk chicken with pickled onions, or pulled pork with BBQ sauce &amp; onion strings. One style per order.</p>
+      <p class="bs-sub">Add fries $2.50</p>
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Chicken Strips (3)</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14.50</span>
+      </div>
+      <p class="bs-desc">Breaded white meat chicken, regular or spicy buffalo. Served with fries.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Chicken Wings</span>
+        <span class="bs-badge">GF</span><span class="bs-badge">SPICY</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$16</span>
+      </div>
+      <p class="bs-desc">8 jumbo bone-in wings tossed in buffalo, garlic parmesan, asian zing or naked.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Soup of the Day</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$6</span>
+      </div>
+      <p class="bs-desc">Ask your server!</p>
+      
+      
+    </article></div>
+          <div>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Veggie Tray</span>
+        <span class="bs-badge">VG</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$9</span>
+      </div>
+      <p class="bs-desc">Farm fresh vegetables.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Pretzel Sticks (6)</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$12.50</span>
+      </div>
+      <p class="bs-desc">Bakery fresh, with nacho cheese &amp; mustard.</p>
+      
+      <p class="bs-note">Ask for no cheese for vegan option</p>
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Hummus &amp; Pita</span>
+        <span class="bs-badge">VG</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$12</span>
+      </div>
+      <p class="bs-desc">Creamy chickpea hummus topped with a marinated tomato olive relish. Served with warm pita bread and fresh vegetables.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Mozzarella Sticks</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$10.50</span>
+      </div>
+      <p class="bs-desc">Served with marinara sauce, topped with parmesan.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Shrimp Tacos (3)</span>
+        <span class="bs-badge">SPICY</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$15</span>
+      </div>
+      <p class="bs-desc">Flour shell shrimp tacos filled with melted mozzarella cheese, lettuce, pico de gallo and chipotle aioli. Served with black beans puree and tortilla chips.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Taco Plate</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$12</span>
+      </div>
+      <p class="bs-desc">Three soft corn tortillas filled with your choice of chicken, pork carnitas or beef carne asada. Topped with diced red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Quesadilla</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$11</span>
+      </div>
+      <p class="bs-desc">Topped with pico de gallo. Served with chips, sour cream &amp; red salsa.</p>
+      <p class="bs-sub">Add Chicken $4 · Steak or Shrimp $5</p>
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Southwest Rice Bowl</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$10</span>
+      </div>
+      <p class="bs-desc">Steaming bed of long grain rice. Features black bean-corn and tomatillo salsas, cheddar cheese, chipotle aioli, diced avocado and fajita vegetables. Topped with crispy tortilla strips.</p>
+      <p class="bs-sub">Add Chicken $4 · Steak or Shrimp $5</p>
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Chicken Lettuce Cups</span>
+        <span class="bs-badge">NEW</span><span class="bs-badge">SPICY</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$13</span>
+      </div>
+      <p class="bs-desc">Seasoned ground chicken with onions, peppers &amp; rice noodles in crisp lettuce leaves. Served with chili dipping sauce and chili roasted peanuts.</p>
+      
+      
+    </article></div>
+        </div>
+      </section>
+      <section class="bs-section">
+        <h2 class="bs-section-title">Pizzas</h2>
+        <p class="bs-section-note">Housemade sauce &amp; hand grated mozzarella. Medium 12″ · 8 slices — Large 16″ · 12 slices</p>
+        <div class="bs-pizza">
+          <div>
+            <div class="bs-subhead">Specialties</div>
+            
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Bowlers Combo</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $23 · <span class="sz">L</span> $26</span>
+      </div>
+      <p class="bs-desc">Sausage, pepperoni, mushrooms, onions, bell peppers.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Meat Lovers</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $23 · <span class="sz">L</span> $26</span>
+      </div>
+      <p class="bs-desc">Pepperoni, ham, Italian sausage, applewood smoked bacon.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Veggie Lovers</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $20 · <span class="sz">L</span> $23</span>
+      </div>
+      <p class="bs-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">BBQ Chicken</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $22 · <span class="sz">L</span> $25</span>
+      </div>
+      <p class="bs-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Hawaiian</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $20 · <span class="sz">L</span> $23</span>
+      </div>
+      <p class="bs-desc">Ham &amp; pineapple.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Hot Honey Pep</span>
+        <span class="bs-badge">SPICY</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price-dual"><span class="sz">M</span> $22 · <span class="sz">L</span> $25</span>
+      </div>
+      <p class="bs-desc">Double pepperoni, Fresno chiles, drizzled with HOT honey.</p>
+      
+      
+    </article>
+          </div>
+          <div class="bs-byo">
+            <div class="bs-subhead">Build Your Own</div>
+            <div class="bs-byo-base">
+              Medium Pizza <span class="p">$17</span> <em style="font-weight:400;color:var(--muted)">cheese only</em><br>Large Pizza <span class="p">$20</span> <em style="font-weight:400;color:var(--muted)">cheese only</em>
+            </div>
+            
+              <div class="bs-byo-cat">
+                <div class="bs-byo-cat-title">Veggie Tops<span class="each">$1.50/each</span></div>
+                <div class="bs-byo-list">Mushrooms, Sweet Onions, Green Peppers, Tomato, Olives, Pineapple, Jalapenos, Blue Cheese Crumbles, Banana Peppers</div>
+              </div>
+              <div class="bs-byo-cat">
+                <div class="bs-byo-cat-title">Meat Tops<span class="each">$2.50/each</span></div>
+                <div class="bs-byo-list">Pepperoni, Italian Sausage, Ham, Applewood Smoked Bacon</div>
+              </div>
+          </div>
+        </div>
+      </section>
+  </div>
+  
+    <footer class="bs-footer">
+      <div class="bs-legend">
+        <div class="bs-legend-item"><span class="bs-badge">NEW</span> New Items</div><div class="bs-legend-item"><span class="bs-badge">SPICY</span> Spicy</div><div class="bs-legend-item"><span class="bs-badge">VG</span> Vegan</div><div class="bs-legend-item"><span class="bs-badge">GF</span> Gluten Free</div>
+      </div>
+      <div>Est. 1990 · Anaheim</div>
+    </footer>
+</div>
+</body>
+</html>

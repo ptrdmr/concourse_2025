@@ -1,0 +1,23 @@
+{
+  "$comment": [
+    "Door sign content. `notice` is the thing people actually stop to read, so it",
+    "gets the top of the sign. Delete the notice block when nothing is unusual."
+  ],
+
+  "title": "Hours",
+  "notice": {
+    "heading": "Holiday Weekend",
+    "body": "We close at 6pm on Sunday and stay closed Monday. Back to normal Tuesday."
+  },
+
+  "rows": [
+    { "label": "Monday", "value": "11am - 10pm" },
+    { "label": "Tuesday - Thursday", "value": "11am - 11pm" },
+    { "label": "Friday", "value": "11am - 1am" },
+    { "label": "Saturday", "value": "10am - 1am" },
+    { "label": "Sunday", "value": "10am - 9pm" }
+  ],
+
+  "kitchenNote": "Kitchen closes one hour before the bar.",
+  "callToAction": "Reserve a table or order ahead"
+}

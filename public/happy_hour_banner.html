@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse – Happy Hour Banner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D42027;
+    --bg: #111111;
+    --bg2: #1c1c1c;
+    --green: #9BCD00;
+    --white: #ffffff;
+  }
+
+  html, body {
+    background: #000;
+    overflow: hidden;
+  }
+
+  .banner {
+    width: 1920px;
+    height: 270px;
+    background: linear-gradient(145deg, var(--bg2) 60%, #242424);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--white);
+  }
+
+  .banner::before, .banner::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 5px;
+    background: var(--red);
+    z-index: 10;
+  }
+  .banner::before { top: 0; }
+  .banner::after { bottom: 0; }
+
+  .title-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .title {
+    font-size: 96px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    line-height: 1;
+    color: var(--white);
+  }
+
+  .subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    color: var(--green);
+    margin-top: 6px;
+  }
+
+  .divider {
+    width: 2px;
+    height: 160px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .hours {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .hour-row {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    align-items: baseline;
+    gap: 0 22px;
+  }
+
+  .day {
+    font-size: 60px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    text-align: right;
+    line-height: 1.2;
+  }
+
+  .time {
+    font-size: 60px;
+    font-weight: 700;
+    color: var(--green);
+    line-height: 1.2;
+  }
+</style>
+</head>
+<body>
+
+<div class="banner">
+
+  <div class="title-block">
+    <div class="title">Happy Hour</div>
+    <div class="subtitle">Specials &amp; Deals</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="hours">
+    <div class="hour-row">
+      <span class="day">Monday</span>
+      <span class="time">Open – Close</span>
+    </div>
+    <div class="hour-row">
+      <span class="day">Tue – Thu</span>
+      <span class="time">2pm – 6pm &amp; 9pm – Close</span>
+    </div>
+    <div class="hour-row">
+      <span class="day">Friday</span>
+      <span class="time">2pm – 6pm</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

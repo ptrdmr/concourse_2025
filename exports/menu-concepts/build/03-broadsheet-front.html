@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURSE — 03-broadsheet (front)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1C1410;
+  --ink-soft: #4A3F36;
+  --muted: #6B5E52;
+  --rule: #C9B8A4;
+  --paper: #F3E6D0;
+  --paper-deep: #E8D4B5;
+  --accent: #8B1E1E; /* oxblood — the second ink */
+  --page-bg: #F3E6D0;
+  --bleed-color: #F3E6D0;
+  --font-display: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+  --font-body: 'Source Serif 4', 'Libre Baskerville', Georgia, serif;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #8a7a66;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 0;
+    min-height: 100vh;
+  }
+}
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+  background: var(--paper);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.28in 0.38in 0.22in;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+}
+
+/* Double-rule masthead */
+.bs-mast {
+  text-align: center;
+  border-top: 2.5px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding: 0.08in 0 0.07in;
+  margin-bottom: 0.04in;
+  position: relative;
+}
+.bs-mast::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 3px;
+  border-bottom: 0.5px solid var(--ink);
+}
+.bs-kicker {
+  font-family: var(--font-body);
+  font-size: 7pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 2pt;
+}
+.bs-brand {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28pt;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.bs-tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 10pt;
+  color: var(--ink-soft);
+  margin-top: 2pt;
+}
+.bs-dateline {
+  display: flex;
+  justify-content: space-between;
+  font-size: 6.5pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0.05in 0 0.08in;
+  border-bottom: 0.5px solid var(--rule);
+  margin-bottom: 0.1in;
+}
+
+/* Columns */
+.bs-body {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.bs-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.28in;
+  align-content: start;
+}
+.bs-col { min-width: 0; }
+
+.bs-section { margin-bottom: 0.12in; }
+.bs-section:last-child { margin-bottom: 0; }
+
+.bs-section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  padding-bottom: 2pt;
+  margin-bottom: 0.05in;
+  font-variant: small-caps;
+  font-feature-settings: "smcp" 1;
+}
+.bs-section-note {
+  font-size: 6.5pt;
+  line-height: 1.35;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 0.05in;
+}
+
+.bs-item { margin-bottom: 0.055in; }
+.bs-item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-variant-numeric: tabular-nums;
+}
+.bs-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.5pt;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.15;
+  flex-shrink: 0;
+}
+.bs-lead {
+  flex: 1;
+  border-bottom: 1px dotted var(--rule);
+  margin: 0 4px 2px;
+  min-width: 0.2in;
+  height: 0;
+  align-self: flex-end;
+}
+.bs-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 8.5pt;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.bs-price-dual {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.5pt;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.bs-price-dual .sz {
+  font-weight: 400;
+  font-style: italic;
+  color: var(--muted);
+  font-size: 6.5pt;
+}
+.bs-badge {
+  font-family: var(--font-body);
+  font-size: 5.5pt;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 0 2.5pt;
+  line-height: 1.3;
+  flex-shrink: 0;
+}
+.bs-serves {
+  font-size: 6pt;
+  font-style: italic;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.bs-desc {
+  font-size: 7pt;
+  line-height: 1.35;
+  color: var(--ink-soft);
+  margin-top: 1pt;
+  text-align: justify;
+  hyphens: auto;
+}
+.bs-sub, .bs-note {
+  font-size: 6.5pt;
+  font-style: italic;
+  color: var(--muted);
+  margin-top: 1pt;
+}
+
+/* Jr. bowlers callout */
+.bs-shaded {
+  background: var(--paper-deep);
+  padding: 0.08in 0.1in;
+  border: 0.5px solid var(--rule);
+  margin-top: 0.08in;
+}
+
+/* Pizza grid */
+.bs-pizza {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0 0.22in;
+  margin-top: 0.04in;
+}
+.bs-subhead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 9pt;
+  color: var(--ink);
+  margin-bottom: 0.04in;
+}
+.bs-byo {
+  background: var(--paper-deep);
+  border: 0.5px solid var(--rule);
+  padding: 0.08in 0.1in;
+}
+.bs-byo-base {
+  font-size: 8pt;
+  line-height: 1.4;
+  margin-bottom: 0.06in;
+  font-weight: 600;
+}
+.bs-byo-base .p { color: var(--accent); }
+.bs-byo-cat { margin-bottom: 0.05in; }
+.bs-byo-cat-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.5pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bs-byo-cat-title .each { color: var(--accent); font-style: italic; font-weight: 400; margin-left: 4px; text-transform: none; letter-spacing: 0; }
+.bs-byo-list {
+  font-size: 7pt;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  margin-top: 1pt;
+}
+
+/* Starters two-col under one title */
+.bs-starters-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.24in;
+}
+
+.bs-footer {
+  margin-top: auto;
+  padding-top: 0.07in;
+  border-top: 1px solid var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 6.5pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.bs-legend { display: flex; gap: 0.16in; }
+.bs-legend-item { display: flex; align-items: center; gap: 3px; }
+
+</style>
+</head>
+<body data-concept="03-broadsheet" data-side="front">
+
+<div class="page">
+  
+    <header class="bs-mast">
+      <div class="bs-kicker">The Kitchen Gazette · Vol. I</div>
+      <div class="bs-brand">CONCOURSE</div>
+      <div class="bs-tag">Bowl · Bar · Grill</div>
+    </header>
+    <div class="bs-dateline">
+      <span>Page One</span>
+      <span>3364 E La Palma Ave, Anaheim, CA 92806</span>
+      <span>(714) 666-2695</span>
+    </div>
+  <div class="bs-body">
+    
+      <div class="bs-cols-2">
+        <div class="bs-col">
+          
+    
+    <section class="bs-section">
+      <h2 class="bs-section-title">Salads</h2>
+      <p class="bs-section-note">Dressings: Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese. Add Proteins: Chicken Breast +$4 · Steak +$5 · Shrimp +$5</p>
+      
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">House Salad</span>
+        <span class="bs-badge">GF</span><span class="bs-badge">VG</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$9</span>
+      </div>
+      <p class="bs-desc">Romaine lettuce, tomato, cucumber, mozzarella &amp; carrots.</p>
+      
+      <p class="bs-note">Ask for no cheese for vegan option</p>
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Caesar Salad</span>
+        <span class="bs-badge">GF</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$9.50</span>
+      </div>
+      <p class="bs-desc">Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.</p>
+      
+      <p class="bs-note">Ask for no croutons for gluten-free option</p>
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Chinese Chicken Salad</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14</span>
+      </div>
+      <p class="bs-desc">Grilled chicken breast, shredded cabbage, romaine lettuce, sweet &amp; savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions &amp; sesame seeds.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Taco Salad</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14</span>
+      </div>
+      <p class="bs-desc">Black beans, shredded lettuce and seasoned ground beef adorn this local favorite. Topped with shredded cheddar cheese, avocado, pico de gallo and sour cream. Served with tortilla chips and chipotle ranch dressing.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Cobb Salad</span>
+        <span class="bs-badge">GF</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$15.50</span>
+      </div>
+      <p class="bs-desc">Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles &amp; tomato.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Miso Shrimp Salad</span>
+        <span class="bs-badge">NEW</span><span class="bs-badge">GF</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$15</span>
+      </div>
+      <p class="bs-desc">Grilled shrimp over chopped kale and romaine, dried cranberries, sliced almonds, tossed in miso dressing.</p>
+      
+      
+    </article>
+    </section>
+    
+          
+    <div class="bs-shaded">
+    <section class="bs-section">
+      <h2 class="bs-section-title">Jr. Bowlers</h2>
+      
+      
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Mini Corn Dogs</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$10</span>
+      </div>
+      <p class="bs-desc">Served with fries.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Kids Sliders</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$11.50</span>
+      </div>
+      <p class="bs-desc">Two mini burgers with american cheese and ketchup. Served with french fries.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Kids Chicken Strips</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$11.50</span>
+      </div>
+      <p class="bs-desc">2 chicken fingers with fries.</p>
+      
+      
+    </article>
+    </section>
+    </div>
+        </div>
+        <div class="bs-col">
+          
+    
+    <section class="bs-section">
+      <h2 class="bs-section-title">Sandwiches</h2>
+      <p class="bs-section-note">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50. Breads: bun, sourdough, ciabatta</p>
+      
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">BBQ Chicken Sandwich</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14</span>
+      </div>
+      <p class="bs-desc">A plump chicken breast brushed with BBQ sauce and piled high with ham, american cheese on onion strings on a burger bun.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Club Sandwich</span>
+        <span class="bs-badge">NEW</span>
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14</span>
+      </div>
+      <p class="bs-desc">Sliced turkey breast, ham, avocado, lettuce &amp; tomato on toasted sourdough with mayo. Served with french fries.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Grilled Cheese</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$10</span>
+      </div>
+      
+      <p class="bs-sub">Add ham for $3</p>
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Hot Italian</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$13.50</span>
+      </div>
+      <p class="bs-desc">Hot &amp; fresh out of the oven! A bakery fresh ciabatta roll topped with marinara sauce, shredded mozzarella cheese, basil, pepperoncini, pepperoni &amp; sausage. Then oven baked until bubbly &amp; crisp.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Chipotle Chicken Melt</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$15</span>
+      </div>
+      <p class="bs-desc">A tender chicken breast on a fresh ciabatta roll with chipotle aioli &amp; shredded mozzarella cheese. Served hot &amp; fresh from the oven, topped with lettuce, tomato &amp; sliced cucumber.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Soup &amp; Half Sandwich</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$10</span>
+      </div>
+      <p class="bs-desc">A half sandwich (grilled cheese or BLT) on sourdough bread, paired with a cup of our housemade soup of the day.</p>
+      
+      
+    </article>
+    </section>
+    
+          
+    
+    <section class="bs-section">
+      <h2 class="bs-section-title">Burgers</h2>
+      <p class="bs-section-note">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50</p>
+      
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Smash Burger</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$13</span>
+      </div>
+      <p class="bs-desc">Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">The Classic Cheeseburger</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$14.50</span>
+      </div>
+      <p class="bs-desc">Custom blended beef patty, american cheese, lettuce, tomato, onions &amp; 1000 Island dressing on bakery fresh burger bun.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">Cali Burger</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$16</span>
+      </div>
+      <p class="bs-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.</p>
+      
+      
+    </article>
+    <article class="bs-item">
+      <div class="bs-item-head">
+        <span class="bs-name">BBQ Bacon Cheeseburger</span>
+        
+        
+        <span class="bs-lead" aria-hidden="true"></span>
+        <span class="bs-price">$16</span>
+      </div>
+      <p class="bs-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh burger bun.</p>
+      
+      
+    </article>
+    </section>
+    
+        </div>
+      </div>
+  </div>
+  
+    <footer class="bs-footer">
+      <div class="bs-legend">
+        <div class="bs-legend-item"><span class="bs-badge">NEW</span> New Items</div><div class="bs-legend-item"><span class="bs-badge">SPICY</span> Spicy</div><div class="bs-legend-item"><span class="bs-badge">VG</span> Vegan</div><div class="bs-legend-item"><span class="bs-badge">GF</span> Gluten Free</div>
+      </div>
+      <div>Est. 1990 · Anaheim</div>
+    </footer>
+</div>
+</body>
+</html>

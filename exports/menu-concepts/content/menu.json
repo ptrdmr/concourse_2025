@@ -1,0 +1,425 @@
+{
+  "$comment": "Single source of truth for all three menu concepts. Ported verbatim from public/menu_front.html and public/menu_back.html.",
+
+  "business": {
+    "name": "CONCOURSE",
+    "tagline": "Bowl · Bar · Grill",
+    "phone": "(714) 666-2695",
+    "address": "3364 E La Palma Ave, Anaheim, CA 92806"
+  },
+
+  "$comment-extras": "Used only by TV-screen layouts (mirrors public/front-tv.html).",
+  "extras": {
+    "sodas": {
+      "title": "Sodas",
+      "items": [
+        { "name": "Pitchers", "price": "$15", "badges": [] },
+        { "name": "Cups", "price": "$3.75", "sub": "$1 refills", "badges": [] }
+      ]
+    }
+  },
+
+  "legend": [
+    { "badge": "NEW", "label": "New Items" },
+    { "badge": "SPICY", "label": "Spicy" },
+    { "badge": "VG", "label": "Vegan" },
+    { "badge": "GF", "label": "Gluten Free" }
+  ],
+
+  "front": {
+    "sections": [
+      {
+        "id": "salads",
+        "title": "Salads",
+        "notesHtml": "<strong>Dressings:</strong> Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese<br><strong>Add Proteins:</strong> Chicken Breast +$4 · Steak +$5 · Shrimp +$5",
+        "notes": "Dressings: Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese. Add Proteins: Chicken Breast +$4 · Steak +$5 · Shrimp +$5",
+        "items": [
+          {
+            "name": "House Salad",
+            "price": "$9",
+            "desc": "Romaine lettuce, tomato, cucumber, mozzarella & carrots.",
+            "descShort": "Romaine, tomato, cucumber, mozzarella & carrots",
+            "note": "Ask for no cheese for vegan option",
+            "badges": ["GF", "VG"]
+          },
+          {
+            "name": "Caesar Salad",
+            "price": "$9.50",
+            "desc": "Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.",
+            "descShort": "Romaine, parmesan, croutons, Caesar dressing",
+            "note": "Ask for no croutons for gluten-free option",
+            "badges": ["GF"]
+          },
+          {
+            "name": "Chinese Chicken Salad",
+            "price": "$14",
+            "desc": "Grilled chicken breast, shredded cabbage, romaine lettuce, sweet & savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions & sesame seeds.",
+            "descShort": "Grilled chicken, cabbage, sesame dressing, mandarin oranges",
+            "badges": []
+          },
+          {
+            "name": "Taco Salad",
+            "price": "$14",
+            "desc": "Black beans, shredded lettuce and seasoned ground beef adorn this local favorite. Topped with shredded cheddar cheese, avocado, pico de gallo and sour cream. Served with tortilla chips and chipotle ranch dressing.",
+            "descShort": "Seasoned beef, black beans, cheddar, avocado, pico, chipotle ranch",
+            "badges": []
+          },
+          {
+            "name": "Cobb Salad",
+            "price": "$15.50",
+            "desc": "Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles & tomato.",
+            "descShort": "Chicken, bacon, egg, avocado, blue cheese & tomato",
+            "badges": ["GF"]
+          },
+          {
+            "name": "Miso Shrimp Salad",
+            "price": "$15",
+            "desc": "Grilled shrimp over chopped kale and romaine, dried cranberries, sliced almonds, tossed in miso dressing.",
+            "descShort": "Grilled shrimp, kale, cranberries, almonds, miso dressing",
+            "badges": ["NEW", "GF"]
+          }
+        ]
+      },
+      {
+        "id": "jr-bowlers",
+        "title": "Jr. Bowlers",
+        "shaded": true,
+        "items": [
+          {
+            "name": "Mini Corn Dogs",
+            "price": "$10",
+            "desc": "Served with fries.",
+            "descShort": "Served with fries",
+            "badges": []
+          },
+          {
+            "name": "Kids Sliders",
+            "price": "$11.50",
+            "desc": "Two mini burgers with american cheese and ketchup. Served with french fries.",
+            "descShort": "Two mini burgers with cheese & fries",
+            "badges": []
+          },
+          {
+            "name": "Kids Chicken Strips",
+            "price": "$11.50",
+            "desc": "2 chicken fingers with fries.",
+            "descShort": "2 chicken fingers with fries",
+            "badges": []
+          }
+        ]
+      },
+      {
+        "id": "sandwiches",
+        "title": "Sandwiches",
+        "notesHtml": "Includes french fries or side salad · <strong>Upgrade:</strong> veggies +$2.50, onion rings or waffle fries +$3<br><strong>Add:</strong> cheese +$1.50 (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br><strong>Breads:</strong> hamburger bun, sourdough, ciabatta",
+        "notes": "Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50. Breads: bun, sourdough, ciabatta",
+        "items": [
+          {
+            "name": "BBQ Chicken Sandwich",
+            "price": "$14",
+            "desc": "A plump chicken breast brushed with BBQ sauce and piled high with ham, american cheese on onion strings on a burger bun.",
+            "descShort": "BBQ chicken, ham, american cheese, onion strings",
+            "badges": []
+          },
+          {
+            "name": "Club Sandwich",
+            "price": "$14",
+            "desc": "Sliced turkey breast, ham, avocado, lettuce & tomato on toasted sourdough with mayo. Served with french fries.",
+            "descShort": "Turkey, ham, avocado, lettuce & tomato on sourdough",
+            "badges": ["NEW"]
+          },
+          {
+            "name": "Grilled Cheese",
+            "price": "$10",
+            "sub": "Add ham for $3",
+            "descShort": "Add ham for $3",
+            "badges": []
+          },
+          {
+            "name": "Hot Italian",
+            "price": "$13.50",
+            "desc": "Hot & fresh out of the oven! A bakery fresh ciabatta roll topped with marinara sauce, shredded mozzarella cheese, basil, pepperoncini, pepperoni & sausage. Then oven baked until bubbly & crisp.",
+            "descShort": "Ciabatta, marinara, mozzarella, pepperoni & sausage",
+            "badges": []
+          },
+          {
+            "name": "Chipotle Chicken Melt",
+            "price": "$15",
+            "desc": "A tender chicken breast on a fresh ciabatta roll with chipotle aioli & shredded mozzarella cheese. Served hot & fresh from the oven, topped with lettuce, tomato & sliced cucumber.",
+            "descShort": "Chicken, chipotle aioli, mozzarella on ciabatta",
+            "badges": []
+          },
+          {
+            "name": "Soup & Half Sandwich",
+            "price": "$10",
+            "desc": "A half sandwich (grilled cheese or BLT) on sourdough bread, paired with a cup of our housemade soup of the day.",
+            "descShort": "Half grilled cheese or BLT with soup of the day",
+            "tvSub": "Cup of Soup · $6",
+            "badges": []
+          }
+        ]
+      },
+      {
+        "id": "burgers",
+        "title": "Burgers",
+        "notesHtml": "Includes french fries or side salad · <strong>Upgrade:</strong> veggies +$2.50, onion rings or waffle fries +$3<br><strong>Add:</strong> cheese +$1.50 (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br><strong>Breads:</strong> hamburger bun, sourdough, ciabatta",
+        "notes": "Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50",
+        "items": [
+          {
+            "name": "Smash Burger",
+            "price": "$13",
+            "desc": "Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.",
+            "descShort": "Two 2oz patties, american cheese, grilled onions. Extra patty +$3",
+            "badges": []
+          },
+          {
+            "name": "The Classic Cheeseburger",
+            "price": "$14.50",
+            "desc": "Custom blended beef patty, american cheese, lettuce, tomato, onions & 1000 Island dressing on bakery fresh burger bun.",
+            "descShort": "Beef, american cheese, lettuce, tomato, 1000 Island",
+            "badges": []
+          },
+          {
+            "name": "Cali Burger",
+            "price": "$16",
+            "desc": "Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.",
+            "descShort": "Bacon, pepperjack, avocado, chipotle aioli",
+            "badges": []
+          },
+          {
+            "name": "BBQ Bacon Cheeseburger",
+            "price": "$16",
+            "desc": "Custom blended beef patty, onion straws, bacon, american cheese & BBQ sauce on bakery fresh burger bun.",
+            "descShort": "Onion straws, bacon, american cheese & BBQ",
+            "badges": []
+          }
+        ]
+      }
+    ]
+  },
+
+  "back": {
+    "sections": [
+      {
+        "id": "starters",
+        "title": "Starters",
+        "columns": 2,
+        "items": [
+          {
+            "name": "French Fries",
+            "price": "$7",
+            "badges": ["GF", "VG"],
+            "descShort": ""
+          },
+          {
+            "name": "Waffle Fries",
+            "price": "$9",
+            "badges": ["GF", "VG"],
+            "descShort": ""
+          },
+          {
+            "name": "Onion Rings",
+            "price": "$9.50",
+            "badges": [],
+            "descShort": ""
+          },
+          {
+            "name": "Irish Nachos",
+            "price": "$20",
+            "serves": "Feeds 4–6",
+            "desc": "Waffle cut fries, hot cheese sauce, topped with shredded cheddar, crispy bacon and green onions.",
+            "descShort": "Waffle fries, cheese sauce, cheddar, bacon",
+            "badges": ["GF"]
+          },
+          {
+            "name": "Concourse Nacho",
+            "price": "$17.50",
+            "serves": "Feeds 4–6",
+            "desc": "Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos and pico de gallo.",
+            "descShort": "Chips, guac, salsa, cheese, black beans, jalapeños",
+            "sub": "Add Chicken $4 · Steak $5",
+            "badges": ["GF", "SPICY"]
+          },
+          {
+            "name": "Sliders",
+            "price": "$14.50",
+            "desc": "Three sliders on sweet Hawaiian buns. Choose from classic cheeseburger, jerk chicken with pickled onions, or pulled pork with BBQ sauce & onion strings. One style per order.",
+            "descShort": "Three Hawaiian-bun sliders — cheeseburger, jerk chicken, or pulled pork",
+            "sub": "Add fries $2.50",
+            "badges": ["NEW"]
+          },
+          {
+            "name": "Chicken Strips (3)",
+            "price": "$14.50",
+            "desc": "Breaded white meat chicken, regular or spicy buffalo. Served with fries.",
+            "descShort": "Regular or spicy buffalo, served with fries",
+            "badges": []
+          },
+          {
+            "name": "Chicken Wings",
+            "price": "$16",
+            "desc": "8 jumbo bone-in wings tossed in buffalo, garlic parmesan, asian zing or naked.",
+            "descShort": "8 jumbo wings — buffalo, garlic parm, asian zing or naked",
+            "badges": ["GF", "SPICY"]
+          },
+          {
+            "name": "Soup of the Day",
+            "price": "$6",
+            "desc": "Ask your server!",
+            "descShort": "Ask your server",
+            "badges": []
+          },
+          {
+            "name": "Veggie Tray",
+            "price": "$9",
+            "desc": "Farm fresh vegetables.",
+            "descShort": "Farm fresh vegetables",
+            "badges": ["VG"]
+          },
+          {
+            "name": "Pretzel Sticks (6)",
+            "price": "$12.50",
+            "desc": "Bakery fresh, with nacho cheese & mustard.",
+            "descShort": "With nacho cheese & mustard",
+            "note": "Ask for no cheese for vegan option",
+            "badges": []
+          },
+          {
+            "name": "Hummus & Pita",
+            "price": "$12",
+            "desc": "Creamy chickpea hummus topped with a marinated tomato olive relish. Served with warm pita bread and fresh vegetables.",
+            "descShort": "Chickpea hummus, tomato olive relish, warm pita",
+            "badges": ["VG"]
+          },
+          {
+            "name": "Mozzarella Sticks",
+            "price": "$10.50",
+            "desc": "Served with marinara sauce, topped with parmesan.",
+            "descShort": "With marinara & parmesan",
+            "badges": []
+          },
+          {
+            "name": "Shrimp Tacos (3)",
+            "price": "$15",
+            "desc": "Flour shell shrimp tacos filled with melted mozzarella cheese, lettuce, pico de gallo and chipotle aioli. Served with black beans puree and tortilla chips.",
+            "descShort": "Shrimp, mozzarella, pico, chipotle aioli",
+            "badges": ["SPICY"]
+          },
+          {
+            "name": "Taco Plate",
+            "price": "$12",
+            "desc": "Three soft corn tortillas filled with your choice of chicken, pork carnitas or beef carne asada. Topped with diced red onion & cilantro. Includes tortilla chips, black beans and fire roasted salsa.",
+            "descShort": "Chicken, carnitas or carne asada — chips, beans, salsa",
+            "badges": []
+          },
+          {
+            "name": "Quesadilla",
+            "price": "$11",
+            "desc": "Topped with pico de gallo. Served with chips, sour cream & red salsa.",
+            "descShort": "Pico, chips, sour cream & red salsa",
+            "sub": "Add Chicken $4 · Steak or Shrimp $5",
+            "badges": []
+          },
+          {
+            "name": "Southwest Rice Bowl",
+            "price": "$10",
+            "desc": "Steaming bed of long grain rice. Features black bean-corn and tomatillo salsas, cheddar cheese, chipotle aioli, diced avocado and fajita vegetables. Topped with crispy tortilla strips.",
+            "descShort": "Rice, black bean-corn salsa, cheddar, avocado, fajita veg",
+            "sub": "Add Chicken $4 · Steak or Shrimp $5",
+            "badges": []
+          },
+          {
+            "name": "Chicken Lettuce Cups",
+            "price": "$13",
+            "desc": "Seasoned ground chicken with onions, peppers & rice noodles in crisp lettuce leaves. Served with chili dipping sauce and chili roasted peanuts.",
+            "descShort": "Ground chicken, peppers, rice noodles, chili sauce",
+            "badges": ["NEW", "SPICY"]
+          }
+        ]
+      },
+      {
+        "id": "pizzas",
+        "title": "Pizzas",
+        "notesHtml": "All pies prepared with our housemade pizza sauce & hand grated mozzarella. <strong>Medium Pizzas</strong> 12″ · 8 Slices &nbsp;—&nbsp; <strong>Large Pizzas</strong> 16″ · 12 Slices",
+        "notes": "Housemade sauce & hand grated mozzarella. Medium 12″ · 8 slices — Large 16″ · 12 slices",
+        "subsections": [
+          {
+            "id": "specialties",
+            "title": "Specialties",
+            "items": [
+              {
+                "name": "Bowlers Combo",
+                "priceM": "$23",
+                "priceL": "$26",
+                "desc": "Sausage, pepperoni, mushrooms, onions, bell peppers.",
+                "descShort": "Sausage, pepperoni, mushrooms, onions, peppers",
+                "badges": []
+              },
+              {
+                "name": "Meat Lovers",
+                "priceM": "$23",
+                "priceL": "$26",
+                "desc": "Pepperoni, ham, Italian sausage, applewood smoked bacon.",
+                "descShort": "Pepperoni, ham, Italian sausage, bacon",
+                "badges": []
+              },
+              {
+                "name": "Veggie Lovers",
+                "priceM": "$20",
+                "priceL": "$23",
+                "desc": "Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.",
+                "descShort": "Mushroom, onions, peppers, tomatoes, olives, banana peppers",
+                "badges": []
+              },
+              {
+                "name": "BBQ Chicken",
+                "priceM": "$22",
+                "priceL": "$25",
+                "desc": "Chicken breast, cilantro, onions & BBQ sauce.",
+                "descShort": "Chicken, cilantro, onions & BBQ sauce",
+                "badges": []
+              },
+              {
+                "name": "Hawaiian",
+                "priceM": "$20",
+                "priceL": "$23",
+                "desc": "Ham & pineapple.",
+                "descShort": "Ham & pineapple",
+                "badges": []
+              },
+              {
+                "name": "Hot Honey Pep",
+                "priceM": "$22",
+                "priceL": "$25",
+                "desc": "Double pepperoni, Fresno chiles, drizzled with HOT honey.",
+                "descShort": "Double pepperoni, Fresno chiles, hot honey",
+                "badges": ["SPICY"]
+              }
+            ]
+          },
+          {
+            "id": "build-your-own",
+            "title": "Build Your Own",
+            "shaded": true,
+            "base": [
+              { "name": "Medium Pizza", "price": "$17", "note": "cheese only" },
+              { "name": "Large Pizza", "price": "$20", "note": "cheese only" }
+            ],
+            "toppings": [
+              {
+                "title": "Veggie Tops",
+                "priceEach": "$1.50/each",
+                "list": "Mushrooms, Sweet Onions, Green Peppers, Tomato, Olives, Pineapple, Jalapenos, Blue Cheese Crumbles, Banana Peppers"
+              },
+              {
+                "title": "Meat Tops",
+                "priceEach": "$2.50/each",
+                "list": "Pepperoni, Italian Sausage, Ham, Applewood Smoked Bacon"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

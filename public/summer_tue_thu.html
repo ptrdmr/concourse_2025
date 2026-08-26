@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse Summer – Tue–Thu Specials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #C8195A;
+    --yellow: #FFC300;
+    --bg: #3A3A3A;
+    --bg-dark: #2E2E2E;
+    --white: #ffffff;
+    --light: rgba(255,255,255,0.7);
+  }
+
+  html, body { background: #000; overflow: hidden; }
+
+  .banner {
+    width: 1920px;
+    height: 270px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+    color: var(--white);
+  }
+
+  .banner::before, .banner::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 5px;
+    background: var(--pink);
+    z-index: 10;
+  }
+  .banner::before { top: 0; }
+  .banner::after  { bottom: 0; }
+
+  .brand {
+    width: 220px;
+    min-width: 220px;
+    background: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 10px;
+    gap: 4px;
+  }
+
+  .logo { width: 190px; height: auto; }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--light);
+  }
+
+  .day-strip {
+    width: 180px;
+    min-width: 180px;
+    background: var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .day-name {
+    font-size: 52px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.1;
+  }
+
+  .specials {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .special {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    gap: 1px;
+    position: relative;
+    text-align: center;
+  }
+
+  .special + .special::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10%; bottom: 10%;
+    width: 2px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .special-name {
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .special-desc {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--light);
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.2;
+  }
+
+  .special-time {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .price {
+    font-size: 100px;
+    font-weight: 900;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .badge {
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+
+  <div class="brand">
+    <img src="../exports/menu-jpegs/concourse_summer_logo_colors.png" class="logo" />
+    <div class="tag">Summer Specials 2026</div>
+  </div>
+
+  <div class="day-strip">
+    <div class="day-name">Tue –<br>Thu</div>
+  </div>
+
+  <div class="specials">
+    <div class="special">
+      <div class="special-name">Summer Triple Play</div>
+      <div class="price">$17</div>
+      <div class="special-desc">2 games + shoes + $10 arcade card</div>
+      <div class="special-time">Open – 5pm · Per person</div>
+    </div>
+    <div class="special">
+      <div class="special-name">All You Can Bowl</div>
+      <div class="price">$18</div>
+      <div class="special-desc">2 hrs unlimited bowling + shoes</div>
+      <div class="special-time">8pm – Close · Per person</div>
+    </div>
+    <div class="special">
+      <div class="special-name">Late Night<br>Happy Hour</div>
+      <div class="badge">Drinks<br>&amp; Deals</div>
+      <div class="special-desc">Bar specials</div>
+      <div class="special-time">9pm – Close</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

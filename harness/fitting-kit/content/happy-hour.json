@@ -1,0 +1,77 @@
+{
+  "$comment": [
+    "Content for the happy hour card and the square social post.",
+    "Write prices exactly as you want them printed — the harness never reformats",
+    "them, so '$11', '11', and 'Market' all work.",
+    "Any item field you leave out simply does not appear."
+  ],
+
+  "title": "Happy Hour",
+  "hours": [
+    "Monday: open to close",
+    "Tuesday - Thursday: 2-6pm and 9pm to close",
+    "Friday: 2-6pm"
+  ],
+  "callout": {
+    "label": "House Cocktails",
+    "price": "$11"
+  },
+  "footnote": "Bar and patio seating only. Not valid on holidays.",
+
+  "sections": [
+    {
+      "title": "Small Plates",
+      "items": [
+        {
+          "name": "Pimento Dip",
+          "price": "$9",
+          "desc": "Sharp cheddar, roasted red pepper, warm sourdough"
+        },
+        {
+          "name": "Fried Olives",
+          "price": "$8",
+          "desc": "Castelvetrano, herb breadcrumb, lemon aioli"
+        },
+        {
+          "name": "Pork Belly Skewers",
+          "price": "$11",
+          "desc": "Maple glaze, pickled onion, sesame"
+        },
+        {
+          "name": "House Flatbread",
+          "price": "$12",
+          "desc": "Tomato, mozzarella, basil",
+          "note": "Add prosciutto +$4"
+        },
+        {
+          "name": "Loaded Fries",
+          "price": "$10",
+          "desc": "White cheddar, scallion, smoked paprika aioli"
+        },
+        {
+          "name": "Street Corn Ribs",
+          "price": "$9",
+          "desc": "Lime crema, cotija, chili"
+        }
+      ]
+    },
+    {
+      "title": "Drafts & Cans",
+      "items": [
+        { "name": "Northgate Pale", "price": "$6", "note": "16oz draft" },
+        { "name": "Riverbend Lager", "price": "$6", "note": "16oz draft" },
+        { "name": "Seasonal Cider", "price": "$7", "note": "16oz draft" },
+        { "name": "Mexican Amber", "price": "$6", "note": "12oz bottle" },
+        { "name": "Hard Seltzer", "price": "$6", "note": "12oz can" },
+        { "name": "Athletic Golden", "price": "$5", "note": "12oz can, non-alcoholic" }
+      ]
+    }
+  ],
+
+  "wine": {
+    "title": "Wine by the Glass",
+    "brand": "House Selection",
+    "price": "$8",
+    "varieties": "Chardonnay, Sauvignon Blanc, Rose, Pinot Noir, Red Blend"
+  }
+}

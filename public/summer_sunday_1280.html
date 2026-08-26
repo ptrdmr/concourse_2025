@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Concourse Summer – Sunday Specials (1280)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #C8195A;
+    --yellow: #FFC300;
+    --bg: #3A3A3A;
+    --bg-dark: #2E2E2E;
+    --white: #ffffff;
+    --light: rgba(255,255,255,0.7);
+  }
+
+  html, body { background: #000; overflow: hidden; }
+
+  .banner {
+    width: 1280px;
+    height: 328px;
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+    color: var(--white);
+  }
+
+  .banner::before, .banner::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 5px;
+    background: var(--pink);
+    z-index: 10;
+  }
+  .banner::before { top: 0; }
+  .banner::after  { bottom: 0; }
+
+  .brand {
+    width: 180px;
+    min-width: 180px;
+    background: var(--bg-dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 10px;
+    gap: 6px;
+  }
+
+  .logo { width: 155px; height: auto; }
+
+  .tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--light);
+  }
+
+  .day-strip {
+    width: 150px;
+    min-width: 150px;
+    background: var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .day-name {
+    font-size: 48px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-align: center;
+    line-height: 1;
+  }
+
+  .specials {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .special {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 18px;
+    gap: 4px;
+    position: relative;
+    text-align: center;
+  }
+
+  .special + .special::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 12%; bottom: 12%;
+    width: 2px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .special-name {
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--white);
+    letter-spacing: 1.5px;
+    line-height: 1;
+  }
+
+  .special-desc {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--light);
+    font-family: 'Barlow', sans-serif;
+    line-height: 1.2;
+  }
+
+  .special-time {
+    font-size: 22px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.55);
+    font-family: 'Barlow', sans-serif;
+  }
+
+  .highlight {
+    color: var(--yellow);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .price {
+    font-size: 110px;
+    font-weight: 900;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .price-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .price-line {
+    font-size: 52px;
+    font-weight: 900;
+    color: var(--yellow);
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+<div class="banner">
+
+  <div class="brand">
+    <img src="../exports/menu-jpegs/concourse_summer_logo_colors.png" class="logo" />
+    <div class="tag">Summer Specials 2026</div>
+  </div>
+
+  <div class="day-strip">
+    <div class="day-name">Sunday</div>
+  </div>
+
+  <div class="specials">
+    <div class="special">
+      <div class="special-name">Group Party Pack</div>
+      <div class="price">$100</div>
+      <div class="special-desc">4 bowlers · Shoes · 1 hr · Pizza · Soda pitcher</div>
+      <div class="special-time">Open – 2pm · <span class="highlight">Online Only</span></div>
+    </div>
+    <div class="special">
+      <div class="special-name">Sunday After Dark</div>
+      <div class="price-stack">
+        <div class="price-line">$5 Games</div>
+        <div class="price-line">$5 Shoes</div>
+      </div>
+      <div class="special-desc">Pay per game, no package needed</div>
+      <div class="special-time">7pm – Close</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

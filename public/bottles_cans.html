@@ -54,7 +54,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    padding: 48px 72px 44px;
+    padding: 48px 72px 340px;
     font-family: 'Barlow Condensed', sans-serif;
     color: var(--white);
   }
@@ -100,30 +100,77 @@
   .right-col {
     display: flex;
     flex-direction: column;
-    gap: 46px;
+    gap: 40px;
   }
 
   .section-title {
-    font-size: 70px;
+    font-size: 66px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
     color: var(--white);
   }
 
-  .beer-list { display: flex; flex-direction: column; gap: 17px; }
+  .beer-list { display: flex; flex-direction: column; gap: 14px; }
+
+  .tall-cans-bar {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 200px;
+    padding: 0 72px;
+    z-index: 14;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .tall-cans-bar .section-title {
+    font-size: 56px;
+    margin-bottom: 0;
+    text-align: center;
+  }
+
+  .tall-cans-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 96px;
+    row-gap: 14px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .tall-cans-list .beer-item {
+    grid-template-columns: 78px 1fr;
+  }
+
+  .tall-cans-list .price {
+    font-size: 50px;
+  }
+
+  .tall-cans-list .beer-name {
+    font-size: 42px;
+    white-space: nowrap;
+  }
+
+  .tall-cans-list .beer-name .abv {
+    font-size: 36px;
+  }
 
   .beer-item {
     display: grid;
     grid-template-columns: var(--price-col) 1fr;
     align-items: start;
     gap: 0 16px;
+    min-width: 0;
   }
 
   .price {
-    font-size: 60px;
+    font-size: 56px;
     font-weight: 900;
     color: var(--white);
     line-height: 1.1;
@@ -131,10 +178,10 @@
     padding-top: 1px;
   }
 
-  .beer-info { display: flex; flex-direction: column; gap: 0; }
+  .beer-info { display: flex; flex-direction: column; gap: 0; min-width: 0; }
 
   .beer-name {
-    font-size: 52px;
+    font-size: 48px;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--white);
@@ -144,7 +191,7 @@
 
   .beer-name .abv {
     font-weight: 700;
-    font-size: 44px;
+    font-size: 40px;
     color: var(--white);
     opacity: 0.85;
   }
@@ -229,49 +276,49 @@
         <div class="section-title">Bottled Beer</div>
         <div class="beer-list">
           <div class="beer-item">
-            <span class="price">$6</span>
+            <span class="price">$7</span>
             <div class="beer-info">
               <div class="beer-name">Heineken <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$6</span>
+            <span class="price">$7</span>
             <div class="beer-info">
               <div class="beer-name">Corona <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$6</span>
+            <span class="price">$7</span>
             <div class="beer-info">
-              <div class="beer-name">Corona Light <span class="abv">- 12oz</span></div>
+              <div class="beer-name">Corona Premier <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$5</span>
+            <span class="price">$6</span>
             <div class="beer-info">
               <div class="beer-name">Budweiser <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$5</span>
+            <span class="price">$6</span>
             <div class="beer-info">
               <div class="beer-name">Bud Light <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$5</span>
+            <span class="price">$6</span>
             <div class="beer-info">
               <div class="beer-name">Miller Lite <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$5</span>
+            <span class="price">$6</span>
             <div class="beer-info">
               <div class="beer-name">Coors Light <span class="abv">- 12oz</span></div>
             </div>
           </div>
           <div class="beer-item">
-            <span class="price">$5</span>
+            <span class="price">$6</span>
             <div class="beer-info">
               <div class="beer-name">Coors Banquet <span class="abv">- 12oz</span></div>
             </div>
@@ -300,6 +347,12 @@
           <div class="beer-item">
             <span class="price">$7</span>
             <div class="beer-info">
+              <div class="beer-name">High Noon Pineapple <span class="abv">- 12oz</span></div>
+            </div>
+          </div>
+          <div class="beer-item">
+            <span class="price">$7</span>
+            <div class="beer-info">
               <div class="beer-name">Sun Cruiser Iced Tea <span class="abv">- 12oz</span></div>
             </div>
           </div>
@@ -309,29 +362,35 @@
               <div class="beer-name">Sun Cruiser Lemonade <span class="abv">- 12oz</span></div>
             </div>
           </div>
-          <div class="beer-item">
-            <span class="price">$8</span>
-            <div class="beer-info">
-              <div class="beer-name">Happy Dad Fruit Punch <span class="abv">- 16oz</span></div>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
 
-      <div>
-        <div class="section-title">Tall Cans</div>
-        <div class="beer-list">
-          <div class="beer-item">
-            <span class="price">$10</span>
-            <div class="beer-info">
-              <div class="beer-name">Happy Dad Grape <span class="abv">- 24oz</span></div>
-            </div>
+    <div class="tall-cans-bar">
+      <div class="section-title">Tall Cans</div>
+      <div class="tall-cans-list">
+        <div class="beer-item">
+          <span class="price">$8</span>
+          <div class="beer-info">
+            <div class="beer-name">Logic Light <span class="abv">- 16oz</span></div>
           </div>
-          <div class="beer-item">
-            <span class="price">$9</span>
-            <div class="beer-info">
-              <div class="beer-name">Twisted Tea Peach <span class="abv">- 24oz</span></div>
-            </div>
+        </div>
+        <div class="beer-item">
+          <span class="price">$8</span>
+          <div class="beer-info">
+            <div class="beer-name">Happy Dad Fruit Punch <span class="abv">- 24oz</span></div>
+          </div>
+        </div>
+        <div class="beer-item">
+          <span class="price">$10</span>
+          <div class="beer-info">
+            <div class="beer-name">Happy Dad Grape <span class="abv">- 24oz</span></div>
+          </div>
+        </div>
+        <div class="beer-item">
+          <span class="price">$9</span>
+          <div class="beer-info">
+            <div class="beer-name">Twisted Tea Peach <span class="abv">- 24oz</span></div>
           </div>
         </div>
       </div>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — {{ content.title }}</title>
+
+<!-- These four tags are the whole configuration for this board. -->
+<meta name="flyer:format" content="card-5x7">
+<meta name="flyer:content" content="happy-hour">
+<meta name="flyer:outputs" content="jpeg,pdf">
+<meta name="flyer:title" content="Happy hour table card">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  /* Board-specific tweaks only. Anything reusable belongs in base.css. */
+  .safe { --pad: 0.5rem; }
+
+  .title { margin: 0.2rem 0 0.5rem; }
+
+  /* Pushes the wine block to the foot of the grid so the card fills out
+     instead of trailing off into empty space. */
+  .cols-2 { align-content: space-between; }
+
+  .hours p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .callout { margin-top: 0.5rem; }
+
+  .wine {
+    text-align: center;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .wine-brand {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .wine-varieties {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--accent);
+  }
+</style>
+</head>
+<body>
+
+<div class="board board--gradient hairline-frame">
+  <div class="edge-top"></div>
+
+  <div class="safe">
+    <header class="center">
+      <div class="lockup lockup--stacked">
+        <img src="../brand/assets/logo-on-dark.svg" alt="">
+        <div class="brand-name">{{ brand.business.name }}</div>
+        <div class="brand-tagline">{{ brand.business.tagline }}</div>
+      </div>
+
+      <h1 class="title">{{ content.title }}</h1>
+
+      <div class="hours">
+        {{#each content.hours}}<p>{{ this }}</p>{{/each}}
+      </div>
+
+      {{#if content.callout}}
+      <div class="badge badge--accent callout">{{ content.callout.label }} &nbsp;{{ content.callout.price }}</div>
+      {{/if}}
+    </header>
+
+    <div class="rule" style="margin: 0.7rem auto; width: 60%"></div>
+
+    <div class="cols-2 grow">
+      {{#each content.sections}}
+      <section>
+        <h2 class="section-title">{{ this.title }}</h2>
+        <div class="items items--tight">
+          {{#each this.items}}
+          <article>
+            <div class="item-head">
+              <span class="item-name">{{ this.name }}</span>
+              <span class="item-price">{{ this.price }}</span>
+            </div>
+            {{#if this.desc}}<p class="item-desc">{{ this.desc }}</p>{{/if}}
+            {{#if this.note}}<p class="item-note">{{ this.note }}</p>{{/if}}
+          </article>
+          {{/each}}
+        </div>
+      </section>
+      {{/each}}
+
+      {{#if content.wine}}
+      <section class="span-all wine">
+        <h2 class="section-title section-title--center">{{ content.wine.title }}</h2>
+        <div class="wine-brand">{{ content.wine.brand }} &nbsp;<span class="item-price">{{ content.wine.price }}</span></div>
+        <div class="wine-varieties">{{ content.wine.varieties }}</div>
+      </section>
+      {{/if}}
+    </div>
+
+    <footer class="footer">
+      {{#if content.footnote}}<p class="footer-note">{{ content.footnote }}</p>{{/if}}
+      <p class="legal">{{ brand.legal.allergen }}</p>
+    </footer>
+  </div>
+
+  <div class="edge-bottom"></div>
+</div>
+
+</body>
+</html>

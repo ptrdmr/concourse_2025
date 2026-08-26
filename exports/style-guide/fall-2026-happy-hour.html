@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Concourse — Fall 2026 Happy Hour Style Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/dom1gkc.css">
+<style>
+  @page { size: letter; margin: 0; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #D42027;
+    --red-hot: #f03030;
+    --bg: #111111;
+    --bg2: #1c1c1c;
+    --lift: #242424;
+    --yellow: #E8D88C;
+    --white: #ffffff;
+    --muted: rgba(255, 255, 255, 0.65);
+    --muted-soft: rgba(255, 255, 255, 0.45);
+    --rule: rgba(255, 255, 255, 0.12);
+    --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+    --font-body: "DM Sans", "Helvetica Neue", sans-serif;
+    --font-accent: "Libre Baskerville", Georgia, serif;
+    --font-title: "cortado", sans-serif;
+  }
+
+  html, body {
+    background: #000;
+    color: var(--white);
+    font-family: var(--font-body);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    background: var(--bg2);
+    position: relative;
+    overflow: hidden;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  .page::before,
+  .page::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0;
+    height: 8px;
+    background: var(--red);
+    z-index: 2;
+  }
+  .page::before { top: 0; }
+  .page::after { bottom: 0; }
+
+  .frame {
+    position: absolute;
+    inset: 14px;
+    border: 1.5px solid var(--rule);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .inner {
+    padding: 36px 44px 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 5px;
+    text-align: center;
+  }
+  .tagline {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 2px;
+  }
+  h1.title {
+    font-family: var(--font-title);
+    font-size: 64px;
+    line-height: 0.85;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-align: center;
+    margin: 10px 0 8px;
+  }
+  .kicker {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    color: var(--red-hot);
+    margin-bottom: 4px;
+  }
+  .lede {
+    text-align: center;
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.45;
+    max-width: 6.4in;
+    margin: 0 auto 16px;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 2px;
+    color: var(--red-hot);
+    border-bottom: 2px solid var(--rule);
+    display: inline-block;
+    padding-bottom: 2px;
+    margin: 12px 0 8px;
+    font-weight: 400;
+  }
+  .page:last-child h2 { margin: 10px 0 6px; }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .swatches.surfaces { grid-template-columns: repeat(3, 1fr); margin-top: 10px; }
+  .chip .block {
+    height: 42px;
+    border: 1px solid var(--rule);
+  }
+  .chip .name {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+  }
+  .chip .meta {
+    font-size: 8.5px;
+    color: var(--yellow);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    line-height: 1.35;
+    margin-top: 1px;
+  }
+  .c-red { background: var(--red); }
+  .c-hot { background: var(--red-hot); }
+  .c-champ { background: var(--yellow); }
+  .c-white { background: var(--white); }
+  .c-bg { background: var(--bg); }
+  .c-bg2 { background: var(--bg2); border-color: rgba(255,255,255,0.22) !important; }
+  .c-lift { background: var(--lift); }
+
+  .type-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 28px;
+  }
+  .type-role .label {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted-soft);
+    margin-bottom: 2px;
+  }
+  .type-role .face {
+    font-size: 8.5px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+  .spec-title {
+    font-family: var(--font-title);
+    font-size: 36px;
+    line-height: 0.9;
+    font-weight: 400;
+  }
+  .spec-display {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: 2px;
+  }
+  .spec-body {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .spec-accent {
+    font-family: var(--font-accent);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--yellow);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5px;
+    margin-top: 6px;
+  }
+  th, td {
+    text-align: left;
+    padding: 4px 8px 4px 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .page:last-child td { padding: 3px 8px 3px 0; }
+  th {
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  td:first-child { color: var(--white); width: 1.4in; }
+  .mono {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 8.5px;
+    color: var(--yellow);
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    flex: 1;
+  }
+  .mini-board {
+    width: 142px;
+    height: 199px;
+    background: var(--bg);
+    border-top: 5px solid var(--red);
+    border-bottom: 5px solid var(--red);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .mini-board .inset {
+    position: absolute;
+    inset: 7px;
+    border: 1px solid var(--rule);
+  }
+  .mini-board .mw {
+    position: absolute;
+    top: 16px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+  .mini-board .mt {
+    position: absolute;
+    top: 32px; left: 0; right: 0;
+    text-align: center;
+    font-family: var(--font-title);
+    font-size: 18px;
+    line-height: 0.85;
+    font-weight: 400;
+  }
+  .mini-board .call {
+    position: absolute;
+    top: 56px; left: 28px; right: 28px;
+    border: 1px solid var(--red);
+    font-family: var(--font-display);
+    font-size: 6px;
+    letter-spacing: 0.6px;
+    text-align: center;
+    padding: 2px 0;
+  }
+  .mini-board .colL, .mini-board .colR {
+    position: absolute;
+    top: 78px;
+    width: 52px;
+  }
+  .mini-board .colL { left: 14px; }
+  .mini-board .colR { right: 14px; }
+  .mini-board .st {
+    font-family: var(--font-display);
+    font-size: 7px;
+    color: var(--red-hot);
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+  }
+  .mini-board .bar { height: 4px; background: var(--white); margin-bottom: 2px; }
+  .mini-board .bar.s { width: 70%; height: 3px; background: var(--yellow); margin-bottom: 5px; }
+
+  p.body {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  p.body strong { color: var(--white); font-weight: 600; }
+
+  ul.rules {
+    list-style: none;
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+  ul.rules li { padding-left: 12px; position: relative; margin-bottom: 4px; }
+  ul.rules li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 6px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+  ul.do li::before { background: var(--yellow); }
+  ul.dont li::before { background: var(--red); }
+
+  .parts td:first-child {
+    font-family: var(--font-display);
+    letter-spacing: 0.6px;
+    font-size: 12px;
+    width: 1.55in;
+  }
+
+  .tokens {
+    font-family: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    font-size: 8.5px;
+    line-height: 1.45;
+    color: var(--yellow);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    padding: 8px 12px;
+    white-space: pre;
+  }
+
+  .warn {
+    border: 1.5px solid var(--red);
+    padding: 7px 12px;
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--muted);
+    line-height: 1.35;
+  }
+  .warn b {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: var(--red-hot);
+    font-weight: 400;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .foot {
+    margin-top: auto;
+    padding-top: 10px;
+    font-size: 8px;
+    color: var(--muted-soft);
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="wordmark">CONCOURSE</div>
+    <div class="tagline">Bowl · Bar · Grill</div>
+    <div class="kicker">Fall 2026 · Happy Hour · 5×7 Print</div>
+    <h1 class="title">Style Guide</h1>
+    <p class="lede">The system behind the Fall 2026 happy hour front and specialty cocktails reverse. Same tokens as the bottles / wines 5×7 family. Four typefaces. One red. One champagne. Do not invent a fifth color.</p>
+
+    <h2>Color</h2>
+    <div class="swatches">
+      <div class="chip"><div class="block c-red"></div><div class="name">Concourse Red</div><div class="meta">#D42027 · --red<br>Rails, callout, icons, bullets</div></div>
+      <div class="chip"><div class="block c-hot"></div><div class="name">Hot Red</div><div class="meta">#F03030 · --red-hot<br>Section titles, allergen line</div></div>
+      <div class="chip"><div class="block c-champ"></div><div class="name">Champagne</div><div class="meta">#E8D88C · --yellow<br>Descriptions, wine, prices to notice</div></div>
+      <div class="chip"><div class="block c-white"></div><div class="name">Ink</div><div class="meta">#FFFFFF · --white<br>Titles, names, prices</div></div>
+    </div>
+    <div class="swatches surfaces">
+      <div class="chip"><div class="block c-bg"></div><div class="name">Near Black</div><div class="meta">#111111 · --bg · page behind the card</div></div>
+      <div class="chip"><div class="block c-bg2"></div><div class="name">Charcoal</div><div class="meta">#1C1C1C · --bg2 · board fill</div></div>
+      <div class="chip"><div class="block c-lift"></div><div class="name">Lift</div><div class="meta">#242424 · lower-right wash on the 5×7 only</div></div>
+    </div>
+    <table>
+      <thead><tr><th>Token</th><th>Value</th><th>Job</th></tr></thead>
+      <tbody>
+        <tr><td>--muted</td><td class="mono">white at 65%</td><td>Hours, tagline, pizza sub-line</td></tr>
+        <tr><td>--muted-soft</td><td class="mono">white at 45%</td><td>See reverse side</td></tr>
+        <tr><td>--rule</td><td class="mono">white at 12%</td><td>Inset frame, section underline, wine rule</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Type</h2>
+    <div class="type-grid">
+      <div class="type-role">
+        <div class="label">Title — Cortado</div>
+        <div class="spec-title">Happy Hour</div>
+        <div class="face">Adobe Fonts kit dom1gkc · 52px front / 44px reverse · line-height 0.85</div>
+      </div>
+      <div class="type-role">
+        <div class="label">Display — Bebas Neue</div>
+        <div class="spec-display">BAR GRUB</div>
+        <div class="face">Google · lockup 13px / tracking 4px · sections 18px · items 15px · prices 12.5px</div>
+      </div>
+      <div class="type-role">
+        <div class="label">Body — DM Sans</div>
+        <div class="spec-body">Served with cheese &amp; mustard sauce</div>
+        <div class="face">Google · food desc 7px uppercase · cocktail recipes 10px sentence case · hours 7.5px</div>
+      </div>
+      <div class="type-role">
+        <div class="label">Accent — Libre Baskerville italic</div>
+        <div class="spec-accent">Bowl · Bar · Grill</div>
+        <div class="face">Google · tagline 7.5px · wine 10px · $ in the price badge 32px · each 18px</div>
+      </div>
+    </div>
+
+    <table>
+      <thead><tr><th>Role</th><th>Face</th><th>Case</th><th>Color</th></tr></thead>
+      <tbody>
+        <tr><td>Page title</td><td>Cortado</td><td>Title case, as written</td><td>White</td></tr>
+        <tr><td>Wordmark / items</td><td>Bebas Neue</td><td>Uppercase</td><td>White</td></tr>
+        <tr><td>Section head</td><td>Bebas Neue</td><td>Uppercase, tracking 2px</td><td>Hot red</td></tr>
+        <tr><td>Food description</td><td>DM Sans</td><td>Uppercase</td><td>Champagne</td></tr>
+        <tr><td>Cocktail recipe</td><td>DM Sans</td><td>Sentence case</td><td>Champagne</td></tr>
+        <tr><td>Wine varieties</td><td>Libre Baskerville italic</td><td>Title case</td><td>Champagne</td></tr>
+      </tbody>
+    </table>
+
+    <div class="foot">Sizes are at the 5×7 artboard, before the 3.125× export zoom to 1500×2100 (300 dpi). Typekit kit dom1gkc must load or Cortado titles collapse to generic sans.</div>
+  </div>
+</div>
+
+<div class="page">
+  <div class="frame"></div>
+  <div class="inner">
+    <div class="wordmark">CONCOURSE</div>
+    <div class="tagline">Bowl · Bar · Grill</div>
+
+    <h2>Board anatomy</h2>
+    <div class="two-col" style="flex: 0; align-items: start; margin-bottom: 2px; gap: 16px;">
+      <div style="display:flex; gap: 18px; align-items: start;">
+        <div class="mini-board" aria-hidden="true">
+          <div class="inset"></div>
+          <div class="mw">CONCOURSE</div>
+          <div class="mt">Happy Hour</div>
+          <div class="call">SPECIALTY $11</div>
+          <div class="colL"><div class="st">BAR GRUB</div><div class="bar"></div><div class="bar s"></div><div class="bar"></div><div class="bar s"></div></div>
+          <div class="colR"><div class="st">PINTS</div><div class="bar"></div><div class="bar s"></div><div class="bar"></div><div class="bar s"></div></div>
+        </div>
+        <p class="body" style="padding-top: 4px;">
+          Every Fall 2026 5×7 card is the same object: charcoal field, <strong>6px Concourse Red rails</strong> on the top and bottom edges, and a 1.5px hairline inset 6px from every side. Inner padding is 14–22px. Export at 300 dpi (1500 × 2100) with <span class="mono">zoom: 3.125</span>.
+          <br><br>
+          Masthead is always centered: wordmark, italic tagline, Cortado title. Body then either splits into two columns (food / pints) or stays a single cocktail list.
+        </p>
+      </div>
+      <p class="body" style="padding-top: 4px;">
+        <strong>Front — Happy Hour.</strong> Two-column grid, 20px gutter. Item name and price share a baseline. Description tucks under the name in champagne. Specialty cocktails are not listed here — they get an outlined callout (red stroke, no fill) and a muted “see reverse side” line.
+        <br><br>
+        <strong>Reverse — Specialty Cocktails.</strong> Single column. 12px bowling-ball bullets, odd items red, even items champagne. One shared price at the foot: dollar in Libre Baskerville hot red, giant Bebas numeral in white, italic “each” in champagne, between two 2.5px red rules.
+      </p>
+    </div>
+
+    <h2>Repeating parts</h2>
+    <table class="parts">
+      <thead><tr><th>Part</th><th>Build it like this</th></tr></thead>
+      <tbody>
+        <tr><td>Specialty callout</td><td>fit-content box, 1.5px --red stroke, 2px radius, Bebas 14px / tracking 2px, price in --yellow</td></tr>
+        <tr><td>Section title</td><td>Bebas 18px --red-hot, 2px tracking, 2px --rule underline only as wide as the words</td></tr>
+        <tr><td>Menu row</td><td>Name left, price right, same line. Description or pint detail on the next line in champagne</td></tr>
+        <tr><td>Cocktail bullet</td><td>12px bowling-ball SVG, 14px left of the name. Alternate --red and --yellow. Not a plain disc</td></tr>
+        <tr><td>Wine band</td><td>Full-width, centered, hairline on top. Brand + price in Bebas; varieties in italic Baskerville champagne</td></tr>
+        <tr><td>Price badge</td><td>Centered, red rules above and below. One price for the whole cocktail list</td></tr>
+        <tr><td>Legal footer</td><td>Holiday line in muted, bold 8px. Allergen line in --red-hot, 7.5px. No emoji on print</td></tr>
+      </tbody>
+    </table>
+
+    <div class="two-col" style="flex: 0; margin-top: 2px; gap: 16px;">
+      <div>
+        <h2>Do</h2>
+        <ul class="rules do">
+          <li>Name the item. List the ingredients. Stop.</li>
+          <li>Food descriptions in uppercase so they read as a garnish line.</li>
+          <li>Cocktail recipes in ordinary sentence case — they are longer and need to breathe.</li>
+          <li>Keep prices on the name line, never on the description line.</li>
+          <li>Required footer: not valid on holidays, allergen notice.</li>
+        </ul>
+      </div>
+      <div>
+        <h2>Do not</h2>
+        <ul class="rules dont">
+          <li>Add a fifth typeface, or a new red, gold, or green.</li>
+          <li>Fill the specialty callout. It is an outline so the title stays loudest.</li>
+          <li>Set descriptions in white. That fights the item names.</li>
+          <li>Write “delicious,” “signature,” or exclamation marks. These boards list. They do not sell.</li>
+          <li>Put a price on every cocktail if they share one price. The badge is the price.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Copy these tokens</h2>
+    <div class="tokens">:root {
+  --red: #D42027;          --red-hot: #f03030;
+  --bg: #111111;           --bg2: #1c1c1c;
+  --yellow: #E8D88C;       --white: #ffffff;
+  --muted: rgba(255,255,255,0.65);
+  --muted-soft: rgba(255,255,255,0.45);
+  --rule: rgba(255,255,255,0.12);
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
+  --font-body: "DM Sans", "Helvetica Neue", sans-serif;
+  --font-accent: "Libre Baskerville", Georgia, serif;
+  --font-title: "cortado", sans-serif;
+}</div>
+
+    <div class="warn">
+      <b>Price check before the next print</b>
+      The front callout currently reads Specialty Cocktails $11. The reverse badge reads $13 each. That is a content error, not a style choice. Confirm the live price before reprinting.
+    </div>
+
+    <div class="foot">Source: public/happy_hour_fall2026.html · public/specialty_cocktails_fall2026.html · Reprint: node scripts/export-style-guide-pdf.mjs</div>
+  </div>
+</div>
+
+</body>
+</html>

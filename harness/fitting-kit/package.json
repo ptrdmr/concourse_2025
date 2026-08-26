@@ -1,0 +1,22 @@
+{
+  "name": "flyer-harness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Fill in your brand once, then have an AI agent generate print-ready menus, flyers and digital boards from plain HTML.",
+  "scripts": {
+    "setup": "playwright install chromium",
+    "tokens": "node scripts/build-tokens.mjs",
+    "render": "node scripts/render.mjs",
+    "check": "node scripts/doctor.mjs",
+    "new": "node scripts/new-board.mjs",
+    "optimize": "node scripts/optimize-assets.mjs"
+  },
+  "dependencies": {
+    "playwright": "^1.59.1",
+    "sharp": "^0.33.5"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

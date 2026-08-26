@@ -1,0 +1,388 @@
+/* ============================================================================
+   Shared layout and typography for every board.
+
+   The single idea that makes this work: every size below is in `rem`, and the
+   renderer sets the root font size per format (the `scale` field in
+   formats.json). So the same markup that fills a 5x7 card also fills a 1920px
+   TV board — you change one number instead of redesigning.
+
+   Colours are never written literally here. They all come from tokens.css,
+   which is generated from brand/brand.json.
+   ============================================================================ */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #000;
+  color: var(--ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+/* Make sure background colours and images survive the trip to PDF. */
+* {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------------------- the canvas */
+
+/* One board per file. Its size comes from the format, bleed included. */
+.board {
+  position: relative;
+  width: calc(var(--page-w) + var(--bleed) * 2);
+  height: calc(var(--page-h) + var(--bleed) * 2);
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* Light "printed on paper" variant. Re-points the semantic colours so every
+   child element below adapts without any extra markup. */
+.board--paper {
+  --bg: var(--paper);
+  --ink: var(--paper-ink);
+  --muted: var(--paper-muted);
+  --muted-soft: var(--paper-muted);
+  --rule: var(--paper-rule);
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+
+.board--gradient {
+  background: linear-gradient(155deg, var(--bg-alt) 45%, var(--bg));
+}
+
+/* Everything readable goes inside .safe. It keeps content clear of the trim
+   edge on print sizes and gives screen sizes sane padding.
+   Set --pad on the board for extra breathing room. */
+.safe {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  padding: calc(var(--bleed) + var(--safe) + var(--pad, 1.2rem));
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full-bleed decoration: a colour band at the very top or bottom edge. */
+.edge-top,
+.edge-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: calc(var(--bleed) + 0.35rem);
+  background: var(--brand);
+  z-index: 2;
+}
+.edge-top {
+  top: 0;
+}
+.edge-bottom {
+  bottom: 0;
+}
+
+.hairline-frame::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--bleed) + var(--safe) * 0.5);
+  border: 1px solid var(--rule);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* -------------------------------------------------------------- brand lockup */
+
+.lockup {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.lockup--stacked {
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.lockup img {
+  height: 2.6rem;
+  width: auto;
+}
+
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* --------------------------------------------------------------- typography */
+
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Display fonts often have tall ascenders. A line-height under about 0.95 lets
+   them collide with whatever sits underneath, so the default stays safe and a
+   board can tighten it deliberately. */
+.title {
+  font-family: var(--font-title);
+  font-size: 6.5rem;
+  line-height: 0.98;
+  letter-spacing: 0.01em;
+}
+
+.title--tight {
+  font-size: 4.6rem;
+}
+
+.headline {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.section-title {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-bright);
+  border-bottom: 2px solid var(--rule);
+  padding-bottom: 0.15rem;
+  margin-bottom: 0.6rem;
+}
+
+.section-title--center {
+  display: block;
+  text-align: center;
+  border-bottom: 0;
+}
+
+/* --------------------------------------------------------------- menu items */
+
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.items--tight {
+  gap: 0.45rem;
+}
+
+.item-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.item-name {
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.12;
+}
+
+.item-price {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--accent);
+}
+
+/* Dotted leader between name and price, the classic printed-menu look. */
+.item-head--leader .lead {
+  flex: 1;
+  border-bottom: 1px dotted var(--rule);
+  transform: translateY(-0.25em);
+}
+
+.item-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--muted);
+  margin-top: 0.1rem;
+}
+
+.item-note {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.1rem;
+}
+
+.item-options {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--muted);
+}
+
+/* ------------------------------------------------------------------- accents */
+
+.price-huge {
+  font-family: var(--font-display);
+  font-size: 6.5rem;
+  font-weight: 900;
+  line-height: 0.9;
+  color: var(--accent);
+}
+
+.badge {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.7rem;
+  border: 1.5px solid var(--brand);
+  border-radius: 0.15rem;
+}
+
+.badge--solid {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.badge--accent {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.rule {
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--brand), transparent);
+}
+
+.rule--flat {
+  height: 1px;
+  background: var(--rule);
+}
+
+/* --------------------------------------------------------------- arrangement */
+
+.cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1.6rem;
+}
+
+.cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 1.6rem;
+}
+
+.cols-divided > * + * {
+  border-left: 1px solid var(--rule);
+  padding-left: 1.6rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.center {
+  text-align: center;
+}
+
+.grow {
+  flex: 1;
+}
+
+.push {
+  margin-top: auto;
+}
+
+.span-all {
+  grid-column: 1 / -1;
+}
+
+/* -------------------------------------------------------------------- footer */
+
+.footer {
+  margin-top: auto;
+  padding-top: 0.8rem;
+  text-align: center;
+}
+
+.footer-note {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.contact {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.legal {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--muted-soft);
+  margin-top: 0.25rem;
+}

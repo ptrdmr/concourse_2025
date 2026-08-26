@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" role="img" aria-label="Northgate Social">
+  <!-- Placeholder mark. Replace this file with the real logo, keeping the name. -->
+  <circle cx="60" cy="60" r="55" fill="none" stroke="#FBF8F1" stroke-width="3.5" />
+  <path d="M36 90V56a24 24 0 0 1 48 0v34" fill="none" stroke="#E8B84B" stroke-width="8" stroke-linecap="round" />
+  <path d="M60 90V66" fill="none" stroke="#FBF8F1" stroke-width="6" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — {{ content.title }}</title>
+
+<!--
+  The sign taped inside the front door. Designed to be read from outside, in
+  daylight, by someone who has already got their hand on the handle: the unusual
+  thing goes first and biggest, the routine hours go underneath.
+
+  Prints on ordinary 11x8.5 paper. The bleed is harmless if you print it at home.
+-->
+<meta name="flyer:format" content="print-letter-landscape">
+<meta name="flyer:content" content="hours">
+<meta name="flyer:outputs" content="jpeg,pdf">
+<meta name="flyer:title" content="Front door hours sign">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  .safe { --pad: 0.8rem; }
+
+  header { display: flex; align-items: center; gap: 1rem; }
+  header img { height: 3.6rem; }
+
+  .notice {
+    margin-top: 1rem;
+    padding: 0.9rem 1.2rem;
+    background: var(--brand);
+    color: #fff;
+    border-radius: 0.2rem;
+  }
+
+  .notice-heading {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .notice-body {
+    font-family: var(--font-body);
+    font-size: 1.4rem;
+    line-height: 1.35;
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  /* A door sign is read from four feet away through glass, so the rows spread
+     to fill the whole sign rather than huddling at the top. */
+  .hours-table {
+    flex: 1;
+    margin-top: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .hours-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+
+  .hours-label {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .hours-fill { flex: 1; border-bottom: 2px dotted var(--rule); transform: translateY(-0.3em); }
+
+  .hours-value {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--brand);
+  }
+</style>
+</head>
+<body>
+
+<div class="board board--paper">
+  <div class="safe">
+    <header>
+      <img src="../brand/assets/logo-on-light.svg" alt="">
+      <div>
+        <div class="brand-name">{{ brand.business.name }}</div>
+        <div class="brand-tagline">{{ brand.business.tagline }}</div>
+      </div>
+      <div class="grow"></div>
+      <h1 class="title title--tight">{{ content.title }}</h1>
+    </header>
+
+    {{#if content.notice}}
+    <div class="notice">
+      <div class="notice-heading">{{ content.notice.heading }}</div>
+      <p class="notice-body">{{ content.notice.body }}</p>
+    </div>
+    {{/if}}
+
+    <div class="hours-table">
+      {{#each content.rows}}
+      <div class="hours-row">
+        <span class="hours-label">{{ this.label }}</span>
+        <span class="hours-fill"></span>
+        <span class="hours-value">{{ this.value }}</span>
+      </div>
+      {{/each}}
+    </div>
+
+    <footer class="footer push">
+      {{#if content.kitchenNote}}<p class="footer-note">{{ content.kitchenNote }}</p>{{/if}}
+      <div class="contact">{{ content.callToAction }} &nbsp;&middot;&nbsp; {{ brand.business.website }}</div>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

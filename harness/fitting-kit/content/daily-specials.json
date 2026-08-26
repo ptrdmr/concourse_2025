@@ -1,0 +1,53 @@
+{
+  "$comment": [
+    "One entry per day. The banner board renders itself once for every item in",
+    "`days`, so five days means five finished banners from a single design file.",
+    "`slug` becomes part of the output filename."
+  ],
+
+  "season": "Fall Specials",
+  "year": "2026",
+
+  "days": [
+    {
+      "slug": "monday",
+      "name": "Monday",
+      "specials": [
+        { "name": "Neighbour Night", "price": "$11", "desc": "Any flatbread + a draft", "time": "4pm - close" },
+        { "name": "Happy Hour", "badge": "All Day", "desc": "Full bar menu", "time": "open - close" }
+      ]
+    },
+    {
+      "slug": "tuesday",
+      "name": "Tuesday",
+      "specials": [
+        { "name": "Taco Tuesday", "price": "$3", "desc": "Per taco, three kinds", "time": "4pm - 9pm" },
+        { "name": "Margaritas", "price": "$8", "desc": "Classic lime or spicy", "time": "4pm - 9pm" }
+      ]
+    },
+    {
+      "slug": "wednesday",
+      "name": "Wednesday",
+      "specials": [
+        { "name": "Wine Down", "price": "1/2 off", "desc": "Every bottle under $60", "time": "5pm - close" },
+        { "name": "Cheese Board", "price": "$14", "desc": "Three cheeses, house jam", "time": "5pm - close" }
+      ]
+    },
+    {
+      "slug": "friday",
+      "name": "Friday",
+      "specials": [
+        { "name": "Fish Fry", "price": "$16", "desc": "Beer battered cod, slaw, fries", "time": "4pm - 9pm" },
+        { "name": "Live Music", "badge": "7pm", "desc": "No cover, patio stage" }
+      ]
+    },
+    {
+      "slug": "sunday",
+      "name": "Sunday",
+      "specials": [
+        { "name": "Brunch", "price": "$29", "desc": "Bottomless plate, per person", "time": "10am - 2pm" },
+        { "name": "Bloody Mary Bar", "price": "$10", "desc": "Build your own", "time": "10am - 2pm" }
+      ]
+    }
+  ]
+}

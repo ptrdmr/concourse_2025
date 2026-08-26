@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURSE — 01-departure-board (front)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --amber: #F5B942;
+  --amber-dim: #C4922E;
+  --amber-soft: rgba(245, 185, 66, 0.55);
+  --ink: #F5B942;
+  --muted: rgba(245, 185, 66, 0.62);
+  --soft: rgba(245, 185, 66, 0.38);
+  --rule: rgba(245, 185, 66, 0.22);
+  --bg: #0B0C0E;
+  --bg-row: rgba(245, 185, 66, 0.04);
+  --page-bg: #0B0C0E;
+  --bleed-color: #0B0C0E;
+  --font-sans: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 0;
+    min-height: 100vh;
+  }
+}
+
+html, body {
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--bg);
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0.28in 0.32in 0.22in;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+
+/* ── Header ── */
+.db-header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 0.12in;
+  padding-bottom: 0.1in;
+  border-bottom: 1.5px solid var(--amber);
+  margin-bottom: 0.12in;
+}
+.db-brand {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 18pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.db-tagline {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3pt;
+}
+.db-board-label {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  padding: 3pt 10pt;
+  align-self: center;
+}
+.db-meta {
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.db-meta strong {
+  color: var(--amber);
+  font-weight: 600;
+  display: block;
+  font-size: 8pt;
+  letter-spacing: 0.12em;
+}
+
+/* Column headers */
+.db-colhead {
+  display: grid;
+  grid-template-columns: 0.55in 1fr 0.85in;
+  gap: 0.08in;
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soft);
+  padding: 0 0 0.05in;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0.06in;
+}
+.db-colhead .r { text-align: right; }
+
+/* Body */
+.db-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.db-section { margin-bottom: 0.1in; }
+.db-section:last-child { margin-bottom: 0; }
+
+.db-gate {
+  display: flex;
+  align-items: baseline;
+  gap: 0.1in;
+  margin-bottom: 0.04in;
+  padding: 0.03in 0;
+  border-bottom: 1px solid var(--rule);
+}
+.db-gate-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 8pt;
+  letter-spacing: 0.12em;
+  color: var(--bg);
+  background: var(--amber);
+  padding: 1pt 5pt;
+  line-height: 1.3;
+}
+.db-gate-title {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 10pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.db-gate-note {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  letter-spacing: 0.04em;
+  color: var(--soft);
+  max-width: 3.6in;
+  text-align: right;
+  line-height: 1.3;
+}
+
+.db-row {
+  display: grid;
+  grid-template-columns: 0.55in 1fr 0.85in;
+  gap: 0.08in;
+  align-items: baseline;
+  padding: 0.028in 0;
+  border-bottom: 0.5px solid var(--rule);
+}
+.db-row:nth-child(even) { background: var(--bg-row); }
+.db-row--head {
+  grid-template-columns: 0.55in 1fr;
+  padding-bottom: 0.01in;
+  border-bottom: none;
+}
+.db-idx {
+  font-family: var(--font-mono);
+  font-size: 7pt;
+  color: var(--soft);
+  letter-spacing: 0.06em;
+}
+.db-name-block { min-width: 0; }
+.db-name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 9pt;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+.db-badges {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: 5px;
+  vertical-align: middle;
+}
+.db-badge {
+  font-family: var(--font-mono);
+  font-size: 5pt;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border: 1px solid var(--amber-dim);
+  color: var(--amber-dim);
+  padding: 0 3pt;
+  line-height: 1.4;
+}
+.db-badge--new { background: var(--amber); color: var(--bg); border-color: var(--amber); }
+.db-badge--spicy { border-color: #E85D4A; color: #E85D4A; }
+.db-serves {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--soft);
+  margin-left: 4px;
+}
+.db-desc {
+  font-size: 6.5pt;
+  line-height: 1.3;
+  color: var(--muted);
+  margin-top: 1pt;
+}
+.db-sub, .db-note {
+  font-family: var(--font-mono);
+  font-size: 5.5pt;
+  color: var(--soft);
+  margin-top: 1pt;
+  letter-spacing: 0.02em;
+}
+.db-price {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 9pt;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.db-price-dual {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 7.5pt;
+  text-align: right;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+.db-price-dual .sz {
+  color: var(--soft);
+  font-weight: 400;
+  font-size: 5.5pt;
+  margin-right: 2px;
+}
+
+/* Two-col for dense starters on back */
+.db-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.22in;
+}
+.db-split .db-row {
+  grid-template-columns: 0.4in 1fr 0.7in;
+}
+
+/* Pizza block */
+.db-pizza {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 0 0.2in;
+  margin-top: 0.04in;
+}
+.db-byo {
+  border: 1px solid var(--rule);
+  padding: 0.08in 0.1in;
+  background: rgba(245, 185, 66, 0.03);
+}
+.db-byo-title {
+  font-family: var(--font-mono);
+  font-size: 8pt;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 0.05in;
+  color: var(--amber);
+}
+.db-byo-base {
+  font-family: var(--font-mono);
+  font-size: 7.5pt;
+  line-height: 1.45;
+  margin-bottom: 0.06in;
+}
+.db-byo-base .p { color: var(--amber); font-weight: 600; }
+.db-byo-cat { margin-bottom: 0.05in; }
+.db-byo-cat-title {
+  font-family: var(--font-mono);
+  font-size: 6.5pt;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+.db-byo-cat-title .each { color: var(--muted); margin-left: 4px; }
+.db-byo-list {
+  font-size: 6.5pt;
+  color: var(--muted);
+  line-height: 1.35;
+  margin-top: 1pt;
+}
+
+/* Footer legend */
+.db-footer {
+  margin-top: auto;
+  padding-top: 0.08in;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 6pt;
+  letter-spacing: 0.08em;
+  color: var(--soft);
+  text-transform: uppercase;
+}
+.db-legend { display: flex; gap: 0.18in; align-items: center; }
+.db-legend-item { display: flex; align-items: center; gap: 4px; }
+
+</style>
+</head>
+<body data-concept="01-departure-board" data-side="front">
+
+<div class="page">
+  
+    <header class="db-header">
+      <div>
+        <div class="db-brand">CONCOURSE</div>
+        <div class="db-tagline">Bowl · Bar · Grill</div>
+      </div>
+      <div class="db-board-label">Kitchen · Board A</div>
+      <div class="db-meta">
+        <strong>NOW SERVING</strong>
+        (714) 666-2695<br>
+        3364 E La Palma Ave, Anaheim, CA 92806
+      </div>
+    </header>
+    <div class="db-colhead">
+      <div>#</div>
+      <div>Flight / Item</div>
+      <div class="r">Fare</div>
+    </div>
+  <div class="db-body">
+    
+      <div class="db-split" style="flex:1; align-content:start;">
+        <div>
+    <section class="db-section">
+      <div class="db-gate">
+        <span class="db-gate-code">A01</span>
+        <span class="db-gate-title">Salads</span>
+        <div class="db-gate-note">Dressings: Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese. Add Proteins: Chicken Breast +$4 · Steak +$5 · Shrimp +$5</div>
+      </div>
+      
+    <div class="db-row">
+      <div class="db-idx">01</div>
+      <div class="db-name-block">
+        <div class="db-name">House Salad<span class="db-badges"><span class="db-badge">GF</span><span class="db-badge">VG</span></span></div>
+        <div class="db-desc">Romaine lettuce, tomato, cucumber, mozzarella &amp; carrots.</div>
+        
+        <div class="db-note">Ask for no cheese for vegan option</div>
+      </div>
+      <div class="db-price">$9</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">02</div>
+      <div class="db-name-block">
+        <div class="db-name">Caesar Salad<span class="db-badges"><span class="db-badge">GF</span></span></div>
+        <div class="db-desc">Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.</div>
+        
+        <div class="db-note">Ask for no croutons for gluten-free option</div>
+      </div>
+      <div class="db-price">$9.50</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">03</div>
+      <div class="db-name-block">
+        <div class="db-name">Chinese Chicken Salad</div>
+        <div class="db-desc">Grilled chicken breast, shredded cabbage, romaine lettuce, sweet &amp; savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions &amp; sesame seeds.</div>
+        
+        
+      </div>
+      <div class="db-price">$14</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">04</div>
+      <div class="db-name-block">
+        <div class="db-name">Taco Salad</div>
+        <div class="db-desc">Black beans, shredded lettuce and seasoned ground beef adorn this local favorite. Topped with shredded cheddar cheese, avocado, pico de gallo and sour cream. Served with tortilla chips and chipotle ranch dressing.</div>
+        
+        
+      </div>
+      <div class="db-price">$14</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">05</div>
+      <div class="db-name-block">
+        <div class="db-name">Cobb Salad<span class="db-badges"><span class="db-badge">GF</span></span></div>
+        <div class="db-desc">Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles &amp; tomato.</div>
+        
+        
+      </div>
+      <div class="db-price">$15.50</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">06</div>
+      <div class="db-name-block">
+        <div class="db-name">Miso Shrimp Salad<span class="db-badges"><span class="db-badge db-badge--new">NEW</span><span class="db-badge">GF</span></span></div>
+        <div class="db-desc">Grilled shrimp over chopped kale and romaine, dried cranberries, sliced almonds, tossed in miso dressing.</div>
+        
+        
+      </div>
+      <div class="db-price">$15</div>
+    </div>
+    </section>
+    <section class="db-section">
+      <div class="db-gate">
+        <span class="db-gate-code">A02</span>
+        <span class="db-gate-title">Jr. Bowlers</span>
+        
+      </div>
+      
+    <div class="db-row">
+      <div class="db-idx">01</div>
+      <div class="db-name-block">
+        <div class="db-name">Mini Corn Dogs</div>
+        <div class="db-desc">Served with fries.</div>
+        
+        
+      </div>
+      <div class="db-price">$10</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">02</div>
+      <div class="db-name-block">
+        <div class="db-name">Kids Sliders</div>
+        <div class="db-desc">Two mini burgers with american cheese and ketchup. Served with french fries.</div>
+        
+        
+      </div>
+      <div class="db-price">$11.50</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">03</div>
+      <div class="db-name-block">
+        <div class="db-name">Kids Chicken Strips</div>
+        <div class="db-desc">2 chicken fingers with fries.</div>
+        
+        
+      </div>
+      <div class="db-price">$11.50</div>
+    </div>
+    </section></div>
+        <div>
+    <section class="db-section">
+      <div class="db-gate">
+        <span class="db-gate-code">B01</span>
+        <span class="db-gate-title">Sandwiches</span>
+        <div class="db-gate-note">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50. Breads: bun, sourdough, ciabatta</div>
+      </div>
+      
+    <div class="db-row">
+      <div class="db-idx">01</div>
+      <div class="db-name-block">
+        <div class="db-name">BBQ Chicken Sandwich</div>
+        <div class="db-desc">A plump chicken breast brushed with BBQ sauce and piled high with ham, american cheese on onion strings on a burger bun.</div>
+        
+        
+      </div>
+      <div class="db-price">$14</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">02</div>
+      <div class="db-name-block">
+        <div class="db-name">Club Sandwich<span class="db-badges"><span class="db-badge db-badge--new">NEW</span></span></div>
+        <div class="db-desc">Sliced turkey breast, ham, avocado, lettuce &amp; tomato on toasted sourdough with mayo. Served with french fries.</div>
+        
+        
+      </div>
+      <div class="db-price">$14</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">03</div>
+      <div class="db-name-block">
+        <div class="db-name">Grilled Cheese</div>
+        
+        <div class="db-sub">Add ham for $3</div>
+        
+      </div>
+      <div class="db-price">$10</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">04</div>
+      <div class="db-name-block">
+        <div class="db-name">Hot Italian</div>
+        <div class="db-desc">Hot &amp; fresh out of the oven! A bakery fresh ciabatta roll topped with marinara sauce, shredded mozzarella cheese, basil, pepperoncini, pepperoni &amp; sausage. Then oven baked until bubbly &amp; crisp.</div>
+        
+        
+      </div>
+      <div class="db-price">$13.50</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">05</div>
+      <div class="db-name-block">
+        <div class="db-name">Chipotle Chicken Melt</div>
+        <div class="db-desc">A tender chicken breast on a fresh ciabatta roll with chipotle aioli &amp; shredded mozzarella cheese. Served hot &amp; fresh from the oven, topped with lettuce, tomato &amp; sliced cucumber.</div>
+        
+        
+      </div>
+      <div class="db-price">$15</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">06</div>
+      <div class="db-name-block">
+        <div class="db-name">Soup &amp; Half Sandwich</div>
+        <div class="db-desc">A half sandwich (grilled cheese or BLT) on sourdough bread, paired with a cup of our housemade soup of the day.</div>
+        
+        
+      </div>
+      <div class="db-price">$10</div>
+    </div>
+    </section>
+    <section class="db-section">
+      <div class="db-gate">
+        <span class="db-gate-code">B02</span>
+        <span class="db-gate-title">Burgers</span>
+        <div class="db-gate-note">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50</div>
+      </div>
+      
+    <div class="db-row">
+      <div class="db-idx">01</div>
+      <div class="db-name-block">
+        <div class="db-name">Smash Burger</div>
+        <div class="db-desc">Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.</div>
+        
+        
+      </div>
+      <div class="db-price">$13</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">02</div>
+      <div class="db-name-block">
+        <div class="db-name">The Classic Cheeseburger</div>
+        <div class="db-desc">Custom blended beef patty, american cheese, lettuce, tomato, onions &amp; 1000 Island dressing on bakery fresh burger bun.</div>
+        
+        
+      </div>
+      <div class="db-price">$14.50</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">03</div>
+      <div class="db-name-block">
+        <div class="db-name">Cali Burger</div>
+        <div class="db-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.</div>
+        
+        
+      </div>
+      <div class="db-price">$16</div>
+    </div>
+    <div class="db-row">
+      <div class="db-idx">04</div>
+      <div class="db-name-block">
+        <div class="db-name">BBQ Bacon Cheeseburger</div>
+        <div class="db-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh burger bun.</div>
+        
+        
+      </div>
+      <div class="db-price">$16</div>
+    </div>
+    </section></div>
+      </div>
+  </div>
+  
+    <footer class="db-footer">
+      <div class="db-legend">
+        <div class="db-legend-item"><span class="db-badge db-badge--new">NEW</span> New Items</div><div class="db-legend-item"><span class="db-badge db-badge--spicy">SPICY</span> Spicy</div><div class="db-legend-item"><span class="db-badge">VG</span> Vegan</div><div class="db-legend-item"><span class="db-badge">GF</span> Gluten Free</div>
+      </div>
+      <div>Prices subject to change</div>
+    </footer>
+</div>
+</body>
+</html>

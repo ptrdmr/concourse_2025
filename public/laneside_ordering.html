@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1500px;
+    height: 2100px;
+    overflow: hidden;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFF8E1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flyer {
+    width: 1500px;
+    height: 2100px;
+    background: #FFF8E1;
+    border: 28px solid #C2185B;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 80px 60px 70px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 168px;
+    color: #C2185B;
+    letter-spacing: 8px;
+    line-height: 0.9;
+    -webkit-text-stroke: 3px #C2185B;
+  }
+
+  .header .subtitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .header .subtitle .line {
+    width: 100px;
+    height: 3px;
+    background: #FFA000;
+  }
+
+  .header .subtitle span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 52px;
+    color: #FFA000;
+    letter-spacing: 4px;
+  }
+
+  .hungry {
+    font-family: 'Cortado', 'DM Sans', sans-serif;
+    font-size: 240px;
+    font-weight: normal;
+    color: #1A1A1A;
+    text-align: center;
+  }
+
+  .qr-section {
+    text-align: center;
+  }
+
+  .qr-section img {
+    width: 620px;
+    height: 620px;
+  }
+
+  .scan-me {
+    font-family: 'Cortado', 'DM Sans', sans-serif;
+    font-size: 160px;
+    font-weight: normal;
+    color: #1A1A1A;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .bottom {
+    text-align: center;
+  }
+
+  .bottom .laneside {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 152px;
+    color: #1A1A1A;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  .bottom .lane-number {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 64px;
+    font-weight: 800;
+    color: #C2185B;
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+  <div class="flyer">
+    <div class="header">
+      <h1>CONCOURSE</h1>
+      <div class="subtitle">
+        <div class="line"></div>
+        <span>Bowl - Bar - Grill</span>
+        <div class="line"></div>
+      </div>
+    </div>
+
+    <div class="hungry">HUNGRY?</div>
+
+    <div class="qr-section">
+      <img src="../ONLINE%20FOOD%20ORDER.png" alt="QR Code">
+      <div class="scan-me">SCAN ME!</div>
+    </div>
+
+    <div class="bottom">
+      <div class="laneside">LANESIDE ORDERING</div>
+      <div class="lane-number">DON'T FORGET YOUR LANE NUMBER!</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+  "$comment": [
+    "This is the machine-readable version of brand/business.md.",
+    "A human fills in business.md; the AI agent keeps this file in sync with it.",
+    "Every colour and font here becomes a CSS variable that all boards share, so",
+    "changing a colour here restyles every menu and flyer at once.",
+    "",
+    "Everything below is EXAMPLE DATA for a fictional business. Replace it."
+  ],
+
+  "business": {
+    "name": "Northgate Social",
+    "shortName": "Northgate",
+    "tagline": "Coffee \u00b7 Kitchen \u00b7 Cocktails",
+    "phone": "(555) 014-2200",
+    "website": "northgatesocial.example",
+    "orderUrl": "order.northgatesocial.example",
+    "address": {
+      "street": "418 North Gate Road",
+      "city": "Riverbend",
+      "region": "OR",
+      "postal": "97005"
+    },
+    "socials": {
+      "instagram": "@northgatesocial",
+      "facebook": "/northgatesocial"
+    }
+  },
+
+  "voice": {
+    "tone": "Warm, plainspoken, a little proud. Never salesy, never cute.",
+    "headingCase": "uppercase",
+    "avoid": ["exclamation marks", "the word 'delicious'", "clip-art emoji"]
+  },
+
+  "colors": {
+    "brand": "#1F6F5C",
+    "brandBright": "#2FA183",
+    "accent": "#E8B84B",
+    "bg": "#121614",
+    "bgAlt": "#1C2220",
+    "ink": "#FFFFFF",
+    "muted": "rgba(255, 255, 255, 0.66)",
+    "mutedSoft": "rgba(255, 255, 255, 0.42)",
+    "rule": "rgba(255, 255, 255, 0.14)",
+    "paper": "#FBF8F1",
+    "paperInk": "#1A1E1C",
+    "paperMuted": "rgba(26, 30, 28, 0.62)",
+    "paperRule": "rgba(26, 30, 28, 0.16)"
+  },
+
+  "fonts": {
+    "$comment": "google: the query part of a Google Fonts URL. Leave empty and set `url` or `local` for anything else.",
+    "display": {
+      "stack": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "google": "Barlow+Condensed:wght@400;500;600;700;800;900"
+    },
+    "body": {
+      "stack": "'Barlow', 'Helvetica Neue', Arial, sans-serif",
+      "google": "Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400"
+    },
+    "accent": {
+      "stack": "'Libre Baskerville', Georgia, serif",
+      "google": "Libre+Baskerville:ital,wght@0,400;0,700;1,400"
+    },
+    "title": {
+      "stack": "'Alfa Slab One', 'Barlow Condensed', sans-serif",
+      "google": "Alfa+Slab+One"
+    }
+  },
+
+  "assets": {
+    "logoOnDark": "brand/assets/logo-on-dark.svg",
+    "logoOnLight": "brand/assets/logo-on-light.svg"
+  },
+
+  "legal": {
+    "allergen": "Items may contain nuts, dairy, gluten or shellfish. Tell your server about any allergy.",
+    "disclaimer": "Prices subject to change. Specials not valid on holidays.",
+    "copyright": "\u00a9 Northgate Social"
+  },
+
+  "print": {
+    "$comment": "Ask your print shop for these numbers once, then never think about them again.",
+    "requiresBleed": true,
+    "minBodyPointSize": 7,
+    "notes": "Supply PDFs. Printer converts to CMYK in-house."
+  }
+}

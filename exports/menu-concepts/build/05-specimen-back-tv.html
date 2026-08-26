@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURSE — 05-specimen (back-tv)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #FCFCFA;
+  --ink: #141414;
+  --muted: rgba(20, 20, 20, 0.56);
+  --soft: rgba(20, 20, 20, 0.44);
+  --hair: rgba(20, 20, 20, 0.22);
+  --aqua: #DEEAE5;
+  --page-bg: #FCFCFA;
+  --bleed-color: #FCFCFA;
+  --mono: 'Space Mono', 'Courier New', monospace;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #E4E4DF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px 0;
+  }
+}
+
+body {
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+/* ─── Page shell (print) ─── */
+.page {
+  width: 816px;
+  height: 1056px;
+  position: relative;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Swash layer ─── */
+.sp-swashes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.sp-swash-wrap { position: absolute; }
+.sp-swash { display: block; width: 100%; height: 100%; }
+.sp-ball-wrap { position: absolute; }
+.sp-ball-wrap svg { display: block; }
+
+.sp-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 42px 52px 30px;
+}
+
+/* ─── Masthead ─── */
+.sp-mast { text-align: center; margin-bottom: 22px; }
+.sp-corners {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5.5pt;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+.sp-wordmark {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.36em;
+  text-indent: 0.36em; /* balances the trailing tracking so it centres true */
+  text-transform: uppercase;
+}
+.sp-tagline {
+  font-size: 6.5pt;
+  letter-spacing: 0.62em;
+  text-indent: 0.62em;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* ─── Body / columns ─── */
+.sp-body { flex: 1 1 auto; min-height: 0; }
+.sp-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 44px;
+  align-items: start;
+}
+
+.sp-sec-title {
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 4px;
+}
+.sp-sec-notes {
+  font-size: 5.8pt;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 0 2px;
+}
+.sp-sec + .sp-sec { margin-top: 26px; }
+.sp-sec--pizzas { margin-top: 24px; }
+.sp-subhead {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 8px 0 2px;
+}
+
+/* ─── Items ─── */
+.sp-item {
+  padding: 7px 0 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.sp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  justify-content: space-between;
+}
+.sp-item-name {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.sp-b {
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.sp-item-desc {
+  font-size: 6.2pt;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.sp-item-sub {
+  font-size: 6pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-top: 2px;
+}
+.sp-item-price {
+  font-size: 8pt;
+  font-weight: 700;
+  text-align: right;
+  flex-shrink: 0;
+}
+.sp-ml { letter-spacing: 0.04em; }
+
+/* The front carries fewer items — let it breathe more */
+body[data-side='front'] .sp-item { padding: 10px 0 11px; }
+/* Back page carries more items — tighten the grid slightly */
+body[data-side='back'] .sp-item { padding: 5px 0 6px; }
+body[data-side='back'] .sp-sec--pizzas { margin-top: 16px; }
+body[data-side='back'] .sp-sec-notes { padding: 5px 0 1px; }
+body[data-side='back'] .sp-footer { margin-top: 12px; }
+
+/* ─── Aqua card (Jr. Bowlers / Build Your Own) ─── */
+.sp-card {
+  background: var(--aqua);
+  padding: 16px 18px 8px;
+  margin-top: 24px;
+}
+.sp-cols .sp-col > .sp-card:first-child { margin-top: 0; }
+.sp-card .sp-item { border-color: rgba(20, 20, 20, 0.16); }
+.sp-item--byo { padding: 7px 0 8px; }
+.sp-tops { padding: 9px 0 10px; border-bottom: 1px solid rgba(20, 20, 20, 0.16); }
+.sp-tops:last-child { border-bottom: none; }
+
+/* ─── Footer ─── */
+.sp-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ink);
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.sp-footer-mark { font-size: 9pt; font-weight: 700; letter-spacing: 0.28em; }
+.sp-footer-tag { font-size: 5.5pt; letter-spacing: 0.3em; color: var(--muted); margin-top: 3px; }
+.sp-footer-legend {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 5.5pt;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.sp-footer-right {
+  text-align: right;
+  font-size: 5.5pt;
+  line-height: 1.7;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ════════════════ TV (1920×1080) ════════════════ */
+.page--tv {
+  width: 1920px;
+  height: 1080px;
+  box-shadow: none;
+}
+.page--tv .sp-content { padding: 28px 56px 34px; }
+
+.sp-tv-head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 24px;
+}
+.sp-tv-corner { font-size: 18px; letter-spacing: 0.32em; color: var(--muted); }
+.sp-tv-corner--r { text-align: right; }
+.sp-tv-mark { text-align: center; }
+.page--tv .sp-wordmark { font-size: 54px; letter-spacing: 0.32em; text-indent: 0.32em; }
+.page--tv .sp-tagline { font-size: 15px; letter-spacing: 0.55em; text-indent: 0.55em; margin-top: 8px; }
+
+.sp-tv-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.sp-tv-col {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.sp-tv-col:first-child { padding-left: 0; }
+.sp-tv-col:last-child { padding-right: 0; }
+.sp-tv-col + .sp-tv-col { border-left: 1px solid var(--hair); }
+
+.sp-tv-title {
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 4px;
+}
+.sp-tv-sec { margin-bottom: 24px; }
+.sp-tv-sec:last-child { margin-bottom: 0; }
+.sp-tv-sec--cont .sp-tv-title { color: var(--muted); border-color: var(--hair); }
+
+.sp-tv-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+}
+.sp-tv-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.sp-tv-name {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.page--tv .sp-b { font-size: 16px; }
+.sp-tv-price {
+  margin-left: auto;
+  font-size: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sp-tv-sub {
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.sp-tv-blurb {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.75;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sp-tv-blurb strong { color: var(--ink); font-weight: 700; }
+
+.sp-tv-card {
+  background: var(--aqua);
+  padding: 12px 18px 4px;
+  margin-top: 20px;
+}
+.sp-tv-card .sp-tv-item { border-color: rgba(20, 20, 20, 0.16); }
+
+.sp-tv-tops { padding: 9px 0 10px; border-bottom: 1px solid rgba(20, 20, 20, 0.16); }
+.sp-tv-tops:last-child { border-bottom: none; }
+.sp-tv-tops-head { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; }
+.sp-tv-tops-list {
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+</style>
+</head>
+<body data-concept="05-specimen" data-side="back-tv">
+<div class="page page--tv">
+  <div class="sp-swashes"><div class="sp-swash-wrap" style="left:2.2%;top:13.5%;width:16%;height:5.5%;transform:rotate(-1.8deg)"><svg class="sp-swash" viewBox="-24 0 348 60" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M 0.0 15.0 Q 37.5 12.7 56.3 9.9 Q 75.0 7.1 93.8 2.1 Q 112.5 -2.9 131.3 1.7 Q 150.0 6.4 168.8 3.3 Q 187.5 0.3 206.3 3.6 Q 225.0 7.0 243.8 8.5 Q 262.5 10.1 281.3 11.5 Q 319.3 27.0 300.0 41.2 Q 262.5 34.0 243.8 38.6 Q 225.0 43.3 206.3 45.6 Q 187.5 48.0 168.8 55.7 Q 150.0 63.4 131.3 57.5 Q 112.5 51.6 93.8 51.2 Q 75.0 50.9 56.3 50.7 Q 37.5 50.5 18.8 47.6 Q -19.3 29.9 0.0 15.0 Z" fill="#FFD140" fill-opacity="0.6000000000000001"/>
+<g transform="translate(13.8 11.9)"><path d="M 0.0 11.5 Q 33.8 6.5 50.6 8.0 Q 67.5 9.5 84.4 5.6 Q 101.3 1.6 118.1 -0.9 Q 135.0 -3.4 151.9 -2.3 Q 168.8 -1.3 185.6 0.8 Q 202.5 3.0 219.4 5.1 Q 236.3 7.3 253.1 7.9 Q 285.1 20.1 270.0 31.8 Q 236.3 25.5 219.4 30.3 Q 202.5 35.1 185.6 34.2 Q 168.8 33.2 151.9 37.5 Q 135.0 41.7 118.1 41.3 Q 101.3 40.8 84.4 43.6 Q 67.5 46.4 50.6 42.9 Q 33.8 39.3 16.9 33.7 Q -15.1 19.8 0.0 11.5 Z" fill="#FFD140" fill-opacity="0.48"/></g>
+</svg></div><div class="sp-swash-wrap" style="left:69%;top:13.5%;width:14%;height:5%;transform:rotate(2.2deg)"><svg class="sp-swash" viewBox="-24 0 348 60" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M 0.0 22.1 Q 37.5 8.8 56.3 8.7 Q 75.0 8.7 93.8 8.7 Q 112.5 8.8 131.3 4.7 Q 150.0 0.6 168.8 1.2 Q 187.5 1.9 206.3 1.0 Q 225.0 0.2 243.8 5.8 Q 262.5 11.4 281.3 10.2 Q 319.3 23.1 300.0 37.2 Q 262.5 40.0 243.8 40.9 Q 225.0 41.9 206.3 43.9 Q 187.5 45.9 168.8 48.1 Q 150.0 50.3 131.3 53.5 Q 112.5 56.6 93.8 55.7 Q 75.0 54.9 56.3 50.8 Q 37.5 46.7 18.8 48.0 Q -19.3 35.7 0.0 22.1 Z" fill="#5FC6E6" fill-opacity="0.5625"/>
+<g transform="translate(14.2 3.8)"><path d="M 0.0 15.8 Q 33.8 12.8 50.6 11.0 Q 67.5 9.1 84.4 5.6 Q 101.3 2.0 118.1 0.5 Q 135.0 -1.0 151.9 -0.1 Q 168.8 0.7 185.6 3.8 Q 202.5 6.9 219.4 9.5 Q 236.3 12.0 253.1 11.6 Q 285.1 21.1 270.0 31.1 Q 236.3 31.4 219.4 31.8 Q 202.5 32.3 185.6 35.8 Q 168.8 39.3 151.9 38.9 Q 135.0 38.5 118.1 39.9 Q 101.3 41.4 84.4 42.2 Q 67.5 43.0 50.6 40.9 Q 33.8 38.9 16.9 38.1 Q -15.1 26.6 0.0 15.8 Z" fill="#5FC6E6" fill-opacity="0.44999999999999996"/></g>
+</svg></div></div>
+  <div class="sp-content">
+    <header class="sp-tv-head">
+  <span class="sp-tv-corner">MENU</span>
+  <div class="sp-tv-mark">
+    <h1 class="sp-wordmark">CONCOURSE</h1>
+    <div class="sp-tagline">BOWL · BAR · GRILL</div>
+  </div>
+  <span class="sp-tv-corner sp-tv-corner--r">ANAHEIM · CA</span>
+</header>
+    <main class="sp-tv-main"><div class="sp-tv-col">
+  <section class="sp-tv-sec ">
+  <h2 class="sp-tv-title">Starters</h2>
+  <div class="sp-tv-items"><div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">French Fries <span class="sp-b">[GF]</span> <span class="sp-b">[VG]</span></span>
+    <span class="sp-tv-price">$7</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Waffle Fries <span class="sp-b">[GF]</span> <span class="sp-b">[VG]</span></span>
+    <span class="sp-tv-price">$9</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Onion Rings </span>
+    <span class="sp-tv-price">$9.50</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Irish Nachos <span class="sp-b">[GF]</span> <span class="sp-b">[FEEDS 4–6]</span></span>
+    <span class="sp-tv-price">$20</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Concourse Nacho <span class="sp-b">[GF]</span> <span class="sp-b">[SPICY]</span> <span class="sp-b">[FEEDS 4–6]</span></span>
+    <span class="sp-tv-price">$17.50</span>
+  </div>
+  <div class="sp-tv-sub">Add Chicken $4 · Steak $5</div>
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Sliders <span class="sp-b">[NEW]</span></span>
+    <span class="sp-tv-price">$14.50</span>
+  </div>
+  <div class="sp-tv-sub">Add fries $2.50</div>
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Chicken Strips (3) </span>
+    <span class="sp-tv-price">$14.50</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Chicken Wings <span class="sp-b">[GF]</span> <span class="sp-b">[SPICY]</span></span>
+    <span class="sp-tv-price">$16</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Soup of the Day </span>
+    <span class="sp-tv-price">$6</span>
+  </div>
+  
+</div></div>
+</section>
+</div>
+<div class="sp-tv-col">
+  <section class="sp-tv-sec sp-tv-sec--cont">
+  <h2 class="sp-tv-title">Starters (CONT.)</h2>
+  <div class="sp-tv-items"><div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Veggie Tray <span class="sp-b">[VG]</span></span>
+    <span class="sp-tv-price">$9</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Pretzel Sticks (6) </span>
+    <span class="sp-tv-price">$12.50</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Hummus &amp; Pita <span class="sp-b">[VG]</span></span>
+    <span class="sp-tv-price">$12</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Mozzarella Sticks </span>
+    <span class="sp-tv-price">$10.50</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Shrimp Tacos (3) <span class="sp-b">[SPICY]</span></span>
+    <span class="sp-tv-price">$15</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Taco Plate </span>
+    <span class="sp-tv-price">$12</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Quesadilla </span>
+    <span class="sp-tv-price">$11</span>
+  </div>
+  <div class="sp-tv-sub">Add Chicken $4 · Steak or Shrimp $5</div>
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Southwest Rice Bowl </span>
+    <span class="sp-tv-price">$10</span>
+  </div>
+  <div class="sp-tv-sub">Add Chicken $4 · Steak or Shrimp $5</div>
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Chicken Lettuce Cups <span class="sp-b">[NEW]</span> <span class="sp-b">[SPICY]</span></span>
+    <span class="sp-tv-price">$13</span>
+  </div>
+  
+</div></div>
+</section>
+</div>
+<div class="sp-tv-col">
+  <section class="sp-tv-sec ">
+  <h2 class="sp-tv-title">Pizzas</h2>
+  <div class="sp-tv-items"><div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Bowlers Combo </span>
+    <span class="sp-tv-price">M $23 · L $26</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Meat Lovers </span>
+    <span class="sp-tv-price">M $23 · L $26</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Veggie Lovers </span>
+    <span class="sp-tv-price">M $20 · L $23</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">BBQ Chicken </span>
+    <span class="sp-tv-price">M $22 · L $25</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Hawaiian </span>
+    <span class="sp-tv-price">M $20 · L $23</span>
+  </div>
+  
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Hot Honey Pep <span class="sp-b">[SPICY]</span></span>
+    <span class="sp-tv-price">M $22 · L $25</span>
+  </div>
+  
+</div></div>
+</section>
+  <section class="sp-tv-sec sp-tv-card">
+    <h2 class="sp-tv-title">Build Your Own</h2>
+    <div class="sp-tv-items"><div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Medium Pizza </span>
+    <span class="sp-tv-price">$17</span>
+  </div>
+  <div class="sp-tv-sub">cheese only</div>
+</div>
+<div class="sp-tv-item">
+  <div class="sp-tv-row">
+    <span class="sp-tv-name">Large Pizza </span>
+    <span class="sp-tv-price">$20</span>
+  </div>
+  <div class="sp-tv-sub">cheese only</div>
+</div></div>
+    <div class="sp-tv-tops">
+  <div class="sp-tv-tops-head">VEGGIE TOPS <span class="sp-b">$1.50/EACH</span></div>
+  <div class="sp-tv-tops-list">Mushrooms, Sweet Onions, Green Peppers, Tomato, Olives, Pineapple, Jalapenos, Blue Cheese Crumbles, Banana Peppers</div>
+</div>
+<div class="sp-tv-tops">
+  <div class="sp-tv-tops-head">MEAT TOPS <span class="sp-b">$2.50/EACH</span></div>
+  <div class="sp-tv-tops-list">Pepperoni, Italian Sausage, Ham, Applewood Smoked Bacon</div>
+</div>
+  </section>
+</div></main>
+  </div>
+</div>
+</body>
+</html>

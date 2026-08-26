@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ brand.business.name }} — printed menu</title>
+
+<!--
+  The printed 8.5x11 menu. Two things make this print-shop ready:
+
+  * The format carries 0.125in of bleed, so the artwork runs past the trim line
+    and the printer can cut without leaving a white sliver.
+  * It outputs a PDF as well as a JPEG. Text stays vector in the PDF, which is
+    what a printer wants. The JPEG is for the website and for email.
+
+  Run `npm run render -- --guides` to see the trim and safe-area lines drawn on.
+-->
+<meta name="flyer:format" content="print-letter-portrait">
+<meta name="flyer:content" content="food-menu">
+<meta name="flyer:outputs" content="jpeg,pdf">
+<meta name="flyer:scale" content="11">
+<meta name="flyer:title" content="Printed food menu, front">
+
+<link rel="stylesheet" href="../templates/tokens.css">
+<link rel="stylesheet" href="../templates/base.css">
+<style>
+  .safe { --pad: 0.6rem; }
+
+  header { text-align: center; }
+  header img { height: 3.2rem; margin: 0 auto 0.3rem; }
+
+  .title { font-size: 4.4rem; margin-top: 0.2rem; }
+
+  .subtitle { font-size: 1.05rem; margin-top: 0.15rem; }
+
+  .menu-body {
+    columns: 2;
+    column-gap: 2.2rem;
+    column-rule: 1px solid var(--rule);
+    margin-top: 1.2rem;
+  }
+
+  section { break-inside: avoid; margin-bottom: 1.3rem; }
+
+  .section-title {
+    color: var(--brand);
+    font-size: 1.9rem;
+    border-bottom-color: var(--brand);
+    margin-bottom: 0.5rem;
+  }
+
+  .items { gap: 0.75rem; }
+  .item-name { font-size: 1.5rem; }
+  .item-price { font-size: 1.4rem; color: var(--brand); }
+  .item-desc { font-size: 0.85rem; }
+  .item-note { font-size: 0.8rem; color: var(--brand); }
+
+  footer { border-top: 2px solid var(--brand); margin-top: 0.6rem; padding-top: 0.5rem; }
+</style>
+</head>
+<body>
+
+<div class="board board--paper">
+  <div class="safe">
+    <header>
+      <img src="../brand/assets/logo-on-light.svg" alt="">
+      <div class="brand-name">{{ brand.business.name }}</div>
+      <div class="brand-tagline">{{ brand.business.tagline }}</div>
+      <h1 class="title">{{ content.title }}</h1>
+      <p class="subtitle">{{ content.subtitle }}</p>
+    </header>
+
+    <div class="menu-body">
+      {{#each content.sections}}
+      <section>
+        <h2 class="section-title">{{ this.title }}</h2>
+        <div class="items">
+          {{#each this.items}}
+          <article>
+            <div class="item-head item-head--leader">
+              <span class="item-name">{{ this.name }}</span>
+              {{#if this.price}}<span class="lead"></span><span class="item-price">{{ this.price }}</span>{{/if}}
+            </div>
+            {{#if this.desc}}<p class="item-desc">{{ this.desc }}</p>{{/if}}
+            {{#if this.options}}<p class="item-options">{{ this.options }}</p>{{/if}}
+            {{#if this.note}}<p class="item-note">{{ this.note }}</p>{{/if}}
+          </article>
+          {{/each}}
+        </div>
+      </section>
+      {{/each}}
+    </div>
+
+    <footer class="center push">
+      <div class="contact">{{ brand.business.website }} &nbsp;&middot;&nbsp; {{ brand.business.phone }}</div>
+      <p class="legal">{{ brand.legal.allergen }}</p>
+      <p class="legal">{{ brand.legal.disclaimer }}</p>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>

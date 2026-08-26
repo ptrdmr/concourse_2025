@@ -1,0 +1,29 @@
+/* ============================================================================
+   Northgate Social — brand settings.
+
+   This is the whole brand, in one file. Change a colour here and every board
+   changes with it. Nothing else needs touching.
+
+   If you want a different font, pick one from fonts.google.com and change both
+   the line at the top and the matching --font- line below.
+   ============================================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&family=Libre+Baskerville:ital@0;1&display=swap");
+
+:root {
+  /* Colours ---------------------------------------------------------------- */
+  --brand: #1f6f5c;         /* headings, bars, the colour people know you by */
+  --brand-bright: #2fa183;  /* section titles on a dark background */
+  --accent: #e8b84b;        /* prices, and anything the eye should land on */
+  --bg: #121614;            /* the screen background */
+  --bg-alt: #1c2220;        /* a slightly lighter panel */
+  --ink: #ffffff;           /* text */
+  --muted: rgba(255, 255, 255, 0.66);      /* descriptions */
+  --muted-soft: rgba(255, 255, 255, 0.42); /* small print */
+  --rule: rgba(255, 255, 255, 0.14);       /* dividing lines */
+
+  /* Fonts ------------------------------------------------------------------ */
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif; /* item names, headings */
+  --font-body: "Barlow", Arial, sans-serif;                       /* descriptions */
+  --font-accent: "Libre Baskerville", Georgia, serif;             /* the tagline */
+}

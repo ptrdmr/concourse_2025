@@ -1,0 +1,7 @@
+node_modules/
+
+# Finished boards. Regenerated any time from the files in boards/.
+out/
+
+.DS_Store
+Thumbs.db

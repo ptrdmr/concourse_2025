@@ -1,0 +1,470 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: #EFEDE0;
+  --ink: #14142B;
+  --brown-deep: #5E3210;
+  --brown-warm: #9C5F1C;
+  --gold: #EBB63C;
+  --pale: #F6E7A9;
+  --orange: #EE7B25;
+  --coral: #E8434E;
+  --magenta: #DE1B7C;
+  --violet: #7C3FA3;
+  --lavender: #BBA9DE;
+  --cobalt: #1C2C74;
+  --blue: #2A6CD4;
+  --teal: #14A199;
+  --mint: #86D2B6;
+  --page-bg: #EFEDE0;
+  --bleed-color: #EFEDE0;
+  --font-display: 'Syne', 'Trebuchet MS', sans-serif;
+  --font-body: 'Outfit', 'Helvetica Neue', Arial, sans-serif;
+  --muted: rgba(20, 20, 43, 0.62);
+  --soft: rgba(20, 20, 43, 0.42);
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #c8c4b4;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px 0;
+    min-height: 100vh;
+  }
+}
+
+html, body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--cream);
+}
+
+.page {
+  width: 8.5in;
+  height: 11in;
+  overflow: hidden;
+  position: relative;
+  background: var(--cream);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.22);
+}
+
+/* ── Art stage clips bleed for scroll metrics; PDF pass opens it ── */
+.ch-art-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.ch-art {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 840px;
+  height: 1080px;
+  z-index: 0;
+  pointer-events: none;
+}
+.ch-art-svg { display: block; width: 840px; height: 1080px; }
+
+.ch-overlay {
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: 840px;
+  height: 1080px;
+  z-index: 2;
+  pointer-events: none;
+}
+.ch-overlay-svg { display: block; width: 840px; height: 1080px; }
+
+/* ── Reading scrim ── */
+.ch-field {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: 108px;
+  bottom: 48px;
+  background: rgba(239, 237, 224, 0.94);
+  border-radius: 26px 90px 26px 90px;
+  box-shadow: 0 0 0 1px rgba(20, 20, 43, 0.10);
+  z-index: 1;
+  pointer-events: none;
+}
+.page[data-side="back"] .ch-field {
+  top: 96px;
+}
+
+/* ── Content stack ── */
+.ch-content {
+  position: relative;
+  z-index: 3;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* Bottom padding keeps the footer clear of the trim edge (printer safe zone) */
+  padding: 0.16in 0.28in 0.16in;
+}
+
+/* ── Masthead (on artwork) ── */
+.ch-mast {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 0.15in;
+  padding-bottom: 0.06in;
+  flex-shrink: 0;
+}
+.ch-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 34pt;
+  letter-spacing: 0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.ch-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10pt;
+  color: var(--ink);
+  margin-top: 4pt;
+  letter-spacing: 0.02em;
+}
+.ch-dots {
+  display: inline-flex;
+  gap: 4px;
+}
+.ch-dots i {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.ch-mast-right {
+  text-align: right;
+  align-self: center;
+  background: rgba(239, 237, 224, 0.9);
+  border-radius: 999px;
+  padding: 5pt 10pt;
+  box-shadow: 0 0 0 1px rgba(20, 20, 43, 0.08);
+}
+.ch-meta {
+  font-weight: 400;
+  font-size: 6.8pt;
+  line-height: 1.4;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+/* ── Body fills the scrim ── */
+.ch-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.04in;
+  padding: 0.12in 0.12in 0.08in;
+  gap: 0.12in;
+  height: 100%;
+}
+
+.ch-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 0.22in;
+  align-content: start;
+}
+.ch-cols--fill {
+  flex: 1 1 auto;
+  min-height: 0;
+  align-items: start;
+}
+.ch-cols--tight { gap: 0 0.2in; }
+.ch-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.24in;
+}
+
+.ch-section {
+  display: flex;
+  flex-direction: column;
+}
+.ch-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--item-gap, 0.175in);
+}
+.page[data-side="back"] .ch-items { --item-gap: 0.132in; }
+/* Jr. Bowlers is short — let it breathe so the left column keeps pace */
+.ch-tint .ch-items { --item-gap: 0.22in; }
+
+.ch-section-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 0.09in;
+}
+.ch-chip {
+  flex-shrink: 0;
+  display: block;
+}
+.ch-section-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15pt;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--sec, var(--ink));
+  line-height: 1;
+  white-space: nowrap;
+}
+.page[data-side="back"] .ch-section-title { font-size: 14pt; }
+.ch-section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--sec, var(--ink));
+  opacity: 0.3;
+  min-width: 0.15in;
+}
+
+.ch-section-note {
+  font-size: 7.2pt;
+  line-height: 1.4;
+  color: var(--muted);
+  margin-bottom: 0.07in;
+  font-weight: 400;
+}
+
+.ch-item {
+  padding: 0.015in 0;
+}
+
+.ch-item-head {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  flex-wrap: wrap;
+  line-height: 1.15;
+}
+.ch-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11.5pt;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.12;
+}
+.page[data-side="back"] .ch-name { font-size: 10.5pt; }
+
+.ch-price {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 11.5pt;
+  color: var(--sec, var(--magenta));
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.page[data-side="back"] .ch-price { font-size: 10.5pt; }
+
+.ch-price-dual {
+  margin-left: auto;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10pt;
+  color: var(--sec, var(--orange));
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ch-price-dual .sz {
+  font-weight: 600;
+  font-size: 7.5pt;
+  opacity: 0.65;
+  margin-right: 1px;
+}
+
+.ch-desc {
+  font-size: 8.6pt;
+  line-height: 1.4;
+  color: var(--muted);
+  margin-top: 2.5pt;
+  font-weight: 400;
+}
+.page[data-side="back"] .ch-desc { font-size: 8pt; }
+
+.ch-sub, .ch-note {
+  font-size: 7.2pt;
+  font-style: italic;
+  color: var(--soft);
+  margin-top: 1.5pt;
+  font-weight: 400;
+}
+.ch-serves {
+  font-size: 6.5pt;
+  font-style: italic;
+  color: var(--soft);
+  flex-shrink: 0;
+}
+
+/* Badges */
+.ch-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 6.2pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.8pt 4.5pt;
+  border-radius: 999px;
+  line-height: 1.35;
+  flex-shrink: 0;
+  color: #fff;
+  background: var(--ink);
+}
+.ch-badge--new { background: var(--teal); color: #fff; }
+.ch-badge--spicy { background: var(--coral); color: #fff; }
+.ch-badge--vg { background: var(--mint); color: var(--ink); }
+.ch-badge--gf {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid rgba(20, 20, 43, 0.45);
+}
+
+/* Tinted sub-panels */
+.ch-tint {
+  background: color-mix(in srgb, var(--tint, #EBB63C) calc(var(--tint-a, 0.16) * 100%), transparent);
+  border-radius: 14px 36px 14px 28px;
+  padding: 0.2in 0.18in;
+  display: flex;
+  flex-direction: column;
+}
+.page[data-side="back"] .ch-tint { padding: 0.16in 0.16in; }
+
+.ch-subhead {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sec, var(--orange));
+  margin-bottom: 0.07in;
+}
+
+.ch-pizza {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0 0.18in;
+  margin-top: 0.06in;
+  align-items: stretch;
+}
+
+/* Card matches the height of the specialties list; content breathes evenly */
+.ch-byo {
+  margin-top: 0;
+  height: 100%;
+  justify-content: space-evenly;
+}
+.ch-byo .ch-byo-base,
+.ch-byo .ch-byo-cat {
+  margin-bottom: 0;
+}
+.ch-byo-base {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  margin-bottom: 0.1in;
+  text-transform: uppercase;
+}
+.ch-byo-base .ch-price {
+  margin-left: 4px;
+  font-size: 10.5pt;
+}
+.ch-byo-note {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 7.5pt;
+  text-transform: none;
+  color: var(--muted);
+  margin-left: 2px;
+}
+.ch-byo-cat { margin-bottom: 0.09in; }
+.ch-byo-cat-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 9pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.ch-byo-cat-title .each {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 8.2pt;
+  color: var(--orange);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 3px;
+}
+.ch-byo-list {
+  font-size: 8pt;
+  line-height: 1.4;
+  color: var(--muted);
+  margin-top: 2pt;
+}
+
+/* Footer pill — no margin-top:auto (it steals flex space from .ch-body) */
+.ch-footer {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.12in;
+  background: rgba(239, 237, 224, 0.94);
+  border-radius: 999px;
+  padding: 0.055in 0.16in;
+  box-shadow: 0 0 0 1px rgba(20, 20, 43, 0.08);
+  font-size: 6.5pt;
+  font-weight: 500;
+}
+.ch-legend {
+  display: flex;
+  gap: 0.14in;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.ch-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 6pt;
+}
+.ch-footer-phone {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 7.5pt;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}

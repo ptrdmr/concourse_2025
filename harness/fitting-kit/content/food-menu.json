@@ -1,0 +1,67 @@
+{
+  "$comment": [
+    "The main food menu. Used by both the printed 8.5x11 page and the TV board,",
+    "which is the point: one list of prices, so the wall and the table can never",
+    "disagree with each other."
+  ],
+
+  "title": "Kitchen",
+  "subtitle": "Served 11am until an hour before close",
+
+  "sections": [
+    {
+      "title": "Starters",
+      "items": [
+        { "name": "Pimento Dip", "price": "$12", "desc": "Sharp cheddar, roasted red pepper, warm sourdough" },
+        { "name": "Street Corn Ribs", "price": "$11", "desc": "Lime crema, cotija, chili, cilantro" },
+        { "name": "Pork Belly Skewers", "price": "$14", "desc": "Maple glaze, pickled onion, toasted sesame" },
+        { "name": "Soup of the Day", "price": "$8", "desc": "Ask your server, always made in house" }
+      ]
+    },
+    {
+      "title": "Handhelds",
+      "items": [
+        {
+          "name": "Northgate Burger",
+          "price": "$18",
+          "desc": "Two smashed patties, white cheddar, house sauce, brioche, fries",
+          "note": "Add bacon +$3 | Sub salad +$2"
+        },
+        { "name": "Crispy Chicken", "price": "$17", "desc": "Buttermilk brined, slaw, dill pickle, honey butter bun" },
+        { "name": "Mushroom Melt", "price": "$16", "desc": "Roast mushrooms, gruyere, caramelised onion, rye", "note": "Vegetarian" },
+        { "name": "Italian Sub", "price": "$17", "desc": "Salami, capicola, provolone, giardiniera, pressed roll" }
+      ]
+    },
+    {
+      "title": "Flatbreads",
+      "items": [
+        { "name": "Margherita", "price": "$16", "desc": "Tomato, fresh mozzarella, basil" },
+        { "name": "Hot Honey Pepperoni", "price": "$18", "desc": "Cup pepperoni, chili honey, oregano" },
+        { "name": "Garden", "price": "$17", "desc": "Zucchini, red onion, olive, feta, lemon oil" }
+      ]
+    },
+    {
+      "title": "Bowls & Greens",
+      "items": [
+        { "name": "Chopped Salad", "price": "$15", "desc": "Little gem, chickpea, salami, provolone, red wine vinaigrette" },
+        { "name": "Harvest Grain Bowl", "price": "$16", "desc": "Farro, roast squash, kale, pepita, maple tahini" },
+        { "name": "Add to any bowl", "options": "Chicken +$6 | Steak +$9 | Salmon +$9" }
+      ]
+    },
+    {
+      "title": "For the Table",
+      "items": [
+        { "name": "Loaded Fries", "price": "$12", "desc": "White cheddar, scallion, smoked paprika aioli" },
+        { "name": "Fried Olives", "price": "$10", "desc": "Castelvetrano, herb breadcrumb, lemon aioli" },
+        { "name": "Warm Pretzel", "price": "$11", "desc": "Six sticks, beer cheese, coarse mustard" }
+      ]
+    },
+    {
+      "title": "Sweet",
+      "items": [
+        { "name": "Skillet Cookie", "price": "$10", "desc": "Brown butter, sea salt, vanilla ice cream" },
+        { "name": "Seasonal Crisp", "price": "$9", "desc": "Whatever the orchard sent, oat crumble" }
+      ]
+    }
+  ]
+}

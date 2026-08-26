@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anaheim Local Trends — Summary Report</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f7f5f1;
+  --surface: #ffffff;
+  --navy: #1f2a44;
+  --slate: #374151;
+  --muted: #6b7280;
+  --accent: #3b5b7a;
+  --accent-alt: #5a7d7c;
+  --border: #d1d5db;
+  --rule: #e5e7eb;
+}
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--slate);
+  background: var(--bg);
+}
+
+h1, h2, h3, h4 {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: var(--navy);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2rem; margin-bottom: 0.35rem; }
+h2 {
+  font-size: 1.35rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--navy);
+}
+h3 { font-size: 1.05rem; margin: 1.25rem 0 0.5rem; color: var(--accent); }
+
+p { margin-bottom: 0.85rem; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* Header */
+.doc-header {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+.doc-meta {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+}
+.scope-note {
+  font-size: 0.95rem;
+  color: var(--slate);
+  margin-top: 1rem;
+  max-width: 720px;
+}
+
+/* Stat cards */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--accent);
+  padding: 1rem 1.1rem;
+}
+.stat-card .label {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.stat-card .value {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.stat-card .year {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+/* Charts */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin: 1.25rem 0;
+}
+@media (min-width: 700px) {
+  .chart-row.two-col { grid-template-columns: 1fr 1fr; }
+}
+.chart-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.25rem;
+}
+.chart-box canvas { max-height: 280px; }
+.chart-title {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 0.75rem;
+}
+.chart-source {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  line-height: 1.4;
+}
+
+/* Notes & callouts */
+.note-block {
+  background: var(--surface);
+  border-left: 3px solid var(--accent-alt);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  font-size: 0.92rem;
+}
+.note-block ul { margin: 0.5rem 0 0 1.25rem; }
+.note-block li { margin-bottom: 0.35rem; }
+
+.trend-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+@media (min-width: 600px) {
+  .trend-cards { grid-template-columns: 1fr 1fr; }
+}
+.trend-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1.1rem 1.25rem;
+}
+.trend-card h3 { margin-top: 0; font-size: 0.95rem; color: var(--navy); }
+.trend-card p { font-size: 0.88rem; margin-bottom: 0.4rem; }
+.trend-card .tag {
+  display: inline-block;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--accent);
+  margin-bottom: 0.4rem;
+}
+
+.employer-list {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+}
+.employer-list table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+.employer-list th, .employer-list td {
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+.employer-list th {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Sources */
+.sources {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.sources ol {
+  font-size: 0.82rem;
+  margin: 0.75rem 0 0 1.25rem;
+  line-height: 1.55;
+}
+.sources li { margin-bottom: 0.35rem; word-break: break-all; }
+
+.caveat {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.team-note {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule);
+}
+
+@media print {
+  body { background: #fff; }
+  .page { padding: 0; max-width: 100%; }
+  .chart-box { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="doc-header">
+    <h1>Anaheim Local Trends</h1>
+    <div class="doc-meta">Summary report &middot; As of June 2026</div>
+    <p class="scope-note">
+      A concise overview of demographic, economic, housing, and development trends in Anaheim, California.
+      Figures are drawn from U.S. Census Bureau data, BLS employment statistics, Zillow Research indices,
+      Visit Anaheim tourism reports, and City of Anaheim planning documents. Estimates are labeled where applicable.
+    </p>
+  </header>
+
+  <!-- At-a-glance -->
+  <section>
+    <h2>At a Glance</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">Population</div>
+        <div class="value">344,579</div>
+        <div class="year">2024 est. &middot; ACS 1-year</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Median Age</div>
+        <div class="value">36.1</div>
+        <div class="year">2024 est. &middot; ACS 1-year</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Median Home Value</div>
+        <div class="value">$831K</div>
+        <div class="year">2020&ndash;2024 &middot; ACS</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Median Household Income</div>
+        <div class="value">$95,227</div>
+        <div class="year">2020&ndash;2024 &middot; ACS</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Cost of Living Index</div>
+        <div class="value">164.9</div>
+        <div class="year">2026 &middot; US avg = 100</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Population -->
+  <section>
+    <h2>Population &amp; Demographics</h2>
+    <p>
+      Anaheim grew rapidly from 1980 to 2000 (+49.6%), then slowed. The 2020 Census counted 346,824 residents;
+      the most recent ACS 1-year estimate (2024) is 344,579&mdash;essentially flat. The city is majority
+      Hispanic/Latino (53.2%) with a significant Asian population (18.0%).
+    </p>
+
+    <div class="chart-row">
+      <div class="chart-box">
+        <div class="chart-title">Total Population Over Time</div>
+        <canvas id="popChart"></canvas>
+        <div class="chart-source">Source: U.S. Census decennial counts (1980&ndash;2020); 2024 ACS 1-year estimate via Census Reporter.</div>
+      </div>
+    </div>
+
+    <div class="chart-row two-col">
+      <div class="chart-box">
+        <div class="chart-title">Age Distribution (Broad Groups)</div>
+        <canvas id="ageChart"></canvas>
+        <div class="chart-source">Source: ACS 2019&ndash;2023 5-year estimates (Neilsberg/Census); 65+ and Under 18 from QuickFacts 2024.</div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Race &amp; Ethnicity</div>
+        <canvas id="raceChart"></canvas>
+        <div class="chart-source">Source: U.S. Census QuickFacts &amp; ACS 2020&ndash;2024 5-year (Census Dots). Hispanic/Latino is an ethnicity category; other groups are non-Hispanic.</div>
+      </div>
+    </div>
+
+    <div class="note-block">
+      <strong>Key demographic notes</strong>
+      <ul>
+        <li>Average household size: <strong>3.1 persons</strong> (2024 ACS 1-year estimate).</li>
+        <li>Under 18: <strong>22.2%</strong>; 65 and over: <strong>13.0%</strong> (2024 QuickFacts).</li>
+        <li>Growth has shifted from rapid expansion to a mature, stable population base.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Cost of Living -->
+  <section>
+    <h2>Cost of Living &amp; Housing</h2>
+    <p>
+      Anaheim's overall cost of living index is <strong>164.9</strong> (U.S. average = 100), driven primarily
+      by housing costs. Median owner-occupied home value (ACS) is $831,200; Zillow's typical home value index
+      (ZHVI) was $953,649 as of May 2026&mdash;a modeled market estimate, not a closed-sale median.
+    </p>
+
+    <div class="chart-row two-col">
+      <div class="chart-box">
+        <div class="chart-title">Typical Home Value Trend (Zillow ZHVI)</div>
+        <canvas id="homeChart"></canvas>
+        <div class="chart-source">Source: Zillow Home Value Index, city of Anaheim, Dec year-end values. ZHVI is a modeled typical value, not ACS median.</div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Typical Market Rent Trend (Zillow ZORI)</div>
+        <canvas id="rentChart"></canvas>
+        <div class="chart-source">Source: Zillow Observed Rent Index, city of Anaheim, Dec year-end values. ACS median gross rent (2020&ndash;2024): $2,175/mo.</div>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-box">
+        <div class="chart-title">Cost of Living Components vs. U.S. Average (100)</div>
+        <canvas id="colChart"></canvas>
+        <div class="chart-source">Source: RentCafe cost-of-living calculator, 2026. Component indexes converted from % difference vs. national average. Modeled estimates, not official BLS CPI.</div>
+      </div>
+    </div>
+
+    <div class="note-block">
+      <strong>Housing affordability signals</strong>
+      <ul>
+        <li>ACS median gross rent ($2,175) consumes ~27% of median household income ($95,227).</li>
+        <li>Zillow typical home value (~$954K) is roughly <strong>10&times;</strong> median household income.</li>
+        <li>Home values rose ~98% from Dec 2015 ($479K) to Dec 2024 ($947K), with a slight softening in 2025 before rebounding in 2026.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Economy -->
+  <section>
+    <h2>Economy &amp; Business Growth</h2>
+    <p>
+      Employment data below reflects the <strong>Anaheim&ndash;Santa Ana&ndash;Irvine metropolitan division</strong>
+      (Orange County), the closest BLS-published geography. Leisure &amp; hospitality (14.2%) and education &amp;
+      health services (17.5%) are among the largest sectors. Tourism remains the primary economic driver for Anaheim proper.
+    </p>
+
+    <div class="chart-row two-col">
+      <div class="chart-box">
+        <div class="chart-title">Employment by Sector (Orange County MD)</div>
+        <canvas id="sectorChart"></canvas>
+        <div class="chart-source">Source: CA EDD / BLS Current Employment Statistics, Apr 2026 preliminary. Total nonfarm: ~1,686,700.</div>
+      </div>
+      <div class="chart-box">
+        <div class="chart-title">Median Household Income Trend (Inflation-Adjusted)</div>
+        <canvas id="incomeChart"></canvas>
+        <div class="chart-source">Source: U.S. Census ACS 5-year estimates. 2010&ndash;2023 in 2023 dollars; 2020&ndash;2024 in 2024 dollars (not directly comparable across periods).</div>
+      </div>
+    </div>
+
+    <h3>Major Employers (Orange County)</h3>
+    <div class="employer-list">
+      <table>
+        <thead>
+          <tr><th>Employer</th><th>Employees</th><th>Year</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Disneyland Resort (Anaheim)</td><td>36,000</td><td>2025</td></tr>
+          <tr><td>University of California, Irvine</td><td>34,300</td><td>2025</td></tr>
+          <tr><td>Providence South Division</td><td>~25,155</td><td>2024</td></tr>
+          <tr><td>County of Orange</td><td>~14,000</td><td>2024</td></tr>
+          <tr><td>Kaiser Permanente</td><td>10,293</td><td>2024</td></tr>
+        </tbody>
+      </table>
+      <div class="chart-source" style="margin-top:0.5rem;">Source: Orange County Business Journal largest-employers surveys, 2024&ndash;2025.</div>
+    </div>
+
+    <h3>Tourism Indicators</h3>
+    <div class="note-block">
+      <ul>
+        <li><strong>26 million</strong> visitors to Anaheim in 2024, up from 25.8M in 2023 (Visit Anaheim).</li>
+        <li><strong>$6.6 billion</strong> in visitor spending (2024).</li>
+        <li>Disneyland Resort attendance: <strong>~27.4 million</strong> (2024, TEA/AECOM); Disney CEO cited "almost 30 million" for 2025.</li>
+        <li>Anaheim Convention Center: <strong>69 conventions</strong>, ~1M attendees, $1.2B economic impact (2023).</li>
+        <li>Resort-area hotel occupancy: <strong>75.4%</strong> (FY 2023/24); average daily rate ~$237 (2023).</li>
+        <li>Disney's tax contribution to City of Anaheim: <strong>$279 million</strong> (FY 2023, Oxford Economics).</li>
+      </ul>
+    </div>
+
+    <div class="note-block">
+      <strong>Business formation</strong>
+      <p style="margin-bottom:0.5rem;">
+        California new business applications (EIN filings) remain elevated post-pandemic: ~558,612 in 2023 vs. ~363,771 in 2019
+        (+54%). 2024 cooled to ~517,133 but remains well above pre-pandemic norms (Census Business Formation Statistics).
+      </p>
+    </div>
+  </section>
+
+  <!-- Other trends -->
+  <section>
+    <h2>Other Trends Worth Knowing</h2>
+    <div class="trend-cards">
+      <div class="trend-card">
+        <div class="tag">Development</div>
+        <h3>ocVIBE &mdash; $4B Mixed-Use District</h3>
+        <p>92&ndash;100 acres around Honda Center and ARTIC: 2,000+ apartments, two hotels, 35+ restaurants, entertainment venues. Phase I opening 2026&ndash;2027; much of project targets 2028 Olympics.</p>
+      </div>
+      <div class="trend-card">
+        <div class="tag">Development</div>
+        <h3>DisneylandForward &mdash; $1.9B+ Expansion</h3>
+        <p>City Council approved May 2024. Rezones ~490 acres of Disney-owned land for flexible theme park, hotel, and entertainment uses. Minimum $1.9B investment over 10 years; agreement extends through 2064.</p>
+      </div>
+      <div class="trend-card">
+        <div class="tag">Events</div>
+        <h3>2028 Olympics Host Venue</h3>
+        <p>Honda Center will host indoor volleyball. Visit Anaheim targets 30M annual visitors by 2028. U.S. DOT granted $5M for a pedestrian bridge connecting ARTIC to Honda Center.</p>
+      </div>
+      <div class="trend-card">
+        <div class="tag">Housing Policy</div>
+        <h3>Inclusionary Housing Ordinance</h3>
+        <p>Adopted Oct 2024. New rental projects with 35+ units must dedicate 10% to low/very-low income households or pay in-lieu fee. Over 30,000 households on Section 8 waitlist.</p>
+      </div>
+      <div class="trend-card">
+        <div class="tag">Infrastructure</div>
+        <h3>ARTIC Transit Hub</h3>
+        <p>Major renovations underway as part of ocVIBE. Plans include a fourth rail line for future California High-Speed Rail and an elevated pedestrian bridge to Honda Center.</p>
+      </div>
+      <div class="trend-card">
+        <div class="tag">Workforce</div>
+        <h3>Tight Labor Market</h3>
+        <p>OC unemployment ~3.7% (below state and national averages). Disneyland union wages reaching $26/hr by 2026. Wage pressure and talent competition remain key constraints for local employers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Analytical notes -->
+  <section>
+    <h2>Notes for Local Business Owners</h2>
+    <div class="note-block">
+      <ul>
+        <li><strong>Tourism is the economic engine.</strong> With 26M visitors and a path to 30M by 2028, businesses serving visitor spending (food, retail, entertainment, services) have a structurally expanding customer base.</li>
+        <li><strong>Healthcare is the fastest-growing employment sector</strong> in the metro (+15.5% from 2022 to 2025), creating demand for ancillary services.</li>
+        <li><strong>$14B+ in committed development</strong> (ocVIBE, DisneylandForward, residential construction) will bring construction workers, then permanent employees and residents&mdash;each wave creating new demand.</li>
+        <li><strong>Housing costs remain the binding constraint.</strong> High home values and rents limit workforce availability; the inclusionary ordinance and new apartment supply are responses, but demand outstrips supply.</li>
+        <li><strong>2028 Olympics will be a one-time demand shock.</strong> Infrastructure being built now will serve the city for decades beyond the Games.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section class="sources">
+    <h2>Sources &amp; Data Caveats</h2>
+    <p class="caveat">
+      This report synthesizes research from three parallel analyses (demographics, cost of living/housing, economy/business).
+      Where sources conflict, decennial Census counts and ACS official estimates are preferred over third-party aggregators.
+      Zillow ZHVI/ZORI values are modeled market indices, not official medians. Cost-of-living indexes from BestPlaces and
+      RentCafe are proprietary models, not BLS Consumer Price Index data. Employment figures cover the Orange County
+      metropolitan division, not Anaheim city alone.
+    </p>
+    <ol>
+      <li>U.S. Census Bureau QuickFacts, Anaheim city, CA: <a href="https://www.census.gov/quickfacts/fact/table/anaheimcitycalifornia/PST045224">census.gov/quickfacts</a></li>
+      <li>Census Reporter, Anaheim ACS 2024 1-year: <a href="http://censusreporter.org/profiles/16000US0602000-anaheim-ca/">censusreporter.org</a></li>
+      <li>HUD SOCDS Census Data, population history: <a href="https://socds.huduser.gov/Census/totalpop.odb?metro=msa&msacitylist=5945.0*0600002000*1.0">socds.huduser.gov</a></li>
+      <li>Neilsberg, Anaheim population by age (ACS 2019&ndash;2023): <a href="https://www.neilsberg.com/insights/anaheim-ca-population-by-age/">neilsberg.com</a></li>
+      <li>Census Dots, Anaheim race demographics (ACS 2020&ndash;2024): <a href="https://www.censusdots.com/race/anaheim-ca-demographics">censusdots.com</a></li>
+      <li>BestPlaces, Anaheim cost of living (ZIP 92801): <a href="https://www.bestplaces.net/cost_of_living/zip-code/california/anaheim/92801">bestplaces.net</a></li>
+      <li>RentCafe, Anaheim cost of living calculator: <a href="https://www.rentcafe.com/cost-of-living-calculator/us/ca/anaheim/">rentcafe.com</a></li>
+      <li>Zillow Research, ZHVI &amp; ZORI city data: <a href="https://www.zillow.com/research/data/">zillow.com/research/data</a></li>
+      <li>CA EDD / BLS, Anaheim&ndash;Santa Ana&ndash;Irvine MD employment: <a href="https://labormarketinfo.edd.ca.gov/geography/md/anaheim-santa-ana-irvine.html">labormarketinfo.edd.ca.gov</a></li>
+      <li>Visit Anaheim, visitor statistics: <a href="https://www.visitanaheim.org/">visitanaheim.org</a></li>
+      <li>OC Register, 26M visitors in 2024: <a href="https://www.ocregister.com/2025/07/16/26-million-people-traveled-to-anaheim-in-2024-but-ongoing-international-traveler-drop-lingers/">ocregister.com</a></li>
+      <li>Orange County Business Journal, largest employers: <a href="https://www.ocbj.com/">ocbj.com</a></li>
+      <li>Disney / Oxford Economics economic impact study: <a href="https://economicimpact.disneyexperiences.com/">economicimpact.disneyexperiences.com</a></li>
+      <li>City of Anaheim, ocVIBE &amp; DisneylandForward: <a href="https://www.anaheim.net/">anaheim.net</a></li>
+      <li>U.S. Census Business Formation Statistics: <a href="https://www.census.gov/econ/bfs/data/county.html">census.gov/econ/bfs</a></li>
+      <li>Neilsberg, Anaheim median household income (ACS): <a href="https://www.neilsberg.com/insights/anaheim-ca-median-household-income/">neilsberg.com</a></li>
+      <li>Voice of OC, affordable housing ordinance: <a href="https://voiceofoc.org/2024/10/anaheim-inches-closer-to-mandating-affordable-housing/">voiceofoc.org</a></li>
+    </ol>
+
+    <p class="team-note">
+      Research compiled by a team of three specialized models (demographics, cost of living/housing, economy/business)
+      and reconciled into this report. Data reflects publicly available sources as of June 2026.
+    </p>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  Chart.defaults.font.family = '"Segoe UI", system-ui, sans-serif';
+  Chart.defaults.font.size = 12;
+  Chart.defaults.color = '#374151';
+
+  const navy = '#1f2a44';
+  const accent = '#3b5b7a';
+  const accentAlt = '#5a7d7c';
+  const muted = '#8b9aab';
+  const palette = ['#1f2a44', '#3b5b7a', '#5a7d7c', '#6b8f8e', '#8b9aab', '#a3b1bd'];
+
+  const commonOpts = {
+    responsive: true,
+    maintainAspectRatio: true,
+    plugins: { legend: { display: false } }
+  };
+
+  /* Population trend */
+  new Chart(document.getElementById('popChart'), {
+    type: 'line',
+    data: {
+      labels: ['1980', '1990', '2000', '2010', '2020', '2024'],
+      datasets: [{
+        label: 'Population',
+        data: [219311, 266406, 328014, 336265, 346824, 344579],
+        borderColor: navy,
+        backgroundColor: 'rgba(31,42,68,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: navy
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: {
+          beginAtZero: false,
+          min: 200000,
+          ticks: { callback: v => (v / 1000).toFixed(0) + 'K' }
+        }
+      }
+    }
+  });
+
+  /* Age distribution (aggregated) */
+  new Chart(document.getElementById('ageChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Under 18', '18–34', '35–54', '55–64', '65+'],
+      datasets: [{
+        data: [22.2, 23.5, 26.6, 12.1, 13.0],
+        backgroundColor: palette
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: { beginAtZero: true, max: 30, ticks: { callback: v => v + '%' } }
+      }
+    }
+  });
+
+  /* Race/ethnicity */
+  new Chart(document.getElementById('raceChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Hispanic/Latino', 'White (non-Hisp.)', 'Asian', 'Black', 'Other/Multi'],
+      datasets: [{
+        data: [53.2, 22.8, 18.0, 2.3, 3.8],
+        backgroundColor: palette
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 10 } } }
+      }
+    }
+  });
+
+  /* Home value trend */
+  new Chart(document.getElementById('homeChart'), {
+    type: 'line',
+    data: {
+      labels: ['2015', '2018', '2020', '2022', '2024', '2025', '2026'],
+      datasets: [{
+        label: 'Home Value',
+        data: [479229, 614943, 685037, 840315, 947432, 940234, 953649],
+        borderColor: accent,
+        backgroundColor: 'rgba(59,91,122,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointBackgroundColor: accent
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'K' }
+        }
+      }
+    }
+  });
+
+  /* Rent trend */
+  new Chart(document.getElementById('rentChart'), {
+    type: 'line',
+    data: {
+      labels: ['2015', '2018', '2020', '2022', '2024', '2025', '2026'],
+      datasets: [{
+        label: 'Rent',
+        data: [1658, 1927, 2024, 2445, 2620, 2682, 2682],
+        borderColor: accentAlt,
+        backgroundColor: 'rgba(90,125,124,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointBackgroundColor: accentAlt
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { callback: v => '$' + v.toLocaleString() }
+        }
+      }
+    }
+  });
+
+  /* COL components */
+  new Chart(document.getElementById('colChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Overall', 'Housing', 'Utilities', 'Groceries', 'Transport', 'Healthcare'],
+      datasets: [{
+        data: [164.9, 275, 122, 108, 138, 93],
+        backgroundColor: [navy, accent, muted, accentAlt, '#6b8f8e', '#a3b1bd']
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { callback: v => v },
+          grid: { color: '#e5e7eb' }
+        },
+        x: { grid: { display: false } }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => ctx.parsed.y + ' (US avg = 100)' } }
+      }
+    }
+  });
+
+  /* Employment by sector */
+  new Chart(document.getElementById('sectorChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Prof/Business', 'Ed/Health', 'Trade/Trans', 'Leisure/Hosp', 'Government', 'Manufacturing', 'Financial', 'Construction'],
+      datasets: [{
+        data: [18.8, 17.5, 15.0, 14.2, 9.1, 8.7, 6.1, 6.0],
+        backgroundColor: palette.concat(['#c4cdd4'])
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      ...commonOpts,
+      scales: {
+        x: { beginAtZero: true, max: 22, ticks: { callback: v => v + '%' } },
+        y: { grid: { display: false } }
+      }
+    }
+  });
+
+  /* Income trend */
+  new Chart(document.getElementById('incomeChart'), {
+    type: 'line',
+    data: {
+      labels: ['2010', '2015', '2020', '2023', '2024*'],
+      datasets: [{
+        label: 'Median HH Income',
+        data: [81215, 78369, 90524, 90583, 95227],
+        borderColor: navy,
+        backgroundColor: 'rgba(31,42,68,0.08)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: navy
+      }]
+    },
+    options: {
+      ...commonOpts,
+      scales: {
+        y: {
+          beginAtZero: false,
+          ticks: { callback: v => '$' + (v / 1000).toFixed(0) + 'K' }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            afterLabel: ctx => ctx.dataIndex === 4 ? '(2024 dollars; other years in 2023 dollars)' : '(2023 inflation-adjusted dollars)'
+          }
+        }
+      }
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

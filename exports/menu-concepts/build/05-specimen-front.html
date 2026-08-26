@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CONCOURSE — 05-specimen (front)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #FCFCFA;
+  --ink: #141414;
+  --muted: rgba(20, 20, 20, 0.56);
+  --soft: rgba(20, 20, 20, 0.44);
+  --hair: rgba(20, 20, 20, 0.22);
+  --aqua: #DEEAE5;
+  --page-bg: #FCFCFA;
+  --bleed-color: #FCFCFA;
+  --mono: 'Space Mono', 'Courier New', monospace;
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+@media print {
+  html, body { width: 8.5in; height: 11in; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen {
+  body {
+    background: #E4E4DF;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 30px 0;
+  }
+}
+
+body {
+  font-family: var(--mono);
+  color: var(--ink);
+}
+
+/* ─── Page shell (print) ─── */
+.page {
+  width: 816px;
+  height: 1056px;
+  position: relative;
+  background: var(--paper);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Swash layer ─── */
+.sp-swashes {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.sp-swash-wrap { position: absolute; }
+.sp-swash { display: block; width: 100%; height: 100%; }
+.sp-ball-wrap { position: absolute; }
+.sp-ball-wrap svg { display: block; }
+
+.sp-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 42px 52px 30px;
+}
+
+/* ─── Masthead ─── */
+.sp-mast { text-align: center; margin-bottom: 22px; }
+.sp-corners {
+  display: flex;
+  justify-content: space-between;
+  font-size: 5.5pt;
+  letter-spacing: 0.32em;
+  color: var(--muted);
+  margin-bottom: 26px;
+}
+.sp-wordmark {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.36em;
+  text-indent: 0.36em; /* balances the trailing tracking so it centres true */
+  text-transform: uppercase;
+}
+.sp-tagline {
+  font-size: 6.5pt;
+  letter-spacing: 0.62em;
+  text-indent: 0.62em;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+/* ─── Body / columns ─── */
+.sp-body { flex: 1 1 auto; min-height: 0; }
+.sp-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 44px;
+  align-items: start;
+}
+
+.sp-sec-title {
+  font-size: 10pt;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 4px;
+}
+.sp-sec-notes {
+  font-size: 5.8pt;
+  line-height: 1.7;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 7px 0 2px;
+}
+.sp-sec + .sp-sec { margin-top: 26px; }
+.sp-sec--pizzas { margin-top: 24px; }
+.sp-subhead {
+  font-size: 7pt;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 8px 0 2px;
+}
+
+/* ─── Items ─── */
+.sp-item {
+  padding: 7px 0 8px;
+  border-bottom: 1px solid var(--hair);
+}
+.sp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  justify-content: space-between;
+}
+.sp-item-name {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.sp-b {
+  font-size: 6pt;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.sp-item-desc {
+  font-size: 6.2pt;
+  line-height: 1.55;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.sp-item-sub {
+  font-size: 6pt;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--soft);
+  margin-top: 2px;
+}
+.sp-item-price {
+  font-size: 8pt;
+  font-weight: 700;
+  text-align: right;
+  flex-shrink: 0;
+}
+.sp-ml { letter-spacing: 0.04em; }
+
+/* The front carries fewer items — let it breathe more */
+body[data-side='front'] .sp-item { padding: 10px 0 11px; }
+/* Back page carries more items — tighten the grid slightly */
+body[data-side='back'] .sp-item { padding: 5px 0 6px; }
+body[data-side='back'] .sp-sec--pizzas { margin-top: 16px; }
+body[data-side='back'] .sp-sec-notes { padding: 5px 0 1px; }
+body[data-side='back'] .sp-footer { margin-top: 12px; }
+
+/* ─── Aqua card (Jr. Bowlers / Build Your Own) ─── */
+.sp-card {
+  background: var(--aqua);
+  padding: 16px 18px 8px;
+  margin-top: 24px;
+}
+.sp-cols .sp-col > .sp-card:first-child { margin-top: 0; }
+.sp-card .sp-item { border-color: rgba(20, 20, 20, 0.16); }
+.sp-item--byo { padding: 7px 0 8px; }
+.sp-tops { padding: 9px 0 10px; border-bottom: 1px solid rgba(20, 20, 20, 0.16); }
+.sp-tops:last-child { border-bottom: none; }
+
+/* ─── Footer ─── */
+.sp-footer {
+  margin-top: 18px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ink);
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+.sp-footer-mark { font-size: 9pt; font-weight: 700; letter-spacing: 0.28em; }
+.sp-footer-tag { font-size: 5.5pt; letter-spacing: 0.3em; color: var(--muted); margin-top: 3px; }
+.sp-footer-legend {
+  flex: 1 1 auto;
+  text-align: center;
+  font-size: 5.5pt;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.sp-footer-right {
+  text-align: right;
+  font-size: 5.5pt;
+  line-height: 1.7;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* ════════════════ TV (1920×1080) ════════════════ */
+.page--tv {
+  width: 1920px;
+  height: 1080px;
+  box-shadow: none;
+}
+.page--tv .sp-content { padding: 28px 56px 34px; }
+
+.sp-tv-head {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 24px;
+}
+.sp-tv-corner { font-size: 18px; letter-spacing: 0.32em; color: var(--muted); }
+.sp-tv-corner--r { text-align: right; }
+.sp-tv-mark { text-align: center; }
+.page--tv .sp-wordmark { font-size: 54px; letter-spacing: 0.32em; text-indent: 0.32em; }
+.page--tv .sp-tagline { font-size: 15px; letter-spacing: 0.55em; text-indent: 0.55em; margin-top: 8px; }
+
+.sp-tv-main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.sp-tv-col {
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.sp-tv-col:first-child { padding-left: 0; }
+.sp-tv-col:last-child { padding-right: 0; }
+.sp-tv-col + .sp-tv-col { border-left: 1px solid var(--hair); }
+
+.sp-tv-title {
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: 4px;
+}
+.sp-tv-sec { margin-bottom: 24px; }
+.sp-tv-sec:last-child { margin-bottom: 0; }
+.sp-tv-sec--cont .sp-tv-title { color: var(--muted); border-color: var(--hair); }
+
+.sp-tv-item {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--hair);
+}
+.sp-tv-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.sp-tv-name {
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.page--tv .sp-b { font-size: 16px; }
+.sp-tv-price {
+  margin-left: auto;
+  font-size: 25px;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.sp-tv-sub {
+  font-size: 17px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.sp-tv-blurb {
+  margin-top: 20px;
+  font-size: 17px;
+  line-height: 1.75;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sp-tv-blurb strong { color: var(--ink); font-weight: 700; }
+
+.sp-tv-card {
+  background: var(--aqua);
+  padding: 12px 18px 4px;
+  margin-top: 20px;
+}
+.sp-tv-card .sp-tv-item { border-color: rgba(20, 20, 20, 0.16); }
+
+.sp-tv-tops { padding: 9px 0 10px; border-bottom: 1px solid rgba(20, 20, 20, 0.16); }
+.sp-tv-tops:last-child { border-bottom: none; }
+.sp-tv-tops-head { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; }
+.sp-tv-tops-list {
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+</style>
+</head>
+<body data-concept="05-specimen" data-side="front">
+<div class="page">
+  <div class="sp-swashes"><div class="sp-swash-wrap" style="left:47%;top:37%;width:46%;height:6.2%;transform:rotate(-2.5deg)"><svg class="sp-swash" viewBox="-24 0 348 60" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M 0.0 17.4 Q 37.5 12.3 56.3 7.4 Q 75.0 2.4 93.8 1.7 Q 112.5 1.0 131.3 -0.4 Q 150.0 -1.8 168.8 0.1 Q 187.5 2.1 206.3 3.1 Q 225.0 4.2 243.8 5.5 Q 262.5 6.9 281.3 9.5 Q 319.3 26.0 300.0 39.9 Q 262.5 33.6 243.8 38.2 Q 225.0 42.8 206.3 44.8 Q 187.5 46.7 168.8 49.6 Q 150.0 52.5 131.3 54.8 Q 112.5 57.1 93.8 54.0 Q 75.0 50.9 56.3 50.8 Q 37.5 50.7 18.8 47.7 Q -19.3 31.1 0.0 17.4 Z" fill="#5FC6E6" fill-opacity="0.6000000000000001"/>
+<g transform="translate(24.5 0.4)"><path d="M 0.0 14.7 Q 33.8 5.7 50.6 8.5 Q 67.5 11.4 84.4 8.1 Q 101.3 4.9 118.1 3.1 Q 135.0 1.2 151.9 2.4 Q 168.8 3.5 185.6 2.1 Q 202.5 0.8 219.4 5.1 Q 236.3 9.5 253.1 11.1 Q 285.1 20.4 270.0 28.1 Q 236.3 27.7 219.4 30.5 Q 202.5 33.2 185.6 36.3 Q 168.8 39.4 151.9 39.2 Q 135.0 39.1 118.1 42.7 Q 101.3 46.4 84.4 45.8 Q 67.5 45.3 50.6 41.3 Q 33.8 37.4 16.9 36.8 Q -15.1 25.5 0.0 14.7 Z" fill="#5FC6E6" fill-opacity="0.48"/></g>
+</svg></div><div class="sp-swash-wrap" style="left:5%;top:74%;width:38%;height:5.4%;transform:rotate(1.8deg)"><svg class="sp-swash" viewBox="-24 0 348 60" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<path d="M 0.0 10.3 Q 37.5 11.9 56.3 7.4 Q 75.0 2.8 93.8 0.6 Q 112.5 -1.6 131.3 -4.7 Q 150.0 -7.8 168.8 -2.5 Q 187.5 2.8 206.3 2.3 Q 225.0 1.7 243.8 6.2 Q 262.5 10.7 281.3 11.9 Q 319.3 23.3 300.0 33.6 Q 262.5 33.6 243.8 39.2 Q 225.0 44.8 206.3 44.9 Q 187.5 45.0 168.8 46.6 Q 150.0 48.2 131.3 47.9 Q 112.5 47.6 93.8 50.6 Q 75.0 53.7 56.3 50.2 Q 37.5 46.6 18.8 42.3 Q -19.3 24.1 0.0 10.3 Z" fill="#FFD140" fill-opacity="0.6375"/>
+<g transform="translate(23.0 7.7)"><path d="M 0.0 15.1 Q 33.8 11.2 50.6 9.1 Q 67.5 7.0 84.4 6.6 Q 101.3 6.2 118.1 1.6 Q 135.0 -3.0 151.9 0.5 Q 168.8 4.0 185.6 6.4 Q 202.5 8.8 219.4 9.7 Q 236.3 10.5 253.1 13.4 Q 285.1 23.7 270.0 31.1 Q 236.3 32.3 219.4 34.9 Q 202.5 37.5 185.6 38.4 Q 168.8 39.3 151.9 40.6 Q 135.0 41.9 118.1 43.7 Q 101.3 45.5 84.4 46.1 Q 67.5 46.7 50.6 45.5 Q 33.8 44.3 16.9 39.9 Q -15.1 25.3 0.0 15.1 Z" fill="#FFD140" fill-opacity="0.51"/></g>
+</svg></div><div class="sp-ball-wrap" style="left:6.5%;top:84.5%;width:78px;height:78px;transform:rotate(-14deg)">
+<svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<g stroke="#141414" stroke-opacity="0.32" fill="none" stroke-width="1.6">
+  <circle cx="50" cy="50" r="46"/>
+  <circle cx="42" cy="34" r="5.5"/>
+  <circle cx="58" cy="30" r="5.5"/>
+  <circle cx="53" cy="46" r="6.5"/>
+</g>
+</svg>
+</div></div>
+  <div class="sp-content">
+    <header class="sp-mast">
+  <div class="sp-corners"><span>MENU</span><span>ANAHEIM · CA</span></div>
+  <h1 class="sp-wordmark">CONCOURSE</h1>
+  <div class="sp-tagline">BOWL · BAR · GRILL</div>
+</header>
+    <main class="sp-body"><div class="sp-cols">
+  <div class="sp-col">
+    <section class="sp-sec">
+  <h2 class="sp-sec-title">Salads</h2>
+  <p class="sp-sec-notes">Dressings: Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese. Add Proteins: Chicken Breast +$4 · Steak +$5 · Shrimp +$5</p>
+  <div class="sp-items"><div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">House Salad <span class="sp-b">[GF]</span> <span class="sp-b">[VG]</span></span><span class="sp-item-price">$9</span></div>
+  <div class="sp-item-desc">Romaine, tomato, cucumber, mozzarella &amp; carrots</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Caesar Salad <span class="sp-b">[GF]</span></span><span class="sp-item-price">$9.50</span></div>
+  <div class="sp-item-desc">Romaine, parmesan, croutons, Caesar dressing</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Chinese Chicken Salad </span><span class="sp-item-price">$14</span></div>
+  <div class="sp-item-desc">Grilled chicken, cabbage, sesame dressing, mandarin oranges</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Taco Salad </span><span class="sp-item-price">$14</span></div>
+  <div class="sp-item-desc">Seasoned beef, black beans, cheddar, avocado, pico, chipotle ranch</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Cobb Salad <span class="sp-b">[GF]</span></span><span class="sp-item-price">$15.50</span></div>
+  <div class="sp-item-desc">Chicken, bacon, egg, avocado, blue cheese &amp; tomato</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Miso Shrimp Salad <span class="sp-b">[NEW]</span> <span class="sp-b">[GF]</span></span><span class="sp-item-price">$15</span></div>
+  <div class="sp-item-desc">Grilled shrimp, kale, cranberries, almonds, miso dressing</div>
+  
+</div></div>
+</section>
+    <section class="sp-card">
+  <h2 class="sp-sec-title">Jr. Bowlers</h2>
+  <div class="sp-items"><div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Mini Corn Dogs </span><span class="sp-item-price">$10</span></div>
+  <div class="sp-item-desc">Served with fries</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Kids Sliders </span><span class="sp-item-price">$11.50</span></div>
+  <div class="sp-item-desc">Two mini burgers with cheese &amp; fries</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Kids Chicken Strips </span><span class="sp-item-price">$11.50</span></div>
+  <div class="sp-item-desc">2 chicken fingers with fries</div>
+  
+</div></div>
+</section>
+  </div>
+  <div class="sp-col">
+    <section class="sp-sec">
+  <h2 class="sp-sec-title">Sandwiches</h2>
+  <p class="sp-sec-notes">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50. Breads: bun, sourdough, ciabatta</p>
+  <div class="sp-items"><div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">BBQ Chicken Sandwich </span><span class="sp-item-price">$14</span></div>
+  <div class="sp-item-desc">BBQ chicken, ham, american cheese, onion strings</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Club Sandwich <span class="sp-b">[NEW]</span></span><span class="sp-item-price">$14</span></div>
+  <div class="sp-item-desc">Turkey, ham, avocado, lettuce &amp; tomato on sourdough</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Grilled Cheese </span><span class="sp-item-price">$10</span></div>
+  <div class="sp-item-desc">Add ham for $3</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Hot Italian </span><span class="sp-item-price">$13.50</span></div>
+  <div class="sp-item-desc">Ciabatta, marinara, mozzarella, pepperoni &amp; sausage</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Chipotle Chicken Melt </span><span class="sp-item-price">$15</span></div>
+  <div class="sp-item-desc">Chicken, chipotle aioli, mozzarella on ciabatta</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Soup &amp; Half Sandwich </span><span class="sp-item-price">$10</span></div>
+  <div class="sp-item-desc">Half grilled cheese or BLT with soup of the day</div>
+  
+</div></div>
+</section>
+    <section class="sp-sec">
+  <h2 class="sp-sec-title">Burgers</h2>
+  <p class="sp-sec-notes">Includes fries or side salad. Upgrade: veggies +$2.50, onion rings or waffle fries +$3. Add: cheese +$1.50 · bacon +$3 · avocado +$1.50</p>
+  <div class="sp-items"><div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Smash Burger </span><span class="sp-item-price">$13</span></div>
+  <div class="sp-item-desc">Two 2oz patties, american cheese, grilled onions. Extra patty +$3</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">The Classic Cheeseburger </span><span class="sp-item-price">$14.50</span></div>
+  <div class="sp-item-desc">Beef, american cheese, lettuce, tomato, 1000 Island</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">Cali Burger </span><span class="sp-item-price">$16</span></div>
+  <div class="sp-item-desc">Bacon, pepperjack, avocado, chipotle aioli</div>
+  
+</div>
+<div class="sp-item">
+  <div class="sp-row"><span class="sp-item-name">BBQ Bacon Cheeseburger </span><span class="sp-item-price">$16</span></div>
+  <div class="sp-item-desc">Onion straws, bacon, american cheese &amp; BBQ</div>
+  
+</div></div>
+</section>
+  </div>
+</div></main>
+    <footer class="sp-footer">
+  <div class="sp-footer-left">
+    <div class="sp-footer-mark">CONCOURSE</div>
+    <div class="sp-footer-tag">BOWL · BAR · GRILL</div>
+  </div>
+  <div class="sp-footer-legend"><span class="sp-b">[NEW]</span> NEW ITEMS &nbsp; <span class="sp-b">[SPICY]</span> SPICY &nbsp; <span class="sp-b">[VG]</span> VEGAN &nbsp; <span class="sp-b">[GF]</span> GLUTEN FREE</div>
+  <div class="sp-footer-right">
+    <div>(714) 666-2695</div>
+    <div>3364 E LA PALMA AVE, ANAHEIM, CA 92806</div>
+  </div>
+</footer>
+  </div>
+</div>
+</body>
+</html>

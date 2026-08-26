@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=3300">
+<title>Concourse – July 4th Weekend Hours (11x8.5 Door Sign)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #B22234;
+    --blue: #0A3161;
+    --white: #ffffff;
+    --ink: #1a1a1a;
+    --grey: #5b5b5b;
+  }
+
+  html, body { background: #000; overflow: hidden; }
+
+  .sign {
+    width: 3300px;
+    height: 2550px;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Barlow Condensed', 'Barlow', sans-serif;
+    color: var(--ink);
+  }
+
+  /* Flag-stripe bars, top and bottom */
+  .stripes {
+    display: flex;
+    width: 100%;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+  .stripes span { flex: 1; }
+  .stripes span:nth-child(odd)  { background: var(--red); }
+  .stripes span:nth-child(even) { background: var(--blue); }
+
+  .header {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0 30px;
+  }
+
+  .logo {
+    width: 1080px;
+    height: auto;
+    margin-bottom: -10px;
+  }
+
+  .eyebrow {
+    font-family: 'Barlow', sans-serif;
+    font-size: 54px;
+    font-weight: 800;
+    letter-spacing: 9px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .title {
+    font-size: 210px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 0.92;
+    color: var(--blue);
+  }
+
+  .title .accent { color: var(--red); }
+
+  .subtitle {
+    font-family: 'Barlow', sans-serif;
+    font-size: 56px;
+    font-weight: 600;
+    color: var(--grey);
+    margin-top: 20px;
+  }
+
+  .hours {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  .hours-row {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 90px;
+    position: relative;
+    border-top: 4px solid rgba(10,49,97,0.12);
+  }
+
+  .hours-row.open-row { background: var(--white); }
+  .hours-row.open-row .day { color: var(--blue); }
+  .hours-row.open-row .time { color: var(--red); }
+
+  .hours-row.closed-row {
+    background: var(--red);
+    border-top: none;
+  }
+  .hours-row.closed-row .day,
+  .hours-row.closed-row .time { color: var(--white); }
+  .hours-row.closed-row .date-note { color: rgba(255,255,255,0.85); }
+
+  .day-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .day {
+    font-size: 175px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .date-note {
+    font-family: 'Barlow', sans-serif;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--grey);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 10px;
+  }
+
+  .time {
+    font-size: 158px;
+    font-weight: 800;
+    text-align: right;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .footer {
+    flex: 0 0 auto;
+    text-align: center;
+    padding: 36px 0 46px;
+    font-family: 'Barlow', sans-serif;
+    font-size: 44px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--blue);
+  }
+
+  .footer .star { color: var(--red); margin: 0 14px; }
+</style>
+</head>
+<body>
+<div class="sign">
+  <div class="stripes"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+  <div class="header">
+    <img src="branding/logo.png" class="logo" alt="Concourse Bowl Bar Grill" />
+    <div class="eyebrow">Independence Day Weekend</div>
+    <div class="title">Holiday <span class="accent">Hours</span></div>
+    <div class="subtitle">Friday, July 3 &ndash; Sunday, July 5</div>
+  </div>
+
+  <div class="hours">
+    <div class="hours-row open-row">
+      <div class="day-block">
+        <div class="day">Friday</div>
+      </div>
+      <div class="time">11:00am &ndash; Midnight</div>
+    </div>
+    <div class="hours-row closed-row">
+      <div class="day-block">
+        <div class="day">Saturday</div>
+        <div class="date-note">Closed for Independence Day</div>
+      </div>
+      <div class="time">Closed</div>
+    </div>
+    <div class="hours-row open-row">
+      <div class="day-block">
+        <div class="day">Sunday</div>
+      </div>
+      <div class="time">12:00pm &ndash; 10:00pm</div>
+    </div>
+  </div>
+
+  <div class="footer">Have a safe &amp; happy 4th <span class="star">&#9733;</span> See you on the lanes!</div>
+
+  <div class="stripes"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+</body>
+</html>

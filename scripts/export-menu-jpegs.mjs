@@ -18,39 +18,74 @@ const outDir = path.join(root, 'exports', 'menu-jpegs')
 const MENUS = [
   { slug: 'draft_1', file: 'draft_1.html', width: 1920, height: 1080 },
   { slug: 'draft_2', file: 'draft_2.html', width: 1920, height: 1080 },
+  { slug: 'front_tv', file: 'front-tv.html', width: 1920, height: 1080 },
+  { slug: 'back_tv', file: 'back-tv.html', width: 1920, height: 1080 },
   { slug: 'bottles_cans', file: 'bottles_cans.html', width: 1920, height: 1080 },
   { slug: 'wines', file: 'wines.html', width: 1920, height: 1080 },
-  /** 5×7 in portrait at 300dpi */
+  /** 5×7 portrait at 300dpi */
   { slug: 'bottles_wines_5x7', file: 'bottles_wines_5x7.html', width: 1500, height: 2100 },
+  { slug: 'happy_hour_fall2026', file: 'happy_hour_fall2026.html', width: 1500, height: 2100 },
+  { slug: 'specialty_cocktails_fall2026', file: 'specialty_cocktails_fall2026.html', width: 1500, height: 2100 },
+  { slug: 'happy_hour_banner', file: 'happy_hour_banner.html', width: 1920, height: 270 },
+  { slug: 'happy_hour_banner_1280', file: 'happy_hour_banner_1280.html', width: 1280, height: 328 },
+  { slug: 'summer_monday', file: 'summer_monday.html', width: 1920, height: 270 },
+  { slug: 'summer_tue_thu', file: 'summer_tue_thu.html', width: 1920, height: 270 },
+  { slug: 'summer_friday', file: 'summer_friday.html', width: 1920, height: 270 },
+  { slug: 'summer_saturday', file: 'summer_saturday.html', width: 1920, height: 270 },
+  { slug: 'summer_sunday', file: 'summer_sunday.html', width: 1920, height: 270 },
+  { slug: 'summer_monday_1280', file: 'summer_monday_1280.html', width: 1280, height: 328 },
+  { slug: 'summer_tue_thu_1280', file: 'summer_tue_thu_1280.html', width: 1280, height: 328 },
+  { slug: 'summer_friday_1280', file: 'summer_friday_1280.html', width: 1280, height: 328 },
+  { slug: 'summer_saturday_1280', file: 'summer_saturday_1280.html', width: 1280, height: 328 },
+  { slug: 'summer_sunday_1280', file: 'summer_sunday_1280.html', width: 1280, height: 328 },
+  /** 5×7 portrait at 300dpi — laneside ordering flyer */
+  { slug: 'laneside_ordering', file: 'laneside_ordering.html', width: 1500, height: 2100 },
+  /** Reservation page mockup — full-page capture */
+  { slug: 'reservations', file: 'reservations.html', width: 1280, fullPage: true },
+  /** 11×8.5 landscape door sign at 300dpi */
+  { slug: 'july4_weekend_hours_sign', file: 'july4_weekend_hours_sign.html', width: 3300, height: 2550 },
+  /** 8.5×11 portrait cafe menu at 300dpi (CSS sized in inches; scale up from 96dpi) */
+  { slug: 'menu_front', file: 'menu_front.html', width: 2550, height: 3300, scale: 3.125 },
+  { slug: 'menu_back', file: 'menu_back.html', width: 2550, height: 3300, scale: 3.125 },
 ]
 
 async function main() {
   fs.mkdirSync(outDir, { recursive: true })
 
+  const filter = new Set(process.argv.slice(2))
+  const menus = filter.size ? MENUS.filter((m) => filter.has(m.slug)) : MENUS
+
   const browser = await chromium.launch({ headless: true })
 
-  for (const { slug, file, width, height } of MENUS) {
+  for (const { slug, file, width, height, fullPage, scale } of menus) {
     const htmlPath = path.join(publicDir, file)
     if (!fs.existsSync(htmlPath)) {
       console.warn('Skip (missing):', htmlPath)
       continue
     }
 
+    // When `scale` is set, the page is laid out in CSS px (e.g. inches at 96dpi)
+    // and we render at deviceScaleFactor to reach the target output resolution.
+    const useScale = typeof scale === 'number' && scale > 0
+    const cssW = useScale ? Math.round(width / scale) : width
+    const cssH = useScale ? Math.round(height / scale) : (height || 1080)
+
     const page = await browser.newPage({
-      viewport: { width, height },
-      deviceScaleFactor: 1,
+      viewport: { width: cssW, height: cssH },
+      deviceScaleFactor: useScale ? scale : 1,
     })
 
     const url = pathToFileURL(htmlPath).href
     await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 })
 
     const outFile = path.join(outDir, `${slug}.jpg`)
-    await page.screenshot({
-      path: outFile,
-      type: 'jpeg',
-      quality: 92,
-      clip: { x: 0, y: 0, width, height },
-    })
+    const screenshotOpts = { path: outFile, type: 'jpeg', quality: 92 }
+    if (fullPage) {
+      screenshotOpts.fullPage = true
+    } else {
+      screenshotOpts.clip = { x: 0, y: 0, width: cssW, height: cssH }
+    }
+    await page.screenshot(screenshotOpts)
 
     await page.close()
     console.log('Wrote', path.relative(root, outFile))

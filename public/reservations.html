@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concourse Bowling - Summer 2026 Reservation Page Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,700&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Oswald", sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 300;
+  color: #fff;
+  background-color: #041c2c;
+  background-image:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,1.0) 90%),
+    url('https://secure.meriq.com/concoursebowling/images/concourse_bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+}
+
+a { color: #fff; text-decoration: none; font-weight: bold; }
+a:hover { color: #fff; text-decoration: none; }
+
+h1, h2, h3 {
+  color: #fff;
+  line-height: 180%;
+  margin: 0 0 10px 0;
+  font-weight: normal;
+  font-family: "Bebas Neue", sans-serif;
+  padding: 0;
+}
+
+h3 { font-size: 32px; }
+
+hr { border: none; border-top: 1px solid #fff; margin: 15px 0; }
+
+.back-link {
+  font-style: italic;
+  font-size: 14px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* ---- Hero / Top ---- */
+.top-section {
+  text-align: center;
+  padding: 10px 15px 0;
+}
+
+.logo-img {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  display: block;
+}
+
+.top-text {
+  text-align: center;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  padding: 10px 30px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* ---- Main content area ---- */
+.content-row {
+  display: flex;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+@media (max-width: 767px) {
+  .content-row { flex-direction: column; }
+}
+
+/* ---- Left sidebar ---- */
+.sidebar {
+  flex: 0 0 320px;
+  min-width: 0;
+}
+
+@media (max-width: 991px) {
+  .sidebar { flex: 0 0 280px; }
+}
+
+@media (max-width: 767px) {
+  .sidebar { display: none; }
+}
+
+.start-header {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 28px;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.start-header .fas { font-size: 24px; margin-right: 5px; }
+
+.info-wrapper {
+  font-size: 15px;
+  line-height: 26px;
+}
+
+.hours-row {
+  display: flex;
+}
+
+.hours-day { flex: 0 0 55%; font-weight: bold; text-transform: uppercase; }
+.hours-time { flex: 1; }
+
+.hours-row.today { color: #e53935; font-weight: bold; }
+.hours-row.today .hours-day::before {
+  content: "\203A ";
+  margin-right: 4px;
+}
+
+/* ---- Right: reservation cards ---- */
+.cards-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.cards-header {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+/* ---- Summer specials section ---- */
+.summer-banner {
+  background: #1A1A1A;
+  color: #FFD54F;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 28px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 5px 5px 0 0;
+  margin-bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.summer-banner .banner-sub {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-transform: none;
+  color: rgba(255,213,79,0.6);
+  font-weight: 400;
+}
+
+.summer-section {
+  background: #1A1A1A;
+  border-radius: 0 0 5px 5px;
+  padding: 0 12px 12px;
+  margin-bottom: 10px;
+}
+
+.sunset-strip {
+  display: flex;
+  height: 5px;
+  border-radius: 0;
+  overflow: hidden;
+  margin: 0;
+}
+.sunset-strip div { flex: 1; }
+
+.sunset-strip-bottom {
+  display: flex;
+  height: 4px;
+  border-radius: 0 0 3px 3px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.sunset-strip-bottom div { flex: 1; }
+
+/* Summer card overrides */
+.card {
+  display: flex;
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.4);
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0,0,0,0.6);
+}
+
+@media (max-width: 767px) {
+  .card { flex-direction: column; }
+}
+
+.card-img-wrap {
+  flex: 0 0 40%;
+  max-width: 40%;
+  overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .card-img-wrap {
+    flex: none;
+    max-width: 100%;
+  }
+}
+
+.card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+@media (max-width: 767px) {
+  .card-img-wrap img { clip-path: none; }
+}
+
+.card-body {
+  flex: 1;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-body h3 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 30px;
+  color: #2192ce;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.card-body h3 .new-tag { color: #e53935; }
+
+.card-body .desc {
+  color: #555;
+  font-size: 14px;
+  line-height: 20px;
+  margin-bottom: 6px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.card-body .continue-link {
+  color: #2192ce;
+  font-style: italic;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.card-body .continue-link:hover { text-decoration: underline; }
+
+/* Summer-colored cards: burnt amber = game special hero */
+.card.summer-hero {
+  background: #FF6F00;
+  margin-bottom: 12px;
+}
+.card.summer-hero .card-body h3 { color: #fff; font-size: 34px; }
+.card.summer-hero .card-body .desc { color: rgba(255,255,255,0.85); }
+.card.summer-hero .card-body .summer-price {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 40px;
+  color: #FFD54F;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-top: 2px;
+}
+.card.summer-hero .card-body .continue-link { color: #FFD54F; }
+.card.summer-hero:hover { transform: translateY(-2px); }
+
+/* Summer: hot pink = unlimited bowling */
+.card.summer-pink {
+  background: #E91E63;
+  margin-bottom: 12px;
+}
+.card.summer-pink .card-body h3 { color: #fff; }
+.card.summer-pink .card-body .desc { color: rgba(255,255,255,0.85); }
+.card.summer-pink .card-body .summer-price {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  color: #FFD54F;
+  letter-spacing: 1px;
+  line-height: 1;
+  margin-top: 2px;
+}
+.card.summer-pink .card-body .continue-link { color: #FFD54F; }
+.card.summer-pink:hover { transform: translateY(-2px); }
+
+/* Summer: deep magenta = family/party builder */
+.card.summer-magenta {
+  background: #C2185B;
+  margin-bottom: 4px;
+}
+.card.summer-magenta .card-body h3 { color: #FFD54F; }
+.card.summer-magenta .card-body .desc { color: rgba(255,255,255,0.85); }
+.card.summer-magenta .card-body .continue-link { color: #FFD54F; }
+.card.summer-magenta:hover { transform: translateY(-2px); }
+
+/* Summer: warm amber = group party */
+.card.summer-amber {
+  background: #FFA000;
+  margin-bottom: 12px;
+}
+.card.summer-amber .card-body h3 { color: #fff; }
+.card.summer-amber .card-body .desc { color: rgba(255,255,255,0.85); }
+.card.summer-amber .card-body .continue-link { color: #fff; }
+.card.summer-amber:hover { transform: translateY(-2px); }
+
+/* Label above regular section */
+.regular-label {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 24px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* ---- Note ---- */
+.note {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+  font-size: 14px;
+  margin-top: 10px;
+  padding: 0 10px;
+}
+
+/* ---- Footer ---- */
+footer {
+  text-align: center;
+  padding: 30px 15px 20px;
+  font-size: 14px;
+}
+
+.social-icons { margin-bottom: 10px; }
+.social-icons a {
+  font-size: 20px;
+  margin: 0 5px;
+  color: #fff;
+}
+.social-icons a:hover { color: #239feb; }
+
+.footer-address { font-weight: bold; margin-bottom: 6px; }
+
+.footer-contact { margin-bottom: 10px; }
+.footer-contact a { margin: 0 4px; }
+.footer-contact a:hover { color: #239feb; }
+
+.footer-links { margin-bottom: 10px; font-weight: bold; }
+.footer-links a { color: #fff; }
+.footer-links a:hover { text-decoration: underline; }
+
+.meriq-credit {
+  font-size: 11px;
+  opacity: 0.6;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<div class="back-link">
+  <a href="https://www.concoursebowling.com/" target="_blank">
+    <span>&#x2039;</span>&nbsp;Back to Concourse Bowling
+  </a>
+</div>
+
+<div class="container">
+
+  <!-- Logo -->
+  <div class="top-section">
+    <img
+      src="https://secure.meriq.com/content/concoursebowling/images/concourse_logo.png"
+      alt="Concourse Bowling"
+      class="logo-img"
+    >
+  </div>
+
+  <!-- Intro text -->
+  <p class="top-text">
+    This is the online reservation system for Concourse Bowling. Concourse Bowling is perfect for hosting events &ndash; whether it&rsquo;s a birthday party, reunion, or corporate team-building function. This premium service lets you jump to the front of the line and avoid lengthy wait times during busy periods by reserving your activity before coming to the center.
+    <br><br>
+    Shoes Included with all reservations!
+  </p>
+
+  <hr>
+
+  <!-- Two-column content -->
+  <div class="content-row">
+
+    <!-- Left sidebar -->
+    <div class="sidebar">
+      <h3 class="start-header"><i class="fas fa-clock"></i> Reservation Hours</h3>
+      <div class="info-wrapper">
+        <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">2:30pm - 10:00pm</span></div>
+        <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">11:30am - 11:00pm</span></div>
+        <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">11:30am - 11:00pm</span></div>
+        <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">11:30am - 11:00pm</span></div>
+        <div class="hours-row today"><span class="hours-day">Friday</span><span class="hours-time">11:30am - 12:00am</span></div>
+        <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">11:30am - 12:00am</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">11:30am - 11:00pm</span></div>
+      </div>
+
+      <h3 class="start-header" style="margin-top:18px;"><i class="fas fa-calendar-day"></i> Special Days</h3>
+      <div class="info-wrapper">
+        <div class="hours-row"><span class="hours-day">July 4th</span><span class="hours-time">CLOSED</span></div>
+      </div>
+    </div>
+
+    <!-- Right: reservation cards -->
+    <div class="cards-col">
+      <h3 class="cards-header">What would you like to reserve?</h3>
+
+      <!-- ========== SUMMER SPECIALS GROUP ========== -->
+      <div class="summer-banner">
+        <i class="fas fa-sun" style="color:#FFD54F;"></i>
+        Summer Specials
+        <span class="banner-sub">Limited time &mdash; through August 31st</span>
+      </div>
+      <div class="sunset-strip">
+        <div style="background:#C2185B;"></div>
+        <div style="background:#E91E63;"></div>
+        <div style="background:#FF6F00;"></div>
+        <div style="background:#FFA000;"></div>
+        <div style="background:#FFD54F;"></div>
+      </div>
+      <div class="summer-section">
+
+        <!-- Summer Party Builder — magenta (top spot) -->
+        <div class="card summer-magenta">
+          <div class="card-img-wrap">
+            <img src="https://secure.meriq.com/content/concoursebowling/images/concourse_pairandspare.jpeg" alt="Summer Party Builder">
+          </div>
+          <div class="card-body">
+            <h3>Summer Party Builder</h3>
+            <p class="desc">Build your party today! 10-40 guests &ndash; Food &amp; Beverage Options &ndash; PRIVATE AREA UPGRADES AVAILABLE!</p>
+            <a href="#" class="continue-link">Reserve Now &rsaquo;</a>
+          </div>
+        </div>
+
+        <!-- Group Party Pack — warm amber -->
+        <div class="card summer-amber">
+          <div class="card-img-wrap">
+            <img src="https://secure.meriq.com/content/concoursebowling/images/meriq_group_2_banner.jpg" alt="Group Party Pack">
+          </div>
+          <div class="card-body">
+            <h3>Group Party Pack</h3>
+            <p class="desc">1 Hour of Bowling on 1 Lane including: 5 pair of shoes, 1 large pizza and 5 sodas!</p>
+            <a href="#" class="continue-link">Reserve Now &rsaquo;</a>
+          </div>
+        </div>
+
+        <!-- Summer Triple Play — hero deal (burnt amber) -->
+        <div class="card summer-hero">
+          <div class="card-img-wrap">
+            <img src="https://secure.meriq.com/content/concoursebowling/images/party.jpg" alt="Summer Triple Play">
+          </div>
+          <div class="card-body">
+            <h3>Summer Triple Play</h3>
+            <p class="desc">2 games + shoes + $10 game card<br>Open &ndash; 5pm daily</p>
+            <div class="summer-price">$17 / person</div>
+            <a href="#" class="continue-link">Reserve Now &rsaquo;</a>
+          </div>
+        </div>
+
+        <!-- All You Can Bowl — unlimited (hot pink) -->
+        <div class="card summer-pink">
+          <div class="card-img-wrap">
+            <img src="https://secure.meriq.com/content/concoursebowling/images/open_play_bowling.jpg" alt="All You Can Bowl">
+          </div>
+          <div class="card-body">
+            <h3>All You Can Bowl</h3>
+            <p class="desc">2 Hours of Unlimited Bowling + Shoes<br>Tuesdays &ndash; Thursdays, 8pm &ndash; Close</p>
+            <div class="summer-price">$18 / person</div>
+            <a href="#" class="continue-link">Reserve Now &rsaquo;</a>
+          </div>
+        </div>
+
+      </div>
+      <div class="sunset-strip-bottom">
+        <div style="background:#C2185B;"></div>
+        <div style="background:#E91E63;"></div>
+        <div style="background:#FF6F00;"></div>
+        <div style="background:#FFA000;"></div>
+        <div style="background:#FFD54F;"></div>
+      </div>
+      <!-- ========== END SUMMER SPECIALS ========== -->
+
+      <!-- Year-round reservations -->
+      <div class="regular-label">Also Available</div>
+
+      <!-- Bowling Reservation -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://secure.meriq.com/content/concoursebowling/images/meriq_bowling_2.jpg" alt="Bowling">
+        </div>
+        <div class="card-body">
+          <h3>Bowling Reservation</h3>
+          <p class="desc">Reserve your lanes online!</p>
+          <a href="#" class="continue-link">Continue &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- Supercharge Kids Party -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://secure.meriq.com/content/concoursebowling/images/councourse_kids_party.jpg" alt="Supercharge Kids Party">
+        </div>
+        <div class="card-body">
+          <h3>Supercharge Kids Party</h3>
+          <p class="desc">More than just a bowling party!</p>
+          <a href="#" class="continue-link">Continue &rsaquo;</a>
+        </div>
+      </div>
+
+      <!-- VIP Suites -->
+      <div class="card">
+        <div class="card-img-wrap">
+          <img src="https://secure.meriq.com/content/concoursebowling/images/4 Lane Suite.jpg" alt="VIP Suites">
+        </div>
+        <div class="card-body">
+          <h3>VIP Suites</h3>
+          <p class="desc">4 - 20 Lanes - Private Curtained Areas with Catering - Perfect for large Corporate or Family and Events!</p>
+          <a href="#" class="continue-link">Continue &rsaquo;</a>
+        </div>
+      </div>
+
+      <p class="note"><b>Please note:</b> Online reservations are available up to 90 days in advance. Want to book more than 90 days in advance? Please contact the center and we will do our best to accommodate you.</p>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="social-icons">
+    <a href="https://www.facebook.com/concoursebowl" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/concoursebowling/" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+  <div class="footer-address">
+    <a href="https://maps.app.goo.gl/ygPk37NGyvVnL3kj7" target="_blank">3364 E La Palma Ave, Anaheim, CA 92806</a>
+  </div>
+  <div class="footer-contact">
+    CONTACT US:&nbsp;
+    <a href="tel:(714) 666-2695"><i class="fas fa-phone"></i></a>&nbsp;
+    <a href="mailto:events@concoursebowling.com"><i class="fas fa-envelope"></i></a>
+  </div>
+  <div class="footer-links">
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Terms &amp; Conditions</a> |
+    <a href="#">Refund Policy</a>
+  </div>
+  <div class="meriq-credit">Developed by <a href="https://www.meriq.com/" target="_blank">MERIQ</a></div>
+</footer>
+
+</body>
+</html>
