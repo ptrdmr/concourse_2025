@@ -12,11 +12,11 @@
 /* "★ New This Summer" pill */
 .badge {
   display: inline-block;
-  font-size: 11px;
+  font-size: clamp(11px, 1.05vw, 15px);
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: 5px 14px;
+  padding: clamp(5px, 0.5vw, 8px) clamp(14px, 1.4vw, 20px);
   border-radius: 4px;
   background: #c2185b;
   color: #ffd54f;
@@ -30,9 +30,9 @@
 /* Summer 2026 logo — white keyline outline so it reads on any background */
 .summerLogo {
   width: 100%;
-  max-width: 360px;
+  max-width: clamp(240px, 36vw, 520px);
   height: auto;
-  margin: 12px 0;
+  margin: clamp(4px, 0.8vw, 12px) 0;
   filter:
     drop-shadow(1px 0px 0 rgba(255, 255, 255, 0.85))
     drop-shadow(-1px 0px 0 rgba(255, 255, 255, 0.85))
@@ -46,7 +46,7 @@
 }
 
 .summerRule {
-  width: 60px;
+  width: clamp(60px, 8vw, 100px);
   height: 2px;
   background: linear-gradient(90deg, transparent, #ffd54f, transparent);
   border: none;
@@ -54,7 +54,7 @@
 }
 
 .summerDates {
-  font-size: clamp(18px, 2.8vw, 24px);
+  font-size: clamp(18px, 2.6vw, 36px);
   font-weight: 900;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -63,28 +63,28 @@
 }
 
 .summerTagline {
-  font-size: 13px;
+  font-size: clamp(13px, 1.35vw, 20px);
   font-weight: 500;
   letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.4;
-  max-width: 300px;
+  max-width: min(520px, 92%);
 }
 
 /* Magenta "View Deals" button */
 .cta {
   display: inline-block;
   text-decoration: none !important;
-  font-size: 15px;
+  font-size: clamp(15px, 1.2vw, 18px);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  padding: 14px 32px;
+  padding: clamp(14px, 1.2vw, 18px) clamp(32px, 3vw, 48px);
   border-radius: 8px;
   transition: all 0.3s ease;
   color: #fff !important;
   width: 100%;
-  max-width: 220px;
+  max-width: clamp(220px, 28vw, 320px);
   background: #c2185b;
   border-bottom: 3px solid #9b1348;
 }
@@ -104,6 +104,7 @@
 @media (max-width: 680px) {
   .summerLogo { max-width: 280px; }
   .summerDates { font-size: 18px; }
+  .summerTagline { max-width: 300px; }
   .cta {
     max-width: 100%;
     font-size: 14px;

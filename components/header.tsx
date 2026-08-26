@@ -72,7 +72,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="border-b border-border/40">
-        <div className="container flex h-20 items-center justify-between px-4 md:px-6 lg:px-8">
+        <div className="mx-auto flex h-20 w-full max-w-[1920px] items-center justify-between px-4 sm:px-6 lg:px-10 xl:px-14">
           <div className="hidden min-w-0 flex-1 items-center justify-end gap-3 pr-2 md:flex md:pr-4">
             <Link
               href="/"
@@ -210,9 +210,9 @@ export default function Header() {
       </div>
 
       <div className="hidden md:block border-b border-border/30 bg-muted/30">
-        <div className="container px-4 md:px-6 lg:px-8">
+        <div className="mx-auto w-full max-w-[1920px] px-4 sm:px-6 lg:px-10 xl:px-14">
           <nav
-            className="flex min-h-14 flex-wrap items-center justify-center gap-x-3 gap-y-1 py-2 lg:gap-x-5"
+            className="flex min-h-14 flex-wrap items-center justify-center gap-x-4 gap-y-1 py-2 lg:gap-x-6 xl:gap-x-8"
             aria-label="Main"
           >
             {navLinks.map((item) => (

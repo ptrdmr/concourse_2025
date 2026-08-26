@@ -49,12 +49,12 @@ const heroSlides: HeroSlide[] = [
     overlayClassName: "bg-black/25 dark:bg-black/75",
     background: { type: "video" },
     info: (
-      <p className="text-3xl font-bold leading-tight sm:text-4xl">
+      <p className="text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
         Food, fun, and competition
         <br />
         ALL UNDER ONE ROOF.
         <br />
-        <span className="mt-2 inline-block text-base font-normal leading-snug text-white/90 sm:text-lg md:text-xl">
+        <span className="mt-2 inline-block text-sm font-normal leading-snug text-white/90 sm:text-base md:text-lg lg:text-xl">
           Walk-ins welcome · Reserve lanes online · Parties for 8 to 320
         </span>
       </p>
@@ -190,7 +190,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative w-full overflow-hidden"
+      className="relative flex h-[calc(100svh-5rem)] w-full flex-col overflow-hidden md:h-[calc(100svh-9rem)]"
       aria-roledescription="carousel"
       aria-label="Featured offers"
       onMouseEnter={() => setIsPaused(true)}
@@ -247,10 +247,10 @@ export function HeroSection() {
         ))}
       </div>
 
-      <div className="container relative z-10 mx-auto flex flex-col items-center justify-center px-4 py-16 text-center md:px-6 md:py-24 lg:px-8 lg:py-40">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] min-h-0 flex-1 flex-col items-center justify-center px-4 py-6 text-center sm:px-6 md:py-8 lg:px-10 lg:py-10 xl:px-14">
         <h1
           className={cn(
-            "mb-4 flex flex-wrap items-baseline justify-center whitespace-nowrap text-6xl font-bold tracking-tight transition-colors duration-700 sm:text-5xl md:text-6xl lg:text-7xl",
+            "mb-3 flex flex-wrap items-baseline justify-center whitespace-nowrap text-5xl font-bold tracking-tight transition-colors duration-700 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl",
             activeSlide.headlineClassName,
           )}
         >
@@ -267,18 +267,18 @@ export function HeroSection() {
         {/* Slide info + buttons — grid-stacked so the tallest slide sets the height (no layout
             shift). Shorter slides center within that shared height instead of hanging from the
             top, which would leave dead space above the dots. */}
-        <div className="grid w-full max-w-2xl">
+        <div className="grid w-full min-h-0 max-w-3xl lg:max-w-4xl xl:max-w-5xl">
           {heroSlides.map((slide, i) => (
             <div
               key={slide.id}
               inert={i !== activeIndex}
               aria-hidden={i !== activeIndex}
               className={cn(
-                "col-start-1 row-start-1 flex flex-col items-center justify-center transition-all duration-700",
+                "col-start-1 row-start-1 flex min-h-0 flex-col items-center justify-center transition-all duration-700",
                 i === activeIndex ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0",
               )}
             >
-              <div className="mb-6 text-base text-white sm:text-lg md:text-xl">{slide.info}</div>
+              <div className="mb-4 text-base text-white sm:text-lg md:text-xl">{slide.info}</div>
               <div className="flex w-full flex-wrap items-center justify-center gap-3">
                 {slide.buttons.map((button) => {
                   const link = button.external ? (
@@ -304,7 +304,7 @@ export function HeroSection() {
                       size="lg"
                       variant={button.variant ?? "default"}
                       className={cn(
-                        "w-full sm:w-auto",
+                        "w-full sm:w-auto lg:h-12 lg:px-8 lg:text-lg",
                         button.variant === "outline" && "bg-white/10 text-white hover:bg-white/20",
                         button.className,
                       )}
@@ -320,7 +320,7 @@ export function HeroSection() {
         </div>
 
         {slideCount > 1 && (
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-4 flex shrink-0 items-center justify-center gap-3 pb-1">
             <button
               type="button"
               onClick={() => goTo(activeIndex - 1)}
