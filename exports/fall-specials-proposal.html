@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fall Specials Proposal — Concourse Bowling Center</title>
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 8.5in;
+    height: 11in;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #1a1a1a;
+    padding: 0.6in 0.7in;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #D42027;
+    padding-bottom: 0.15in;
+    margin-bottom: 0.35in;
+  }
+  header h1 {
+    font-size: 18pt;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: #D42027;
+  }
+  header .date {
+    font-size: 9pt;
+    color: #666;
+  }
+
+  .section-label {
+    font-size: 8pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #999;
+    margin-bottom: 0.12in;
+  }
+
+  /* --- Specials --- */
+  .specials {
+    margin-bottom: 0.5in;
+  }
+  .specials h2 {
+    font-size: 13pt;
+    font-weight: 700;
+    margin-bottom: 0.18in;
+  }
+  .specials .run {
+    font-size: 9.5pt;
+    color: #555;
+    margin-bottom: 0.2in;
+  }
+
+  .special-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    padding: 0.12in 0;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .special-item:last-child { border-bottom: none; }
+  .special-name {
+    font-size: 11pt;
+    font-weight: 600;
+  }
+  .special-details {
+    font-size: 9pt;
+    color: #555;
+    margin-top: 2px;
+  }
+  .special-price {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #D42027;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .working-name {
+    font-size: 8pt;
+    font-style: italic;
+    color: #999;
+  }
+
+  /* --- Palettes --- */
+  .palettes {
+    flex: 1;
+  }
+  .palettes h2 {
+    font-size: 13pt;
+    font-weight: 700;
+    margin-bottom: 0.22in;
+  }
+  .palette-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.3in;
+  }
+  .palette {
+    text-align: center;
+  }
+  .palette-label {
+    font-size: 9pt;
+    font-weight: 600;
+    margin-bottom: 0.1in;
+  }
+  .swatches {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 0.06in;
+  }
+  .swatch {
+    flex: 1;
+    height: 0.55in;
+    border-radius: 3px;
+    position: relative;
+  }
+  .swatch-hex {
+    font-size: 6.5pt;
+    color: #666;
+    font-family: 'Consolas', monospace;
+    display: block;
+    margin-top: 2px;
+    text-align: center;
+  }
+  .hex-row {
+    display: flex;
+    gap: 3px;
+  }
+  .hex-row span {
+    flex: 1;
+    text-align: center;
+  }
+
+  footer {
+    margin-top: auto;
+    padding-top: 0.15in;
+    border-top: 1px solid #ddd;
+    font-size: 7.5pt;
+    color: #aaa;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CONCOURSE — Fall Specials Proposal</h1>
+  <span class="date">Draft · Aug 2026</span>
+</header>
+
+<!-- SPECIALS -->
+<section class="specials">
+  <p class="section-label">Proposed Specials</p>
+  <h2>Fall 2026</h2>
+  <p class="run">Sept 8 — Oct 30, 2026</p>
+
+  <div class="special-item">
+    <div>
+      <div class="special-name">3 Games &amp; Shoes</div>
+      <div class="special-details">Tuesday – Friday · Open – 3 PM</div>
+    </div>
+    <div class="special-price">$14 / person</div>
+  </div>
+
+  <div class="special-item">
+    <div>
+      <div class="special-name">Unlimited Bowling</div>
+      <div class="special-details">Tuesday – Thursday · 8 PM – Close</div>
+    </div>
+    <div class="special-price">$18 / person</div>
+  </div>
+
+  <div class="special-item">
+    <div>
+      <div class="special-name">Party Builder Reservation Package</div>
+      <div class="special-details"><span class="working-name">working name — pricing TBD</span></div>
+    </div>
+    <div class="special-price">—</div>
+  </div>
+</section>
+
+<!-- COLOR PALETTES -->
+<section class="palettes">
+  <p class="section-label">Color Options</p>
+  <h2>Fall Palette Proposals</h2>
+
+  <div class="palette-grid">
+
+    <!-- Option A -->
+    <div class="palette">
+      <div class="palette-label">A · Warm Harvest</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#D42027;"></div>
+        <div class="swatch" style="background:#E8D88C;"></div>
+        <div class="swatch" style="background:#C75B12;"></div>
+        <div class="swatch" style="background:#1C1C1C;"></div>
+      </div>
+      <div class="hex-row">
+        <span class="swatch-hex">#D42027</span>
+        <span class="swatch-hex">#E8D88C</span>
+        <span class="swatch-hex">#C75B12</span>
+        <span class="swatch-hex">#1C1C1C</span>
+      </div>
+    </div>
+
+    <!-- Option B -->
+    <div class="palette">
+      <div class="palette-label">B · Copper &amp; Slate</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#D42027;"></div>
+        <div class="swatch" style="background:#B87333;"></div>
+        <div class="swatch" style="background:#4A5568;"></div>
+        <div class="swatch" style="background:#1C1C1C;"></div>
+      </div>
+      <div class="hex-row">
+        <span class="swatch-hex">#D42027</span>
+        <span class="swatch-hex">#B87333</span>
+        <span class="swatch-hex">#4A5568</span>
+        <span class="swatch-hex">#1C1C1C</span>
+      </div>
+    </div>
+
+    <!-- Option C -->
+    <div class="palette">
+      <div class="palette-label">C · Autumn Dusk</div>
+      <div class="swatches">
+        <div class="swatch" style="background:#D42027;"></div>
+        <div class="swatch" style="background:#D4A34F;"></div>
+        <div class="swatch" style="background:#3B5E3A;"></div>
+        <div class="swatch" style="background:#111111;"></div>
+      </div>
+      <div class="hex-row">
+        <span class="swatch-hex">#D42027</span>
+        <span class="swatch-hex">#D4A34F</span>
+        <span class="swatch-hex">#3B5E3A</span>
+        <span class="swatch-hex">#111111</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>Concourse Bowling Center · Internal Proposal · Not for Distribution</footer>
+
+</body>
+</html>
