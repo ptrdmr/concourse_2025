@@ -4,7 +4,6 @@ import Link from "next/link"
 import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { LANE_BOOKING_URL } from "@/lib/booking"
 import { cn } from "@/lib/utils"
 import styles from "./hero-section.module.css"
 
@@ -60,8 +59,7 @@ const heroSlides: HeroSlide[] = [
       </p>
     ),
     buttons: [
-      { label: "Reserve a Lane", href: LANE_BOOKING_URL, external: true },
-      { label: "Plan a Party", href: "/reservations?track=parties", variant: "outline" },
+      { label: "Reserve a Lane or Plan a Party", href: "/reservations" },
       { label: "Walk-in Rates & Hours", href: "/bowling", variant: "outline" },
     ],
   },
