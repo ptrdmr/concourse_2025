@@ -40,8 +40,8 @@ const MENUS = [
   { slug: 'summer_sunday_1280', file: 'summer_sunday_1280.html', width: 1280, height: 328 },
   /** 5×7 portrait at 300dpi — laneside ordering flyer */
   { slug: 'laneside_ordering', file: 'laneside_ordering.html', width: 1500, height: 2100 },
-  /** Reservation page mockup — full-page capture */
-  { slug: 'reservations', file: 'reservations.html', width: 1280, fullPage: true },
+  /** Reservation page mockup — full-page capture (kept out of public/ so it cannot shadow /reservations) */
+  { slug: 'reservations', file: 'exports/reservations-mockup.html', fromRoot: true, width: 1280, fullPage: true },
   /** 11×8.5 landscape door sign at 300dpi */
   { slug: 'july4_weekend_hours_sign', file: 'july4_weekend_hours_sign.html', width: 3300, height: 2550 },
   /** 8.5×11 portrait cafe menu at 300dpi (CSS sized in inches; scale up from 96dpi) */

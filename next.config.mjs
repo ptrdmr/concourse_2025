@@ -7,6 +7,12 @@ try {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      // Old static mockup lived at public/reservations.html and could win over the App Router page.
+      { source: '/reservations.html', destination: '/reservations', permanent: true },
+    ]
+  },
   async rewrites() {
     return [
       { source: '/back-tv', destination: '/back-tv.html' },
