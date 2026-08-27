@@ -47,6 +47,23 @@ const MENUS = [
   /** 8.5×11 portrait cafe menu at 300dpi (CSS sized in inches; scale up from 96dpi) */
   { slug: 'menu_front', file: 'menu_front.html', width: 2550, height: 3300, scale: 3.125 },
   { slug: 'menu_back', file: 'menu_back.html', width: 2550, height: 3300, scale: 3.125 },
+  /** Fall reconfigure drafts — distinct slugs so current menu_front/back.jpgs stay as reference */
+  {
+    slug: 'menu_front_fall',
+    file: 'exports/menu-fall-reconfigure/menu_front.html',
+    fromRoot: true,
+    width: 2550,
+    height: 3300,
+    scale: 3.125,
+  },
+  {
+    slug: 'menu_back_fall',
+    file: 'exports/menu-fall-reconfigure/menu_back.html',
+    fromRoot: true,
+    width: 2550,
+    height: 3300,
+    scale: 3.125,
+  },
 ]
 
 async function main() {
@@ -57,8 +74,8 @@ async function main() {
 
   const browser = await chromium.launch({ headless: true })
 
-  for (const { slug, file, width, height, fullPage, scale } of menus) {
-    const htmlPath = path.join(publicDir, file)
+  for (const { slug, file, width, height, fullPage, scale, fromRoot } of menus) {
+    const htmlPath = fromRoot ? path.join(root, file) : path.join(publicDir, file)
     if (!fs.existsSync(htmlPath)) {
       console.warn('Skip (missing):', htmlPath)
       continue

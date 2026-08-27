@@ -254,6 +254,12 @@
     letter-spacing: 0.3px;
   }
 
+  /* Proposed items — name + price in red until pricing is final */
+  .menu-item-proposed .item-name,
+  .menu-item-proposed .item-price {
+    color: var(--red);
+  }
+
   .item-sub {
     font-family: var(--font-body);
     font-size: 11.25px;
@@ -398,18 +404,10 @@
 
         <div class="menu-item">
           <div class="item-header">
-            <span class="item-name">Pretzel Sticks (6)</span>
+            <span class="item-name">Large Bavarian Pretzel - 10&quot;</span>
             <span class="item-price">$10</span>
           </div>
-          <div class="item-desc">Served with Cheese &amp; Mustard Sauce</div>
-        </div>
-
-        <div class="menu-item">
-          <div class="item-header">
-            <span class="item-name">Concourse Nacho</span>
-            <span class="item-price">$15</span>
-          </div>
-          <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalape&ntilde;os &amp; pico de gallo. Add Chicken +$4 | Steak +$5</div>
+          <div class="item-desc">Served with cheese &amp; mustard</div>
         </div>
 
         <div class="menu-item">
@@ -420,12 +418,28 @@
           <div class="item-desc">Jerk-spiced ground chicken, grilled onions &amp; bell peppers, rice noodles &amp; chili peanuts in honey gem lettuce with chili dipping sauce</div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item menu-item-proposed">
           <div class="item-header">
-            <span class="item-name">Taco Plate</span>
-            <span class="item-price">$11</span>
+            <span class="item-name">Carne Asada Fries</span>
+            <span class="item-price">$??</span>
           </div>
-          <div class="item-desc">Three soft corn tortillas filled with your choice of Chicken, Pork Carnitas or Beef Carne Asada. Topped with diced red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</div>
+          <div class="item-desc">Placeholder description</div>
+        </div>
+
+        <div class="menu-item menu-item-proposed">
+          <div class="item-header">
+            <span class="item-name">Avocado Rolls</span>
+            <span class="item-price">$??</span>
+          </div>
+          <div class="item-desc">Placeholder description</div>
+        </div>
+
+        <div class="menu-item menu-item-proposed">
+          <div class="item-header">
+            <span class="item-name">Pot Stickers</span>
+            <span class="item-price">$??</span>
+          </div>
+          <div class="item-desc">Placeholder description</div>
         </div>
       </div>
 
