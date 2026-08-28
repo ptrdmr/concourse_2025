@@ -274,12 +274,12 @@ export default function ArcadePage() {
               <div className="flex items-start gap-3">
                 <Users className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
                 <div>
-                  <h3 className="font-medium text-lg">Pair & Spare Package</h3>
+                  <h3 className="font-medium text-lg">Build Your Own Package</h3>
                   <p className="text-sm text-muted-foreground mb-2">
-                    $360 (Mon-Thu) / $390 (Fri-Sun) for 10 guests
+                    From $360 for 2 lanes · extra lanes $180 Mon–Thu / $195 Fri–Sun, up to 8
                   </p>
                   <ul className="text-sm text-muted-foreground space-y-1">
-                    <li>• 2 bowling lanes for 2 hours</li>
+                    <li>• First pair: 2 lanes for 2 hours</li>
                     <li>• 10 pairs of shoes</li>
                     <li>• 2 pizzas</li>
                     <li>• Unlimited sodas for 10 guests</li>

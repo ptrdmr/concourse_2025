@@ -7,11 +7,11 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { Menu, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { LANE_BOOKING_URL } from "@/lib/booking"
 import { TodayHours } from "@/components/today-hours"
 
-/** Flat top-level nav — logo links home; no dropdowns */
+/** Flat top-level nav — logo also links home; no dropdowns */
 const navLinks = [
+  { name: "Home", href: "/" },
   { name: "Reservations", href: "/reservations" },
   { name: "Bowling", href: "/bowling" },
   { name: "Leagues", href: "/league-bowling" },
@@ -22,7 +22,7 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ]
 
-const mobileNavigation = [{ name: "Home", href: "/" }, ...navLinks]
+const mobileNavigation = navLinks
 
 const getDirections = () => {
   const address = "3364 E La Palma Ave, Anaheim, CA 92806"
@@ -113,17 +113,12 @@ export default function Header() {
               asChild
               className="group overflow-hidden rounded-xl px-3 py-2 shadow-md text-sm transition-all duration-300 hover:shadow-lg hover:scale-105 sm:px-6 sm:py-5 sm:text-base"
             >
-              <a
-                href={LANE_BOOKING_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative z-10 flex items-center justify-center"
-              >
+              <Link href="/reservations" className="relative z-10 flex items-center justify-center">
                 <span className="absolute inset-0 z-0 bg-gradient-to-r from-primary via-primary to-primary-600 opacity-100 transition-opacity duration-300" />
                 <span className="z-10 font-bold tracking-wide">
                   Reserve<span className="hidden sm:inline">&nbsp;Now</span>
                 </span>
-              </a>
+              </Link>
             </Button>
 
             <Button onClick={getDirections} variant="outline" size="icon" className="touch-button md:hidden">
@@ -170,15 +165,13 @@ export default function Header() {
                       ))}
                     </div>
                     <Button asChild className="relative mt-2 overflow-hidden rounded-xl py-6 shadow-md text-lg touch-button">
-                      <a
-                        href={LANE_BOOKING_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <Link
+                        href="/reservations"
                         onClick={() => setIsOpen(false)}
                         className="relative z-10 flex items-center justify-center"
                       >
                         <span className="z-10 font-bold">Reserve a Lane</span>
-                      </a>
+                      </Link>
                     </Button>
                     <Button asChild variant="outline" className="relative mt-2 overflow-hidden rounded-xl py-6 shadow-md text-lg touch-button">
                       <Link href="/reservations?track=parties" onClick={() => setIsOpen(false)} className="relative z-10 flex items-center justify-center">

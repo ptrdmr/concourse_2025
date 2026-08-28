@@ -6,27 +6,27 @@ import { Input } from "@/components/ui/input"
 import type { FlatPackage } from "@/lib/party-packages"
 import { CostRow, EstimatePanel, formatCurrency } from "./shared"
 
-const MAX_PACKAGES = 4
-
 export function PairSpareCalculator({ pkg }: { pkg: FlatPackage }) {
   const pricing = pkg.pricing
   const [isWeekend, setIsWeekend] = useState(false)
-  const [packages, setPackages] = useState(1)
+  const [lanes, setLanes] = useState(pricing.baseLanes)
 
   const costs = useMemo(() => {
-    const unitPrice = isWeekend ? pricing.weekendPrice : pricing.weekdayPrice
-    const total = packages * unitPrice
-    const guests = packages * pricing.guestsPerPackage
-    const lanes = packages * 2
-    return { unitPrice, total, guests, lanes }
-  }, [isWeekend, packages, pricing])
+    const perLane = isWeekend ? pricing.weekendPerLane : pricing.weekdayPerLane
+    const extraLanes = Math.max(0, lanes - pricing.baseLanes)
+    const pairCost = pricing.baseLanes * perLane
+    const extraCost = extraLanes * perLane
+    const total = lanes * perLane
+    return { perLane, extraLanes, pairCost, extraCost, total }
+  }, [isWeekend, lanes, pricing])
 
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <div className="space-y-6">
         <p className="text-sm text-muted-foreground">
-          Each package covers {pricing.guestsPerPackage} guests on 2 lanes. Monday–Thursday{" "}
-          {formatCurrency(pricing.weekdayPrice)}, Friday–Sunday {formatCurrency(pricing.weekendPrice)}.
+          Start with a pair of {pricing.baseLanes} lanes, then add more at {formatCurrency(pricing.weekdayPerLane)}{" "}
+          per lane Monday–Thursday or {formatCurrency(pricing.weekendPerLane)} per lane Friday–Sunday. Up to{" "}
+          {pricing.maxLanes} lanes.
         </p>
 
         <div className="space-y-2">
@@ -56,32 +56,38 @@ export function PairSpareCalculator({ pkg }: { pkg: FlatPackage }) {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor={`${pkg.id}-packages`}>Number of Packages</Label>
+          <Label htmlFor={`${pkg.id}-lanes`}>Number of Lanes</Label>
           <Input
-            id={`${pkg.id}-packages`}
+            id={`${pkg.id}-lanes`}
             type="number"
-            min={1}
-            max={MAX_PACKAGES}
-            value={packages}
+            min={pricing.baseLanes}
+            max={pricing.maxLanes}
+            value={lanes}
             onChange={(e) => {
-              const val = Number.parseInt(e.target.value, 10) || 1
-              setPackages(Math.min(Math.max(val, 1), MAX_PACKAGES))
+              const val = Number.parseInt(e.target.value, 10) || pricing.baseLanes
+              setLanes(Math.min(Math.max(val, pricing.baseLanes), pricing.maxLanes))
             }}
             className="w-24"
           />
           <p className="text-xs text-muted-foreground">
-            Each package covers {pricing.guestsPerPackage} guests on 2 lanes.
+            Min {pricing.baseLanes} (first pair), max {pricing.maxLanes}
           </p>
         </div>
       </div>
 
       <EstimatePanel total={costs.total} mailtoSubject={pkg.mailtoSubject}>
         <CostRow
-          label={`${packages} package${packages === 1 ? "" : "s"} × ${formatCurrency(costs.unitPrice)}`}
-          amount={costs.total}
+          label={`First pair (${pricing.baseLanes} lanes × ${formatCurrency(costs.perLane)})`}
+          amount={costs.pairCost}
         />
+        {costs.extraLanes > 0 && (
+          <CostRow
+            label={`Additional lanes (${costs.extraLanes} × ${formatCurrency(costs.perLane)})`}
+            amount={costs.extraCost}
+          />
+        )}
         <p className="text-xs text-muted-foreground">
-          Covers {costs.guests} guests on {costs.lanes} lanes
+          {lanes} lanes · first pair includes food & arcade for {pricing.guestsForBase} guests
         </p>
       </EstimatePanel>
     </div>

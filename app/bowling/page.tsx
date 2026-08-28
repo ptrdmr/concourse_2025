@@ -8,7 +8,7 @@ import { AlertCircle } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { PageHeader } from "@/components/page-header"
 import { TodayHours } from "@/components/today-hours"
-import { LANE_BOOKING_URL, PHONE_DISPLAY, PHONE_TEL } from "@/lib/booking"
+import { PHONE_DISPLAY, PHONE_TEL } from "@/lib/booking"
 
 export default function BowlingPage() {
   return (
@@ -52,9 +52,7 @@ export default function BowlingPage() {
             If you have a group of 8 or more, a reservation is recommended — book online to guarantee your lanes.
           </p>
           <Button asChild>
-            <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-              Reserve a Lane Online
-            </a>
+            <Link href="/reservations">Reserve a Lane Online</Link>
           </Button>
         </div>
       </div>
@@ -230,9 +228,7 @@ export default function BowlingPage() {
               Friday 3:00pm - Midnight - Saturday All Day - Sunday 11:00am - 5:00pm
             </p>
             <Button asChild>
-              <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                Reserve for Cosmic Bowling
-              </a>
+              <Link href="/reservations">Reserve for Cosmic Bowling</Link>
             </Button>
           </div>
         </div>

@@ -10,14 +10,18 @@ import styles from "./hero-section.module.css"
 /**
  * Homepage hero: a permanent "ROLL WITH US!" headline over an auto-rotating
  * stack of slides. Each slide swaps the background media, info text, and
- * buttons together; the headline never moves — only its color class changes
- * per slide so it stays readable against each background.
+ * buttons together. The headline stays put; its color (and on the summer
+ * slide, its size) change so it stays readable without crowding the flyer.
+ *
+ * Overlay type scales from the hero box itself (container queries in
+ * hero-section.module.css) so phones, laptops, and 4K share the same framing.
  *
  * Isolated as a client island so the rest of the homepage can render as a
  * Server Component — GSAP is only loaded here, on demand.
  *
  * TO ADD A SLIDE: append an entry to `heroSlides`. Background media, overlay
  * strength, headline color, info content, and buttons are all per slide.
+ * Optional `objectPosition` on the background tweaks photo framing.
  */
 
 type HeroButton = {
@@ -30,13 +34,17 @@ type HeroButton = {
   className?: string
 }
 
+type HeroBackground =
+  | { type: "video"; objectPosition?: string }
+  | { type: "image"; src: string; objectPosition?: string }
+
 type HeroSlide = {
   id: string
   /** Applied to the headline while this slide is active — tune for contrast against the background. */
   headlineClassName: string
   /** Darkening layer over the background media. */
   overlayClassName: string
-  background: { type: "video" } | { type: "image"; src: string }
+  background: HeroBackground
   info: ReactNode
   buttons: HeroButton[]
 }
@@ -48,12 +56,12 @@ const heroSlides: HeroSlide[] = [
     overlayClassName: "bg-black/25 dark:bg-black/75",
     background: { type: "video" },
     info: (
-      <p className="text-2xl font-bold leading-tight sm:text-3xl md:text-4xl lg:text-5xl">
+      <p className={styles.mainInfo}>
         Food, fun, and competition
         <br />
         ALL UNDER ONE ROOF.
         <br />
-        <span className="mt-2 inline-block text-sm font-normal leading-snug text-white/90 sm:text-base md:text-lg lg:text-xl">
+        <span className={styles.mainTagline}>
           Walk-ins welcome · Reserve lanes online · Parties for 8 to 320
         </span>
       </p>
@@ -68,9 +76,9 @@ const heroSlides: HeroSlide[] = [
     headlineClassName: "text-[#ffd54f] drop-shadow-[0_2px_10px_rgba(0,0,0,0.65)]",
     overlayClassName:
       "bg-[linear-gradient(135deg,rgba(26,26,26,0.82)_0%,rgba(194,24,91,0.25)_75%,rgba(26,26,26,0.88)_100%)]",
-    background: { type: "image", src: "/images/summer/summer-bg.jpg" },
+    background: { type: "image", src: "/images/summer/summer-bg.jpg", objectPosition: "center 42%" },
     info: (
-      <div className="flex flex-col items-center gap-2.5">
+      <div className={styles.summerStack}>
         <span className={styles.badge}>★ New This Summer</span>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/summer/summer-logo.png" alt="Concourse Summer 2026" className={styles.summerLogo} />
@@ -188,7 +196,8 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative flex h-[calc(100svh-5rem)] w-full flex-col overflow-hidden md:h-[calc(100svh-9rem)]"
+      className={styles.hero}
+      data-slide={activeSlide.id}
       aria-roledescription="carousel"
       aria-label="Featured offers"
       onMouseEnter={() => setIsPaused(true)}
@@ -215,6 +224,7 @@ export function HeroSection() {
                   alt=""
                   aria-hidden="true"
                   className="absolute inset-0 h-full w-full object-cover"
+                  style={slide.background.objectPosition ? { objectPosition: slide.background.objectPosition } : undefined}
                 />
                 {showVideo && (
                   <video
@@ -227,6 +237,7 @@ export function HeroSection() {
                     playsInline
                     preload="metadata"
                     className="absolute inset-0 h-full w-full object-cover"
+                    style={slide.background.objectPosition ? { objectPosition: slide.background.objectPosition } : undefined}
                   />
                 )}
               </>
@@ -238,6 +249,7 @@ export function HeroSection() {
                 aria-hidden="true"
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover"
+                style={slide.background.objectPosition ? { objectPosition: slide.background.objectPosition } : undefined}
               />
             )}
             <div className={cn("absolute inset-0", slide.overlayClassName)} />
@@ -245,13 +257,8 @@ export function HeroSection() {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-[1400px] min-h-0 flex-1 flex-col items-center justify-center px-4 py-6 text-center sm:px-6 md:py-8 lg:px-10 lg:py-10 xl:px-14">
-        <h1
-          className={cn(
-            "mb-3 flex flex-wrap items-baseline justify-center whitespace-nowrap text-5xl font-bold tracking-tight transition-colors duration-700 sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl",
-            activeSlide.headlineClassName,
-          )}
-        >
+      <div className={styles.overlay}>
+        <h1 className={cn(styles.headline, activeSlide.headlineClassName)}>
           <span ref={rRef}>R</span>
           <span ref={oRef} className="inline-block">
             O
@@ -262,22 +269,18 @@ export function HeroSection() {
           </span>
         </h1>
 
-        {/* Slide info + buttons — grid-stacked so the tallest slide sets the height (no layout
-            shift). Shorter slides center within that shared height instead of hanging from the
-            top, which would leave dead space above the dots. */}
-        <div className="grid w-full min-h-0 max-w-3xl lg:max-w-4xl xl:max-w-5xl">
+        {/* Fixed-height stage: both slides share the same band so the photo framing
+            (and the dots) never jump. Copy scales inside this box via container queries. */}
+        <div className={styles.stage}>
           {heroSlides.map((slide, i) => (
             <div
               key={slide.id}
               inert={i !== activeIndex}
               aria-hidden={i !== activeIndex}
-              className={cn(
-                "col-start-1 row-start-1 flex min-h-0 flex-col items-center justify-center transition-all duration-700",
-                i === activeIndex ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-3 opacity-0",
-              )}
+              className={cn(styles.slide, i === activeIndex ? styles.slideActive : styles.slideInactive)}
             >
-              <div className="mb-4 text-base text-white sm:text-lg md:text-xl">{slide.info}</div>
-              <div className="flex w-full flex-wrap items-center justify-center gap-3">
+              {slide.info}
+              <div className={styles.buttons}>
                 {slide.buttons.map((button) => {
                   const link = button.external ? (
                     <a
@@ -318,7 +321,7 @@ export function HeroSection() {
         </div>
 
         {slideCount > 1 && (
-          <div className="mt-4 flex shrink-0 items-center justify-center gap-3 pb-1">
+          <div className={styles.dots}>
             <button
               type="button"
               onClick={() => goTo(activeIndex - 1)}

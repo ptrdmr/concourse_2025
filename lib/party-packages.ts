@@ -27,9 +27,11 @@ export type PerGuestPricing = {
 
 export type FlatPricing = {
   kind: "flat"
-  weekdayPrice: number
-  weekendPrice: number
-  guestsPerPackage: number
+  baseLanes: number
+  maxLanes: number
+  weekdayPerLane: number
+  weekendPerLane: number
+  guestsForBase: number
 }
 
 export type QuotePricing = {
@@ -143,32 +145,36 @@ export const PARTY_PACKAGES: PartyPackage[] = [
   },
   {
     id: "pair-spare",
-    name: "Pair & Spare Package",
-    tagline: "A complete bowling package for small groups",
+    name: "Build Your Own Package",
+    tagline: "Start with two lanes, then add more as your group grows",
     image: "/images/food/pizza.jpg",
     imageAlt: "Fresh pizza from the Concourse Bar & Cafe",
     priceHeadline: "From $360",
-    capacity: "10 guests per package",
+    capacity: "2–8 lanes",
     highlights: [
-      "2 lanes for 2 hours",
-      "2 pizzas & unlimited soda",
-      "$5 arcade card per guest",
+      "Starts with 2 lanes for 2 hours",
+      "Add lanes up to 8 total",
+      "Mon–Thu $180/lane · Fri–Sun $195/lane",
     ],
     inclusions: [
-      "2 bowling lanes",
-      "2 hours of bowling",
+      "First pair: 2 bowling lanes for 2 hours",
       "10 pairs of shoes",
-      "2 pizzas",
-      "Unlimited sodas for 10 guests",
+      "2 pizzas and unlimited sodas for 10 guests",
       "10 $5 arcade cards",
+      "Additional lanes $180 Mon–Thu or $195 Fri–Sun, up to 8 lanes total",
     ],
-    notes: ["Package does not come with a server.", "Each package covers 10 guests on 2 lanes."],
-    mailtoSubject: "Pair & Spare Package Inquiry",
+    notes: [
+      "Package does not come with a server.",
+      "The first pair is 2 lanes. Extra lanes after that are billed per lane.",
+    ],
+    mailtoSubject: "Build Your Own Package Inquiry",
     pricing: {
       kind: "flat",
-      weekdayPrice: 360,
-      weekendPrice: 390,
-      guestsPerPackage: 10,
+      baseLanes: 2,
+      maxLanes: 8,
+      weekdayPerLane: 180,
+      weekendPerLane: 195,
+      guestsForBase: 10,
     },
   },
   {

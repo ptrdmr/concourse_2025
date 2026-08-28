@@ -10,7 +10,6 @@ import { BusinessCalendar } from "@/components/business-calendar-client"
 import { LazyMapEmbed } from "@/components/lazy-map-embed"
 import { getGroupedWeeklyHours } from "@/lib/schedule"
 import {
-  LANE_BOOKING_URL,
   PHONE_DISPLAY,
   PHONE_TEL,
   EVENTS_EMAIL,
@@ -84,9 +83,7 @@ export default function Home() {
             <p className="mt-4 text-sm font-medium text-white/80">Lanes from $99 · Mon–Thu</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Button size="lg" className="!bg-white !text-black hover:!bg-white/90" asChild>
-                <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                  Book Lanes Online
-                </a>
+                <Link href="/reservations">Book Lanes Online</Link>
               </Button>
               <Link
                 href="/reservations?track=parties"
@@ -197,9 +194,7 @@ export default function Home() {
                 <Link href="/about">Explore our history</Link>
               </Button>
               <Button variant="secondary" className="w-full sm:w-auto" asChild>
-                <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                  Reserve now
-                </a>
+                <Link href="/reservations">Reserve now</Link>
               </Button>
             </div>
           </div>
@@ -246,9 +241,7 @@ export default function Home() {
                 </ul>
               </div>
               <Button size="lg" className="w-full bg-red-600 hover:bg-red-700 sm:w-auto" asChild>
-                <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-                  Reserve now
-                </a>
+                <Link href="/reservations">Reserve now</Link>
               </Button>
             </div>
             <div className="rounded-lg bg-muted p-6">
@@ -275,9 +268,7 @@ export default function Home() {
             night out with friends.
           </p>
           <Button size="lg" variant="secondary" asChild>
-            <a href={LANE_BOOKING_URL} target="_blank" rel="noopener noreferrer">
-              Reserve Today!
-            </a>
+            <Link href="/reservations">Reserve Today!</Link>
           </Button>
         </div>
       </section>

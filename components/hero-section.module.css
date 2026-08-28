@@ -1,60 +1,211 @@
 /*
- * Styles for hero slides that need more than Tailwind utilities can express
- * comfortably (layered logo outlines, keyframed entrances, brand-exact colors).
+ * Homepage hero — Lucky Strike-inspired scaling.
  *
- * The summer-* rules below were carried over verbatim from the old standalone
- * summer promo banner so the flyer keeps its original sizing and treatment now
- * that it lives inside the hero carousel. Kept here — rather than imported from
- * summer-deals-banner.module.css — so that file stays an inert template for the
- * next seasonal promo and editing it can never restyle the live homepage.
+ * Everything scales with viewport width via clamp(), stepped breakpoints
+ * for heights, and a max-height media query for short screens.
+ * No container queries — straightforward and predictable across every
+ * device from phones to 4K monitors.
+ *
+ * Knobs:
+ *   .hero height           — one screen minus header
+ *   .headline font-size    — ROLL WITH US! (shrinks on summer slide via data-slide)
+ *   .summerLogo max-width  — wordmark scales with vw, capped at 36rem
+ *   .summerLogo max-height — capped at 30vh so the photo always peeks through
+ *   background object-position — per-slide photo framing (set in hero-section.tsx)
  */
+
+/* ── Hero container ── */
+
+.hero {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: calc(100svh - 5rem);
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    height: calc(100svh - 9rem);
+  }
+}
+
+/* ── Overlay: vertically + horizontally centers content over photo ── */
+
+.overlay {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vw, 1.25rem);
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding: clamp(0.75rem, 3vh, 2.5rem) clamp(1rem, 5vw, 4rem);
+  text-align: center;
+}
+
+/* ── ROLL WITH US! headline ── */
+
+.headline {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  justify-content: center;
+  font-size: clamp(2rem, 5vw + 0.75rem, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+  white-space: nowrap;
+  transition: color 700ms ease, font-size 400ms ease;
+}
+
+/* Summer slide: ROLL WITH US! becomes a kicker above the wordmark */
+.hero[data-slide="summer-deals"] .headline {
+  font-size: clamp(1.15rem, 2vw + 0.25rem, 2.75rem);
+}
+
+/* ── Stage: grid-stacks slides so tallest sets the band height ── */
+
+.stage {
+  display: grid;
+  width: 100%;
+  max-width: 56rem;
+  min-height: 0;
+}
+
+.slide {
+  grid-area: 1 / 1;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.4rem, 1vw, 0.85rem);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.slideInactive {
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.slideActive {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Slide 1: main hero copy ── */
+
+.mainInfo {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(1.15rem, 2.5vw + 0.35rem, 3.25rem);
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.mainTagline {
+  display: inline-block;
+  margin-top: 0.35em;
+  color: rgb(255 255 255 / 0.9);
+  font-size: clamp(0.75rem, 1vw + 0.2rem, 1.25rem);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* ── Buttons row ── */
+
+.buttons {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* ── Carousel dots ── */
+
+.dots {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: clamp(0.25rem, 1vw, 0.75rem);
+  padding-bottom: 0.25rem;
+}
+
+/* ══════════════════════════════════════════════════════
+ * Slide 2: Summer promo
+ * ══════════════════════════════════════════════════════ */
 
 /* "★ New This Summer" pill */
 .badge {
   display: inline-block;
-  font-size: clamp(11px, 1.05vw, 15px);
+  font-size: clamp(0.6rem, 0.75vw + 0.15rem, 0.9rem);
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  padding: clamp(5px, 0.5vw, 8px) clamp(14px, 1.4vw, 20px);
+  padding: clamp(3px, 0.5vw, 8px) clamp(10px, 1.2vw, 20px);
   border-radius: 4px;
   background: #c2185b;
   color: #ffd54f;
   animation: pulse 2s ease-in-out infinite;
 }
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.04); }
+  50%      { transform: scale(1.04); }
 }
 
-/* Summer 2026 logo — white keyline outline so it reads on any background */
-.summerLogo {
+.summerStack {
+  display: flex;
+  min-height: 0;
   width: 100%;
-  max-width: clamp(240px, 36vw, 520px);
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.15rem, 0.6vw, 0.4rem);
+}
+
+/* Summer wordmark — the star of this slide */
+.summerLogo {
+  display: block;
+  width: auto;
   height: auto;
-  margin: clamp(4px, 0.8vw, 12px) 0;
+  max-width: clamp(14rem, 36vw, 36rem);
+  max-height: 30vh;
+  object-fit: contain;
   filter:
-    drop-shadow(1px 0px 0 rgba(255, 255, 255, 0.85))
-    drop-shadow(-1px 0px 0 rgba(255, 255, 255, 0.85))
-    drop-shadow(0px 1px 0 rgba(255, 255, 255, 0.85))
-    drop-shadow(0px -1px 0 rgba(255, 255, 255, 0.85))
-    drop-shadow(1px 1px 0 rgba(255, 255, 255, 0.55))
-    drop-shadow(-1px 1px 0 rgba(255, 255, 255, 0.55))
-    drop-shadow(1px -1px 0 rgba(255, 255, 255, 0.55))
+    drop-shadow( 1px  0   0 rgba(255, 255, 255, 0.85))
+    drop-shadow(-1px  0   0 rgba(255, 255, 255, 0.85))
+    drop-shadow( 0    1px 0 rgba(255, 255, 255, 0.85))
+    drop-shadow( 0   -1px 0 rgba(255, 255, 255, 0.85))
+    drop-shadow( 1px  1px 0 rgba(255, 255, 255, 0.55))
+    drop-shadow(-1px  1px 0 rgba(255, 255, 255, 0.55))
+    drop-shadow( 1px -1px 0 rgba(255, 255, 255, 0.55))
     drop-shadow(-1px -1px 0 rgba(255, 255, 255, 0.55))
     drop-shadow(0 4px 16px rgba(255, 213, 79, 0.15));
 }
 
 .summerRule {
-  width: clamp(60px, 8vw, 100px);
+  width: clamp(3rem, 7vw, 6rem);
   height: 2px;
   background: linear-gradient(90deg, transparent, #ffd54f, transparent);
   border: none;
-  margin: 2px 0;
+  margin: 0;
 }
 
 .summerDates {
-  font-size: clamp(18px, 2.6vw, 36px);
+  font-size: clamp(0.9rem, 1.8vw + 0.15rem, 2rem);
   font-weight: 900;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -63,56 +214,76 @@
 }
 
 .summerTagline {
-  font-size: clamp(13px, 1.35vw, 20px);
+  font-size: clamp(0.7rem, 0.9vw + 0.15rem, 1.1rem);
   font-weight: 500;
   letter-spacing: 0.5px;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.4;
-  max-width: min(520px, 92%);
+  max-width: min(32rem, 90%);
 }
 
-/* Magenta "View Deals" button */
+/* Magenta "View Deals" CTA */
 .cta {
   display: inline-block;
   text-decoration: none !important;
-  font-size: clamp(15px, 1.2vw, 18px);
+  font-size: clamp(0.8rem, 1vw + 0.15rem, 1.1rem);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  padding: clamp(14px, 1.2vw, 18px) clamp(32px, 3vw, 48px);
+  padding: clamp(0.6rem, 1vw, 1rem) clamp(1.5rem, 3vw, 3rem);
   border-radius: 8px;
   transition: all 0.3s ease;
   color: #fff !important;
-  width: 100%;
-  max-width: clamp(220px, 28vw, 320px);
   background: #c2185b;
   border-bottom: 3px solid #9b1348;
 }
+
 .cta:hover {
   background: #e91e63;
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(194, 24, 91, 0.5);
 }
-.cta:active { transform: translateY(0); }
+
+.cta:active {
+  transform: translateY(0);
+}
+
 .ctaArrow {
   display: inline-block;
   margin-left: 6px;
   transition: transform 0.3s ease;
 }
-.cta:hover .ctaArrow { transform: translateX(4px); }
 
-@media (max-width: 680px) {
-  .summerLogo { max-width: 280px; }
-  .summerDates { font-size: 18px; }
-  .summerTagline { max-width: 300px; }
-  .cta {
-    max-width: 100%;
-    font-size: 14px;
-    padding: 12px 20px;
+.cta:hover .ctaArrow {
+  transform: translateX(4px);
+}
+
+/* ── Short viewports (landscape phones, short laptops) ── */
+
+@media (max-height: 500px) {
+  .badge,
+  .summerRule,
+  .summerTagline {
+    display: none;
+  }
+
+  .summerLogo {
+    max-height: 20vh;
+  }
+
+  .headline {
+    font-size: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .hero[data-slide="summer-deals"] .headline {
+    font-size: clamp(1rem, 2vw, 1.75rem);
   }
 }
+
+/* ── Accessibility ── */
 
 @media (prefers-reduced-motion: reduce) {
   .badge { animation: none; }
   .cta:hover { transform: none; }
+  .headline { transition: color 700ms ease; }
 }
