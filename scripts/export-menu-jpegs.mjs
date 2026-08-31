@@ -64,6 +64,14 @@ const MENUS = [
     height: 3300,
     scale: 3.125,
   },
+  {
+    slug: 'menu_fall_changelog',
+    file: 'exports/menu-fall-reconfigure/changelog.html',
+    fromRoot: true,
+    width: 2550,
+    height: 3300,
+    scale: 3.125,
+  },
 ]
 
 async function main() {

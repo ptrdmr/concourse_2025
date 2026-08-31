@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fall Menu Swap — Changelog</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D42027;
+    --black: #1A1A1A;
+    --dark: #333;
+    --mid: #555;
+    --light: #888;
+    --rule: #D8D8D8;
+    --bg: #F4F4F4;
+    --white: #FFFFFF;
+    --gone: #8B1E22;
+    --new: #2E7D32;
+    --open: #9A6B12;
+  }
+
+  @page { size: 8.5in 11in; margin: 0; }
+
+  @media print {
+    html, body { width: 8.5in; height: 11in; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  html, body {
+    font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--black);
+    background: #D0D0D0;
+  }
+
+  .page {
+    width: 8.5in;
+    height: 11in;
+    background: var(--white);
+    padding: 0.32in 0.36in 0.28in;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .page::before, .page::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 5px;
+    background: var(--red);
+  }
+  .page::before { top: 0; }
+  .page::after { bottom: 0; }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--red);
+    padding-bottom: 0.08in;
+    margin-bottom: 0.12in;
+  }
+  .brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22pt;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .brand span { color: var(--red); }
+  header h1 {
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    margin-top: 2px;
+  }
+  .meta {
+    text-align: right;
+    font-size: 7.5pt;
+    color: var(--mid);
+    line-height: 1.35;
+  }
+  .meta strong { color: var(--black); }
+
+  .lede {
+    font-size: 8pt;
+    color: var(--mid);
+    line-height: 1.4;
+    margin-bottom: 0.12in;
+  }
+
+  .tri {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.1in;
+    margin-bottom: 0.12in;
+  }
+  .card {
+    background: var(--bg);
+    border-radius: 3px;
+    padding: 0.08in 0.1in 0.09in;
+  }
+  .card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11pt;
+    letter-spacing: 1.4px;
+    margin-bottom: 0.04in;
+    line-height: 1;
+  }
+  .card.gone h2 { color: var(--gone); }
+  .card.new h2 { color: var(--new); }
+  .card.open h2 { color: var(--open); }
+  .card ul {
+    list-style: none;
+    font-size: 7pt;
+    line-height: 1.38;
+    color: var(--dark);
+  }
+  .card li { padding: 0.5pt 0; }
+  .card li strong { font-weight: 600; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 0.18in;
+    flex: 1;
+  }
+  .sec { margin-bottom: 0.1in; }
+  .sec h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 11pt;
+    letter-spacing: 1.6px;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 1pt;
+    margin-bottom: 0.04in;
+    line-height: 1.15;
+  }
+  .sec ul {
+    list-style: none;
+    font-size: 7.5pt;
+    line-height: 1.4;
+    color: var(--dark);
+  }
+  .sec li {
+    padding: 1.5pt 0 1.5pt 0.08in;
+    border-bottom: 0.5px solid #eee;
+    position: relative;
+  }
+  .sec li:last-child { border-bottom: none; }
+  .sec li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 7pt;
+    width: 3px; height: 3px;
+    background: var(--red);
+    border-radius: 50%;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 6pt;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    padding: 0 3.5pt;
+    border-radius: 2px;
+    margin-right: 3px;
+    position: relative;
+    top: -0.5pt;
+  }
+  .tag-off { background: #F3D6D7; color: var(--gone); }
+  .tag-on { background: #DCECDC; color: var(--new); }
+  .tag-chg { background: #EEE; color: var(--dark); }
+  .tag-ask { background: #F6E7C7; color: var(--open); }
+
+  .checks {
+    background: #FBF6EA;
+    border-left: 3px solid var(--open);
+    padding: 0.07in 0.1in;
+    margin-top: 0.04in;
+  }
+  .checks h3 {
+    border: none;
+    padding: 0;
+    margin-bottom: 0.03in;
+    color: var(--open);
+  }
+  .checks ul { font-size: 7.5pt; }
+  .checks li { border: none; padding: 1pt 0 1pt 0.08in; }
+
+  footer {
+    margin-top: auto;
+    padding-top: 0.08in;
+    border-top: 0.5px solid var(--rule);
+    font-size: 6.5pt;
+    color: var(--light);
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="brand">CONCOURSE <span>FALL MENU SWAP</span></div>
+      <h1>Changelog — current printed menu → fall draft</h1>
+    </div>
+    <div class="meta">
+      Internal working copy<br>
+      <strong>Aug 28, 2026</strong><br>
+      Includes earlier fall pass + today’s edits
+    </div>
+  </header>
+
+  <p class="lede">Use this to double-check the JPEGs and as the state of the swap. Red items on the menus still need copy and price. Print drafts only — website / TV boards later.</p>
+
+  <div class="tri">
+    <div class="card gone">
+      <h2>Gone</h2>
+      <ul>
+        <li>Waffle Fries · Onion Rings · Irish Nachos</li>
+        <li>Hummus &amp; Pita · Taco Salad</li>
+        <li>Pretzel Sticks (6)</li>
+        <li>Miso Shrimp Salad</li>
+        <li>BBQ Chicken Sandwich</li>
+        <li>Ham &amp; Cheese Panini</li>
+        <li>Jerk chicken slider option</li>
+        <li>Asian Zing &amp; Naked wing sauces</li>
+        <li>Onion rings / waffle fry sandwich upgrades</li>
+        <li>Plain “Add Chicken” on Nacho, Quesadilla &amp; Southwest Bowl</li>
+      </ul>
+    </div>
+    <div class="card new">
+      <h2>New / In</h2>
+      <ul>
+        <li>Crinkle Cut Fries as the house fry</li>
+        <li>Large Bavarian Pretzel - 10</li>
+        <li>Carne Asada Fries <em>(needs copy/price)</em></li>
+        <li>Avocado Rolls · Pot Stickers <em>(needs copy/price)</em></li>
+        <li>Chopped Wedge Salad <em>(needs copy/price)</em></li>
+        <li>Chicken Pesto Panini <em>(needs copy/price)</em></li>
+        <li>Club Sandwich back · $14</li>
+        <li>Pulled Chicken on Nacho, Quesadilla &amp; Southwest Bowl</li>
+        <li>Cup &amp; Char Pepperoni · Fennel Italian Sausage</li>
+      </ul>
+    </div>
+    <div class="card open">
+      <h2>Still open</h2>
+      <ul>
+        <li><strong>Carne Asada Fries</strong> — red / $??</li>
+        <li><strong>Avocado Rolls</strong> — red / $??</li>
+        <li><strong>Pot Stickers</strong> — red / $??</li>
+        <li><strong>Chopped Wedge Salad</strong> — red / $??</li>
+        <li><strong>Chicken Pesto Panini</strong> — red / $??, Oven Baked note is on</li>
+        <li>Carne Asada Fries pulled-chicken sub still unpriced</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="sec">
+        <h3>Starters</h3>
+        <ul>
+          <li><span class="tag tag-chg">Rename</span> French Fries → <strong>Crinkle Cut Fries</strong> · $7 GF VG</li>
+          <li><span class="tag tag-off">Off</span> Waffle Fries, Onion Rings, Irish Nachos, Hummus &amp; Pita</li>
+          <li><span class="tag tag-on">New</span> Carne Asada Fries — Sub Pulled Chicken <em>(no price yet)</em>. NEW badge on</li>
+          <li><span class="tag tag-chg">Nacho / Quesadilla / Southwest</span> Add Pulled Chicken $4 · steak/shrimp unchanged</li>
+          <li><span class="tag tag-chg">Sliders</span> Cheeseburger or pulled pork with BBQ &amp; onion strings. Jerk chicken gone. Fry add-on is Crinkle Cut Fries $2.50</li>
+          <li><span class="tag tag-chg">Strips</span> Served with Crinkle Cut Fries</li>
+          <li><span class="tag tag-chg">Wings</span> Honey BBQ, Nashville dry rub, Buffalo, Garlic Parmesan</li>
+          <li><span class="tag tag-chg">Taco Plate</span> Chicken option is now <strong>chicken tinga</strong></li>
+          <li><span class="tag tag-chg">Southwest Bowl</span> Note: “Sub lettuce for rice.” Add Pulled Chicken $4 · Steak or Shrimp $5</li>
+          <li><span class="tag tag-on">New</span> Avocado Rolls · Pot Stickers · Large Bavarian Pretzel - 10. NEW badges on Avocado Rolls &amp; Pot Stickers</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h3>Pizza</h3>
+        <ul>
+          <li><span class="tag tag-chg">BYO meats</span> Cup &amp; Char Pepperoni, Fennel Italian Sausage, Ham, Applewood Smoked Bacon</li>
+          <li>Bowlers Combo, Meat Lovers, and Hot Honey Pep descriptions use the same topping names</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h3>Salads</h3>
+        <ul>
+          <li>House, Caesar, Chinese Chicken, Cobb unchanged</li>
+          <li><span class="tag tag-off">Off</span> Taco Salad</li>
+          <li><span class="tag tag-off">Off</span> Miso Shrimp Salad → <span class="tag tag-on">In</span> Chopped Wedge Salad (placeholder, NEW badge)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec">
+        <h3>Jr. Bowlers</h3>
+        <ul>
+          <li>Same three items and prices. Sides now say Crinkle Cut Fries instead of fries / french fries</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h3>Sandwiches</h3>
+        <ul>
+          <li>Header: includes Crinkle Cut Fries or side salad. Veggie upgrade +$2.50. Onion rings / waffle fries upgrade gone</li>
+          <li><span class="tag tag-off">Off</span> BBQ Chicken Sandwich · Ham &amp; Cheese Panini</li>
+          <li><span class="tag tag-on">Back</span> Club Sandwich $14 — turkey, ham, avocado, lettuce &amp; tomato on toasted sourdough with mayo. NEW badge removed</li>
+          <li>Order: Club → Chicken Pesto Panini (NEW) → Grilled Cheese → Hot Italian → Chipotle Chicken Melt → Soup &amp; Half Sandwich</li>
+          <li><span class="tag tag-chg">Note</span> <strong>Oven Baked</strong> on Chicken Pesto Panini and Grilled Cheese. Hot Italian keeps oven language in the body copy only</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h3>Burgers</h3>
+        <ul>
+          <li>Same fry / upgrade header change as sandwiches</li>
+          <li><span class="tag tag-chg">Rename</span> Smash Burger → <strong>Double Smash Burger</strong> · $13 · extra patty +$3</li>
+          <li>Classic, Cali, BBQ Bacon unchanged</li>
+        </ul>
+      </div>
+
+      <div class="sec checks">
+        <h3>Checks before print</h3>
+        <ul>
+          <li>Five items still in red with $?? until descriptions and prices land</li>
+          <li>Carne Asada Fries: Sub Pulled Chicken is a swap, unpriced</li>
+          <li>Print drafts only — website and TV boards later</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Concourse Bowling Center · Internal · Not for guests</span>
+    <span>Sources: exports/menu-fall-reconfigure · JPEGs: menu_front_fall.jpg / menu_back_fall.jpg</span>
+  </footer>
+
+</div>
+</body>
+</html>
