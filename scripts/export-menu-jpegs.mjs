@@ -72,6 +72,20 @@ const MENUS = [
     height: 3300,
     scale: 3.125,
   },
+  {
+    slug: 'front_tv_fall',
+    file: 'exports/menu-fall-reconfigure/front_tv.html',
+    fromRoot: true,
+    width: 1920,
+    height: 1080,
+  },
+  {
+    slug: 'back_tv_fall',
+    file: 'exports/menu-fall-reconfigure/back_tv.html',
+    fromRoot: true,
+    width: 1920,
+    height: 1080,
+  },
 ]
 
 async function main() {

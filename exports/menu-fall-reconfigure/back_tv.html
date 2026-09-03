@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse Menu – Back Display (Fall Reconfigure Draft)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Barlow+Condensed:ital,wght@0,400;0,500;0,600;1,400&family=Caveat:wght@400;500;600;700&family=Satisfy&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D42027;
+    --black: #1A1A1A;
+    --dark: #E8E8E8;
+    --mid: #BBBBBB;
+    --light: #888888;
+    --rule: rgba(255,255,255,0.12);
+    --bg: #111111;
+    --bg-highlight: rgba(255,255,255,0.07);
+    --white: #FFFFFF;
+  }
+
+  html, body {
+    font-family: 'Barlow', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--dark);
+    background: #000;
+    overflow: hidden;
+  }
+
+  /* ─── SCREEN SHELL ─── */
+  .screen {
+    width: 1920px;
+    height: 1080px;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .screen::before, .screen::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0;
+    height: 6px;
+    background: var(--red);
+    z-index: 10;
+  }
+  .screen::before { top: 0; }
+  .screen::after { bottom: 0; }
+
+  .draft-note {
+    background: #3A2410;
+    border: 2px solid var(--red);
+    color: var(--red);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-align: center;
+    padding: 7px 24px;
+    margin: 16px 60px 0;
+    line-height: 1.25;
+    flex-shrink: 0;
+  }
+
+  /* Proposed fall items — name in red so food-cost prices are obvious (all TV prices are already red) */
+  .item-proposed .item-name,
+  .item-proposed .item-price {
+    color: var(--red);
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    padding: 14px 60px 0;
+    flex: 1;
+    min-height: 0;
+  }
+  .starters-section {
+    min-width: 0;
+    overflow: auto;
+  }
+  .pizzas-section {
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  /* ─── SECTION TITLE ─── */
+  .section-title {
+    font-family: 'Caveat', cursive;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--white);
+    border: 2.5px solid var(--white);
+    display: inline-block;
+    padding: 2px 18px 0;
+    margin-bottom: 10px;
+    line-height: 1.15;
+  }
+
+  .sub-title {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--red);
+    margin-bottom: 12px;
+    line-height: 1.15;
+  }
+
+  /* ─── SECTION NOTES ─── */
+  .section-notes {
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--light);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-notes strong { font-weight: 600; color: var(--mid); }
+
+  /* ─── TWO-COL WITHIN A PANEL ─── */
+  .inner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 28px;
+  }
+  .inner-grid > * {
+    min-width: 0;
+  }
+  .starters-inner-grid {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    overflow: hidden;
+  }
+  /* ─── STARTERS: font sizes, stay in container ─── */
+  .starters-section .section-title { font-size: 50px; }
+  .starters-section .item-name { font-size: 31px; min-width: 0; }
+  .starters-section .item-price { font-size: 31px; }
+  .starters-section .badge { font-size: 14px; }
+  .starters-section .item-row { overflow: hidden; }
+  .pizzas-inner-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ─── PIZZAS SECTION: +32% font sizes (15% + 15%) ─── */
+  .pizzas-section .section-title { font-size: 53px; }
+  .pizzas-section .sub-title { font-size: 35px; }
+  .pizzas-section .byo-box .sub-title { font-size: 46px; }
+  .pizzas-section .item-name { font-size: 32px; }
+  .pizzas-section .item-price { font-size: 32px; }
+  .pizzas-section .badge { font-size: 16px; }
+  .pizzas-section .pizza-prices { font-size: 29px; }
+  .pizzas-section .pizza-prices .size { font-size: 24px; }
+  .pizzas-section .byo-base { font-size: 32px; }
+  .pizzas-section .byo-base .byo-note { font-size: 29px; }
+  .pizzas-section .byo-category-title { font-size: 32px; }
+  .pizzas-section .byo-list { font-size: 32px; }
+
+  /* ─── MENU ITEMS ─── */
+  .item { margin-bottom: 12px; }
+  .item-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    line-height: 1.3;
+  }
+  .item-name {
+    font-weight: 700;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--white);
+  }
+  .item-price {
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--red);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .item-desc {
+    font-size: 24px;
+    line-height: 1.45;
+    color: var(--mid);
+    margin-top: 2px;
+  }
+  .starters-section .item-desc {
+    font-size: 22px;
+  }
+  .item-note {
+    font-size: 24px;
+    font-style: italic;
+    color: var(--light);
+    margin-top: 2px;
+  }
+  .item-sub {
+    font-size: 24px;
+    color: var(--light);
+    font-style: italic;
+  }
+  .serves {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 24px;
+    font-style: italic;
+    color: var(--light);
+    margin-left: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ─── BADGES ─── */
+  .badge {
+    display: inline-block;
+    font-family: 'Barlow', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+  .badge-new { background: #2E7D32; color: white; }
+  .badge-spicy { background: #C62828; color: white; }
+  .badge-vegan { background: #558B2F; color: white; }
+  .badge-gf { border: 1px solid #888; color: #999; background: transparent; }
+
+  /* ─── PIZZA PRICES ─── */
+  .pizza-prices {
+    margin-left: auto;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--red);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .pizza-prices .size {
+    font-weight: 500;
+    color: var(--light);
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+  .pizza-sep { color: rgba(255,255,255,0.2); margin: 0 3px; }
+
+  /* ─── BUILD YOUR OWN BOX ─── */
+  .byo-box {
+    background: var(--bg-highlight);
+    padding: 14px 16px;
+    border-radius: 6px;
+    margin-top: 6px;
+  }
+  .byo-base {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .byo-base .byo-price { color: var(--red); font-weight: 700; }
+  .byo-base .byo-note { font-weight: 400; font-size: 22px; color: var(--light); }
+  .byo-category { margin-bottom: 8px; }
+  .byo-category-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .byo-category-title .byo-each { font-weight: 600; color: var(--red); text-transform: none; }
+  .byo-list {
+    font-size: 24px;
+    color: var(--mid);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <div class="draft-note">Red item names are food cost totals, not actual pricing</div>
+
+  <div class="main">
+
+    <!-- ═══ LEFT HALF: STARTERS ═══ -->
+    <div class="starters-section">
+      <div class="section-title">Starters</div>
+
+      <div class="inner-grid starters-inner-grid">
+
+        <div>
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Crinkle Cut Fries</span>
+              <span class="badge badge-gf">GF</span>
+              <span class="badge badge-vegan">VG</span>
+              <span class="item-price">$7</span>
+            </div>
+          </div>
+
+          <div class="item item-proposed">
+            <div class="item-row">
+              <span class="item-name">Carne Asada Fries</span>
+              <span class="badge badge-new">NEW</span>
+              <span class="item-price">$5.37</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Concourse Nacho</span>
+              <span class="badge badge-gf">GF</span>
+              <span class="badge badge-spicy">SPICY</span>
+              <span class="item-price">$17.50</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Sliders</span>
+              <span class="badge badge-new">NEW</span>
+              <span class="item-price">$14.50</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Chicken Strips (3)</span>
+              <span class="item-price">$14.50</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Chicken Wings</span>
+              <span class="badge badge-gf">GF</span>
+              <span class="badge badge-spicy">SPICY</span>
+              <span class="item-price">$16</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Soup of the Day</span>
+              <span class="item-price">$6</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Veggie Tray</span>
+              <span class="badge badge-vegan">VG</span>
+              <span class="item-price">$9</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Large Bavarian Pretzel - 10</span>
+              <span class="item-price">$12.50</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Mozzarella Sticks</span>
+              <span class="item-price">$10.50</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Shrimp Tacos (3)</span>
+              <span class="badge badge-spicy">SPICY</span>
+              <span class="item-price">$15</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Taco Plate</span>
+              <span class="item-price">$12</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Quesadilla</span>
+              <span class="item-price">$11</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Southwest Rice Bowl</span>
+              <span class="item-price">$10</span>
+            </div>
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Chicken Lettuce Cups</span>
+              <span class="badge badge-new">NEW</span>
+              <span class="badge badge-spicy">SPICY</span>
+              <span class="item-price">$13</span>
+            </div>
+          </div>
+
+          <div class="item item-proposed">
+            <div class="item-row">
+              <span class="item-name">Chicken Avocado Eggrolls</span>
+              <span class="badge badge-new">NEW</span>
+              <span class="item-price">$2.50</span>
+            </div>
+          </div>
+
+          <div class="item item-proposed">
+            <div class="item-row">
+              <span class="item-name">Pot Stickers</span>
+              <span class="badge badge-new">NEW</span>
+              <span class="item-price">$2.10</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ═══ RIGHT HALF: PIZZAS ═══ -->
+    <div class="pizzas-section">
+      <div class="section-title">Pizzas</div>
+
+      <!-- <div class="section-notes">
+        All pies prepared with our housemade pizza sauce &amp; hand grated mozzarella.
+        <strong>Medium</strong> 12″ · 8 Slices &nbsp;—&nbsp; <strong>Large</strong> 16″ · 12 Slices
+      </div> -->
+
+      <div class="inner-grid pizzas-inner-grid">
+
+        <!-- Specialties -->
+        <div>
+          <div class="sub-title">Specialties</div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Bowlers Combo</span>
+              <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+            </div>
+            <!-- <div class="item-desc">Sausage, pepperoni, mushrooms, onions, bell peppers.</div> -->
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Meat Lovers</span>
+              <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+            </div>
+            <!-- <div class="item-desc">Pepperoni, ham, Italian sausage, applewood smoked bacon.</div> -->
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Veggie Lovers</span>
+              <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+            </div>
+            <!-- <div class="item-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</div> -->
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">BBQ Chicken</span>
+              <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+            </div>
+            <!-- <div class="item-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</div> -->
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Hawaiian</span>
+              <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+            </div>
+            <!-- <div class="item-desc">Ham &amp; pineapple.</div> -->
+          </div>
+
+          <div class="item">
+            <div class="item-row">
+              <span class="item-name">Hot Honey Pep</span>
+              <span class="badge badge-spicy">SPICY</span>
+              <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+            </div>
+            <!-- <div class="item-desc">Double pepperoni, Fresno chiles, drizzled with HOT honey.</div> -->
+          </div>
+        </div>
+
+        <!-- Build Your Own -->
+        <div>
+          <div class="byo-box">
+            <div class="sub-title">Build Your Own</div>
+
+            <div class="byo-base">
+              Medium Pizza <span class="byo-price">$17</span> <span class="byo-note">cheese only</span><br>
+              Large Pizza <span class="byo-price">$20</span> <span class="byo-note">cheese only</span>
+            </div>
+
+            <div class="byo-category">
+              <div class="byo-category-title">Veggie Tops <span class="byo-each">$1.50/each</span></div>
+              <div class="byo-list">Mushrooms, Sweet Onions, Green Peppers, Tomato, Olives, Pineapple, Jalapenos, Blue Cheese Crumbles, Banana Peppers</div>
+            </div>
+
+            <div class="byo-category">
+              <div class="byo-category-title">Meat Tops <span class="byo-each">$2.50/each</span></div>
+              <div class="byo-list">Cup &amp; Char Pepperoni, Fennel Italian Sausage, Ham, Applewood Smoked Bacon</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

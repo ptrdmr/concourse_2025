@@ -220,6 +220,11 @@
     margin-bottom: 6px;
   }
 
+  .col-left .item-name { font-size: 13px; }
+  .col-left .item-price { font-size: 10.5px; }
+  .col-left .item-desc { font-size: 5px; }
+  .col-left .item-sub { font-size: 9.25px; }
+
   .item-header {
     display: flex;
     justify-content: space-between;
@@ -254,9 +259,10 @@
     letter-spacing: 0.3px;
   }
 
-  /* Proposed items — name + price in red until pricing is final */
+  /* Proposed items — name, price, and copy in red until guest pricing is final */
   .menu-item-proposed .item-name,
-  .menu-item-proposed .item-price {
+  .menu-item-proposed .item-price,
+  .menu-item-proposed .item-desc {
     color: var(--red);
   }
 
@@ -421,25 +427,25 @@
         <div class="menu-item menu-item-proposed">
           <div class="item-header">
             <span class="item-name">Carne Asada Fries</span>
-            <span class="item-price">$??</span>
+            <span class="item-price">$5.37</span>
           </div>
-          <div class="item-desc">Placeholder description</div>
+          <div class="item-desc">Steak, cheese sauce, pico, guacamole &amp; sour cream on crinkle cut fries</div>
         </div>
 
         <div class="menu-item menu-item-proposed">
           <div class="item-header">
-            <span class="item-name">Avocado Rolls</span>
-            <span class="item-price">$??</span>
+            <span class="item-name">Chicken Avocado Eggrolls</span>
+            <span class="item-price">$2.50</span>
           </div>
-          <div class="item-desc">Placeholder description</div>
+          <div class="item-desc">Chicken, avocado, cilantro &amp; sun-dried tomato with southwestern sauce</div>
         </div>
 
         <div class="menu-item menu-item-proposed">
           <div class="item-header">
             <span class="item-name">Pot Stickers</span>
-            <span class="item-price">$??</span>
+            <span class="item-price">$2.10</span>
           </div>
-          <div class="item-desc">Placeholder description</div>
+          <div class="item-desc">Crispy dumplings with steamed rice &amp; chili sauce</div>
         </div>
       </div>
 
