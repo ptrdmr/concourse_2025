@@ -10,38 +10,24 @@
 <link rel="stylesheet" href="fall-specials.css">
 <style>
   .flyer { width: 1920px; height: 1080px; }
-  .flyer::before, .flyer::after { height: 16px; }
   .flyer-head {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--black);
-    padding: 10px 36px;
-    gap: 24px;
+    height: 154px;
+    padding: 24px 48px 20px;
   }
-  .lockup--hero { flex-direction: row; align-items: baseline; gap: 18px; }
-  .lockup--hero .lockup-brand { font-size: 22px; color: var(--red); }
-  .lockup--hero .lockup-season { font-size: 92px; letter-spacing: 0.08em; color: var(--gold); line-height: 0.8; }
-  .lockup--hero .lockup-line { font-size: 18px; margin-top: 0; color: var(--red); }
-  .head-right { text-align: right; }
-  .kicker { font-size: 32px; color: var(--gold); }
-  .run { font-size: 22px; color: var(--gold); }
-  .deals { grid-template-columns: 1fr 18px 1fr; }
+  .lockup { gap: 20px; }
+  .lockup-brand { font-size: 40px; }
+  .lockup-season { font-size: 94px; }
+  .kicker { font-size: 44px; }
+  .run { margin-top: 10px; font-size: 24px; }
+  .deals { grid-template-columns: 1fr 12px 1fr; }
   .flyer-deal {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
-    column-gap: 28px;
-    padding: 8px 32px;
+    grid-template-rows: 116px 1fr 92px 58px;
+    padding: 20px 24px 18px;
   }
-  .flyer-deal-price {
-    font-size: 500px;
-    line-height: 0.72;
-  }
-  .flyer-copy { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
-  .flyer-deal-name { font-size: 76px; text-align: left; }
-  .flyer-deal-window { font-size: 36px; text-align: left; }
-  .flyer-deal-meta { font-size: 28px; text-align: left; }
+  .flyer-deal-name { font-size: 86px; }
+  .flyer-deal-price { font-size: 410px; }
+  .flyer-deal-window { margin: 0 -24px; font-size: 48px; }
+  .flyer-deal-meta { font-size: 27px; }
 </style>
 </head>
 <body>
@@ -59,21 +45,17 @@
   </div>
   <div class="deals">
     <div class="flyer-deal">
+      <div class="flyer-deal-name">3 Games &amp; Shoes</div>
       <div class="flyer-deal-price">$14</div>
-      <div class="flyer-copy">
-        <div class="flyer-deal-name">3 Games &amp; Shoes</div>
-        <div class="flyer-deal-window">Tue – Fri · Open – 3pm</div>
-        <div class="flyer-deal-meta">3 games + shoes · Per person</div>
-      </div>
+      <div class="flyer-deal-window">Tue – Fri · Open – 3pm</div>
+      <div class="flyer-deal-meta">Per person · Shoes included</div>
     </div>
     <div class="gutter-v"></div>
     <div class="flyer-deal">
+      <div class="flyer-deal-name">Unlimited Bowling</div>
       <div class="flyer-deal-price">$18</div>
-      <div class="flyer-copy">
-        <div class="flyer-deal-name">Unlimited Bowling</div>
-        <div class="flyer-deal-window">Tue – Thu · 8pm – Close</div>
-        <div class="flyer-deal-meta">2 hrs unlimited + shoes · Per person</div>
-      </div>
+      <div class="flyer-deal-window">Tue – Thu · 8pm – Close</div>
+      <div class="flyer-deal-meta">2 hours · Shoes included · Per person</div>
     </div>
   </div>
 </div>

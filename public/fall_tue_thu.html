@@ -10,23 +10,27 @@
 <link rel="stylesheet" href="fall-specials.css">
 <style>
   .strip { width: 1920px; height: 270px; }
-  .strip-brand { width: 240px; min-width: 240px; }
-  .strip-day { width: 210px; min-width: 210px; }
-  .strip-day-name { font-size: 72px; }
+  .strip-brand { width: 230px; min-width: 230px; }
+  .strip-day { width: 190px; min-width: 190px; }
+  .lockup { flex-direction: column; gap: 7px; }
+  .lockup-brand { font-size: 24px; }
+  .lockup-season { font-size: 64px; }
+  .strip-day-name { font-size: 68px; }
   .deal {
-    display: grid;
-    grid-template-rows: auto 1fr auto;
-    padding: 6px 8px 8px 20px;
+    grid-template-columns: 1fr 210px;
+    grid-template-rows: 1fr 64px;
+    align-items: center;
+    padding: 10px 20px 0;
   }
-  .deal-name { font-size: 48px; }
-  .deal-price { font-size: 200px; display: flex; align-items: center; justify-content: center; }
-  .deal-time { font-size: 24px; }
+  .deal-name { padding-left: 10px; font-size: 57px; text-align: left; }
+  .deal-price { font-size: 170px; }
+  .deal-time { grid-column: 1 / -1; margin: 0 -20px; font-size: 31px; }
 </style>
 </head>
 <body>
 <div class="strip">
   <div class="strip-brand">
-    <div class="lockup lockup--strip lockup--on-dark">
+    <div class="lockup">
       <div class="lockup-brand">Concourse</div>
       <div class="lockup-season">Fall</div>
       <div class="lockup-line">Lanes, Games &amp; Goodtimes!</div>
