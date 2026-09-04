@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse Fall Specials – 16:9 Flyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fall-specials.css">
+<style>
+  .flyer { width: 1920px; height: 1080px; }
+  .flyer::before, .flyer::after { height: 16px; }
+  .flyer-head {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--black);
+    padding: 10px 36px;
+    gap: 24px;
+  }
+  .lockup--hero { flex-direction: row; align-items: baseline; gap: 18px; }
+  .lockup--hero .lockup-brand { font-size: 22px; color: var(--red); }
+  .lockup--hero .lockup-season { font-size: 92px; letter-spacing: 0.08em; color: var(--gold); line-height: 0.8; }
+  .lockup--hero .lockup-line { font-size: 18px; margin-top: 0; color: var(--red); }
+  .head-right { text-align: right; }
+  .kicker { font-size: 32px; color: var(--gold); }
+  .run { font-size: 22px; color: var(--gold); }
+  .deals { grid-template-columns: 1fr 18px 1fr; }
+  .flyer-deal {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    column-gap: 28px;
+    padding: 8px 32px;
+  }
+  .flyer-deal-price {
+    font-size: 500px;
+    line-height: 0.72;
+  }
+  .flyer-copy { display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+  .flyer-deal-name { font-size: 76px; text-align: left; }
+  .flyer-deal-window { font-size: 36px; text-align: left; }
+  .flyer-deal-meta { font-size: 28px; text-align: left; }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="flyer-head">
+    <div class="lockup lockup--hero">
+      <div class="lockup-brand">Concourse</div>
+      <div class="lockup-season">Fall</div>
+      <div class="lockup-line">Lanes, Games &amp; Goodtimes!</div>
+    </div>
+    <div class="head-right">
+      <div class="kicker">Fall Specials 2026</div>
+      <div class="run">Sept 8 — Oct 30</div>
+    </div>
+  </div>
+  <div class="deals">
+    <div class="flyer-deal">
+      <div class="flyer-deal-price">$14</div>
+      <div class="flyer-copy">
+        <div class="flyer-deal-name">3 Games &amp; Shoes</div>
+        <div class="flyer-deal-window">Tue – Fri · Open – 3pm</div>
+        <div class="flyer-deal-meta">3 games + shoes · Per person</div>
+      </div>
+    </div>
+    <div class="gutter-v"></div>
+    <div class="flyer-deal">
+      <div class="flyer-deal-price">$18</div>
+      <div class="flyer-copy">
+        <div class="flyer-deal-name">Unlimited Bowling</div>
+        <div class="flyer-deal-window">Tue – Thu · 8pm – Close</div>
+        <div class="flyer-deal-meta">2 hrs unlimited + shoes · Per person</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

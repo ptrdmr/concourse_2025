@@ -12,6 +12,7 @@
 
   :root {
     --red: #D42027;
+    --blue: #1565C0;
     --black: #1A1A1A;
     --dark: #333;
     --mid: #555;
@@ -154,7 +155,7 @@
 
   /* ─── MENU ITEMS ─── */
   .item {
-    margin-bottom: 0.065in;
+    margin-bottom: 0.048in;
   }
   .item-row {
     display: flex;
@@ -173,7 +174,7 @@
     margin-left: auto;
     font-weight: 700;
     font-size: 9.5pt;
-    color: var(--red);
+    color: var(--black);
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -195,10 +196,37 @@
     font-style: italic;
   }
 
-  /* Proposed fall items — entire entry in red until pricing is final */
-  .item-proposed .item-name,
-  .item-proposed .item-desc,
-  .item-proposed .item-price {
+  /* Blue = only the text that changed. Names stay black unless new/renamed. */
+  .item-new .item-name,
+  .item-new .item-desc,
+  .item-new .item-price,
+  .item-new .item-sub,
+  .item-new .item-note,
+  .name-chg,
+  .item-chg .item-desc,
+  .item-chg .item-sub,
+  .item-chg .item-note {
+    color: var(--blue);
+  }
+  .item-off .item-name,
+  .item-off .item-desc,
+  .item-off .item-price,
+  .item-off .item-sub,
+  .item-off .item-note {
+    color: var(--red);
+  }
+  .item-price.price-chg,
+  .pizza-prices.price-chg,
+  .byo-price.price-chg,
+  .byo-each.price-chg {
+    color: var(--blue);
+  }
+  .chg { color: var(--blue); font-weight: 600; }
+  .off { color: var(--red); font-weight: 600; }
+  .item-chg .off,
+  .item-new .off,
+  .item-chg .item-note.off,
+  .item-new .item-note.off {
     color: var(--red);
   }
   .serves {
@@ -225,6 +253,7 @@
     top: -0.5pt;
   }
   .badge-new { background: #2E7D32; color: white; }
+  .badge-off { background: #C62828; color: white; }
   .badge-spicy { background: #C62828; color: white; }
   .badge-vegan { background: #558B2F; color: white; }
   .badge-gf { border: 1px solid #757575; color: #616161; background: transparent; }
@@ -280,7 +309,6 @@
     <div class="logo-title">CONCOURSE</div>
     <div class="logo-subtitle">Bowl · Bar · Grill</div>
     <div class="logo-bottom-rule"></div>
-    <div class="draft-note">All red product prices are food cost totals, not actual pricing</div>
     <div class="header-divider"></div>
   </header>
 
@@ -292,8 +320,8 @@
       <div class="section-title">SALADS</div>
 
       <div class="section-notes">
-        <strong>Dressings:</strong> Ranch, Italian, Thousand Island, Caesar, Sesame Soy, Blue Cheese<br>
-        <strong>Add Proteins:</strong> Chicken Breast +$4 · Steak +$5 · Shrimp +$5
+        <strong>Dressings:</strong> Ranch, Italian, Thousand Island, Caesar, <span class="off">Sesame Soy</span>, Blue Cheese. Choose your dressing. Housemade croutons.<br>
+        <strong>Add Proteins:</strong> Chicken Breast +$4 · <span class="chg">Carne Asada +$5</span> · Shrimp +$5
       </div>
 
       <div class="item">
@@ -301,46 +329,47 @@
           <span class="item-name">House Salad</span>
           <span class="badge badge-gf">GF</span>
           <span class="badge badge-vegan">VG</span>
-          <span class="item-price">$9</span>
+          <span class="item-price price-chg">$10</span>
         </div>
         <div class="item-desc">Romaine lettuce, tomato, cucumber, mozzarella &amp; carrots.</div>
         <div class="item-note">Ask for no cheese for vegan option</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">Caesar Salad</span>
           <span class="badge badge-gf">GF</span>
-          <span class="item-price">$9.50</span>
+          <span class="item-price price-chg">$10</span>
         </div>
-        <div class="item-desc">Romaine lettuce, parmesan cheese, croutons tossed in Caesar dressing.</div>
+        <div class="item-desc">Romaine lettuce, parmesan cheese, housemade croutons tossed in Caesar dressing.</div>
         <div class="item-note">Ask for no croutons for gluten-free option</div>
       </div>
 
-      <div class="item">
+      <div class="item item-off">
         <div class="item-row">
           <span class="item-name">Chinese Chicken Salad</span>
-          <span class="item-price">$14</span>
+          <span class="badge badge-off">OFF</span>
+          <span class="item-price">$15</span>
         </div>
         <div class="item-desc">Grilled chicken breast, shredded cabbage, romaine lettuce, sweet &amp; savory toasted sesame dressing. Includes fried rice noodles, carrots, mandarin oranges, green onions &amp; sesame seeds.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">Cobb Salad</span>
           <span class="badge badge-gf">GF</span>
-          <span class="item-price">$15.50</span>
+          <span class="item-price price-chg">$16</span>
         </div>
-        <div class="item-desc">Grilled chicken, romaine lettuce, bacon, hardboiled egg, avocado, blue cheese crumbles &amp; tomato.</div>
+        <div class="item-desc">Romaine lettuce topped with diced grilled chicken, chopped bacon, hard boiled egg, avocado, blue cheese crumbles &amp; diced tomatoes.</div>
       </div>
 
-      <div class="item item-proposed">
+      <div class="item item-new">
         <div class="item-row">
           <span class="item-name">Chopped Wedge Salad</span>
           <span class="badge badge-new">NEW</span>
-          <span class="item-price">$2.40</span>
+          <span class="item-price">$13</span>
         </div>
-        <div class="item-desc">Bite-sized pieces of crisp iceberg lettuce tossed and topped with classic ingredients like bacon, tomatoes, blue cheese crumbles &amp; crispy onion strings.</div>
+        <div class="item-desc">Chopped iceberg lettuce tossed with blue cheese dressing, chopped bacon, diced tomato &amp; cucumber. Topped with crispy onion straws.</div>
       </div>
 
       <!-- JR. BOWLERS (in left column) -->
@@ -349,23 +378,29 @@
         <div class="item">
           <div class="item-row">
             <span class="item-name">Mini Corn Dogs</span>
-            <span class="item-price">$10</span>
+            <span class="item-price price-chg">$11</span>
           </div>
           <div class="item-desc">Served with Crinkle Cut Fries.</div>
         </div>
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Kids Sliders</span>
-            <span class="item-price">$11.50</span>
+            <span class="item-price price-chg">$12.50</span>
           </div>
-          <div class="item-desc">Two mini burgers with american cheese and ketchup. Served with Crinkle Cut Fries.</div>
+          <div class="item-desc">2 slider patties, topped with american cheese &amp; ketchup. Served with crinkle cut seasoned fries or orange wedges.</div>
         </div>
         <div class="item">
           <div class="item-row">
             <span class="item-name">Kids Chicken Strips</span>
-            <span class="item-price">$11.50</span>
+            <span class="item-price price-chg">$12.50</span>
           </div>
           <div class="item-desc">2 chicken fingers with Crinkle Cut Fries.</div>
+        </div>
+        <div class="item">
+          <div class="item-row">
+            <span class="item-name">Grilled Cheese</span>
+            <span class="item-price">$11</span>
+          </div>
         </div>
       </div>
 
@@ -378,48 +413,49 @@
       <div class="section-title">SANDWICHES</div>
 
       <div class="section-notes">
-        Includes Crinkle Cut Fries or side salad · <strong>Upgrade:</strong> veggies +$2.50<br>
-        <strong>Add:</strong> cheese +$1.50 (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br>
-        <strong>Breads:</strong> hamburger bun, sourdough, ciabatta
+        Includes Crinkle Cut Fries or side salad · <span class="chg">Add soup +$3.50</span> · <strong>Upgrade:</strong> veggies +$2.50<br>
+        <strong>Add:</strong> cheese <span class="chg">+$2</span> (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br>
+        <strong>Breads:</strong> <span class="off">hamburger bun</span> · <span class="chg">brioche bun</span>, sourdough, ciabatta
       </div>
 
       <div class="item">
         <div class="item-row">
           <span class="item-name">Club Sandwich</span>
-          <span class="item-price">$14</span>
+          <span class="item-price price-chg">$16</span>
         </div>
         <div class="item-desc">Sliced turkey breast, ham, avocado, lettuce &amp; tomato on toasted sourdough with mayo.</div>
       </div>
 
-      <div class="item item-proposed">
+      <div class="item item-new">
         <div class="item-row">
           <span class="item-name">Chicken Pesto Sandwich</span>
           <span class="badge badge-new">NEW</span>
-          <span class="item-price">$4.07</span>
+          <span class="item-price">$16</span>
         </div>
-        <div class="item-desc">A tender chicken breast topped with green basil pesto sauce, melted swiss cheese &amp; fresh sliced tomatoes, served on a crusty ciabatta roll.</div>
+        <div class="item-desc">Sliced chicken breast topped with swiss, sliced tomatoes &amp; green pesto sauce, served on an oven-baked ciabatta roll.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-new">
         <div class="item-row">
-          <span class="item-name">Grilled Cheese</span>
-          <span class="item-price">$10</span>
+          <span class="item-name">BLT</span>
+          <span class="badge badge-new">NEW</span>
+          <span class="item-price">$12</span>
         </div>
-        <div class="item-note">Oven Baked</div>
-        <div class="item-sub">Add ham for $3</div>
+        <div class="item-desc">Needs a description. Served with fries.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">Hot Italian</span>
-          <span class="item-price">$13.50</span>
+          <span class="item-price price-chg">$14.50</span>
         </div>
-        <div class="item-desc">Hot &amp; fresh out of the oven! A bakery fresh ciabatta roll topped with marinara sauce, shredded mozzarella cheese, basil, pepperoncini, pepperoni &amp; sausage. Then oven baked until bubbly &amp; crisp.</div>
+        <div class="item-desc">Pepperoni, fennel sausage, shredded mozzarella, basil &amp; pepperoncini, topped with housemade marinara sauce, served on an oven-baked ciabatta roll.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-off">
         <div class="item-row">
           <span class="item-name">Chipotle Chicken Melt</span>
+          <span class="badge badge-off">OFF</span>
           <span class="item-price">$15</span>
         </div>
         <div class="item-desc">A tender chicken breast on a fresh ciabatta roll with chipotle aioli &amp; shredded mozzarella cheese. Served hot &amp; fresh from the oven, topped with lettuce, tomato &amp; sliced cucumber.</div>
@@ -428,7 +464,7 @@
       <div class="item">
         <div class="item-row">
           <span class="item-name">Soup &amp; Half Sandwich</span>
-          <span class="item-price">$10</span>
+          <span class="item-price price-chg">$12</span>
         </div>
         <div class="item-desc">A half sandwich (grilled cheese or BLT) on sourdough bread, paired with a cup of our housemade soup of the day.</div>
       </div>
@@ -440,40 +476,40 @@
 
       <div class="section-notes">
         Includes Crinkle Cut Fries or side salad · <strong>Upgrade:</strong> veggies +$2.50<br>
-        <strong>Add:</strong> cheese +$1.50 (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br>
-        <strong>Breads:</strong> hamburger bun, sourdough, ciabatta
+        <strong>Add:</strong> cheese <span class="chg">+$2</span> (american, swiss, pepper jack) · bacon +$3 · avocado +$1.50<br>
+        <strong>Breads:</strong> <span class="off">hamburger bun</span> · <span class="chg">brioche bun</span>, sourdough, ciabatta
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">Double Smash Burger</span>
-          <span class="item-price">$13</span>
+          <span class="item-price price-chg">$14</span>
         </div>
-        <div class="item-desc">Two 2oz beef patties on a bakery fresh burger bun. Topped with american cheese, grilled onions, ketchup and mustard. Additional patty +$3.</div>
+        <div class="item-desc">2 all beef patties smashed with American cheese, grilled onions with ketchup &amp; mustard. Additional patty +$3.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">The Classic Cheeseburger</span>
-          <span class="item-price">$14.50</span>
+          <span class="item-price price-chg">$15.50</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, american cheese, lettuce, tomato, onions &amp; 1000 Island dressing on bakery fresh burger bun.</div>
+        <div class="item-desc">Custom blended beef patty, American cheese, lettuce, tomato, white onion, on a bakery fresh brioche bun.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">Cali Burger</span>
-          <span class="item-price">$16</span>
+          <span class="item-price price-chg">$16.50</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh burger bun.</div>
+        <div class="item-desc">Custom blended beef patty, bacon, pepperjack cheese, avocado, chipotle aioli on bakery fresh brioche bun.</div>
       </div>
 
-      <div class="item">
+      <div class="item item-chg">
         <div class="item-row">
           <span class="item-name">BBQ Bacon Cheeseburger</span>
-          <span class="item-price">$16</span>
+          <span class="item-price price-chg">$16.50</span>
         </div>
-        <div class="item-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh burger bun.</div>
+        <div class="item-desc">Custom blended beef patty, onion straws, bacon, american cheese &amp; BBQ sauce on bakery fresh brioche bun.</div>
       </div>
 
     </div>
@@ -481,6 +517,8 @@
 
   <!-- LEGEND -->
   <footer class="legend">
+    <div class="legend-item"><span class="chg">Blue</span> this revision</div>
+    <div class="legend-item"><span class="off">Red</span> coming off</div>
     <div class="legend-item"><span class="badge badge-new">NEW</span> New Items</div>
     <div class="legend-item"><span class="badge badge-spicy">SPICY</span> Spicy</div>
     <div class="legend-item"><span class="badge badge-vegan">VG</span> Vegan</div>

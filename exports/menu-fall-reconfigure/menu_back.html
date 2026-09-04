@@ -12,6 +12,7 @@
 
   :root {
     --red: #D42027;
+    --blue: #1565C0;
     --black: #1A1A1A;
     --dark: #333;
     --mid: #555;
@@ -64,7 +65,7 @@
   /* ─── HEADER ─── */
   .header {
     text-align: center;
-    padding: 0.28in 0.4in 0.12in;
+    padding: 0.28in 0.4in 0.08in;
   }
   .logo-top-rule { width: 2.6in; height: 2.5px; background: var(--black); margin: 0 auto 0.04in; }
   .logo-title { font-family: 'Aktiv Grotesk', 'Arial Black', sans-serif; font-size: 42pt; font-weight: 900; letter-spacing: 8px; line-height: 1; color: var(--black); }
@@ -154,7 +155,7 @@
     margin-left: auto;
     font-weight: 700;
     font-size: 9.5pt;
-    color: var(--red);
+    color: var(--black);
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -176,10 +177,37 @@
     font-style: italic;
   }
 
-  /* Proposed fall items — entire entry in red until pricing is final */
-  .item-proposed .item-name,
-  .item-proposed .item-desc,
-  .item-proposed .item-price {
+  /* Blue = only the text that changed. Names stay black unless new/renamed. */
+  .item-new .item-name,
+  .item-new .item-desc,
+  .item-new .item-price,
+  .item-new .item-sub,
+  .item-new .item-note,
+  .name-chg,
+  .item-chg .item-desc,
+  .item-chg .item-sub,
+  .item-chg .item-note {
+    color: var(--blue);
+  }
+  .item-off .item-name,
+  .item-off .item-desc,
+  .item-off .item-price,
+  .item-off .item-sub,
+  .item-off .item-note {
+    color: var(--red);
+  }
+  .item-price.price-chg,
+  .pizza-prices.price-chg,
+  .byo-price.price-chg,
+  .byo-each.price-chg {
+    color: var(--blue);
+  }
+  .chg { color: var(--blue); font-weight: 600; }
+  .off { color: var(--red); font-weight: 600; }
+  .item-chg .off,
+  .item-new .off,
+  .item-chg .item-note.off,
+  .item-new .item-note.off {
     color: var(--red);
   }
   .serves {
@@ -208,6 +236,7 @@
     top: -0.5pt;
   }
   .badge-new { background: #2E7D32; color: white; }
+  .badge-off { background: #C62828; color: white; }
   .badge-spicy { background: #C62828; color: white; }
   .badge-vegan { background: #558B2F; color: white; }
   .badge-gf { border: 1px solid #757575; color: #616161; background: transparent; }
@@ -226,7 +255,7 @@
     margin-left: auto;
     font-weight: 700;
     font-size: 8pt;
-    color: var(--red);
+    color: var(--black);
     white-space: nowrap;
     flex-shrink: 0;
     letter-spacing: 0.3px;
@@ -256,7 +285,7 @@
     line-height: 1.4;
   }
   .byo-base .byo-price {
-    color: var(--red);
+    color: var(--black);
     font-weight: 700;
   }
   .byo-category {
@@ -271,7 +300,7 @@
   }
   .byo-category-title .byo-each {
     font-weight: 600;
-    color: var(--red);
+    color: var(--black);
     text-transform: none;
   }
   .byo-list {
@@ -310,7 +339,6 @@
     <div class="logo-title">CONCOURSE</div>
     <div class="logo-subtitle">Bowl · Bar · Grill</div>
     <div class="logo-bottom-rule"></div>
-    <div class="draft-note">All red product prices are food cost totals, not actual pricing</div>
     <div class="header-divider"></div>
   </header>
 
@@ -329,84 +357,88 @@
             <span class="item-name">Crinkle Cut Fries</span>
             <span class="badge badge-gf">GF</span>
             <span class="badge badge-vegan">VG</span>
-            <span class="item-price">$7</span>
+            <span class="item-price price-chg">$8</span>
           </div>
         </div>
 
-        <div class="item item-proposed">
+        <div class="item item-new">
           <div class="item-row">
             <span class="item-name">Carne Asada Fries</span>
             <span class="badge badge-new">NEW</span>
-            <span class="item-price">$5.37</span>
+            <span class="serves">serves 2–4</span>
+            <span class="item-price">$18.50</span>
           </div>
-          <div class="item-desc">A large bed of crispy crinkle cut fries, topped with grilled, chopped steak, cheese sauce, pico de gallo, guacamole &amp; a drizzle of sour cream.</div>
-          <div class="item-sub">Sub Pulled Chicken</div>
+          <div class="item-desc">A large bed of crispy crinkle cut fries, topped with grilled carne asada, beer cheese, pico de gallo, guacamole &amp; a drizzle of sour cream.</div>
+          <div class="item-sub">Chicken Tinga · Carne Asada · Carnitas</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Concourse Nacho</span>
             <span class="badge badge-gf">GF</span>
             <span class="badge badge-spicy">SPICY</span>
-            <span class="serves">*Feeds 4–6*</span>
+            <span class="serves">serves 2–4</span>
             <span class="item-price">$17.50</span>
           </div>
-          <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, nacho cheese, black bean puree, jalapenos and pico de gallo.</div>
-          <div class="item-sub">Add Pulled Chicken $4 · Steak $5</div>
+          <div class="item-desc">Tortilla chips, guacamole, red salsa, sour cream, beer cheese, black beans, jalapenos and pico de gallo.</div>
+          <div class="item-sub">Add Chicken Tinga $5 · Carne Asada $5 · Carnitas $5</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Sliders</span>
             <span class="badge badge-new">NEW</span>
             <span class="item-price">$14.50</span>
           </div>
-          <div class="item-desc">Three sliders on sweet Hawaiian buns. Choose from classic cheeseburger or pulled pork with BBQ sauce &amp; onion strings. One style per order.</div>
+          <div class="item-desc">Three sliders on sweet Hawaiian buns. All-beef slider patties topped with ketchup, grilled onions, pickles &amp; beer cheese. One style per order.</div>
           <div class="item-sub">Add Crinkle Cut Fries $2.50</div>
+          <div class="item-note off">Coming off: pulled pork with BBQ sauce &amp; onion strings</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Chicken Strips (3)</span>
             <span class="item-price">$14.50</span>
           </div>
           <div class="item-desc">Breaded white meat chicken, regular or spicy buffalo. Served with Crinkle Cut Fries.</div>
+          <div class="item-sub">Add sauce $1</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Chicken Wings</span>
             <span class="badge badge-gf">GF</span>
             <span class="badge badge-spicy">SPICY</span>
-            <span class="item-price">$16</span>
+            <span class="item-price price-chg">$17</span>
           </div>
-          <div class="item-desc">8 jumbo bone-in wings tossed in honey BBQ, Nashville dry rub, buffalo or garlic parmesan.</div>
+          <div class="item-desc">8 jumbo bone-in wings. Tossed in your choice of sauce.</div>
+          <div class="item-sub">Sauce: Honey BBQ · Buffalo &nbsp;—&nbsp; Dry Rub: Nashville · Garlic Parmesan</div>
         </div>
 
         <div class="item">
           <div class="item-row">
             <span class="item-name">Soup of the Day</span>
-            <span class="item-price">$6</span>
+            <span class="item-price price-chg">$7</span>
           </div>
           <div class="item-desc">Ask your server!</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Veggie Tray</span>
             <span class="badge badge-vegan">VG</span>
-            <span class="item-price">$9</span>
+            <span class="item-price">$10</span>
           </div>
-          <div class="item-desc">Farm fresh vegetables.</div>
+          <div class="item-desc">Needs a description</div>
         </div>
 
         <div class="item">
           <div class="item-row">
-            <span class="item-name">Large Bavarian Pretzel - 10</span>
-            <span class="item-price">$12.50</span>
+            <span class="item-name">Large Bavarian Pretzel - 10&quot;</span>
+            <span class="item-price price-chg">$14</span>
           </div>
-          <div class="item-desc">Served with cheese &amp; mustard.</div>
-          <div class="item-note">Ask for no cheese for vegan option</div>
+          <div class="item-desc">Served with beer cheese &amp; mustard.</div>
+          <div class="item-note">Ask for no beer cheese for vegan option</div>
         </div>
 
       </div>
@@ -417,71 +449,72 @@
         <div class="item">
           <div class="item-row">
             <span class="item-name">Mozzarella Sticks</span>
-            <span class="item-price">$10.50</span>
+            <span class="item-price price-chg">$11</span>
           </div>
-          <div class="item-desc">Served with marinara sauce, topped with parmesan.</div>
+          <div class="item-desc">Served with housemade marinara sauce, topped with parmesan.</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Shrimp Tacos (3)</span>
             <span class="badge badge-spicy">SPICY</span>
-            <span class="item-price">$15</span>
+            <span class="item-price price-chg">$16</span>
           </div>
-          <div class="item-desc">Flour shell shrimp tacos filled with melted mozzarella cheese, lettuce, pico de gallo and chipotle aioli. Served with black beans puree and tortilla chips.</div>
+          <div class="item-desc">Flour tortillas filled with seasoned shrimp, melted cheese, lettuce, pico &amp; topped with aioli. Served with housemade tortilla chips &amp; salsa.</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
-            <span class="item-name">Taco Plate</span>
-            <span class="item-price">$12</span>
+            <span class="item-name">Taco Plate (3)</span>
+            <span class="item-price price-chg">$13</span>
           </div>
-          <div class="item-desc">Three soft corn tortillas filled with your choice of chicken tinga, pork carnitas or beef carne asada. Topped with diced red onion &amp; cilantro. Includes tortilla chips, black beans and fire roasted salsa.</div>
+          <div class="item-desc">Three soft corn tortillas filled with your choice of chicken tinga, pork carnitas or carne asada. Topped with diced white onion. Served with housemade tortilla chips &amp; salsa.</div>
+          <div class="item-note off">Coming off: black beans</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Quesadilla</span>
-            <span class="item-price">$11</span>
+            <span class="item-price price-chg">$12</span>
           </div>
-          <div class="item-desc">Topped with pico de gallo. Served with chips, sour cream &amp; red salsa.</div>
-          <div class="item-sub">Add Pulled Chicken $4 · Steak or Shrimp $5</div>
+          <div class="item-desc">14 inch flour tortilla filled with shredded mixed cheese. Topped with pico. Served with sour cream, chips &amp; housemade salsa.</div>
+          <div class="item-sub">Add Chicken Tinga $5 · Carne Asada $5 · Carnitas $5 · Shrimp $5</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Southwest Rice Bowl</span>
-            <span class="item-price">$10</span>
+            <span class="item-price price-chg">$11</span>
           </div>
-          <div class="item-desc">Steaming bed of long grain rice. Features black bean-corn and tomatillo salsas, cheddar cheese, chipotle aioli, diced avocado and fajita vegetables. Topped with crispy tortilla strips.</div>
-          <div class="item-sub">Add Pulled Chicken $4 · Steak or Shrimp $5</div>
+          <div class="item-desc">Steamed white rice, black bean &amp; corn housemade salsa, topped with aioli.</div>
+          <div class="item-sub">Add Chicken Breast $5 · Carne Asada $5 · Shrimp $5</div>
           <div class="item-note">Sub lettuce for rice</div>
         </div>
 
-        <div class="item">
+        <div class="item item-new">
           <div class="item-row">
-            <span class="item-name">Chicken Lettuce Cups</span>
+            <span class="item-name">Chicken Lettuce Wraps</span>
             <span class="badge badge-new">NEW</span>
             <span class="badge badge-spicy">SPICY</span>
-            <span class="item-price">$13</span>
+            <span class="item-price">$14</span>
           </div>
-          <div class="item-desc">Seasoned ground chicken with onions, peppers &amp; rice noodles in crisp lettuce leaves. Served with chili dipping sauce and chili roasted peanuts.</div>
+          <div class="item-desc">Seasoned ground chicken with onions &amp; peppers, served with rice noodles, cilantro and lettuce cups. Chili dipping sauce &amp; toasted peanuts.</div>
         </div>
 
-        <div class="item item-proposed">
+        <div class="item item-new">
           <div class="item-row">
             <span class="item-name">Chicken Avocado Eggrolls</span>
             <span class="badge badge-new">NEW</span>
-            <span class="item-price">$2.50</span>
+            <span class="item-price">$12.50</span>
           </div>
-          <div class="item-desc">Crispy golden-fried eggrolls filled with a savory mixture of tender chicken, creamy avocado, red onions, cilantro &amp; sun-dried tomatoes. Served with our southwestern dipping sauce.</div>
+          <div class="item-desc">Housemade crispy golden-fried eggrolls filled with a savory mixture of tender chicken, creamy avocado, red onions, cilantro &amp; sun-dried tomatoes. Served with our southwestern dipping sauce.</div>
         </div>
 
-        <div class="item item-proposed">
+        <div class="item item-new">
           <div class="item-row">
             <span class="item-name">Pot Stickers</span>
             <span class="badge badge-new">NEW</span>
-            <span class="item-price">$2.10</span>
+            <span class="item-price">$12</span>
           </div>
           <div class="item-desc">Asian dumplings with a crispy, golden-brown bottom and a soft tender top, served with steamed rice &amp; chili sauce. Garnished with diced green onions &amp; roasted sesame seeds.</div>
         </div>
@@ -495,7 +528,7 @@
     <div class="section-title">PIZZAS</div>
 
     <div class="section-notes">
-      All pies prepared with our housemade pizza sauce &amp; hand grated mozzarella.
+      Dough made fresh in house. All pies prepared with our housemade pizza sauce &amp; hand grated mozzarella.
       <strong>Medium Pizzas</strong> 12″ · 8 Slices &nbsp;—&nbsp; <strong>Large Pizzas</strong> 16″ · 12 Slices
     </div>
 
@@ -505,34 +538,35 @@
       <div class="col">
         <div class="sub-title">SPECIALTIES</div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Bowlers Combo</span>
-            <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+            <span class="pizza-prices"><span class="size">M</span> $24 <span class="pizza-sep">·</span> <span class="size">L</span> $27</span>
           </div>
-          <div class="item-desc">Fennel Italian sausage, cup &amp; char pepperoni, mushrooms, onions, bell peppers.</div>
+          <div class="item-desc">Fennel Italian sausage, cup &amp; char pepperoni, sliced white mushrooms, onions, diced green peppers, olives.</div>
+          <div class="item-note off">Coming off: bell peppers</div>
         </div>
 
         <div class="item">
           <div class="item-row">
             <span class="item-name">Meat Lovers</span>
-            <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+            <span class="pizza-prices price-chg"><span class="size">M</span> $24 <span class="pizza-sep">·</span> <span class="size">L</span> $27</span>
           </div>
           <div class="item-desc">Cup &amp; char pepperoni, ham, fennel Italian sausage, applewood smoked bacon.</div>
         </div>
 
-        <div class="item">
+        <div class="item item-chg">
           <div class="item-row">
             <span class="item-name">Veggie Lovers</span>
-            <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+            <span class="pizza-prices"><span class="size">M</span> $21 <span class="pizza-sep">·</span> <span class="size">L</span> $24</span>
           </div>
-          <div class="item-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</div>
+          <div class="item-desc">Mushroom, onions, diced green peppers, tomatoes, olives, banana peppers.</div>
         </div>
 
         <div class="item">
           <div class="item-row">
             <span class="item-name">BBQ Chicken</span>
-            <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+            <span class="pizza-prices price-chg"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
           </div>
           <div class="item-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</div>
         </div>
@@ -540,7 +574,7 @@
         <div class="item">
           <div class="item-row">
             <span class="item-name">Hawaiian</span>
-            <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+            <span class="pizza-prices price-chg"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
           </div>
           <div class="item-desc">Ham &amp; pineapple.</div>
         </div>
@@ -549,7 +583,7 @@
           <div class="item-row">
             <span class="item-name">Hot Honey Pep</span>
             <span class="badge badge-spicy">SPICY</span>
-            <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+            <span class="pizza-prices price-chg"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
           </div>
           <div class="item-desc">Double cup &amp; char pepperoni, Fresno chiles, drizzled with HOT honey.</div>
         </div>
@@ -562,8 +596,8 @@
           <div class="sub-title">BUILD YOUR OWN</div>
 
           <div class="byo-base">
-            Medium Pizza <span class="byo-price">$17</span> <span style="font-weight:400; font-size:7pt; color:var(--mid);">cheese only</span><br>
-            Large Pizza <span class="byo-price">$20</span> <span style="font-weight:400; font-size:7pt; color:var(--mid);">cheese only</span>
+            Medium Pizza <span class="byo-price">$18</span> <span style="font-weight:400; font-size:7pt; color:var(--mid);">cheese only</span><br>
+            Large Pizza <span class="byo-price">$21</span> <span style="font-weight:400; font-size:7pt; color:var(--mid);">cheese only</span>
           </div>
 
           <div class="byo-category">
@@ -585,6 +619,8 @@
 
   <!-- LEGEND -->
   <footer class="legend">
+    <div class="legend-item"><span class="chg">Blue</span> this revision</div>
+    <div class="legend-item"><span class="off">Red</span> coming off</div>
     <div class="legend-item"><span class="badge badge-new">NEW</span> New Items</div>
     <div class="legend-item"><span class="badge badge-spicy">SPICY</span> Spicy</div>
     <div class="legend-item"><span class="badge badge-vegan">VG</span> Vegan</div>

@@ -24,6 +24,7 @@
   :root {
     --red: #D42027;
     --red-hot: #f03030;
+    --blue: #7EB6FF;
     --bg: #111111;
     --bg2: #1c1c1c;
     --yellow: #E8D88C;
@@ -259,10 +260,24 @@
     letter-spacing: 0.3px;
   }
 
-  /* Proposed items — name, price, and copy in red until guest pricing is final */
-  .menu-item-proposed .item-name,
-  .menu-item-proposed .item-price,
-  .menu-item-proposed .item-desc {
+  /* This revision: blue = new / changed text only. Red = coming off. */
+  .menu-item-new .item-name,
+  .menu-item-new .item-price,
+  .menu-item-new .item-desc,
+  .name-chg,
+  .menu-item-chg .item-desc,
+  .item-price.price-chg {
+    color: var(--blue);
+  }
+  .menu-item-off .item-name,
+  .menu-item-off .item-price,
+  .menu-item-off .item-desc {
+    color: var(--red);
+  }
+  .off { color: var(--red); }
+  .chg { color: var(--blue); }
+  .menu-item-chg .off,
+  .menu-item-chg .item-desc.off {
     color: var(--red);
   }
 
@@ -389,18 +404,19 @@
 
         <div class="menu-item">
           <div class="item-name">Medium Pizza</div>
-          <div class="item-sub">Cheese – $12.50 &nbsp;|&nbsp; Pepperoni – $14.50</div>
+          <div class="item-sub"><span class="chg">Cheese – $12.50</span> &nbsp;|&nbsp; <span class="chg">Pepperoni – $14.50</span></div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item menu-item-chg">
           <div class="item-header">
             <span class="item-name">Sliders (3)</span>
             <span class="item-price">$12.50</span>
           </div>
-          <div class="item-desc">Choose one style: Cheeseburger, Pulled Pork, or Jerk Chicken</div>
+          <div class="item-desc chg">Cheeseburger only</div>
+          <div class="item-desc off">Coming off: Pulled Pork · Jerk Chicken</div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item menu-item-off">
           <div class="item-header">
             <span class="item-name">Hummus</span>
             <span class="item-price">$10</span>
@@ -411,41 +427,41 @@
         <div class="menu-item">
           <div class="item-header">
             <span class="item-name">Large Bavarian Pretzel - 10&quot;</span>
-            <span class="item-price">$10</span>
+            <span class="item-price price-chg">$10</span>
           </div>
-          <div class="item-desc">Served with cheese &amp; mustard</div>
+          <div class="item-desc">Served with beer cheese &amp; mustard</div>
         </div>
 
-        <div class="menu-item">
+        <div class="menu-item menu-item-chg">
           <div class="item-header">
-            <span class="item-name">Lettuce Cups</span>
-            <span class="item-price">$11</span>
+            <span class="item-name name-chg">Lettuce Wraps</span>
+            <span class="item-price price-chg">$11</span>
           </div>
-          <div class="item-desc">Jerk-spiced ground chicken, grilled onions &amp; bell peppers, rice noodles &amp; chili peanuts in honey gem lettuce with chili dipping sauce</div>
+          <div class="item-desc">Seasoned ground chicken, onions &amp; peppers, rice noodles, cilantro, chili dipping sauce &amp; toasted peanuts</div>
         </div>
 
-        <div class="menu-item menu-item-proposed">
+        <div class="menu-item menu-item-new">
           <div class="item-header">
             <span class="item-name">Carne Asada Fries</span>
-            <span class="item-price">$5.37</span>
+            <span class="item-price">$15.50</span>
           </div>
-          <div class="item-desc">Steak, cheese sauce, pico, guacamole &amp; sour cream on crinkle cut fries</div>
+          <div class="item-desc">Carne asada, beer cheese, pico, guacamole &amp; sour cream on crinkle cut fries. Serves 2–4</div>
         </div>
 
-        <div class="menu-item menu-item-proposed">
+        <div class="menu-item menu-item-new">
           <div class="item-header">
             <span class="item-name">Chicken Avocado Eggrolls</span>
-            <span class="item-price">$2.50</span>
+            <span class="item-price">$10</span>
           </div>
-          <div class="item-desc">Chicken, avocado, cilantro &amp; sun-dried tomato with southwestern sauce</div>
+          <div class="item-desc">Housemade. Chicken, avocado, cilantro &amp; sun-dried tomato with southwestern sauce</div>
         </div>
 
-        <div class="menu-item menu-item-proposed">
+        <div class="menu-item menu-item-new">
           <div class="item-header">
             <span class="item-name">Pot Stickers</span>
-            <span class="item-price">$2.10</span>
+            <span class="item-price">$??</span>
           </div>
-          <div class="item-desc">Crispy dumplings with steamed rice &amp; chili sauce</div>
+          <div class="item-desc">Crispy dumplings with steamed rice &amp; chili sauce. HH guest price still open</div>
         </div>
       </div>
 

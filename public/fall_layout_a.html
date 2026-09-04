@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Concourse Fall – Layout A proof (1920×1080)</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #000; overflow: hidden; }
+  .canvas {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    background: #000;
+  }
+  .canvas img {
+    position: absolute;
+    display: block;
+  }
+  .main { left: 0; top: 0; width: 1440px; height: 810px; object-fit: fill; }
+  .side { left: 1440px; top: 0; width: 480px; height: 810px; object-fit: fill; }
+  .banner { left: 0; top: 810px; width: 1920px; height: 270px; object-fit: fill; }
+</style>
+</head>
+<body>
+<div class="canvas">
+  <img class="main" src="../exports/menu-jpegs/fall_flyer_1080.jpg" alt="16:9 fall flyer">
+  <img class="side" src="../exports/menu-jpegs/fall_flyer_480x810.jpg" alt="480×810 fall flyer">
+  <img class="banner" src="../exports/menu-jpegs/fall_tue_thu.jpg" alt="1920×270 Tue–Thu daily strip">
+</div>
+</body>
+</html>

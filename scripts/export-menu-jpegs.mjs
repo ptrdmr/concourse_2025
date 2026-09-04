@@ -38,6 +38,15 @@ const MENUS = [
   { slug: 'summer_friday_1280', file: 'summer_friday_1280.html', width: 1280, height: 328 },
   { slug: 'summer_saturday_1280', file: 'summer_saturday_1280.html', width: 1280, height: 328 },
   { slug: 'summer_sunday_1280', file: 'summer_sunday_1280.html', width: 1280, height: 328 },
+  { slug: 'fall_tue_thu', file: 'fall_tue_thu.html', width: 1920, height: 270 },
+  { slug: 'fall_friday', file: 'fall_friday.html', width: 1920, height: 270 },
+  { slug: 'fall_tue_thu_1280', file: 'fall_tue_thu_1280.html', width: 1280, height: 328 },
+  { slug: 'fall_friday_1280', file: 'fall_friday_1280.html', width: 1280, height: 328 },
+  { slug: 'fall_flyer_1080', file: 'fall_flyer_1080.html', width: 1920, height: 1080 },
+  { slug: 'fall_flyer_480x810', file: 'fall_flyer_480x810.html', width: 480, height: 810 },
+  { slug: 'fall_flyer_608x1080', file: 'fall_flyer_608x1080.html', width: 608, height: 1080 },
+  { slug: 'fall_layout_a', file: 'fall_layout_a.html', width: 1920, height: 1080 },
+  { slug: 'fall_layout_b', file: 'fall_layout_b.html', width: 1920, height: 1080 },
   /** 5×7 portrait at 300dpi — laneside ordering flyer */
   { slug: 'laneside_ordering', file: 'laneside_ordering.html', width: 1500, height: 2100 },
   /** Reservation page mockup — full-page capture (kept out of public/ so it cannot shadow /reservations) */
@@ -116,6 +125,7 @@ async function main() {
 
     const url = pathToFileURL(htmlPath).href
     await page.goto(url, { waitUntil: 'networkidle', timeout: 60_000 })
+    await page.evaluate(() => document.fonts.ready)
 
     const outFile = path.join(outDir, `${slug}.jpg`)
     const screenshotOpts = { path: outFile, type: 'jpeg', quality: 92 }

@@ -1,0 +1,260 @@
+/* Autumn Dusk — Fall 2026 signage
+   Gold #D4A34F is the field. Red, forest, and black are punches.
+   Type: Bebas Neue (display) · Aktiv Grotesk (body; Helvetica if not installed) */
+
+:root {
+  --red: #D42027;
+  --gold: #E8C04A;
+  --forest: #3B5E3A;
+  --black: #111111;
+  --white: #ffffff;
+  --font-display: 'Bebas Neue', 'Arial Narrow', sans-serif;
+  --font-body: 'Aktiv Grotesk', Helvetica, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: #000;
+  overflow: hidden;
+}
+
+.lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+}
+.lockup-brand {
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.lockup-season {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+  line-height: 0.78;
+  color: var(--black);
+}
+.lockup-line {
+  font-family: var(--font-body);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: 4px;
+}
+.lockup-tag {
+  font-family: var(--font-body);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin-top: 6px;
+}
+
+/* Lockup sitting on a black or forest panel */
+.lockup--on-dark .lockup-season,
+.lockup--on-dark .lockup-tag { color: var(--gold); }
+.lockup--on-dark .lockup-brand,
+.lockup--on-dark .lockup-line { color: var(--red); }
+
+.lockup--strip .lockup-brand { font-size: 13px; }
+.lockup--strip .lockup-season { font-size: 72px; }
+.lockup--strip .lockup-line { font-size: 9px; }
+.lockup--strip .lockup-tag { font-size: 11px; }
+
+.lockup--strip-sm .lockup-brand { font-size: 11px; }
+.lockup--strip-sm .lockup-season { font-size: 58px; }
+.lockup--strip-sm .lockup-line { font-size: 8px; white-space: normal; max-width: 92%; }
+.lockup--strip-sm .lockup-tag { font-size: 10px; }
+
+.lockup--hero .lockup-brand { font-size: 26px; letter-spacing: 0.28em; }
+.lockup--hero .lockup-season { font-size: 156px; letter-spacing: 0.28em; }
+.lockup--hero .lockup-line { font-size: 26px; letter-spacing: 0.12em; margin-top: 2px; }
+
+.lockup--side .lockup-brand { font-size: 16px; }
+.lockup--side .lockup-season { font-size: 120px; }
+.lockup--side .lockup-line { font-size: 13px; white-space: normal; }
+
+.lockup--portrait .lockup-brand { font-size: 20px; letter-spacing: 0.22em; }
+.lockup--portrait .lockup-season { font-size: 160px; }
+.lockup--portrait .lockup-line { font-size: 16px; letter-spacing: 0.08em; }
+
+/* ── Daily strip ── */
+.strip {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+  background: var(--gold);
+  font-family: var(--font-body);
+  color: var(--black);
+}
+.strip::before,
+.strip::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 8px;
+  background: var(--red);
+  z-index: 10;
+}
+.strip::before { top: 0; }
+.strip::after { bottom: 0; }
+
+.strip-brand {
+  background: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 8px;
+}
+.strip-day {
+  background: var(--forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.strip-day-name {
+  font-family: var(--font-display);
+  color: var(--gold);
+  text-align: center;
+  line-height: 0.88;
+  letter-spacing: 0.03em;
+}
+
+.strip-specials {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+.deal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  min-width: 0;
+  gap: 0;
+}
+.deal + .deal::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 8px;
+  background: var(--forest);
+}
+.deal-name {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+  color: var(--black);
+}
+.deal-price {
+  font-family: var(--font-display);
+  color: var(--red);
+  line-height: 0.78;
+}
+.deal-desc {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--black);
+}
+.deal-time {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--forest);
+}
+
+/* ── Flyer shell: gold field, grid eats the leftover ── */
+.flyer {
+  background: var(--gold);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  color: var(--black);
+  font-family: var(--font-body);
+}
+.flyer::before,
+.flyer::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  background: var(--red);
+  z-index: 10;
+}
+.flyer::before { top: 0; }
+.flyer::after { bottom: 0; }
+
+.flyer-head {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.kicker {
+  font-family: var(--font-display);
+  letter-spacing: 0.18em;
+  color: var(--forest);
+  text-align: center;
+}
+.run {
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: var(--black);
+  text-align: center;
+}
+
+.deals {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  position: relative;
+  z-index: 1;
+}
+.flyer-deal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+  min-height: 0;
+  padding: 6px 8px;
+}
+.flyer-deal-name {
+  font-family: var(--font-display);
+  letter-spacing: 0.04em;
+  line-height: 0.9;
+  color: var(--black);
+}
+.flyer-deal-price {
+  font-family: var(--font-display);
+  color: var(--red);
+  line-height: 0.76;
+}
+.flyer-deal-window {
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: var(--black);
+}
+.flyer-deal-meta {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: var(--forest);
+}
+
+.gutter-v { background: var(--forest); }
+.gutter-h { background: var(--forest); }

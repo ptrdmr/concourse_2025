@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=608">
+<title>Concourse Fall Specials – 608×1080 Flyer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fall-specials.css">
+<style>
+  .flyer { width: 608px; height: 1080px; }
+  .flyer::before, .flyer::after { height: 14px; }
+  .flyer-head {
+    background: var(--black);
+    padding: 10px 12px 8px;
+  }
+  .lockup--portrait .lockup-brand { font-size: 14px; color: var(--red); }
+  .lockup--portrait .lockup-season { font-size: 84px; color: var(--gold); }
+  .lockup--portrait .lockup-line { font-size: 11px; color: var(--red); }
+  .kicker { font-size: 18px; color: var(--gold); }
+  .run { font-size: 15px; color: var(--gold); }
+  .deals { grid-template-rows: 1fr 14px 1fr; }
+  .flyer-deal {
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    padding: 8px 10px 12px;
+  }
+  .flyer-deal-name { font-size: 52px; }
+  .flyer-deal-price { font-size: 420px; display: flex; align-items: center; justify-content: center; line-height: 0.72; }
+  .flyer-deal-window { font-size: 24px; }
+  .flyer-deal-meta { font-size: 18px; }
+</style>
+</head>
+<body>
+<div class="flyer">
+  <div class="flyer-head">
+    <div class="lockup lockup--portrait">
+      <div class="lockup-brand">Concourse</div>
+      <div class="lockup-season">Fall</div>
+      <div class="lockup-line">Lanes, Games &amp; Goodtimes!</div>
+    </div>
+    <div class="kicker">Fall Specials 2026</div>
+    <div class="run">Sept 8 — Oct 30</div>
+  </div>
+  <div class="deals">
+    <div class="flyer-deal">
+      <div class="flyer-deal-name">3 Games &amp; Shoes</div>
+      <div class="flyer-deal-price">$14</div>
+      <div class="flyer-deal-window">Tue – Fri · Open – 3pm</div>
+      <div class="flyer-deal-meta">3 games + shoes · Per person</div>
+    </div>
+    <div class="gutter-h"></div>
+    <div class="flyer-deal">
+      <div class="flyer-deal-name">Unlimited Bowling</div>
+      <div class="flyer-deal-price">$18</div>
+      <div class="flyer-deal-window">Tue – Thu · 8pm – Close</div>
+      <div class="flyer-deal-meta">2 hrs unlimited + shoes · Per person</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

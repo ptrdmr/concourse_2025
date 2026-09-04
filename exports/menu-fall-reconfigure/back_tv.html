@@ -12,6 +12,7 @@
 
   :root {
     --red: #D42027;
+    --blue: #7EB6FF;
     --black: #1A1A1A;
     --dark: #E8E8E8;
     --mid: #BBBBBB;
@@ -64,10 +65,19 @@
     flex-shrink: 0;
   }
 
-  /* Proposed fall items — name in red so food-cost prices are obvious (all TV prices are already red) */
-  .item-proposed .item-name,
-  .item-proposed .item-price {
+  .item-new .item-name,
+  .item-new .item-price,
+  .name-chg {
+    color: var(--blue);
+  }
+  .item-off .item-name,
+  .item-off .item-price {
     color: var(--red);
+  }
+  .item-price.price-chg,
+  .pizza-prices.price-chg,
+  .byo-price.price-chg {
+    color: var(--blue);
   }
 
   /* ─── MAIN LAYOUT ─── */
@@ -75,7 +85,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0 48px;
-    padding: 14px 60px 0;
+    padding: 26px 60px 0;
     flex: 1;
     min-height: 0;
   }
@@ -180,7 +190,7 @@
     margin-left: auto;
     font-weight: 700;
     font-size: 24px;
-    color: var(--red);
+    color: var(--white);
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -230,6 +240,7 @@
     top: -1px;
   }
   .badge-new { background: #2E7D32; color: white; }
+  .badge-off { background: #C62828; color: white; }
   .badge-spicy { background: #C62828; color: white; }
   .badge-vegan { background: #558B2F; color: white; }
   .badge-gf { border: 1px solid #888; color: #999; background: transparent; }
@@ -239,7 +250,7 @@
     margin-left: auto;
     font-weight: 700;
     font-size: 22px;
-    color: var(--red);
+    color: var(--white);
     white-space: nowrap;
     flex-shrink: 0;
   }
@@ -265,7 +276,7 @@
     margin-bottom: 10px;
     line-height: 1.5;
   }
-  .byo-base .byo-price { color: var(--red); font-weight: 700; }
+  .byo-base .byo-price { color: var(--white); font-weight: 700; }
   .byo-base .byo-note { font-weight: 400; font-size: 22px; color: var(--light); }
   .byo-category { margin-bottom: 8px; }
   .byo-category-title {
@@ -275,7 +286,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3px;
   }
-  .byo-category-title .byo-each { font-weight: 600; color: var(--red); text-transform: none; }
+  .byo-category-title .byo-each { font-weight: 600; color: var(--white); text-transform: none; }
   .byo-list {
     font-size: 24px;
     color: var(--mid);
@@ -289,7 +300,6 @@
 
 <div class="screen">
 
-  <div class="draft-note">Red item names are food cost totals, not actual pricing</div>
 
   <div class="main">
 
@@ -305,15 +315,15 @@
               <span class="item-name">Crinkle Cut Fries</span>
               <span class="badge badge-gf">GF</span>
               <span class="badge badge-vegan">VG</span>
-              <span class="item-price">$7</span>
+              <span class="item-price price-chg">$8</span>
             </div>
           </div>
 
-          <div class="item item-proposed">
+          <div class="item item-new">
             <div class="item-row">
               <span class="item-name">Carne Asada Fries</span>
               <span class="badge badge-new">NEW</span>
-              <span class="item-price">$5.37</span>
+              <span class="item-price">$18.50</span>
             </div>
           </div>
 
@@ -346,14 +356,14 @@
               <span class="item-name">Chicken Wings</span>
               <span class="badge badge-gf">GF</span>
               <span class="badge badge-spicy">SPICY</span>
-              <span class="item-price">$16</span>
+              <span class="item-price price-chg">$17</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
               <span class="item-name">Soup of the Day</span>
-              <span class="item-price">$6</span>
+              <span class="item-price price-chg">$7</span>
             </div>
           </div>
 
@@ -361,21 +371,21 @@
             <div class="item-row">
               <span class="item-name">Veggie Tray</span>
               <span class="badge badge-vegan">VG</span>
-              <span class="item-price">$9</span>
+              <span class="item-price">$10</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
-              <span class="item-name">Large Bavarian Pretzel - 10</span>
-              <span class="item-price">$12.50</span>
+              <span class="item-name">Large Bavarian Pretzel - 10&quot;</span>
+              <span class="item-price price-chg">$14</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
               <span class="item-name">Mozzarella Sticks</span>
-              <span class="item-price">$10.50</span>
+              <span class="item-price price-chg">$11</span>
             </div>
           </div>
 
@@ -383,53 +393,53 @@
             <div class="item-row">
               <span class="item-name">Shrimp Tacos (3)</span>
               <span class="badge badge-spicy">SPICY</span>
-              <span class="item-price">$15</span>
+              <span class="item-price price-chg">$16</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
-              <span class="item-name">Taco Plate</span>
-              <span class="item-price">$12</span>
+              <span class="item-name">Taco Plate (3)</span>
+              <span class="item-price price-chg">$13</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
               <span class="item-name">Quesadilla</span>
-              <span class="item-price">$11</span>
+              <span class="item-price price-chg">$12</span>
             </div>
           </div>
 
           <div class="item">
             <div class="item-row">
               <span class="item-name">Southwest Rice Bowl</span>
-              <span class="item-price">$10</span>
+              <span class="item-price price-chg">$11</span>
             </div>
           </div>
 
-          <div class="item">
+          <div class="item item-new">
             <div class="item-row">
-              <span class="item-name">Chicken Lettuce Cups</span>
+              <span class="item-name">Chicken Lettuce Wraps</span>
               <span class="badge badge-new">NEW</span>
               <span class="badge badge-spicy">SPICY</span>
-              <span class="item-price">$13</span>
+              <span class="item-price">$14</span>
             </div>
           </div>
 
-          <div class="item item-proposed">
+          <div class="item item-new">
             <div class="item-row">
               <span class="item-name">Chicken Avocado Eggrolls</span>
               <span class="badge badge-new">NEW</span>
-              <span class="item-price">$2.50</span>
+              <span class="item-price">$12.50</span>
             </div>
           </div>
 
-          <div class="item item-proposed">
+          <div class="item item-new">
             <div class="item-row">
               <span class="item-name">Pot Stickers</span>
               <span class="badge badge-new">NEW</span>
-              <span class="item-price">$2.10</span>
+              <span class="item-price">$12</span>
             </div>
           </div>
         </div>
@@ -455,7 +465,7 @@
           <div class="item">
             <div class="item-row">
               <span class="item-name">Bowlers Combo</span>
-              <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+              <span class="pizza-prices"><span class="size">M</span> $24 <span class="pizza-sep">·</span> <span class="size">L</span> $27</span>
             </div>
             <!-- <div class="item-desc">Sausage, pepperoni, mushrooms, onions, bell peppers.</div> -->
           </div>
@@ -463,7 +473,7 @@
           <div class="item">
             <div class="item-row">
               <span class="item-name">Meat Lovers</span>
-              <span class="pizza-prices"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
+              <span class="pizza-prices price-chg"><span class="size">M</span> $24 <span class="pizza-sep">·</span> <span class="size">L</span> $27</span>
             </div>
             <!-- <div class="item-desc">Pepperoni, ham, Italian sausage, applewood smoked bacon.</div> -->
           </div>
@@ -471,7 +481,7 @@
           <div class="item">
             <div class="item-row">
               <span class="item-name">Veggie Lovers</span>
-              <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+              <span class="pizza-prices"><span class="size">M</span> $21 <span class="pizza-sep">·</span> <span class="size">L</span> $24</span>
             </div>
             <!-- <div class="item-desc">Mushroom, onions, bell peppers, tomatoes, olives, banana peppers.</div> -->
           </div>
@@ -479,7 +489,7 @@
           <div class="item">
             <div class="item-row">
               <span class="item-name">BBQ Chicken</span>
-              <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+              <span class="pizza-prices price-chg"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
             </div>
             <!-- <div class="item-desc">Chicken breast, cilantro, onions &amp; BBQ sauce.</div> -->
           </div>
@@ -487,7 +497,7 @@
           <div class="item">
             <div class="item-row">
               <span class="item-name">Hawaiian</span>
-              <span class="pizza-prices"><span class="size">M</span> $20 <span class="pizza-sep">·</span> <span class="size">L</span> $23</span>
+              <span class="pizza-prices price-chg"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
             </div>
             <!-- <div class="item-desc">Ham &amp; pineapple.</div> -->
           </div>
@@ -496,7 +506,7 @@
             <div class="item-row">
               <span class="item-name">Hot Honey Pep</span>
               <span class="badge badge-spicy">SPICY</span>
-              <span class="pizza-prices"><span class="size">M</span> $22 <span class="pizza-sep">·</span> <span class="size">L</span> $25</span>
+              <span class="pizza-prices price-chg"><span class="size">M</span> $23 <span class="pizza-sep">·</span> <span class="size">L</span> $26</span>
             </div>
             <!-- <div class="item-desc">Double pepperoni, Fresno chiles, drizzled with HOT honey.</div> -->
           </div>
@@ -508,8 +518,8 @@
             <div class="sub-title">Build Your Own</div>
 
             <div class="byo-base">
-              Medium Pizza <span class="byo-price">$17</span> <span class="byo-note">cheese only</span><br>
-              Large Pizza <span class="byo-price">$20</span> <span class="byo-note">cheese only</span>
+              Medium Pizza <span class="byo-price">$18</span> <span class="byo-note">cheese only</span><br>
+              Large Pizza <span class="byo-price">$21</span> <span class="byo-note">cheese only</span>
             </div>
 
             <div class="byo-category">
