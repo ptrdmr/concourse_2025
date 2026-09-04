@@ -1,9 +1,9 @@
 /* Fall 2026 in-house signage — editorial scoreboard system. */
 :root {
-  --red: #d42027;
-  --gold: #e8c04a;
-  --forest: #3b5e3a;
-  --black: #111111;
+  --red: #D42027;
+  --gold: #E8D88C;
+  --forest: #C75B12;
+  --black: #1C1C1C;
   --white: #ffffff;
   --font-display: "Bebas Neue", "Arial Narrow", sans-serif;
   --font-body: "Aktiv Grotesk", Helvetica, Arial, sans-serif;
@@ -152,6 +152,24 @@ body {
 .gutter-v,
 .gutter-h {
   background: var(--black);
+}
+
+.leaves {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+.flyer-head,
+.deals,
+.strip-brand,
+.strip-day,
+.strip-specials {
+  position: relative;
+  z-index: 2;
 }
 
 /* Daily offering strips */

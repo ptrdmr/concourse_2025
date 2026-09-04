@@ -13,12 +13,12 @@
   .strip-brand { width: 230px; min-width: 230px; }
   .strip-day { width: 190px; min-width: 190px; }
   .lockup { flex-direction: column; gap: 7px; }
-  .lockup-brand { font-size: 24px; }
+  .lockup-brand { font-size: 30px; }
   .lockup-season { font-size: 64px; }
   .strip-day-name { font-size: 72px; }
   .deal {
     grid-template-columns: 1fr 400px;
-    grid-template-rows: 1fr 70px;
+    grid-template-rows: 1fr 82px;
     align-items: center;
     padding: 10px 44px 0;
   }
@@ -27,12 +27,19 @@
   .deal-time {
     grid-column: 1 / -1;
     margin: 0 -44px;
-    font-size: 38px;
+    font-size: 44px;
+  }
+  .leaves {
+    width: 720px;
+    top: -90px;
+    left: 360px;
+    opacity: 0.18;
   }
 </style>
 </head>
 <body>
 <div class="strip">
+  <img class="leaves" src="leaves.svg" alt="" aria-hidden="true">
   <div class="strip-brand">
     <div class="lockup">
       <div class="lockup-brand">Concourse</div>

@@ -11,30 +11,44 @@
 <style>
   .flyer { width: 608px; height: 1080px; }
   .flyer-head {
-    height: 178px;
+    height: 188px;
     flex-direction: column;
     justify-content: center;
     padding: 20px 20px 14px;
   }
   .lockup { gap: 10px; }
-  .lockup-brand { font-size: 24px; }
+  .lockup-brand { font-size: 30px; }
   .lockup-season { font-size: 66px; }
   .head-right { margin-top: 10px; text-align: center; }
-  .kicker { font-size: 26px; }
-  .run { margin-top: 5px; font-size: 16px; }
+  .kicker { font-size: 30px; }
+  .run { margin-top: 5px; font-size: 19px; }
   .deals { grid-template-rows: 1fr 8px 1fr; }
   .flyer-deal {
-    grid-template-rows: 58px 1fr 58px 36px;
+    grid-template-rows: 58px 1fr 68px 42px;
     padding: 10px 14px 8px;
   }
   .flyer-deal-name { font-size: 48px; }
   .flyer-deal-price { font-size: 260px; }
-  .flyer-deal-window { margin: 0 -14px; font-size: 29px; }
-  .flyer-deal-meta { font-size: 17px; }
+  .flyer-deal-window { margin: 0 -14px; font-size: 34px; }
+  .flyer-deal-meta { font-size: 20px; }
+  .leaves--a {
+    width: 540px;
+    top: 120px;
+    left: -110px;
+  }
+  .leaves--b {
+    width: 500px;
+    right: -100px;
+    bottom: -50px;
+    transform: scaleX(-1);
+    opacity: 0.16;
+  }
 </style>
 </head>
 <body>
 <div class="flyer">
+  <img class="leaves leaves--a" src="leaves.svg" alt="" aria-hidden="true">
+  <img class="leaves leaves--b" src="leaves.svg" alt="" aria-hidden="true">
   <div class="flyer-head">
     <div class="lockup">
       <div class="lockup-brand">Concourse</div>
